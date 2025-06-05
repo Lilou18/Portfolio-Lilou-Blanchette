@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fausse Interface Navigateur</title>
+  <style>
+    body {
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .browser {
+      width: 1500px;
+      height: 800px;
+      background-color: #fff;
+      border: 4px solid #dba57d;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #000;
+      display: flex;
+      flex-direction: column;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    .top-bar {
+      background-color: #f0d3b8;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #dba57d;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-buttons button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #a1683c;
+    }
+
+    .address-bar {
+      flex-grow: 1;
+      margin: 0 10px;
+      padding: 6px 10px;
+      border: 2px solid #dba57d;
+      border-radius: 15px;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .stars {
+      display: flex;
+      gap: 5px;
+    }
+
+    .stars span {
+      color: #a1683c;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto; /* SCROLL ACTIVÉ */
+    }
+
+    .bottom-bar {
+      height: 30px;
+      background-color: #f0d3b8;
+      border-top: 3px solid #dba57d;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+    }
+
+    .bottom-bar .star {
+      color: #a1683c;
+    }
+  </style>
+</head>
+<body>
+  <div class="browser">
+    <div class="top-bar">
+      <div class="nav-buttons">
+        <button>←</button>
+        <button>→</button>
+      </div>
+      <input class="address-bar" type="text" value="www.fausse-interface-jeu.com" />
+      <div class="stars">
+        <span>★</span>
+        <span>★</span>
+      </div>
+    </div>
+    
+    <div class="content">
+      <!-- Texte de test pour voir le scroll -->
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas veniam debitis hic. Soluta, velit.</p>
+      <p>Encore du texte pour simuler des mails, ou des entrées de journal, ou des messages de PNJ.</p>
+      <p>Tu peux écrire beaucoup de contenu ici.</p>
+      <p>Un autre paragraphe.</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <p>Encore et encore pour que ça dépasse.</p>
+      <p>Scroll vers le bas pour en voir plus !</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    
+    <div class="bottom-bar">
+      <span class="star">★</span>
+    </div>
+  </div>
+</body>
+</html>
