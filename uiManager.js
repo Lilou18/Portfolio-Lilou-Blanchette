@@ -9,6 +9,7 @@ export class UIManager {
         }
         this.canvas = document.getElementById("gameCanvas");//document.querySelector("canvas");
         this.currentPanel = null;
+        this.currentInteraction = null;
         this.setupEventListeners();
     };
 
@@ -32,31 +33,58 @@ export class UIManager {
             });
         });
 
+        //this.setUpEnterInput();
         // this.canvas.addEventListener("click", () => {
         //     this.canvas.focus();
         // })
     }
 
+    setUpEnterInput(){
+        onKeyDown("enter", () =>{
+            console.log("ENTER!!!");
+            if(this.currentInteraction){
+                this.displayPanel(this.currentInteraction);
+            }
+        });
+    };
+
     setUpCollisionsUI() {
         if (gameState.player) {
+            this.setUpEnterInput();
 
             gameState.player.gameObject.onCollide("cvHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le CV");
-                onKeyDown("enter", () => {
-                    this.displayPanel("cv");
-                    //document.getElementById("cvPanel").style.display = "block";
+                this.currentInteraction = "cv";
+                // onKeyDown("enter", () => {
+                //     this.displayPanel("cv");
+                //     //document.getElementById("cvPanel").style.display = "block";
 
-                })
+                // })
+            });
+
+            gameState.player.gameObject.onCollideEnd("cvHologram", () => {
+                if(this.currentInteraction === "cv"){
+                    this.currentInteraction = null;
+                }
             });
 
             gameState.player.gameObject.onCollide("portfolioHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
-                onKeyDown("enter", () => {
-                    this.displayPanel("portfolio");
-                    //document.getElementById("portfolioPanel").style.display = "block";
+                this.currentInteraction = "portfolio";
+                // onKeyDown("enter", () => {
+                //     this.displayPanel("portfolio");
+                //     //document.getElementById("portfolioPanel").style.display = "block";
 
-                })
+                // })
             });
+
+            gameState.player.gameObject.onCollideEnd("portfolioHologram", () => {
+                if(this.currentInteraction === "portfolio"){
+                    this.currentInteraction = null;
+                }
+            });
+
+
         }
     }
 

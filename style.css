@@ -38,6 +38,7 @@ html {
   animation: fadeIn 0.5s;
 }
 
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -172,7 +173,7 @@ input[type=text] {
 
 .cv-header {
   border-bottom: 2px solid #00ffff;
-  ;
+
   padding: 30px;
   text-align: center;
   position: relative;
@@ -183,6 +184,11 @@ input[type=text] {
   color: #00ffff;
   font-size: 2.5em;
   margin: 0;
+}
+
+.cv-header p {
+  color: #00ffff;
+  letter-spacing: 1px;
 }
 
 .cv-job {
@@ -290,10 +296,10 @@ input[type=text] {
   margin: 0px;
   margin-left: 30px;
   padding: 0px;
-  
+
 }
 
-.langage li{
+.langage li {
   color: #00ffff;
   letter-spacing: 1px;
   font-size: 1em;
@@ -314,6 +320,203 @@ input[type=text] {
   color: #00ffff;
   letter-spacing: 1px;
 }
+
+
+/*Experience*/
+
+
+.experience-item {
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-left: 5px solid #00ffff;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 30px;
+}
+
+.experience-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.experience-header h3 {
+  color: #00ffff;
+  letter-spacing: 1px;
+  font-weight: bold;
+
+}
+
+.experience-header p {
+  color: #00ffff;
+  font-size: 0.8em;
+}
+
+.experience-title {
+  margin-top: 0px;
+  color: #87adf3;
+  letter-spacing: 1px;
+}
+
+.experience-item li {
+  color: #00ffff;
+  letter-spacing: 1px;
+  padding: 10px;
+}
+
+.download-link {
+  color: #00ffff;
+}
+
+.download-link:visited {
+  text-decoration: none;
+}
+
+
+/*PORTFOLIO*/
+/* .content-section-portfolio{
+    margin-bottom: 40px;
+  /* padding: 25px; 
+  background: rgba(8, 39, 97, 0.692);
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  position: relative;
+  width: 50%;
+}
+
+.content-section-portfolio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  /* top: 0px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(180deg, #00ffff, #00b7ff, #00ffff);
+  border-radius: 8px;
+  z-index: -1;
+  animation: borderGlow 3s infinite;
+} */
+
+.portfolio-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.project {
+  position: relative;
+  background: rgba(8, 39, 97, 0.8);
+  border: 2px solid rgba(0, 255, 255, 13);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.project-content {
+  padding: 30px;
+}
+
+.project-title {
+  color: #00ffff;
+  font-size: 1.3em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.project-role {
+  padding: 0px;
+}
+
+.project-role li {
+  display: inline-block;
+  color: #00ffff;
+  background: rgba(0, 255, 255, 0.2);
+  list-style: none;
+  border: 1px solid #00ffff;
+  border-radius: 15px;
+  padding: 4px 12px;
+  font-size: 0.85em;
+  margin-right: 10px;
+}
+
+.project-details {
+  color: #00ffff;
+  letter-spacing: 1px;
+}
+
+.project-details span {
+  color: #87adf3;
+}
+
+.project-tasks {
+  letter-spacing: 1px;
+}
+
+.project-tasks h4 {
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.project-tasks li::marker {
+  color: #00ffff;
+}
+
+.project-tasks li {
+  color: #87adf3;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+}
+
+.project-description {
+  color: #00ffff;
+  line-height: 1.7;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.project-description span {
+  color: #87adf3;
+}
+
+.project-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+
+}
+
+.skill-tag {
+  color: #00ffff;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 4px 12px;
+  font-size: 0.75em;
+  letter-spacing: 1px;
+}
+
+.project-links{
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #00ffff;
+  gap: 16px;
+  padding-top: 20px;
+}
+
+.project-link{
+  color: #00ffff;
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  padding: 8px 15px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+
 
 /* Responsive browser*/
 @media (max-width: 1200px) {
