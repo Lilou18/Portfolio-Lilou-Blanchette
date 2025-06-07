@@ -13,20 +13,20 @@ export class UIManager {
         this.setupEventListeners();
     };
 
-    setupEventListeners(){
-        if(document.readyState ==="loading"){
+    setupEventListeners() {
+        if (document.readyState === "loading") {
             document.addEventListener('DOMContentLoaded', () => this.initEventListeners());
         }
-        else{
+        else {
             this.initEventListeners();
         }
 
     }
 
-    initEventListeners(){
+    initEventListeners() {
         const closeButtons = document.querySelectorAll("[data-close-panel]");
         //console.log("BUTTONS " + closeButtons.length);
-        closeButtons.forEach( (button) => {
+        closeButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 const panelName = button.getAttribute("data-close-panel");
                 this.hidePanel(panelName);
@@ -39,10 +39,10 @@ export class UIManager {
         // })
     }
 
-    setUpEnterInput(){
-        onKeyDown("enter", () =>{
+    setUpEnterInput() {
+        onKeyDown("enter", () => {
             console.log("ENTER!!!");
-            if(this.currentInteraction){
+            if (this.currentInteraction) {
                 this.displayPanel(this.currentInteraction);
             }
         });
@@ -63,7 +63,7 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollideEnd("cvHologram", () => {
-                if(this.currentInteraction === "cv"){
+                if (this.currentInteraction === "cv") {
                     this.currentInteraction = null;
                 }
             });
@@ -79,10 +79,23 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollideEnd("portfolioHologram", () => {
-                if(this.currentInteraction === "portfolio"){
+                if (this.currentInteraction === "portfolio") {
                     this.currentInteraction = null;
                 }
             });
+
+            gameState.player.gameObject.onCollide("contactHologram", () => {
+                debug.log("Appuie sur ENTRÉE pour voir Contact");
+                this.currentInteraction = "contact";
+
+            });
+
+            gameState.player.gameObject.onCollideEnd("contactHologram", () => {
+                if (this.currentInteraction === "contact") {
+                    this.currentInteraction = null;
+                }
+            });
+
 
 
         }

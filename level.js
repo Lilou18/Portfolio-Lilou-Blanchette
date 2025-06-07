@@ -159,6 +159,22 @@ function setHologram(k, mapPositions) {
             });
 
         }
+        else if(position.name === "hologramContact"){
+            const portfolioHologram = k.add([
+                k.sprite("portfolioHologram", { anim: "hologram" }),
+                k.area(),
+                k.anchor("bot"),
+                k.pos(position.x, position.y), // Initial position from Tiled
+                k.scale(0.6),
+                "contactHologram",
+            ]);
+            // Store both the hologram object and its original Tiled position
+            holograms.push({
+                object: portfolioHologram,
+                originalX: position.x,
+                originalY: position.y + 10
+            });
+        }
     }
 
     return holograms;
