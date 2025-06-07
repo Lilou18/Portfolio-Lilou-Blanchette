@@ -1,10 +1,11 @@
+import { GameManager } from "./gameManager.js";
 export function level(k, dataLevel) {
 
     //k.setCamPos(0, 0);
     //let posTest = k.getCamPos();
     //console.log(posTest);
     //k.setCamPos(526.5,560);
-    k.setGravity(1000);
+    k.setGravity(1400);
 
     const levelLayers = dataLevel.layers;
 
@@ -17,6 +18,10 @@ export function level(k, dataLevel) {
             break;
         }
     }
+
+    const mapWidth = dataLevel.width * dataLevel.tilewidth;
+    const mapHeight = dataLevel.height * dataLevel.tileheight;
+    const gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
 
     let borderLeft = null;
     let borderRight = null;
@@ -36,8 +41,8 @@ export function level(k, dataLevel) {
             const newHeight = map.height * scale;
             map.pos.y = k.height() - newHeight;
 
-            const scaledMapWidth = dataLevel.width * dataLevel.tilewidth * scale;
-            const scaledMapHeight = dataLevel.height * dataLevel.tileheight * scale;
+            const scaledMapWidth = mapWidth * scale;
+            const scaledMapHeight = mapHeight * scale;
 
             // Update or create borders with scaled dimensions
             if (borderLeft) {
@@ -59,6 +64,9 @@ export function level(k, dataLevel) {
                 updateHologramPositions(k, holograms, scale, map.pos.y);
 
             }
+            if (gameManager) {
+                gameManager.updateScale(scale, map.pos.y);
+            }
 
             // Store the current scale and map offset for other objects to use
             k.mapScale = scale;
@@ -68,12 +76,13 @@ export function level(k, dataLevel) {
             if (player) {
                 player.scale = k.vec2(scale);
             }
+
         }
     });
 
     setMapColliders(k, map, colliders);
     // Create borders and store references
-    const borders = setMapBorders(k, dataLevel.tilewidth, dataLevel.tileheight * dataLevel.height, dataLevel.width * dataLevel.tilewidth);
+    const borders = setMapBorders(k, dataLevel.tilewidth, mapHeight, mapWidth);
     borderLeft = borders.left;
     borderRight = borders.right;
 
@@ -102,7 +111,7 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
         k.opacity(0), // Make invisible (was opacity(1))
         k.body({ isStatic: true }),
         k.pos(-128, 0),
-        "border",
+        "borderLeft",
     ]);
 
     const borderRight = k.add([
@@ -159,7 +168,7 @@ function setHologram(k, mapPositions) {
             });
 
         }
-        else if(position.name === "hologramContact"){
+        else if (position.name === "hologramContact") {
             const portfolioHologram = k.add([
                 k.sprite("portfolioHologram", { anim: "hologram" }),
                 k.area(),

@@ -39,3 +39,5 @@ k.loadSprite("portfolioHologram", "./assets/hologramPortfolio.png", {
         }
     }
 });
+
+k.loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");

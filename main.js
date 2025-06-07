@@ -4,6 +4,7 @@ import { Player } from "./entities/player.js";
 import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
+import { GameManager } from "./gameManager.js";
 
 async function main() {
     const levelData = await fetch("./map/level.json")

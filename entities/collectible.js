@@ -1,10 +1,10 @@
-export class GroundEnemy {
-    constructor(k, x, y) {
+export class Collectible{
+    constructor(k, x, y){
         this.k = k;
         this.originalX = x;
         this.originalY = y;
         this.destroyed = false;
-        this.speed = 300 + Math.random() * 100; // Vitesse aléatoire
+        this.variationMovement = Math.random() * Math.PI * 2; // Random between 0 and 2PI
 
         this.gameObject = k.add([
             k.rect(100, 100),
@@ -12,42 +12,35 @@ export class GroundEnemy {
             k.anchor("center"),
             k.scale(0.6),
             k.pos(x, y),
-            k.body({isStatic: false}),
-            color(255, 0, 55),
-            "enemy"
+            color(245, 66, 242),
+            "collectible"
         ]);
 
         this.setupBehavior();
+
     }
 
-    setupBehavior(){
-        this.gameObject.onUpdate(() => {
-            this.gameObject.move(- this.speed, 0)
-        });
-
-        this.gameObject.onCollide("borderLeft", () =>{
-            console.log("DESTRoy");
-            this.destroy();
-        });
-    }
-
-    // Update the scale of the enemy if screen changed
-    updateScale(mapScale, mapOffsetY) {
-        if (!this.destroyed) {
+    updateScale(mapScale, mapOffsetY){
+        if(!this.destroyed){
             const scaledX = this.originalX * mapScale;
             const scaledY = mapOffsetY + (this.originalY * mapScale);
 
             this.gameObject.pos.x = scaledX;
             this.gameObject.posY = scaledY;
             this.gameObject.scale = this.k.vec2(0.6 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
-
-            this.speed = (50 + Math.random() * 100) * mapScale;
         }
     }
 
-    // Destroy the enemy
-    destroy(){
-         if(!this.destroyed){
+    setupBehavior(){
+        this.gameObject.onUpdate(() => {
+            const time = this.k.time();
+            const amount = Math.sin(time * 3 + this.variationMovement) * 10;
+            this.gameObject.pos.y = this.originalY + amount;
+        });
+    }
+
+    collect(){
+        if(!this.destroyed){
             this.destroyed = true;
 
             this.k.tween(
