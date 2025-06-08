@@ -2,7 +2,8 @@ import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
 
 export const k = kaplay({
     canvas : document.getElementById("gameCanvas"),
-    background: [68, 196, 242],
+    background: [61, 66, 74],
+    // background: [68, 196, 242],
     width: window.innerWidth,
     height: window.innerHeight,
     //fit: true,
