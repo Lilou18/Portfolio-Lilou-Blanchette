@@ -15,20 +15,28 @@ export class GameManager {
 
 
         this.enemySpawnTimer = 0;
-        this.enemySpawnInterval = Math.random() * 3;
+        this.enemySpawnInterval = Math.random() * (3 - 0.5) + 0.5;
+        //this.enemySpawnInterval = (Math.random() * 3) + 1;
+
+        this.playerJumpHeight = 200;
+        this.groundLevel = this.mapHeight - (this.tileHeight * 2);
+
         this.collectibleSpawnTimer = 0;
-        this.collectibleSpawnInterval = 2;
-        this.maxEnemies = 5;
+        this.collectibleSpawnInterval = 3;
         this.maxCollectibles = 8;
+        this.initialCollectibles = 4;
+        this.pendingCollectibleSpawns = [];
 
         this.setupUI();
         this.setupCollisions();
         this.setupSpawning();
+        this.initiateSpawn();
+        this.spawnInitialCollectibles();
 
         const test = new Collectible(k, 1000, 600);
         this.collectibles.push(test);
-        const enemy = new GroundEnemy(k, 800, 600);
-        this.enemies.push(enemy);
+        //const enemy = new GroundEnemy(k, 800, 600);
+        //this.enemies.push(enemy);
     }
 
     setupUI() {
@@ -58,6 +66,7 @@ export class GameManager {
 
     updateScale(mapScale, mapOffsetY) {
         this.enemies.forEach(enemy => {
+            enemy.updateScale(mapScale, mapOffsetY);
 
         });
 
@@ -75,6 +84,8 @@ export class GameManager {
                 this.collectibles[indexCollectible].collect();
                 this.changeScore(5);
                 this.collectibles.splice(indexCollectible, 1);
+
+                this.startCollectibleSpawnTimer();
             }
         });
 
@@ -88,35 +99,145 @@ export class GameManager {
                 this.enemies.splice(indexCollectible, 1);
             }
         });
-        
+
+        this.k.onCollide("enemy", "enemy", () => {
+
+        });
+
+        this.k.onCollide("collectible", "enemy", () => {
+
+        });
+
     }
 
-    setupSpawning(){
+    setupSpawning() {
         this.k.onUpdate(() => {
             const dt = this.k.dt();
-            
+
             this.enemySpawnTimer += dt;
-            if(this.enemySpawnTimer >= this.enemySpawnInterval){
+            if (this.enemySpawnTimer >= this.enemySpawnInterval) {
                 this.spawnEnemy();
                 this.enemySpawnTimer = 0;
             }
+
+
+            this.updateCollectibleSpawnTimers(dt);
         });
+
+        this.collectibleSpawnTimer += dt;
+        if (this.collectibleSpawnTimer >= this.collectibleSpawnTimer) {
+            if (this.collectibles.length < this.maxCollectibles) {
+                this.spawnCollectible();
+            }
+        }
     }
 
-    spawnEnemy(){
+    spawnEnemy() {
         const originalX = this.mapWidth - (this.tileWidth / 2);
         const originalY = this.mapHeight - (this.tileHeight * 2);
 
-        let spawnX = originalX;
-        let spawnY = originalY;
+        // let spawnX = originalX;
+        // let spawnY = originalY;
 
-        if(this.k.mapScale && this.k.mapOffsetY !== undefined){
-            spawnX = originalX * this.k.mapScale;
-            spawnY = this.k.mapOffsetY + (originalY * this.k.mapScale);
+        // if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
+        //     spawnX = originalX * this.k.mapScale;
+        //     spawnY = this.k.mapOffsetY + (originalY * this.k.mapScale);
+        // }
+
+        const enemy = new GroundEnemy(this.k, originalX, originalY);
+        this.enemies.push(enemy);
+
+        if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
+            enemy.updateScale(this.k.mapScale, this.k.mapOffsetY);
+        }
+    }
+
+    initiateSpawn() {
+        this.k.wait(2, () => {
+            this.initialEnemySpawn(2000);
+            this.initialEnemySpawn(3000);
+            this.initialEnemySpawn(4500);
+        });
+    }
+
+    initialEnemySpawn(x) {
+        const originalX = x;
+        const originalY = this.mapHeight - (this.tileHeight * 2);
+
+        // Always create with original coordinates
+        const enemy = new GroundEnemy(this.k, originalX, originalY);
+        this.enemies.push(enemy);
+
+        // Let updateScale handle the scaling if needed
+        if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
+            enemy.updateScale(this.k.mapScale, this.k.mapOffsetY);
+        }
+    }
+    // initialEnemySpawn(x) {
+    //     const originalX = x;
+    //     const originalY = this.mapHeight - (this.tileHeight * 2);
+
+    //     let spawnX = originalX;
+    //     let spawnY = originalY;
+
+    //     if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
+    //         spawnX = originalX * this.k.mapScale;
+    //         spawnY = this.k.mapOffsetY + (originalY * this.k.mapScale);
+    //     }
+
+    //     const enemy = new GroundEnemy(this.k, spawnX, spawnY);
+    //     this.enemies.push(enemy);
+    // }
+
+    // Collectibles
+    spawnInitialCollectibles() {
+        for (let i = 0; i < this.initialCollectibles; i++) {
+            this.spawnCollectible();
+        }
+    }
+
+    spawnCollectible() {
+        if (this.collectibles.length >= this.maxCollectibles) {
+            return;
         }
 
-        const enemy = new GroundEnemy(this.k, spawnX, spawnY);
-        this.enemies.push(enemy);
+        const { x, y } = this.generateRandomCollectiblePosition();
+
+        const collectible = new Collectible(this.k, x, y);
+        this.collectibles.push(collectible);
+
+        if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
+            collectible.updateScale(this.k.mapScale, this.k.mapOffsetY);
+        }
+    }
+
+    generateRandomCollectiblePosition() {
+        const minX = this.tileWidth * 2; // Not spawn on the border
+        const maxX = this.mapWidth - (this.tileWidth * 2);
+
+        const groundY = this.groundLevel;
+        const maxY = this.groundLevel - this.playerJumpHeight;
+
+        const x = Math.random() * (maxX - minX) + minX;
+        const y = Math.random() * (maxY - groundY) + groundY - 50;
+
+        return { x, y };
+    }
+
+    startCollectibleSpawnTimer() {
+        // Ajouter un nouveau timer à la liste
+        this.pendingCollectibleSpawns.push(this.collectibleSpawnInterval);
+    }
+
+    updateCollectibleSpawnTimers(dt) {
+        for (let i = this.pendingCollectibleSpawns.length - 1; i >= 0; i--) {
+            this.pendingCollectibleSpawns[i] -= dt;
+
+            if (this.pendingCollectibleSpawns[i] <= 0) {
+                this.spawnCollectible();
+                this.pendingCollectibleSpawns.splice(i, 1);
+            }
+        }
     }
 
 }

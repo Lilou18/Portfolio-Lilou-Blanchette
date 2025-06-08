@@ -1,8 +1,9 @@
-export class Collectible{
-    constructor(k, x, y){
+export class Collectible {
+    constructor(k, x, y) {
         this.k = k;
         this.originalX = x;
         this.originalY = y;
+        this.scaledY = y;
         this.destroyed = false;
         this.variationMovement = Math.random() * Math.PI * 2; // Random between 0 and 2PI
 
@@ -12,7 +13,7 @@ export class Collectible{
             k.anchor("center"),
             k.scale(0.6),
             k.pos(x, y),
-            color(245, 66, 242),
+            k.color(245, 66, 242),
             "collectible"
         ]);
 
@@ -20,34 +21,42 @@ export class Collectible{
 
     }
 
-    updateScale(mapScale, mapOffsetY){
-        if(!this.destroyed){
+    updateScale(mapScale, mapOffsetY) {
+        if (!this.destroyed) {
             const scaledX = this.originalX * mapScale;
-            const scaledY = mapOffsetY + (this.originalY * mapScale);
+            this.scaledY = mapOffsetY + (this.originalY * mapScale);
 
             this.gameObject.pos.x = scaledX;
-            this.gameObject.posY = scaledY;
+            //this.gameObject.pos.y = this.scaledY;
             this.gameObject.scale = this.k.vec2(0.6 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
         }
     }
 
-    setupBehavior(){
+    setupBehavior() {
+        //console.log("ANIMATE");
         this.gameObject.onUpdate(() => {
-            const time = this.k.time();
-            const amount = Math.sin(time * 3 + this.variationMovement) * 10;
-            this.gameObject.pos.y = this.originalY + amount;
+            if (!this.destroyed) {
+
+                const time = this.k.time();
+                const amount = Math.sin(time * 3 + this.variationMovement) * 10;
+                console.log("Animation running:", this.scaledY, amount);
+                this.gameObject.pos.y = this.scaledY + amount;
+            }
+
+
+
         });
     }
 
-    collect(){
-        if(!this.destroyed){
+    collect() {
+        if (!this.destroyed) {
             this.destroyed = true;
 
             this.k.tween(
                 this.gameObject.scale,
                 this.k.vec2(0),
                 0.2,
-                (val) => {this.gameObject.scale = val},
+                (val) => { this.gameObject.scale = val },
                 this.k.easings.easeOutBack
             ).then(() => {
                 this.gameObject.destroy();

@@ -3,17 +3,26 @@ export class GroundEnemy {
         this.k = k;
         this.originalX = x;
         this.originalY = y;
+        this.currentOffset = 0;
         this.destroyed = false;
-        this.speed = 300 + Math.random() * 100; // Vitesse aléatoire
+       
+        const enemyTypes = [
+            { speed: 270, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
+            { speed: 350, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
+            { speed: 500, color: [255, 0, 0], name: "very_fast" } // Très rapide - Rouge 500
+        ];
+
+        this.enemyType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+        this.speed = this.enemyType.speed;
 
         this.gameObject = k.add([
             k.rect(100, 100),
             k.area(),
-            k.anchor("center"),
+            k.anchor("bot"),
             k.scale(0.6),
             k.pos(x, y),
-            k.body({isStatic: false}),
-            color(255, 0, 55),
+            //k.body({isStatic: false}),
+            k.color(this.enemyType.color),
             "enemy"
         ]);
 
@@ -22,6 +31,8 @@ export class GroundEnemy {
 
     setupBehavior(){
         this.gameObject.onUpdate(() => {
+            const movement = this.speed * this.k.dt();
+            this.currentOffset += movement;
             this.gameObject.move(- this.speed, 0)
         });
 
@@ -34,14 +45,16 @@ export class GroundEnemy {
     // Update the scale of the enemy if screen changed
     updateScale(mapScale, mapOffsetY) {
         if (!this.destroyed) {
-            const scaledX = this.originalX * mapScale;
+            const currentX = this.originalX - this.currentOffset;
+            const scaledX = currentX * mapScale;
             const scaledY = mapOffsetY + (this.originalY * mapScale);
 
             this.gameObject.pos.x = scaledX;
-            this.gameObject.posY = scaledY;
+            this.gameObject.pos.y = scaledY;
             this.gameObject.scale = this.k.vec2(0.6 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
 
-            this.speed = (50 + Math.random() * 100) * mapScale;
+            this.speed = this.enemyType.speed * mapScale;
+            //this.speed = (50 + Math.random() * 100) * mapScale;
         }
     }
 

@@ -78,6 +78,7 @@ export function level(k, dataLevel) {
             }
 
         }
+
     });
 
     setMapColliders(k, map, colliders);
@@ -88,6 +89,8 @@ export function level(k, dataLevel) {
 
     //setHologram(k, levelLayers[2].objects);
     holograms = setHologram(k, levelLayers[2].objects);
+
+    // gameManager.initiateSpawn();
 }
 
 function setMapColliders(k, map, colliders) {
