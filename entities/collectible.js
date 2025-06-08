@@ -39,7 +39,7 @@ export class Collectible {
 
                 const time = this.k.time();
                 const amount = Math.sin(time * 3 + this.variationMovement) * 10;
-                console.log("Animation running:", this.scaledY, amount);
+                //console.log("Animation running:", this.scaledY, amount);
                 this.gameObject.pos.y = this.scaledY + amount;
             }
 

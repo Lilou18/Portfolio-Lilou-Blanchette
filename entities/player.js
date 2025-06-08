@@ -2,6 +2,8 @@ export class Player {
     constructor(k, posX, posY, speed, jumpForce, setUpCollisionsUI) {
         this.speed = speed;
         this.scrollSpeed = this.speed * 7;
+        this.isScrolling = false;
+        this.scrollTimeout = null;
         this.jumpForce = jumpForce;
 
         // Store original position for scaling calculations
@@ -87,6 +89,11 @@ export class Player {
         onKeyDown("d", () => moveRight(this.speed))
 
         window.addEventListener("wheel", (e) => {
+            this.isScrolling = true;
+
+            if(this.scrollTimeout){
+                clearTimeout(this.scrollTimeout);
+            }
             if (e.deltaY > 0) {
                 // Scroll vers le bas = droite
                 moveRight(this.scrollSpeed);
@@ -94,6 +101,10 @@ export class Player {
                 // Scroll vers le haut = gauche
                 moveLeft(this.scrollSpeed);
             }
+
+            this.scrollTimeout = setTimeout(() =>{
+                this.isScrolling = false;
+            }, 200);
         });
 
         onKeyDown("space", () => {
@@ -105,7 +116,7 @@ export class Player {
         onUpdate(() => {
             const leftPressed = isKeyDown("left") || isKeyDown("a");
             const rightPressed = isKeyDown("right") || isKeyDown("d");
-            const isMoving = leftPressed || rightPressed;
+            const isMoving = leftPressed || rightPressed || this.isScrolling;
             const isJumping = !this.gameObject.isGrounded() || isKeyDown("space");
 
             // Si le joueur ne bouge pas et ne saute pas, on joue l'anim idle
