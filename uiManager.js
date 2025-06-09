@@ -46,6 +46,14 @@ export class UIManager {
                 this.displayPanel(this.currentInteraction);
             }
         });
+
+        onKeyDown("escape", () => {
+            if(this.currentInteraction && this.panels[this.currentInteraction] && this.canvas){
+                if(this.panels[this.currentInteraction].style.display === "block"){
+                    this.hidePanel(this.currentInteraction);
+                }
+            }
+        });
     };
 
     setUpCollisionsUI() {
