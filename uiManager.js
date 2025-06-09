@@ -1,4 +1,5 @@
 import { gameState } from "./gameState.js";
+import { k } from "./loader.js"
 
 export class UIManager {
     constructor() {
@@ -10,6 +11,7 @@ export class UIManager {
         this.canvas = document.getElementById("gameCanvas");//document.querySelector("canvas");
         this.currentPanel = null;
         this.currentInteraction = null;
+        this.interactionTexts = {};
         this.setupEventListeners();
     };
 
@@ -40,21 +42,57 @@ export class UIManager {
     }
 
     setUpEnterInput() {
-        onKeyDown("enter", () => {
+        k.onKeyDown("enter", () => {
             console.log("ENTER!!!");
             if (this.currentInteraction) {
                 this.displayPanel(this.currentInteraction);
             }
         });
 
-        onKeyDown("escape", () => {
-            if(this.currentInteraction && this.panels[this.currentInteraction] && this.canvas){
-                if(this.panels[this.currentInteraction].style.display === "block"){
+        k.onKeyDown("escape", () => {
+            if (this.currentInteraction && this.panels[this.currentInteraction] && this.canvas) {
+                if (this.panels[this.currentInteraction].style.display === "block") {
                     this.hidePanel(this.currentInteraction);
                 }
             }
         });
     };
+
+    createInteractionText(hologramTag, text) {
+        this.removeInteractionText(hologramTag);
+
+        const hologram = get(hologramTag)[0];
+        if (!hologram) return;
+
+        const interactionText = k.add([
+            k.text(text, {
+                size: 20,
+                font: "orbitron"
+            }),
+            k.color(0, 255, 255),
+            k.pos(hologram.pos.x, hologram.pos.y - 300),
+            k.anchor("center"),
+            k.z(-10),
+            `${hologramTag}TextInput`
+        ]);
+
+        this.interactionTexts[hologramTag] = interactionText;
+
+        interactionText.onUpdate(() => {
+            const currentHologram = get(hologramTag)[0];
+            if (currentHologram) {
+                interactionText.pos.x = currentHologram.pos.x;
+                interactionText.pos.y = currentHologram.pos.y - 300;
+            }
+        });
+    }
+
+    removeInteractionText(hologramTag) {
+        if (this.interactionTexts[hologramTag]) {
+            this.interactionTexts[hologramTag].destroy();
+            delete this.interactionTexts[hologramTag];
+        }
+    }
 
     setUpCollisionsUI() {
         if (gameState.player) {
@@ -63,6 +101,7 @@ export class UIManager {
             gameState.player.gameObject.onCollide("cvHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le CV");
                 this.currentInteraction = "cv";
+                this.createInteractionText("cvHologram", "Appuyez sur Enter");
                 // onKeyDown("enter", () => {
                 //     this.displayPanel("cv");
                 //     //document.getElementById("cvPanel").style.display = "block";
@@ -74,11 +113,13 @@ export class UIManager {
                 if (this.currentInteraction === "cv") {
                     this.currentInteraction = null;
                 }
+                this.removeInteractionText("cvHologram");
             });
 
             gameState.player.gameObject.onCollide("portfolioHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
                 this.currentInteraction = "portfolio";
+                this.createInteractionText("portfolioHologram", "Appuyez sur Enter");
                 // onKeyDown("enter", () => {
                 //     this.displayPanel("portfolio");
                 //     //document.getElementById("portfolioPanel").style.display = "block";
@@ -90,11 +131,13 @@ export class UIManager {
                 if (this.currentInteraction === "portfolio") {
                     this.currentInteraction = null;
                 }
+                this.removeInteractionText("portfolioHologram");
             });
 
             gameState.player.gameObject.onCollide("contactHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir Contact");
                 this.currentInteraction = "contact";
+                this.createInteractionText("contactHologram", "Appuyez sur Enter");
 
             });
 
@@ -102,6 +145,7 @@ export class UIManager {
                 if (this.currentInteraction === "contact") {
                     this.currentInteraction = null;
                 }
+                this.removeInteractionText("contactHologram");
             });
 
 
@@ -110,10 +154,13 @@ export class UIManager {
     }
 
 
+
+
     displayPanel(panelName) {
         if (this.panels[panelName] && this.canvas) {
             this.panels[panelName].style.display = "block";
             this.canvas.style.filter = "brightness(70%)";
+            gameState.isGamePaused = true;
 
             //this.canvas.blur();
         }
@@ -124,6 +171,7 @@ export class UIManager {
         if (this.panels[panelName] && this.canvas) {
             this.panels[panelName].style.display = "none";
             this.canvas.style.filter = "brightness(100%)";
+            gameState.isGamePaused = false;
 
             this.canvas.focus();
         }
