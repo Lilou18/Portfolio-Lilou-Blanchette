@@ -1,3 +1,5 @@
+import { gameState } from "../gameState.js";
+
 export class Player {
     constructor(k, posX, posY, speed, jumpForce, setUpCollisionsUI) {
         this.speed = speed;
@@ -53,7 +55,7 @@ export class Player {
                 this.scaledJumpForce = this.jumpForce * k.mapScale;
 
 
-                if(this.setUpCollisionsUI){
+                if (this.setUpCollisionsUI) {
                     this.setUpCollisionsUI();
                 }
             } else {
@@ -67,22 +69,26 @@ export class Player {
     playerControls() {
 
         const moveLeft = (speed) => {
-            if (this.gameObject.curAnim() !== "run") {
-                this.gameObject.play("run");
+            if (!gameState.isGamePaused) {
+                if (this.gameObject.curAnim() !== "run") {
+                    this.gameObject.play("run");
+                }
+                this.gameObject.flipX = true;
+                this.gameObject.move(-speed, 0);
             }
-            this.gameObject.flipX = true;
-            this.gameObject.move(-speed, 0);
         }
 
         onKeyDown("left", () => moveLeft(this.speed));
         onKeyDown("a", () => moveLeft(this.speed));
 
         const moveRight = (speed) => {
-            if (this.gameObject.curAnim() !== "run") {
-                this.gameObject.play("run");
+            if (!gameState.isGamePaused) {
+                if (this.gameObject.curAnim() !== "run") {
+                    this.gameObject.play("run");
+                }
+                this.gameObject.flipX = false;
+                this.gameObject.move(speed, 0);
             }
-            this.gameObject.flipX = false;
-            this.gameObject.move(speed, 0);
         }
 
         onKeyDown("right", () => moveRight(this.speed))
@@ -91,7 +97,7 @@ export class Player {
         window.addEventListener("wheel", (e) => {
             this.isScrolling = true;
 
-            if(this.scrollTimeout){
+            if (this.scrollTimeout) {
                 clearTimeout(this.scrollTimeout);
             }
             if (e.deltaY > 0) {
@@ -102,16 +108,18 @@ export class Player {
                 moveLeft(this.scrollSpeed);
             }
 
-            this.scrollTimeout = setTimeout(() =>{
+            this.scrollTimeout = setTimeout(() => {
                 this.isScrolling = false;
             }, 200);
         });
 
         onKeyDown("space", () => {
-            if (this.gameObject.isGrounded()) {
-                this.gameObject.jump(this.jumpForce);
+            if (!gameState.isGamePaused) {
+                if (this.gameObject.isGrounded()) {
+                    this.gameObject.jump(this.jumpForce);
+                }
             }
-        })
+        });
 
         onUpdate(() => {
             const leftPressed = isKeyDown("left") || isKeyDown("a");

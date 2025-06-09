@@ -1,3 +1,5 @@
+import { gameState } from "../gameState.js";
+
 export class GroundEnemy {
     constructor(k, x, y) {
         this.k = k;
@@ -5,7 +7,7 @@ export class GroundEnemy {
         this.originalY = y;
         this.currentOffset = 0;
         this.destroyed = false;
-       
+
         const enemyTypes = [
             { speed: 270, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
             { speed: 350, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
@@ -29,14 +31,17 @@ export class GroundEnemy {
         this.setupBehavior();
     }
 
-    setupBehavior(){
+    setupBehavior() {
         this.gameObject.onUpdate(() => {
-            const movement = this.speed * this.k.dt();
-            this.currentOffset += movement;
-            this.gameObject.move(- this.speed, 0)
+            if (!gameState.isGamePaused) {
+                const movement = this.speed * this.k.dt();
+                this.currentOffset += movement;
+                this.gameObject.move(- this.speed, 0)
+            }
+
         });
 
-        this.gameObject.onCollide("borderLeft", () =>{
+        this.gameObject.onCollide("borderLeft", () => {
             console.log("DESTRoy");
             this.destroy();
         });
@@ -59,15 +64,15 @@ export class GroundEnemy {
     }
 
     // Destroy the enemy
-    destroy(){
-         if(!this.destroyed){
+    destroy() {
+        if (!this.destroyed) {
             this.destroyed = true;
 
             this.k.tween(
                 this.gameObject.scale,
                 this.k.vec2(0),
                 0.2,
-                (val) => {this.gameObject.scale = val},
+                (val) => { this.gameObject.scale = val },
                 this.k.easings.easeOutBack
             ).then(() => {
                 this.gameObject.destroy();
