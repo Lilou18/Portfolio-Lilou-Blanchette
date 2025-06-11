@@ -144,7 +144,7 @@ export class GameManager {
         //     spawnY = this.k.mapOffsetY + (originalY * this.k.mapScale);
         // }
 
-        const enemy = new GroundEnemy(this.k, originalX, originalY + 10);
+        const enemy = new GroundEnemy(this.k, originalX, originalY + 40);
         this.enemies.push(enemy);
 
         if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
@@ -165,7 +165,7 @@ export class GameManager {
         const originalY = this.mapHeight - (this.tileHeight * 2);
 
         // Always create with original coordinates
-        const enemy = new GroundEnemy(this.k, originalX, originalY + 10);
+        const enemy = new GroundEnemy(this.k, originalX, originalY + 40);
         this.enemies.push(enemy);
 
         // Let updateScale handle the scaling if needed
