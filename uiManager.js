@@ -72,7 +72,7 @@ export class UIManager {
             k.color(0, 255, 255),
             k.pos(hologram.pos.x, hologram.pos.y - 300),
             k.anchor("center"),
-            k.z(-10),
+            k.z(1),
             `${hologramTag}TextInput`
         ]);
 

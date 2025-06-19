@@ -15,7 +15,7 @@ export class GameManager {
 
 
         this.enemySpawnTimer = 0;
-        this.enemySpawnInterval = Math.random() * (3 - 0.5) + 0.5;
+        this.enemySpawnInterval = Math.random() * (3 - 1) + 1;
         //this.enemySpawnInterval = (Math.random() * 3) + 1;
 
         this.playerJumpHeight = 200;
@@ -133,7 +133,7 @@ export class GameManager {
     }
 
     spawnEnemy() {
-        const originalX = this.mapWidth - (this.tileWidth / 2);
+        const originalX = this.mapWidth - (this.tileWidth / 2) + 128;
         const originalY = this.mapHeight - (this.tileHeight * 2);
 
         // let spawnX = originalX;
