@@ -97,6 +97,7 @@ export class GameManager {
                 this.enemies[indexCollectible].destroy();
                 this.changeScore(-10);
                 this.enemies.splice(indexCollectible, 1);
+                this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
             }
         });
 
