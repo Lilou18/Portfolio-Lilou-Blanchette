@@ -9,6 +9,7 @@ export const k = kaplay({
     height: window.innerHeight,
     //fit: true,
     stretch: true,
+    pixelDensity: 2,
     //debug = false;
 });
 
