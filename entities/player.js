@@ -30,6 +30,7 @@ export class Player {
                 anchor("top"),
                 pos(posX, posY),
                 color(),
+                z(10),
                 "player",   //With the get function of kaplay it pass you all the gameObject with a certain tag
             ]);
 

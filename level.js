@@ -155,7 +155,7 @@ function setHologram(k, mapPositions) {
         }
         else if (position.name === "cvPortfolio") {
             const portfolioHologram = k.add([
-                k.sprite("portfolioHologram", { anim: "hologram" }),
+                k.sprite("cvHologram", { anim: "hologram" }),
                 k.area(),
                 k.anchor("bot"),
                 k.pos(position.x, position.y), // Initial position from Tiled
@@ -173,7 +173,7 @@ function setHologram(k, mapPositions) {
         }
         else if (position.name === "hologramContact") {
             const portfolioHologram = k.add([
-                k.sprite("portfolioHologram", { anim: "hologram" }),
+                k.sprite("contactHologram", { anim: "hologram" }),
                 k.area(),
                 k.anchor("bot"),
                 k.pos(position.x, position.y), // Initial position from Tiled

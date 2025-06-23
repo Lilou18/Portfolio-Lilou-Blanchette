@@ -69,7 +69,7 @@ export class UIManager {
                 size: 20,
                 font: "orbitron"
             }),
-            k.color(0, 255, 255),
+            k.color(255, 255, 255),
             k.pos(hologram.pos.x, hologram.pos.y - 300),
             k.anchor("center"),
             k.z(1),

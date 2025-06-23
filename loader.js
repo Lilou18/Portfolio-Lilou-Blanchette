@@ -43,4 +43,32 @@ k.loadSprite("portfolioHologram", "./assets/hologramPortfolio.png", {
     }
 });
 
+k.loadSprite("contactHologram", "./assets/hologramContact.png", {
+    sliceX: 19,
+    sliceY: 1,
+    anims: {
+        hologram: {
+            from: 0,
+            to: 18,
+            speed: 15,
+            loop: true,
+        }
+    }
+});
+
+k.loadSprite("cvHologram", "./assets/hologramCV.png", {
+    sliceX: 19,
+    sliceY: 1,
+    anims: {
+        hologram: {
+            from: 0,
+            to: 18,
+            speed: 15,
+            loop: true,
+        }
+    }
+});
+
+
+
 k.loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");
