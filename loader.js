@@ -30,7 +30,33 @@ k.loadSprite("player", "./assets/monsterWalking.png", {
     },
 });
 
-k.loadSprite("enemy", "./assets/enemy.png", {
+k.loadSprite("enemyNormal", "./assets/enemyYellow.png", {
+    sliceX: 9,
+    sliceY: 1,
+    anims:{
+        walk: {
+            from: 0,
+            to: 8,
+            speed: 15,
+            loop: true,
+        },
+    },
+})
+
+k.loadSprite("enemyFast", "./assets/enemyOrange.png", {
+    sliceX: 9,
+    sliceY: 1,
+    anims:{
+        walk: {
+            from: 0,
+            to: 8,
+            speed: 15,
+            loop: true,
+        },
+    },
+})
+
+k.loadSprite("enemyVeryFast", "./assets/enemyRed.png", {
     sliceX: 9,
     sliceY: 1,
     anims:{

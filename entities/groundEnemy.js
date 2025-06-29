@@ -17,19 +17,54 @@ export class GroundEnemy {
         this.enemyType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
         this.speed = this.enemyType.speed;
 
-        this.gameObject = k.add([
-            //k.rect(100, 100),
-            k.sprite("enemy", { anim: "walk" }),
-            area({
-                shape: new Rect(vec2(0, 0), 100, 110),
-            }),
-            k.anchor("bot"),
-            k.scale(1),
-            k.pos(x, y),
-            //k.body({isStatic: false}),
-            k.color(this.enemyType.color),
-            "enemy"
-        ]);
+        if (this.enemyType.name === "very_fast") {
+            this.gameObject = k.add([
+                //k.rect(100, 100),
+                k.sprite("enemyVeryFast", { anim: "walk" }),
+                area({
+                    shape: new Rect(vec2(0, 0), 100, 110),
+                }),
+                k.anchor("bot"),
+                k.scale(1),
+                k.pos(x, y),
+                //k.body({isStatic: false}),
+                //k.color(this.enemyType.color),
+                "enemy"
+            ]);
+
+        }
+        else if (this.enemyType.name === "fast") {
+            this.gameObject = k.add([
+                //k.rect(100, 100),
+                k.sprite("enemyFast", { anim: "walk" }),
+                area({
+                    shape: new Rect(vec2(0, 0), 100, 110),
+                }),
+                k.anchor("bot"),
+                k.scale(1),
+                k.pos(x, y),
+                //k.body({isStatic: false}),
+                //k.color(this.enemyType.color),
+                "enemy"
+            ]);
+        }
+        else {
+            this.gameObject = k.add([
+                //k.rect(100, 100),
+                k.sprite("enemyNormal", { anim: "walk" }),
+                area({
+                    shape: new Rect(vec2(0, 0), 100, 110),
+                }),
+                k.anchor("bot"),
+                k.scale(1),
+                k.pos(x, y),
+                //k.body({isStatic: false}),
+                //k.color(this.enemyType.color),
+                "enemy"
+            ]);
+        }
+
+
 
         this.setupBehavior();
     }
