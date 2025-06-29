@@ -18,10 +18,13 @@ export class GroundEnemy {
         this.speed = this.enemyType.speed;
 
         this.gameObject = k.add([
-            k.rect(100, 100),
-            k.area(),
+            //k.rect(100, 100),
+            k.sprite("enemy", { anim: "walk" }),
+            area({
+                shape: new Rect(vec2(0, 0), 100, 110),
+            }),
             k.anchor("bot"),
-            k.scale(0.6),
+            k.scale(1),
             k.pos(x, y),
             //k.body({isStatic: false}),
             k.color(this.enemyType.color),
@@ -56,7 +59,7 @@ export class GroundEnemy {
 
             this.gameObject.pos.x = scaledX;
             this.gameObject.pos.y = scaledY;
-            this.gameObject.scale = this.k.vec2(0.6 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
+            this.gameObject.scale = this.k.vec2(1 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
 
             this.speed = this.enemyType.speed * mapScale;
             //this.speed = (50 + Math.random() * 100) * mapScale;
