@@ -16,11 +16,11 @@ export const k = kaplay({
 console.log("DISPLAY");
 k.loadSprite("level", "./map/level.png");
 
-k.loadSprite("player", "./assets/monsterWalking.png", {
-    sliceX: 17,
+k.loadSprite("player", "./assets/monsterWalkingIdle.png", {
+    sliceX: 18,
     sliceY: 1,
     anims: {
-        idle: 0,
+        idle: 17,
         run: {
             from: 0,
             to: 16,

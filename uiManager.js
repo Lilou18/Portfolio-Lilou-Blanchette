@@ -43,7 +43,6 @@ export class UIManager {
 
     setUpEnterInput() {
         k.onKeyDown("enter", () => {
-            console.log("ENTER!!!");
             if (this.currentInteraction) {
                 this.displayPanel(this.currentInteraction);
             }
@@ -58,6 +57,22 @@ export class UIManager {
         });
     };
 
+    setUpHologramClicks() {
+
+        // k.onClick("cvHologram", () => this.displayPanel("cv"));
+        k.onClick("cvHologram", () => {
+            this.displayPanel("cv");
+        });
+
+        k.onClick("portfolioHologram", () => {
+            this.displayPanel("portfolio");
+        });
+
+        k.onClick("contactHologram", () => {
+            this.displayPanel("contact");
+        });
+    }
+
     createInteractionText(hologramTag, text) {
         this.removeInteractionText(hologramTag);
 
@@ -67,7 +82,8 @@ export class UIManager {
         const interactionText = k.add([
             k.text(text, {
                 size: 20,
-                font: "orbitron"
+                font: "orbitron",
+                align: "center",
             }),
             k.color(255, 255, 255),
             k.pos(hologram.pos.x, hologram.pos.y - 300),
@@ -97,11 +113,12 @@ export class UIManager {
     setUpCollisionsUI() {
         if (gameState.player) {
             this.setUpEnterInput();
+            this.setUpHologramClicks();
 
             gameState.player.gameObject.onCollide("cvHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le CV");
                 this.currentInteraction = "cv";
-                this.createInteractionText("cvHologram", "Appuyez sur Enter");
+                this.createInteractionText("cvHologram", "Appuyez sur Enter \n ou Cliquez");
                 // onKeyDown("enter", () => {
                 //     this.displayPanel("cv");
                 //     //document.getElementById("cvPanel").style.display = "block";
@@ -119,7 +136,7 @@ export class UIManager {
             gameState.player.gameObject.onCollide("portfolioHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
                 this.currentInteraction = "portfolio";
-                this.createInteractionText("portfolioHologram", "Appuyez sur Enter");
+                this.createInteractionText("portfolioHologram", "Appuyez sur Enter \n ou Cliquez");
                 // onKeyDown("enter", () => {
                 //     this.displayPanel("portfolio");
                 //     //document.getElementById("portfolioPanel").style.display = "block";
@@ -137,7 +154,7 @@ export class UIManager {
             gameState.player.gameObject.onCollide("contactHologram", () => {
                 debug.log("Appuie sur ENTRÉE pour voir Contact");
                 this.currentInteraction = "contact";
-                this.createInteractionText("contactHologram", "Appuyez sur Enter");
+                this.createInteractionText("contactHologram", "Appuyez sur Enter \n ou Cliquez");
 
             });
 
