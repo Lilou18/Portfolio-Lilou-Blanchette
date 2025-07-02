@@ -535,7 +535,83 @@ input[type=text] {
   font-size: 0.9em;
 }
 
+/* Contact */
 
+.contact-header{
+  letter-spacing: 1px;
+  color: #00ffff;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+}
+
+.contact-header h1{
+  font-size: 2.5em;
+  margin-bottom: 50px;
+}
+
+.wrapper-grid{
+  display: flex;
+  flex: 1;
+  align-items: center;      
+  justify-content: center;  
+}
+
+.contact-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 0px 30px 30px 30px;
+}
+
+.contact-item{
+  letter-spacing: 1px;
+  color: #00ffff;
+  text-align: center;
+  border: 1px solid #00ffff;
+  border-radius: 12px;
+  padding: 50px 30px 50px 30px;
+}
+
+.contact-item p{
+  word-break: break-all;
+  margin-bottom: 0px;
+}
+
+#contact .browser-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#contact .content-section {
+  flex: 1;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  /* align-items: center; /* Centre le header et la grille horizontalement */
+  /*justify-content: center; */
+}
+/* .cv-header {
+  border-bottom: 2px solid #00ffff;
+
+  padding: 30px;
+  text-align: center;
+  position: relative;
+
+}
+
+.cv-header h1 {
+  color: #00ffff;
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.cv-header p {
+  color: #00ffff;
+  letter-spacing: 1px;
+} */
 
 /* Responsive browser*/
 @media (max-width: 1200px) {
