@@ -434,6 +434,25 @@ input[type=text] {
   overflow: hidden;
 }
 
+.project-video {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  padding-top: 56.25%;
+  border-radius: 8px 8px 0px 0px;
+  overflow: hidden;
+}
+
+.project-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
 .project-content {
   padding: 30px;
 }
