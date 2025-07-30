@@ -53,6 +53,7 @@ export class GameManager {
         ]);
     }
 
+    // Change player score when he collects a collectible
     changeScore(amountScore) {
         this.score += amountScore;
         if (this.score < 0) {
@@ -64,6 +65,7 @@ export class GameManager {
         this.scoreText.text = `Score: ${this.score}`;
     }
 
+    // If the screen change size we must update the size of the enemies and the collectibles
     updateScale(mapScale, mapOffsetY) {
         this.enemies.forEach(enemy => {
             enemy.updateScale(mapScale, mapOffsetY);
@@ -101,16 +103,19 @@ export class GameManager {
             }
         });
 
+        // No collision between enemies
         this.k.onCollide("enemy", "enemy", () => {
 
         });
 
+        // No collision between collectibles
         this.k.onCollide("collectible", "enemy", () => {
 
         });
 
     }
 
+    // Spawn an enemy after the delay
     setupSpawning() {
         this.k.onUpdate(() => {
             const dt = this.k.dt();
@@ -133,6 +138,7 @@ export class GameManager {
         // }
     }
 
+    // Spawn an enemy at the edge of the level
     spawnEnemy() {
         const originalX = this.mapWidth - (this.tileWidth / 2) + 128;
         const originalY = this.mapHeight - (this.tileHeight * 2);
@@ -153,6 +159,7 @@ export class GameManager {
         }
     }
 
+    // Initiale enemy spawn at the start of the level
     initiateSpawn() {
         this.k.wait(2, () => {
             this.initialEnemySpawn(2000);
@@ -161,6 +168,7 @@ export class GameManager {
         });
     }
 
+    // Generate enemy at the start of the level at a specefic position
     initialEnemySpawn(x) {
         const originalX = x;
         const originalY = this.mapHeight - (this.tileHeight * 2);
@@ -190,13 +198,14 @@ export class GameManager {
     //     this.enemies.push(enemy);
     // }
 
-    // Collectibles
+    // Spawn collectibles at the start of the level
     spawnInitialCollectibles() {
         for (let i = 0; i < this.initialCollectibles; i++) {
             this.spawnCollectible();
         }
     }
 
+    // Spawn a collectible at a random position in the level
     spawnCollectible() {
         if (this.collectibles.length >= this.maxCollectibles) {
             return;
@@ -212,6 +221,7 @@ export class GameManager {
         }
     }
 
+    // Generate random collectible position in the level
     generateRandomCollectiblePosition() {
         const minX = this.tileWidth * 2; // Not spawn on the border
         const maxX = this.mapWidth - (this.tileWidth * 2);
@@ -226,10 +236,11 @@ export class GameManager {
     }
 
     startCollectibleSpawnTimer() {
-        // Ajouter un nouveau timer à la liste
+        // Add new timer to the list
         this.pendingCollectibleSpawns.push(this.collectibleSpawnInterval);
     }
 
+    // Each collectibles respawn after 3 sec after they are collected
     updateCollectibleSpawnTimers(dt) {
         for (let i = this.pendingCollectibleSpawns.length - 1; i >= 0; i--) {
             this.pendingCollectibleSpawns[i] -= dt;
