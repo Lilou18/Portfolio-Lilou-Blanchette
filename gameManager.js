@@ -24,7 +24,7 @@ export class GameManager {
         this.collectibleSpawnTimer = 0;
         this.collectibleSpawnInterval = 3;
         this.maxCollectibles = 8;
-        this.initialCollectibles = 4;
+        this.initialCollectibles = 8;
         this.pendingCollectibleSpawns = [];
 
         this.setupUI();
@@ -125,12 +125,12 @@ export class GameManager {
             this.updateCollectibleSpawnTimers(dt);
         });
 
-        this.collectibleSpawnTimer += dt;
-        if (this.collectibleSpawnTimer >= this.collectibleSpawnTimer) {
-            if (this.collectibles.length < this.maxCollectibles) {
-                this.spawnCollectible();
-            }
-        }
+        // this.collectibleSpawnTimer += dt;
+        // if (this.collectibleSpawnTimer >= this.collectibleSpawnTimer) {
+        //     if (this.collectibles.length < this.maxCollectibles) {
+        //         this.spawnCollectible();
+        //     }
+        // }
     }
 
     spawnEnemy() {
