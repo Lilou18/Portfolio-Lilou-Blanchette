@@ -1,5 +1,6 @@
 import { Collectible } from "./entities/collectible.js";
 import { GroundEnemy } from "./entities/groundEnemy.js";
+import { gameState } from "./gameState.js";
 
 export class GameManager {
     constructor(k, mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -91,7 +92,7 @@ export class GameManager {
             }
         });
 
-        // Collision betwenn a player and an enemy
+        // Collision between a player and an enemy
         this.k.onCollide("player", "enemy", (player, enemy) => {
 
             const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
@@ -118,6 +119,10 @@ export class GameManager {
     // Spawn an enemy after the delay
     setupSpawning() {
         this.k.onUpdate(() => {
+
+            // Stop the timers is the game is paused
+            if(gameState.isGamePaused) return;
+
             const dt = this.k.dt();
 
             this.enemySpawnTimer += dt;
@@ -197,6 +202,8 @@ export class GameManager {
     //     const enemy = new GroundEnemy(this.k, spawnX, spawnY);
     //     this.enemies.push(enemy);
     // }
+
+    // Collectibles
 
     // Spawn collectibles at the start of the level
     spawnInitialCollectibles() {
