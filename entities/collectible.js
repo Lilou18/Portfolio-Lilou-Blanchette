@@ -8,12 +8,13 @@ export class Collectible {
         this.variationMovement = Math.random() * Math.PI * 2; // Random between 0 and 2PI
 
         this.gameObject = k.add([
-            k.rect(100, 100),
+            k.sprite("collectible", { anim: "mug" }),
+            //k.rect(100, 100),
             k.area(),
             k.anchor("center"),
             k.scale(0.6),
             k.pos(x, y),
-            k.color(245, 66, 242),
+            //k.color(245, 66, 242),
             "collectible"
         ]);
 

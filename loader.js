@@ -2,7 +2,8 @@ import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
 
 export const k = kaplay({
     canvas : document.getElementById("gameCanvas"),
-    background: [115, 204, 255],
+    //background: [115, 204, 255],
+    background: [167, 234, 252],
     // background: [61, 66, 74],
     // background: [68, 196, 242],
     width: window.innerWidth,
@@ -14,7 +15,7 @@ export const k = kaplay({
 });
 
 console.log("DISPLAY");
-k.loadSprite("level", "./map/level.png");
+k.loadSprite("level", "./map/level2.png");
 
 k.loadSprite("player", "./assets/monsterWalkingIdle.png", {
     sliceX: 18,
@@ -104,6 +105,32 @@ k.loadSprite("cvHologram", "./assets/hologramCV.png", {
             to: 18,
             speed: 15,
             loop: true,
+        }
+    }
+});
+
+k.loadSprite("collectible", "./assets/collectible.png", {
+    sliceX: 31,
+    sliceY: 1,
+    anims: {
+        mug:{
+            from: 0,
+            to: 30,
+            speed: 12,
+            loop: true,
+        }
+    }
+});
+
+k.loadSprite("citySign", "./assets/citySign.png", {
+    sliceX: 17,
+    sliceY: 1,
+    anims: {
+        hologram: {
+            from: 0,
+            to: 16,
+            speed: 15,
+            loop: false,
         }
     }
 });

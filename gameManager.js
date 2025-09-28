@@ -16,7 +16,7 @@ export class GameManager {
 
 
         this.enemySpawnTimer = 0;
-        this.enemySpawnInterval = Math.random() * (3 - 1) + 1;
+        this.enemySpawnInterval = Math.random() * (3 - 2) + 2;
         //this.enemySpawnInterval = (Math.random() * 3) + 1;
 
         this.playerJumpHeight = 200;
@@ -43,7 +43,7 @@ export class GameManager {
     setupUI() {
         // Display score
         this.scoreText = this.k.add([
-            this.k.text(`Score: ${this.score}`), {
+            this.k.text(`Énergie: ${this.score}`), {
                 size: 32,
                 font: "orbitron"
             },
@@ -63,7 +63,7 @@ export class GameManager {
         if (this.score > 999) {
             this.score = 999;
         }
-        this.scoreText.text = `Score: ${this.score}`;
+        this.scoreText.text = `Énergie: ${this.score}`;
     }
 
     // If the screen change size we must update the size of the enemies and the collectibles
