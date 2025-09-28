@@ -7,7 +7,7 @@ import { uiManager } from "./uiManager.js";
 import { GameManager } from "./gameManager.js";
 
 async function main() {
-    const levelData = await fetch("./map/level.json")
+    const levelData = await fetch("./map/level2.json")
     const levelDataJson = await (levelData.json());
 
     k.scene("level", () => {

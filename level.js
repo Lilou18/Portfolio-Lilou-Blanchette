@@ -150,7 +150,8 @@ function setHologram(k, mapPositions) {
             holograms.push({
                 object: portfolioHologram,
                 originalX: position.x,
-                originalY: position.y + 10
+                originalY: position.y + 10,
+                scale: 0.6,
             });
         }
         else if (position.name === "cvPortfolio") {
@@ -167,7 +168,8 @@ function setHologram(k, mapPositions) {
             holograms.push({
                 object: portfolioHologram,
                 originalX: position.x,
-                originalY: position.y + 10
+                originalY: position.y + 10,
+                scale: 0.6,
             });
 
         }
@@ -184,12 +186,43 @@ function setHologram(k, mapPositions) {
             holograms.push({
                 object: portfolioHologram,
                 originalX: position.x,
-                originalY: position.y + 10
+                originalY: position.y + 10,
+                scale: 0.6,
+            });
+        }
+        else if (position.name === "citySign") {
+            const citySign = k.add([
+                k.sprite("citySign"),
+                k.area(),
+                k.anchor("bot"),
+                k.pos(position.x, position.y), // Initial position from Tiled
+                "citySign",
+            ]);
+            // Store both the hologram object and its original Tiled position
+            holograms.push({
+                object: citySign,
+                originalX: position.x,
+                originalY: position.y,
+                scale: 1,
+            });
+
+            k.wait(0.1, () => {
+                delayedLoop(k, citySign, "hologram", 5);
             });
         }
     }
 
     return holograms;
+}
+
+function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
+    if (!animatedObject.exists()) return;
+    animatedObject.play(animationName);
+
+    k.loop(delayInSeconds, () =>{
+        
+        animatedObject.play(animationName);
+    })
 }
 
 function updateHologramPositions(k, holograms, scale, mapOffsetY) {
@@ -199,6 +232,6 @@ function updateHologramPositions(k, holograms, scale, mapOffsetY) {
         hologramData.object.pos.y = mapOffsetY + (hologramData.originalY * scale);
 
         // Update scale - combine the original scale (0.6) with the map scale
-        hologramData.object.scale = k.vec2(0.6 * scale);
+        hologramData.object.scale = k.vec2(hologramData.scale * scale);
     }
 }
