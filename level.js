@@ -88,7 +88,7 @@ export function level(k, dataLevel) {
     borderRight = borders.right;
 
     //setHologram(k, levelLayers[2].objects);
-    holograms = setHologram(k, levelLayers[5].objects);
+    holograms = setHologram(k, levelLayers[6].objects);
 
     // gameManager.initiateSpawn();
 }
