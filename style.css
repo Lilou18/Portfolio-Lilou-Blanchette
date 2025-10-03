@@ -171,7 +171,7 @@ input[type=text] {
   left: -2px;
   right: -2px;
   bottom: -2px; */
-  background: linear-gradient(180deg, #00ffff, #00b7ff, #00ffff);
+  background: linear-gradient(180deg, #00ffff, rgb(0, 183, 255), #00ffff);
   border-radius: 8px;
   z-index: -1;
   animation: borderGlow 3s infinite;
@@ -464,7 +464,8 @@ input[type=text] {
 
 .portfolio-body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); */
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 30px;
 }
@@ -597,6 +598,18 @@ input[type=text] {
   font-size: 0.9em;
 }
 
+.technical-project-title {
+  letter-spacing: 1px;
+  color: #00ffff;
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid #00ffff;
+  border-top: 2px solid #00ffff;
+  padding: 30px;
+
+  /* padding: 30px; */
+}
+
 /* Contact */
 
 .contact-header {
@@ -685,5 +698,11 @@ input[type=text] {
   .cv-left-column {
     border-right: none;
     border-bottom: 2px solid #00ffff;
+  }
+}
+
+@media (max-width: 900px) {
+  .portfolio-body {
+    grid-template-columns: 1fr;
   }
 }
