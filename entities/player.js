@@ -27,6 +27,7 @@ export class Player {
                     shape: new Rect(vec2(0, 10), 100, 220),
                 }),
                 body(),
+                doubleJump(1),
                 anchor("top"),
                 pos(posX, posY),
                 color(),
@@ -72,7 +73,7 @@ export class Player {
 
         const moveLeft = (speed) => {
             if (!gameState.isGamePaused) {
-                if (this.gameObject.curAnim() !== "run") {
+                if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "run") {
                     this.gameObject.play("run");
                 }
                 this.gameObject.flipX = true;
@@ -85,7 +86,7 @@ export class Player {
 
         const moveRight = (speed) => {
             if (!gameState.isGamePaused) {
-                if (this.gameObject.curAnim() !== "run") {
+                if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "run") {
                     this.gameObject.play("run");
                 }
                 this.gameObject.flipX = false;
@@ -115,10 +116,29 @@ export class Player {
             }, 200);
         });
 
+        this.gameObject.onGround(() => {
+        if (!gameState.isGamePaused) {
+            const leftPressed = isKeyDown("left") || isKeyDown("a");
+            const rightPressed = isKeyDown("right") || isKeyDown("d");
+            const isMoving = leftPressed || rightPressed || this.isScrolling;
+            
+            if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
+                this.gameObject.play("idle");
+            }
+        }
+    });
+
+    this.gameObject.onFall(() => {
+        if (!gameState.isGamePaused && this.gameObject.curAnim() !== "fall") {
+            this.gameObject.play("fall");
+        }
+    });
+
         onKeyDown("space", () => {
             if (!gameState.isGamePaused) {
                 if (this.gameObject.isGrounded()) {
                     this.gameObject.jump(this.jumpForce);
+                    this.gameObject.play("jump");
                 }
             }
         });
@@ -136,6 +156,8 @@ export class Player {
                 }
             }
         });
+
+
 
     }
 }
