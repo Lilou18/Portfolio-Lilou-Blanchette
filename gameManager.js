@@ -10,6 +10,7 @@ export class GameManager {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.score = 0;
+        this.bestScore = 0;
         this.enemies = [];
         this.collectibles = [];
 
@@ -52,6 +53,17 @@ export class GameManager {
             this.k.fixed(),
             "scoreUI"
         ]);
+
+        this.bestScoreText = this.k.add([
+            this.k.text(`Meilleure Énergie: ${this.bestScore}`), {
+                size: 32,
+                font: "orbitron"
+            },
+            this.k.pos(20, 70),
+            this.k.color(255, 255, 255),
+            this.k.fixed(),
+            "bestScoreUI"
+        ]);
     }
 
     // Change player score when he collects a collectible
@@ -62,6 +74,10 @@ export class GameManager {
         }
         if (this.score > 999) {
             this.score = 999;
+        }
+        if(this.score > this.bestScore){
+            this.bestScore = this.score
+            this.bestScoreText.text = `Meilleure Énergie: ${this.bestScore}`;
         }
         this.scoreText.text = `Énergie: ${this.score}`;
     }
