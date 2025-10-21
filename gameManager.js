@@ -183,7 +183,7 @@ export class GameManager {
     // Initiale enemy spawn at the start of the level
     initiateSpawn() {
         this.k.wait(2, () => {
-            this.initialEnemySpawn(2000);
+            this.initialEnemySpawn(2500);
             this.initialEnemySpawn(3000);
             this.initialEnemySpawn(4500);
         });
