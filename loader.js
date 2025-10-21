@@ -14,7 +14,6 @@ export const k = kaplay({
     //debug = false;
 });
 
-console.log("DISPLAY");
 k.loadSprite("level", "./map/level2.png");
 
 k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {

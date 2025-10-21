@@ -14,6 +14,7 @@ export class Collectible {
             k.anchor("center"),
             k.scale(0.6),
             k.pos(x, y),
+            k.z(1),
             //k.color(245, 66, 242),
             "collectible"
         ]);

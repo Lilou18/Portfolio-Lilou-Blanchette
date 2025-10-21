@@ -116,7 +116,7 @@ export class UIManager {
             this.setUpHologramClicks();
 
             gameState.player.gameObject.onCollide("cvHologram", () => {
-                debug.log("Appuie sur ENTRÉE pour voir le CV");
+                //debug.log("Appuie sur ENTRÉE pour voir le CV");
                 this.currentInteraction = "cv";
                 this.createInteractionText("cvHologram", "Appuyez sur Enter \n ou Cliquez");
                 // onKeyDown("enter", () => {
@@ -134,7 +134,7 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollide("portfolioHologram", () => {
-                debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
+                //debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
                 this.currentInteraction = "portfolio";
                 this.createInteractionText("portfolioHologram", "Appuyez sur Enter \n ou Cliquez");
                 // onKeyDown("enter", () => {
@@ -152,7 +152,7 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollide("contactHologram", () => {
-                debug.log("Appuie sur ENTRÉE pour voir Contact");
+                //debug.log("Appuie sur ENTRÉE pour voir Contact");
                 this.currentInteraction = "contact";
                 this.createInteractionText("contactHologram", "Appuyez sur Enter \n ou Cliquez");
 
