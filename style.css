@@ -119,7 +119,7 @@ input[type=text] {
   justify-content: center;
 }
 
-.nav-btn:hover {
+.exit:hover {
   background: rgba(0, 255, 255, 0.4);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
 }
