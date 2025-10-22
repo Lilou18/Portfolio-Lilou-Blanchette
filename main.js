@@ -16,7 +16,7 @@ k.scene("level", async () => {
     
     // Create the player
     let playerPosition = levelDataJson.layers[6].objects[0];
-    const player = new Player(k, playerPosition.x, playerPosition.y, 400, 650, () => {
+    const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
         gameState.player = player;
         uiManager.setUpCollisionsUI();
     });

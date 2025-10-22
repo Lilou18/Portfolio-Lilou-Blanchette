@@ -10,8 +10,8 @@ export class GroundEnemy {
 
         const enemyTypes = [
             { speed: 250, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
-            { speed: 350, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
-            { speed: 500, color: [255, 0, 0], name: "very_fast" } // Très rapide - Rouge 500
+            { speed: 340, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
+            { speed: 560, color: [255, 0, 0], name: "very_fast" } // Très rapide - Rouge 500
         ];
 
         this.enemyType = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
@@ -22,7 +22,7 @@ export class GroundEnemy {
                 //k.rect(100, 100),
                 k.sprite("enemyVeryFast", { anim: "walk" }),
                 area({
-                    shape: new Rect(vec2(0, 0), 100, 110),
+                    shape: new Rect(vec2(0, 0), 90, 100),
                 }),
                 k.anchor("bot"),
                 k.scale(1),
@@ -38,7 +38,7 @@ export class GroundEnemy {
                 //k.rect(100, 100),
                 k.sprite("enemyFast", { anim: "walk" }),
                 area({
-                    shape: new Rect(vec2(0, 0), 100, 110),
+                    shape: new Rect(vec2(0, 0), 90, 100),
                 }),
                 k.anchor("bot"),
                 k.scale(1),
@@ -53,7 +53,7 @@ export class GroundEnemy {
                 //k.rect(100, 100),
                 k.sprite("enemyNormal", { anim: "walk" }),
                 area({
-                    shape: new Rect(vec2(0, 0), 100, 110),
+                    shape: new Rect(vec2(0, 0), 90, 100),
                 }),
                 k.anchor("bot"),
                 k.scale(1),

@@ -36,7 +36,7 @@ k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {
             from: 22,
             to: 25,
             speed: 15,
-        }
+        } 
     },
 });
 

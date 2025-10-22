@@ -24,7 +24,47 @@ export class Player {
             this.gameObject = add([
                 sprite("player", { anim: "idle" }),
                 area({
-                    shape: new Rect(vec2(0, 10), 100, 220),
+                    shape: new Polygon([
+                        // vec2(-40, 0),
+                        // vec2(40, 0),
+                        // vec2(40, 100),
+                        // vec2(40, 200),
+                        // vec2(-40, 200),
+                        // vec2(-40, 100),
+                        // vec2(-40, 0)
+
+                        vec2(-40, 0),
+                        vec2(40, 0),
+                        vec2(40, 100),
+                        vec2(40, 220),
+                        vec2(-40, 220),
+                        vec2(-40, 100),
+
+                        // vec2(-40, 0),
+                        // vec2(40, 0),
+                        // vec2(40, 100),
+                        // vec2(15, 100),
+                        // vec2(40, 215),
+                        // vec2(-40, 215),
+                        // vec2(-15, 100),
+                        // vec2(-40, 100),
+
+                        // vec2(-60, 0),
+                        // vec2(60, 0),
+                        // vec2(60, 100),
+                        // vec2(15, 100),
+                        // vec2(15, 215),
+                        // vec2(-15, 215),
+                        // vec2(-15, 100),
+                        // vec2(-60, 100),
+
+                        // vec2(0,0),
+                        // vec2(100,0),
+                        // vec2(100,100),
+                        // vec2(0,100),
+                    ]),
+                    offset: vec2(0, 10),
+                    //shape: new Rect(vec2(0, 10), 80, 220),
                 }),
                 body(),
                 doubleJump(1),
@@ -77,7 +117,7 @@ export class Player {
                     this.gameObject.play("run");
                 }
                 this.gameObject.flipX = true;
-                this.gameObject.move(-speed, 0);
+                this.gameObject.move(-speed * 1.2, 0);
             }
         }
 
@@ -117,28 +157,68 @@ export class Player {
         });
 
         this.gameObject.onGround(() => {
-        if (!gameState.isGamePaused) {
-            const leftPressed = isKeyDown("left") || isKeyDown("a");
-            const rightPressed = isKeyDown("right") || isKeyDown("d");
-            const isMoving = leftPressed || rightPressed || this.isScrolling;
-            
-            if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
-                this.gameObject.play("idle");
-            }
-        }
-    });
+            if (!gameState.isGamePaused) {
+                const leftPressed = isKeyDown("left") || isKeyDown("a");
+                const rightPressed = isKeyDown("right") || isKeyDown("d");
+                const isMoving = leftPressed || rightPressed || this.isScrolling;
 
-    this.gameObject.onFall(() => {
-        if (!gameState.isGamePaused && this.gameObject.curAnim() !== "fall") {
-            this.gameObject.play("fall");
-        }
-    });
+                if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
+                    this.gameObject.play("idle");
+                }
+
+                this.gameObject.area.shape = new Polygon([
+                    vec2(-40, 0),
+                    vec2(40, 0),
+                    vec2(40, 100),
+                    vec2(40, 220),
+                    vec2(-40, 220),
+                    vec2(-40, 100),
+                ]);//new Rect(vec2(0, 10), 80, 220);
+            }
+        });
+
+        this.gameObject.onFall(() => {
+            if (!gameState.isGamePaused && this.gameObject.curAnim() !== "fall") {
+                this.gameObject.play("fall");
+
+                // Is the player walking on the right
+                if (!this.gameObject.flipX) {
+                    this.gameObject.area.shape = new Polygon([
+                        vec2(-40, 0),
+                        vec2(40, 0),
+                        vec2(40, 100),
+                        vec2(15, 100),
+                        vec2(50, 215),
+                        vec2(10, 215),
+                        vec2(-15, 100),
+                        vec2(-40, 100),
+                    ]);
+
+                }
+                else {
+                    this.gameObject.area.shape = new Polygon([
+                        vec2(-40, 0),
+                        vec2(40, 0),
+                        vec2(40, 100),
+                        vec2(15, 100),
+                        vec2(-10, 215),
+                        vec2(-50, 215),
+                        vec2(-15, 100),
+                        vec2(-40, 100),
+                    ]);
+
+                }
+
+            }
+        });
 
         onKeyDown("space", () => {
             if (!gameState.isGamePaused) {
                 if (this.gameObject.isGrounded()) {
                     this.gameObject.jump(this.jumpForce);
                     this.gameObject.play("jump");
+
+                    //this.gameObject.area.shape = new Rect(vec2(-15, 10), 80, 220);
                 }
             }
         });
