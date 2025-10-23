@@ -111,6 +111,68 @@ export class Player {
 
     playerControls() {
 
+        let pauseText = null;
+
+        let keysPressed = {
+            left: false,
+            right: false,
+            a: false,
+            d: false,
+            space: false
+        };
+
+        window.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if (key === 'arrowleft') keysPressed.left = true;
+            if (key === 'arrowright') keysPressed.right = true;
+            if (key === 'a') keysPressed.a = true;
+            if (key === 'd') keysPressed.d = true;
+            if (key === ' ') keysPressed.space = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            if (key === 'arrowleft') keysPressed.left = false;
+            if (key === 'arrowright') keysPressed.right = false;
+            if (key === 'a') keysPressed.a = false;
+            if (key === 'd') keysPressed.d = false;
+            if (key === ' ') keysPressed.space = false;
+        });
+
+        window.addEventListener('blur', () => {
+            gameState.isGamePaused = true;
+
+            // Reset keys
+            keysPressed = {
+                left: false,
+                right: false,
+                a: false,
+                d: false,
+                space: false
+            };
+
+            if (this.gameObject.isGrounded()) {
+                this.gameObject.play("idle");
+            }
+
+            if (!pauseText) {
+                pauseText = add([
+                    text("PAUSED", { size: 48 }),
+                    pos(center()),
+                    anchor("center"),
+                    z(100),
+                ]);
+            }
+        });
+
+        window.addEventListener('focus', () => {
+            gameState.isGamePaused = false;
+            if (pauseText) {
+                destroy(pauseText);
+                pauseText = null;
+            }
+        });
+
         const moveLeft = (speed) => {
             if (!gameState.isGamePaused) {
                 if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "run") {
@@ -121,8 +183,8 @@ export class Player {
             }
         }
 
-        onKeyDown("left", () => moveLeft(this.speed));
-        onKeyDown("a", () => moveLeft(this.speed));
+        // onKeyDown("left", () => moveLeft(this.speed));
+        // onKeyDown("a", () => moveLeft(this.speed));
 
         const moveRight = (speed) => {
             if (!gameState.isGamePaused) {
@@ -134,10 +196,12 @@ export class Player {
             }
         }
 
-        onKeyDown("right", () => moveRight(this.speed))
-        onKeyDown("d", () => moveRight(this.speed))
+        // onKeyDown("right", () => moveRight(this.speed))
+        // onKeyDown("d", () => moveRight(this.speed))
 
         window.addEventListener("wheel", (e) => {
+            if (gameState.isGamePaused) return;
+
             this.isScrolling = true;
 
             if (this.scrollTimeout) {
@@ -158,8 +222,10 @@ export class Player {
 
         this.gameObject.onGround(() => {
             if (!gameState.isGamePaused) {
-                const leftPressed = isKeyDown("left") || isKeyDown("a");
-                const rightPressed = isKeyDown("right") || isKeyDown("d");
+                // const leftPressed = isKeyDown("left") || isKeyDown("a");
+                // const rightPressed = isKeyDown("right") || isKeyDown("d");
+                const leftPressed = keysPressed.left || keysPressed.a;
+                const rightPressed = keysPressed.right || keysPressed.d;
                 const isMoving = leftPressed || rightPressed || this.isScrolling;
 
                 if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
@@ -212,32 +278,52 @@ export class Player {
             }
         });
 
-        onKeyDown("space", () => {
-            if (!gameState.isGamePaused) {
-                if (this.gameObject.isGrounded()) {
-                    this.gameObject.jump(this.jumpForce);
-                    this.gameObject.play("jump");
+        // onKeyDown("space", () => {
+        //     if (!gameState.isGamePaused) {
+        //         if (this.gameObject.isGrounded()) {
+        //             this.gameObject.jump(this.jumpForce);
+        //             this.gameObject.play("jump");
 
-                    //this.gameObject.area.shape = new Rect(vec2(-15, 10), 80, 220);
-                }
-            }
-        });
+        //             //this.gameObject.area.shape = new Rect(vec2(-15, 10), 80, 220);
+        //         }
+        //     }
+        // });
 
         onUpdate(() => {
-            const leftPressed = isKeyDown("left") || isKeyDown("a");
-            const rightPressed = isKeyDown("right") || isKeyDown("d");
-            const isMoving = leftPressed || rightPressed || this.isScrolling;
-            const isJumping = !this.gameObject.isGrounded() || isKeyDown("space");
+            if (gameState.isGamePaused) {
+                if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
+                    this.gameObject.play("idle");
+                }
+                return;
+            }
 
-            // Si le joueur ne bouge pas et ne saute pas, on joue l'anim idle
+            const leftPressed = keysPressed.left || keysPressed.a;
+            const rightPressed = keysPressed.right || keysPressed.d;
+
+            if (leftPressed) {
+                moveLeft(this.speed);
+            }
+            if (rightPressed) {
+                moveRight(this.speed);
+            }
+
+            // Player jump
+            if (keysPressed.space && this.gameObject.isGrounded()) {
+                this.gameObject.jump(this.jumpForce);
+                this.gameObject.play("jump");
+                // We don't want double jump
+                keysPressed.space = false;
+            }
+
+            const isMoving = leftPressed || rightPressed || this.isScrolling;
+            const isJumping = !this.gameObject.isGrounded();
+
+            // If the player is not moving or jumping then we play the idle animation
             if (!isMoving && !isJumping) {
                 if (this.gameObject.curAnim() !== "idle") {
                     this.gameObject.play("idle");
                 }
             }
         });
-
-
-
     }
 }
