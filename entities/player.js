@@ -18,53 +18,22 @@ export class Player {
         this.playerControls();
     }
 
+    // Create player gameObject with Kaplay
     makePlayer(k, posX, posY) {
         this.initialPlayerPositionX = posX,
             this.initialPlayerPositionY = posY,
             this.gameObject = add([
                 sprite("player", { anim: "idle" }),
                 area({
-                    shape: new Polygon([
-                        // vec2(-40, 0),
-                        // vec2(40, 0),
-                        // vec2(40, 100),
-                        // vec2(40, 200),
-                        // vec2(-40, 200),
-                        // vec2(-40, 100),
-                        // vec2(-40, 0)
-
+                    shape: new Polygon([                     
                         vec2(-40, 0),
                         vec2(40, 0),
                         vec2(40, 100),
                         vec2(40, 220),
                         vec2(-40, 220),
                         vec2(-40, 100),
-
-                        // vec2(-40, 0),
-                        // vec2(40, 0),
-                        // vec2(40, 100),
-                        // vec2(15, 100),
-                        // vec2(40, 215),
-                        // vec2(-40, 215),
-                        // vec2(-15, 100),
-                        // vec2(-40, 100),
-
-                        // vec2(-60, 0),
-                        // vec2(60, 0),
-                        // vec2(60, 100),
-                        // vec2(15, 100),
-                        // vec2(15, 215),
-                        // vec2(-15, 215),
-                        // vec2(-15, 100),
-                        // vec2(-60, 100),
-
-                        // vec2(0,0),
-                        // vec2(100,0),
-                        // vec2(100,100),
-                        // vec2(0,100),
                     ]),
-                    offset: vec2(0, 10),
-                    //shape: new Rect(vec2(0, 10), 80, 220),
+                    offset: vec2(0, 10),                    
                 }),
                 body(),
                 doubleJump(1),
@@ -72,7 +41,7 @@ export class Player {
                 pos(posX, posY),
                 color(),
                 z(10),
-                "player",   //With the get function of kaplay it pass you all the gameObject with a certain tag
+                "player",
             ]);
 
         this.updateInitialPosition(k);
@@ -109,9 +78,10 @@ export class Player {
         checkAndUpdate();
     }
 
+    // Controls for player movement
     playerControls() {
 
-        let pauseText = null;
+        // let pauseText = null;
 
         let keysPressed = {
             left: false,
@@ -121,6 +91,7 @@ export class Player {
             space: false
         };
 
+        // Event to control player movement
         window.addEventListener('keydown', (e) => {
             const key = e.key.toLowerCase();
             if (key === 'arrowleft') keysPressed.left = true;
@@ -130,6 +101,7 @@ export class Player {
             if (key === ' ') keysPressed.space = true;
         });
 
+        // Event to ensure that released keys are properly registered
         window.addEventListener('keyup', (e) => {
             const key = e.key.toLowerCase();
             if (key === 'arrowleft') keysPressed.left = false;
@@ -139,6 +111,7 @@ export class Player {
             if (key === ' ') keysPressed.space = false;
         });
 
+        // Pause the game when the window is no longer the focus
         window.addEventListener('blur', () => {
             gameState.isGamePaused = true;
 
@@ -155,24 +128,26 @@ export class Player {
                 this.gameObject.play("idle");
             }
 
-            if (!pauseText) {
-                pauseText = add([
-                    text("PAUSED", { size: 48 }),
-                    pos(center()),
-                    anchor("center"),
-                    z(100),
-                ]);
-            }
+            // if (!pauseText) {
+            //     pauseText = add([
+            //         text("PAUSED", { size: 48 }),
+            //         pos(center()),
+            //         anchor("center"),
+            //         z(100),
+            //     ]);
+            // }
         });
 
-        window.addEventListener('focus', () => {
-            gameState.isGamePaused = false;
-            if (pauseText) {
-                destroy(pauseText);
-                pauseText = null;
-            }
-        });
+        // // Destroy the pause text when the window is the focus
+        // window.addEventListener('focus', () => {
+        //     gameState.isGamePaused = false;
+        //     if (pauseText) {
+        //         destroy(pauseText);
+        //         pauseText = null;
+        //     }
+        // });
 
+        // Allows the player to move to the left
         const moveLeft = (speed) => {
             if (!gameState.isGamePaused) {
                 if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "run") {
@@ -183,9 +158,7 @@ export class Player {
             }
         }
 
-        // onKeyDown("left", () => moveLeft(this.speed));
-        // onKeyDown("a", () => moveLeft(this.speed));
-
+        // Allows the player to move to the right
         const moveRight = (speed) => {
             if (!gameState.isGamePaused) {
                 if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "run") {
@@ -196,9 +169,7 @@ export class Player {
             }
         }
 
-        // onKeyDown("right", () => moveRight(this.speed))
-        // onKeyDown("d", () => moveRight(this.speed))
-
+        // Scrolling event to move the player
         window.addEventListener("wheel", (e) => {
             if (gameState.isGamePaused) return;
 
@@ -208,22 +179,22 @@ export class Player {
                 clearTimeout(this.scrollTimeout);
             }
             if (e.deltaY > 0) {
-                // Scroll vers le bas = droite
+                // Scroll down moves the player to the right
                 moveRight(this.scrollSpeed);
             } else if (e.deltaY < 0) {
-                // Scroll vers le haut = gauche
+                // Scroll up moves the player to the left
                 moveLeft(this.scrollSpeed);
             }
 
+            // Small delay between scroll detection for a smooth walking animation
             this.scrollTimeout = setTimeout(() => {
                 this.isScrolling = false;
             }, 200);
         });
 
+        // Reset collider and animation when player hits the ground
         this.gameObject.onGround(() => {
             if (!gameState.isGamePaused) {
-                // const leftPressed = isKeyDown("left") || isKeyDown("a");
-                // const rightPressed = isKeyDown("right") || isKeyDown("d");
                 const leftPressed = keysPressed.left || keysPressed.a;
                 const rightPressed = keysPressed.right || keysPressed.d;
                 const isMoving = leftPressed || rightPressed || this.isScrolling;
@@ -232,6 +203,7 @@ export class Player {
                     this.gameObject.play("idle");
                 }
 
+                // Reset player collider
                 this.gameObject.area.shape = new Polygon([
                     vec2(-40, 0),
                     vec2(40, 0),
@@ -239,7 +211,7 @@ export class Player {
                     vec2(40, 220),
                     vec2(-40, 220),
                     vec2(-40, 100),
-                ]);//new Rect(vec2(0, 10), 80, 220);
+                ]);
             }
         });
 
@@ -249,6 +221,7 @@ export class Player {
 
                 // Is the player walking on the right
                 if (!this.gameObject.flipX) {
+                    // Change collider shape when player is falling and walking to the right
                     this.gameObject.area.shape = new Polygon([
                         vec2(-40, 0),
                         vec2(40, 0),
@@ -261,7 +234,9 @@ export class Player {
                     ]);
 
                 }
+                // The player is walking to the left
                 else {
+                    // Change collider shape when player is falling and walking to the left
                     this.gameObject.area.shape = new Polygon([
                         vec2(-40, 0),
                         vec2(40, 0),
@@ -278,17 +253,6 @@ export class Player {
             }
         });
 
-        // onKeyDown("space", () => {
-        //     if (!gameState.isGamePaused) {
-        //         if (this.gameObject.isGrounded()) {
-        //             this.gameObject.jump(this.jumpForce);
-        //             this.gameObject.play("jump");
-
-        //             //this.gameObject.area.shape = new Rect(vec2(-15, 10), 80, 220);
-        //         }
-        //     }
-        // });
-
         onUpdate(() => {
             if (gameState.isGamePaused) {
                 if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
@@ -297,6 +261,7 @@ export class Player {
                 return;
             }
 
+            // Check if the player should move
             const leftPressed = keysPressed.left || keysPressed.a;
             const rightPressed = keysPressed.right || keysPressed.d;
 

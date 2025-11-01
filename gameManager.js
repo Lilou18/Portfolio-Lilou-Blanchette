@@ -35,10 +35,8 @@ export class GameManager {
         this.initiateSpawn();
         this.spawnInitialCollectibles();
 
-        const test = new Collectible(k, 1000, 600);
-        this.collectibles.push(test);
-        //const enemy = new GroundEnemy(k, 800, 600);
-        //this.enemies.push(enemy);
+        // const test = new Collectible(k, 1000, 600);
+        // this.collectibles.push(test);
     }
 
     setupUI() {

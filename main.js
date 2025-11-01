@@ -4,7 +4,6 @@ import { Player } from "./entities/player.js";
 import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
-import { GameManager } from "./gameManager.js";
 
 k.scene("level", async () => {
     // Load level data

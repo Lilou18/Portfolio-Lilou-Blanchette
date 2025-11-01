@@ -1,6 +1,7 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
 
+// Manages user interface interactions and display
 export class UIManager {
     constructor() {
         this.panels = {
@@ -12,6 +13,8 @@ export class UIManager {
         this.currentPanel = null;
         this.currentInteraction = null;
         this.interactionTexts = {};
+        this.pauseText = null;
+        this.backgroundColor = null;
         this.setupEventListeners();
     };
 
@@ -23,34 +26,44 @@ export class UIManager {
             this.initEventListeners();
         }
 
+        // Pause the game when the window is no longer the focus
+        window.addEventListener('blur', () => {
+            gameState.isGamePaused = true;
+            this.showPauseText();
+        });
+
+        // Destroy the pause text when the window is the focus
+        window.addEventListener('focus', () => {
+            // If no panel is open then we resume the game
+            if(!this.currentPanel){
+                gameState.isGamePaused = false;                
+            }   
+            this.hidePauseText();
+            
+        });
+
     }
 
     initEventListeners() {
         const closeButtons = document.querySelectorAll("[data-close-panel]");
-        //console.log("BUTTONS " + closeButtons.length);
         closeButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 const panelName = button.getAttribute("data-close-panel");
                 this.hidePanel(panelName);
             });
         });
-
-        //this.setUpEnterInput();
-        // this.canvas.addEventListener("click", () => {
-        //     this.canvas.focus();
-        // })
     }
 
     setUpEnterInput() {
         k.onKeyDown("enter", () => {
-            if (this.currentInteraction) {
+            if (this.currentInteraction) {                
                 this.displayPanel(this.currentInteraction);
             }
         });
 
         k.onKeyDown("escape", () => {
             if (this.currentInteraction && this.panels[this.currentInteraction] && this.canvas) {
-                if (this.panels[this.currentInteraction].style.display === "block") {
+                if (this.panels[this.currentInteraction].style.display === "block") {                    
                     this.hidePanel(this.currentInteraction);
                 }
             }
@@ -170,13 +183,12 @@ export class UIManager {
         }
     }
 
-
-
-
     displayPanel(panelName) {
         if (this.panels[panelName] && this.canvas) {
+            this.currentPanel = panelName;
             this.panels[panelName].style.display = "block";
             this.canvas.style.filter = "brightness(70%)";
+            // Pause the game when a panel is displayed
             gameState.isGamePaused = true;
 
             //this.canvas.blur();
@@ -186,11 +198,49 @@ export class UIManager {
 
     hidePanel(panelName) {
         if (this.panels[panelName] && this.canvas) {
+            this.currentPanel = null;
             this.panels[panelName].style.display = "none";
             this.canvas.style.filter = "brightness(100%)";
             gameState.isGamePaused = false;
 
             this.canvas.focus();
+        }
+    }
+
+    showPauseText() {
+        if (!this.pauseText) {
+            this.pauseText = add([
+                text("PAUSED", {
+                    size: 64,
+                    font: "orbitron",
+                }),
+                pos(center()),
+                anchor("center"),
+                fixed(),
+                color(255, 255, 255),
+                z(100),
+            ]);
+
+            this.backgroundColor = add([
+                k.rect(350, 80, { radius: 8 }),
+                k.pos(center()),
+                k.color(0, 0, 0),
+                anchor("center"),
+                k.opacity(0.7),
+                k.fixed(),
+                z(99),
+            ])
+        }
+    }
+
+    hidePauseText() {
+        if (this.pauseText) {
+            destroy(this.pauseText);
+            this.pauseText = null;
+        }
+        if(this.backgroundColor){
+            destroy(this.backgroundColor);
+            this.backgroundColor = null;
         }
     }
 
