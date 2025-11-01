@@ -217,17 +217,18 @@ export class UIManager {
                 pos(center()),
                 anchor("center"),
                 fixed(),
-                color(255, 255, 255),
+                color(0, 255, 255),
                 z(100),
             ]);
 
             this.backgroundColor = add([
                 k.rect(350, 80, { radius: 8 }),
                 k.pos(center()),
-                k.color(0, 0, 0),
+                k.color(8, 45, 103),
                 anchor("center"),
                 k.opacity(0.7),
                 k.fixed(),
+                k.outline(4, rgb(0, 255, 255)),
                 z(99),
             ])
         }

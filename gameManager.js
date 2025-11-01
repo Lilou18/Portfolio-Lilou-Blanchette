@@ -42,26 +42,44 @@ export class GameManager {
     setupUI() {
         // Display score
         this.scoreText = this.k.add([
-            this.k.text(`Énergie: ${this.score}`), {
-                size: 32,
+            this.k.text(`Énergie: ${this.score}`, {
+                size: 30,
                 font: "orbitron"
-            },
+            }),
             this.k.pos(20, 20),
-            this.k.color(255, 255, 255),
+            this.k.color(0, 255, 255),
             this.k.fixed(),
+            this.k.z(2),
             "scoreUI"
         ]);
 
         this.bestScoreText = this.k.add([
-            this.k.text(`Meilleure Énergie: ${this.bestScore}`), {
-                size: 32,
+            this.k.text(`Meilleure Énergie: ${this.bestScore}`, {
+                size: 30,
                 font: "orbitron"
-            },
+            }),
             this.k.pos(20, 70),
-            this.k.color(255, 255, 255),
+            this.k.color(0, 255, 255),
             this.k.fixed(),
+            this.k.z(2),
             "bestScoreUI"
         ]);
+
+        this.backgroundScore = this.k.add([
+            this.k.rect(410,100, { radius: 8 }),
+            this.k.opacity(0.7),
+            this.k.fixed(),
+            this.k.pos(10,10),
+            this.k.color(8, 45, 103),
+            this.k.outline(4, rgb(0, 255, 255)),
+            // this.k.outline({
+            //     width: 4,
+            //     color: rgb(0, 255, 255)
+            // }),
+            this.k.z(1)
+        ])
+
+
     }
 
     // Change player score when he collects a collectible
