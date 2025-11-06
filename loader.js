@@ -11,6 +11,7 @@ export const k = kaplay({
     //fit: true,
     stretch: true,
     pixelDensity: 2,
+    touchToMouse: true,
     //debug = false;
 });
 
