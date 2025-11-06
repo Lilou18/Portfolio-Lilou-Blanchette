@@ -10,8 +10,8 @@ export class GroundEnemy {
         this.destroyed = false;
 
         const enemyTypes = [
-            { speed: 250, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
-            { speed: 340, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
+            { speed: 220, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
+            { speed: 280, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
             { speed: 560, color: [255, 0, 0], name: "very_fast" } // Très rapide - Rouge 500
         ];
 
@@ -97,7 +97,7 @@ export class GroundEnemy {
             this.gameObject.pos.y = scaledY;
             this.gameObject.scale = this.k.vec2(1 * mapScale); // ICI CHANGER EN FONCTION DU SCALE DANS ADD DANS LE CONSTRUCTEUR!!!
 
-            this.speed = this.enemyType.speed * mapScale;
+            //this.speed = this.enemyType.speed * mapScale;
             //this.speed = (50 + Math.random() * 100) * mapScale;
         }
     }

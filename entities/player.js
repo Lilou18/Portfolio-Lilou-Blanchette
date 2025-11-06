@@ -62,9 +62,9 @@ export class Player {
                 this.gameObject.scale = k.vec2(this.originalScale * k.mapScale);
 
                 // Also scale movement speed and jump force to match the new scale
-                this.scaledSpeed = this.speed * k.mapScale;
-                this.scaledScrollSpeed = this.scrollSpeed * k.mapScale;
-                this.scaledJumpForce = this.jumpForce * k.mapScale;
+                // this.scaledSpeed = this.speed * k.mapScale;
+                // this.scaledScrollSpeed = this.scrollSpeed * k.mapScale;
+                // this.scaledJumpForce = this.jumpForce * k.mapScale;
 
 
                 if (this.setUpCollisionsUI) {
@@ -153,7 +153,7 @@ export class Player {
                     this.gameObject.play("run");
                 }
                 this.gameObject.flipX = true;
-                this.gameObject.move(-speed * 1.2, 0);
+                this.gameObject.move(-speed * 1.4, 0);
             }
         }
 

@@ -1,13 +1,28 @@
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
 
+const aspectRatio = 16 / 9;
+let gameWidth, gameHeight;
+
+if (window.innerWidth / window.innerHeight > aspectRatio) {
+    // L'écran est plus large que 16:9
+    gameHeight = 1080;
+    gameWidth = gameHeight * (window.innerWidth / window.innerHeight);
+} else {
+    // L'écran est plus haut que 16:9
+    gameWidth = 1920;
+    gameHeight = gameWidth / (window.innerWidth / window.innerHeight);
+}
+
 export const k = kaplay({
     canvas : document.getElementById("gameCanvas"),
-    //background: [115, 204, 255],
+    
     background: [167, 234, 252],
-    // background: [61, 66, 74],
-    // background: [68, 196, 242],
-    width: window.innerWidth,
-    height: window.innerHeight,
+
+    // width: window.innerWidth,
+    // height: window.innerHeight,
+    width: gameWidth,
+    height: gameHeight,
+
     //fit: true,
     stretch: true,
     pixelDensity: 2,
