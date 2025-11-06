@@ -1,4 +1,5 @@
 import { GameManager } from "./gameManager.js";
+import { pauseAnimation } from "./animationManager.js";
 export function level(k, dataLevel) {
 
     //k.setCamPos(0, 0);
@@ -211,6 +212,10 @@ function setHologram(k, mapPositions) {
             });
         }
     }
+
+    holograms.forEach(hologram => {
+        pauseAnimation(hologram.object);
+    });
 
     return holograms;
 }

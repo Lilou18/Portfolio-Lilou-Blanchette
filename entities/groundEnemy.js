@@ -1,4 +1,5 @@
 import { gameState } from "../gameState.js";
+import { pauseAnimation } from "../animationManager.js";
 
 export class GroundEnemy {
     constructor(k, x, y) {
@@ -66,21 +67,21 @@ export class GroundEnemy {
 
 
 
-        this.setupBehavior();
+        this.update();
     }
 
-    setupBehavior() {
+    // Manage walking animation and collision with the left border
+    update() {
+        pauseAnimation(this.gameObject)
         this.gameObject.onUpdate(() => {
-            if (!gameState.isGamePaused) {
+            if (!this.destroyed && !gameState.isGamePaused) {
                 const movement = this.speed * this.k.dt();
                 this.currentOffset += movement;
                 this.gameObject.move(- this.speed, 0)
             }
-
         });
 
         this.gameObject.onCollide("borderLeft", () => {
-            console.log("DESTRoy");
             this.destroy();
         });
     }

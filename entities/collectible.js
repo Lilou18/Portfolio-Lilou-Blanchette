@@ -1,3 +1,5 @@
+import { gameState } from "../gameState.js";
+import { pauseAnimation } from "../animationManager.js";
 export class Collectible {
     constructor(k, x, y) {
         this.k = k;
@@ -5,6 +7,7 @@ export class Collectible {
         this.originalY = y;
         this.scaledY = y;
         this.destroyed = false;
+        this.animationTime = 0;
         this.variationMovement = Math.random() * Math.PI * 2; // Random between 0 and 2PI
 
         this.gameObject = k.add([
@@ -19,7 +22,7 @@ export class Collectible {
             "collectible"
         ]);
 
-        this.setupBehavior();
+        this.update();
 
     }
 
@@ -34,19 +37,17 @@ export class Collectible {
         }
     }
 
-    setupBehavior() {
-        //console.log("ANIMATE");
-        this.gameObject.onUpdate(() => {
-            if (!this.destroyed) {
+    // Floating animation for the mug
+    update() {
+        this.gameObject.play("mug");
+        pauseAnimation(this.gameObject);
 
-                const time = this.k.time();
-                const amount = Math.sin(time * 3 + this.variationMovement) * 10;
-                //console.log("Animation running:", this.scaledY, amount);
+        this.gameObject.onUpdate(() => {
+            if (!this.destroyed && !gameState.isGamePaused) {
+                this.animationTime += this.k.dt();
+                const amount = Math.sin(this.animationTime * 3 + this.variationMovement) * 10;
                 this.gameObject.pos.y = this.scaledY + amount;
             }
-
-
-
         });
     }
 

@@ -113,7 +113,6 @@ export class Player {
 
         // Pause the game when the window is no longer the focus
         window.addEventListener('blur', () => {
-            gameState.isGamePaused = true;
 
             // Reset keys
             keysPressed = {
