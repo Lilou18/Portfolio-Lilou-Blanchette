@@ -16,6 +16,7 @@ export class Player {
 
         this.makePlayer(k, posX, posY);
         this.playerControls();
+        this.playerMobileControls();
     }
 
     // Create player gameObject with Kaplay
@@ -81,8 +82,6 @@ export class Player {
     // Controls for player movement
     playerControls() {
 
-        // let pauseText = null;
-
         let keysPressed = {
             left: false,
             right: false,
@@ -126,25 +125,7 @@ export class Player {
             if (this.gameObject.isGrounded()) {
                 this.gameObject.play("idle");
             }
-
-            // if (!pauseText) {
-            //     pauseText = add([
-            //         text("PAUSED", { size: 48 }),
-            //         pos(center()),
-            //         anchor("center"),
-            //         z(100),
-            //     ]);
-            // }
         });
-
-        // // Destroy the pause text when the window is the focus
-        // window.addEventListener('focus', () => {
-        //     gameState.isGamePaused = false;
-        //     if (pauseText) {
-        //         destroy(pauseText);
-        //         pauseText = null;
-        //     }
-        // });
 
         // Allows the player to move to the left
         const moveLeft = (speed) => {
@@ -194,8 +175,8 @@ export class Player {
         // Reset collider and animation when player hits the ground
         this.gameObject.onGround(() => {
             if (!gameState.isGamePaused) {
-                const leftPressed = keysPressed.left || keysPressed.a;
-                const rightPressed = keysPressed.right || keysPressed.d;
+                const leftPressed = keysPressed.left || keysPressed.a || this.mobileControls.left;
+                const rightPressed = keysPressed.right || keysPressed.d || this.mobileControls.right;
                 const isMoving = leftPressed || rightPressed || this.isScrolling;
 
                 if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
@@ -261,8 +242,8 @@ export class Player {
             }
 
             // Check if the player should move
-            const leftPressed = keysPressed.left || keysPressed.a;
-            const rightPressed = keysPressed.right || keysPressed.d;
+            const leftPressed = keysPressed.left || keysPressed.a || this.mobileControls.left;
+            const rightPressed = keysPressed.right || keysPressed.d || this.mobileControls.right;
 
             if (leftPressed) {
                 moveLeft(this.speed);
@@ -289,5 +270,61 @@ export class Player {
                 }
             }
         });
+    }
+
+    playerMobileControls(){
+        const btnLeft = document.getElementById("btnLeft");
+        const btnRight = document.getElementById("btnRight");
+        const btnJump = document.getElementById("btnJump");
+
+        this.mobileControls = {
+            left: false,
+            right: false,
+            jumo: false
+        };
+
+        if(btnLeft){
+            btnLeft.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.mobileControls.left = true;
+            });
+
+            btnLeft.addEventListener('touchend', (e) =>{
+                e.preventDefault();
+                this.mobileControls.left = false;
+            });
+            btnLeft.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this.mobileControls.left = false;
+            });
+        }
+
+        if (btnRight) {
+            btnRight.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.mobileControls.right = true;
+            });
+
+            btnRight.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.mobileControls.right = false;
+            });
+
+            btnRight.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this.mobileControls.right = false;
+            });
+        }
+
+        if (btnJump) {
+            btnJump.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // No double jump
+                if (!gameState.isGamePaused && this.gameObject.isGrounded()) {
+                    this.gameObject.jump(this.jumpForce);
+                    this.gameObject.play("jump");
+                }
+            });
+        }
     }
 }

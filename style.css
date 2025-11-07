@@ -502,7 +502,7 @@ input[type=text] {
 }
 
 .project-title {
-  color: #00ffff;
+  color: rgb(0, 255, 255);
   font-size: 1.3em;
   font-weight: bold;
   letter-spacing: 1px;
@@ -713,5 +713,52 @@ input[type=text] {
 @media (max-width: 900px) {
   .portfolio-body {
     grid-template-columns: 1fr;
+  }
+}
+
+#mobileControls {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  bottom: 5%;
+  width: calc(100% - 40px);
+  margin: 0px 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+  user-select: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  /* 
+  padding: 0 30px;
+  z-index: 10; */
+}
+
+#mobileControls button {
+  background-color: rgba(8, 45, 103, 0.8);
+  color: rgb(0, 255, 255);
+  font-size: 32px;
+  border: 2px solid rgb(0, 255, 255);
+  border-radius: 5%;
+  width: 50px;
+  height: 50px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+}
+
+/* Hide button for PC user */
+@media (hover: hover) and (pointer: fine) {
+  #mobileControls {
+    display: none;
   }
 }
