@@ -15,12 +15,18 @@ function checkOrientation() {
 
         overlay.style.display = "flex";
 
+        if(gameStarted){
+            gameState.addPauseFlag("portraitMode");
+        }
+
 
     } else {
 
         if (!gameStarted) {
             k.go("level");
             gameStarted = true;
+        }else{
+            gameState.removePauseFlag("portraitMode");
         }
 
         overlay.style.display = "none";

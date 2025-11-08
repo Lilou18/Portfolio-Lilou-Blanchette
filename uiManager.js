@@ -28,16 +28,19 @@ export class UIManager {
 
         // Pause the game when the window is no longer the focus
         window.addEventListener('blur', () => {
-            gameState.isGamePaused = true;
+            //gameState.isGamePaused = true;
+            gameState.addPauseFlag("windowBlur");
             this.showPauseText();
         });
 
         // Destroy the pause text when the window is the focus
         window.addEventListener('focus', () => {
             // If no panel is open then we resume the game
-            if(!this.currentPanel){
-                gameState.isGamePaused = false;                
-            }   
+            gameState.removePauseFlag("windowBlur");
+            // if(!this.currentPanel){
+            //     //gameState.isGamePaused = false;      
+            //     gameState.removePauseFlag("windowBlur");          
+            // }   
             this.hidePauseText();
             
         });
@@ -184,12 +187,13 @@ export class UIManager {
     }
 
     displayPanel(panelName) {
-        if (this.panels[panelName] && this.canvas) {
+        if (this.panels[panelName] && this.canvas && this.currentPanel == null) {
             this.currentPanel = panelName;
             this.panels[panelName].style.display = "block";
             this.canvas.style.filter = "brightness(70%)";
             // Pause the game when a panel is displayed
-            gameState.isGamePaused = true;
+            gameState.addPauseFlag("panelOpen");
+            //gameState.isGamePaused = true;
 
             //this.canvas.blur();
         }
@@ -201,7 +205,8 @@ export class UIManager {
             this.currentPanel = null;
             this.panels[panelName].style.display = "none";
             this.canvas.style.filter = "brightness(100%)";
-            gameState.isGamePaused = false;
+            gameState.removePauseFlag("panelOpen");
+            //gameState.isGamePaused = false;
 
             this.canvas.focus();
         }
