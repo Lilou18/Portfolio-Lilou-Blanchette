@@ -11,13 +11,18 @@ function checkOrientation() {
     const isPortrait = window.matchMedia("(orientation: portrait)").matches;
     const isMobile = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     console.log("IS PORTRAIT:" + isPortrait);
-    if(isPortrait && isMobile){
+    if (isPortrait && isMobile) {
+
         overlay.style.display = "flex";
-    }else{
-        if(!gameStarted){
+
+
+    } else {
+
+        if (!gameStarted) {
             k.go("level");
             gameStarted = true;
         }
+
         overlay.style.display = "none";
     }
 
