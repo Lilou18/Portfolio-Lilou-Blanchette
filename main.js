@@ -4,28 +4,31 @@ import { Player } from "./entities/player.js";
 import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
+import { orientationManager } from "./orientationManager.js";
 
-let gameStarted = false;
 function checkOrientation() {
     const overlay = document.getElementById("overlay");
-    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
-    const isMobile = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    console.log("IS PORTRAIT:" + isPortrait);
+    const isPortrait = orientationManager.isPortrait;
+    const isMobile = orientationManager.isMobile;
+
     if (isPortrait && isMobile) {
 
         overlay.style.display = "flex";
-
-        if(gameStarted){
+        if (gameState.gameStarted) {
             gameState.addPauseFlag("portraitMode");
         }
-
-
     } else {
 
-        if (!gameStarted) {
-            k.go("level");
-            gameStarted = true;
-        }else{
+        if (!gameState.gameStarted) {
+            k.go("intro");
+            console.log("Hello");
+            // k.go("level");
+            // k.play("backgroundMusic", {
+            //     volume: 0.5,
+            //     loop: true,
+            // });
+            // gameStarted = true;
+        } else {
             gameState.removePauseFlag("portraitMode");
         }
 
@@ -36,6 +39,17 @@ function checkOrientation() {
 }
 
 k.scene("level", async () => {
+
+    const canvas = document.getElementById("gameCanvas");
+    if (canvas) {
+        canvas.focus();
+    }
+
+    const mobileControls = document.getElementById("mobileControls");
+    if (mobileControls && orientationManager.isMobile) {
+        mobileControls.style.display = "flex";
+    }
+
     // Load level data
     const levelData = await fetch("./map/level2.json");
     const levelDataJson = await levelData.json();
@@ -55,6 +69,25 @@ k.scene("level", async () => {
     const mapHeight = levelDataJson.height * levelDataJson.tileheight;
     const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
 });
+
+k.scene("intro", () => {
+    const startButton = document.getElementById("start-button");
+    const startMenu = document.getElementById("start-menu");
+    if (startButton && startMenu) {
+        startMenu.style.display = "flex";
+        startButton.addEventListener("click", () => startGame(startMenu));
+    }
+});
+
+function startGame(startMenu) {
+    k.go("level");
+    k.play("backgroundMusic", {
+        volume: 0.3,
+        loop: true,
+    });
+    gameState.gameStarted = true;
+    startMenu.style.display = "none";
+}
 
 window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
     checkOrientation();

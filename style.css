@@ -15,6 +15,68 @@ html {
   display: block;
 }
 
+.start-menu {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  /* background-color: rgb(8, 45, 103); */
+  /* background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); */
+   background: linear-gradient(0.25turn, #082d67, #00ffff, #082d67);
+  /* background: linear-gradient(180deg, #00ffff, rgb(8, 45, 103), #00ffff); */
+  /* animation: borderGlow 3s infinite; */
+
+
+}
+
+.lines {
+  background: repeating-linear-gradient(rgb(8, 45, 103),
+      #082d67 20px,
+      rgba(78, 111, 111, 0.85) 20px,
+      rgba(78, 111, 111, 0.85) 25px);
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  border: 5px solid #00ffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  /* animation: borderGlowV2 3s infinite; */
+}
+
+#start-button {
+  display: flex;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 2px;
+  font-size: 20px;
+  padding: 20px 20px;
+  border: 5px solid rgb(0, 255, 255);
+  border-radius: 12px;
+  background-color: rgb(8, 45, 103);
+  color: rgb(0, 255, 255);
+  position: absolute;
+  z-index: 2;
+  animation: scaleUp 2s infinite;;
+  /* animation: borderGlowV2 3s infinite; */
+}
+
+@keyframes scaleUp {
+
+  0%,
+  100% {
+    transform: scale(0.8)
+  }
+
+  50% {
+    transform: scale(1)
+  }
+}
+
 #cvPanel,
 #portfolioPanel,
 #contact {
@@ -634,7 +696,7 @@ input[type=text] {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 30px;
   margin: 0px 30px 30px 30px;
 }
@@ -719,7 +781,7 @@ input[type=text] {
 /* Mobile */
 #mobileControls {
   position: fixed;
-  display: flex;
+  display: none;
   justify-content: space-between;
   bottom: 5%;
   width: calc(100% - 40px);

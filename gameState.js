@@ -1,5 +1,6 @@
 export const gameState = {
     player: null,
+    gameStarted: false,
     pauseFlags: new Set(),
 
     get isGamePaused() {
