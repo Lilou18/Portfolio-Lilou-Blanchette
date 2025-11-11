@@ -26,7 +26,7 @@ html {
   left: 0%;
   /* background-color: rgb(8, 45, 103); */
   /* background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); */
-   background: linear-gradient(0.25turn, #082d67, #00ffff, #082d67);
+  background: linear-gradient(0.25turn, #082d67, #00ffff, #082d67);
   /* background: linear-gradient(180deg, #00ffff, rgb(8, 45, 103), #00ffff); */
   /* animation: borderGlow 3s infinite; */
 
@@ -36,15 +36,18 @@ html {
 .lines {
   background: repeating-linear-gradient(rgb(8, 45, 103),
       #082d67 20px,
-      rgba(78, 111, 111, 0.85) 20px,
       rgba(78, 111, 111, 0.85) 25px);
   width: 95%;
   height: 95%;
-  position: absolute;
+  position: relative;
+  display: flex;
   border: 5px solid #00ffff;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0%;
+  left: 0%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* transform: translate(-50%, -50%); */
   box-sizing: border-box;
   /* animation: borderGlowV2 3s infinite; */
 }
@@ -59,9 +62,9 @@ html {
   border-radius: 12px;
   background-color: rgb(8, 45, 103);
   color: rgb(0, 255, 255);
-  position: absolute;
-  z-index: 2;
-  animation: scaleUp 2s infinite;;
+  position: relative;
+  animation: scaleUp 2s infinite;
+  ;
   /* animation: borderGlowV2 3s infinite; */
 }
 
@@ -74,6 +77,43 @@ html {
 
   50% {
     transform: scale(1)
+  }
+}
+
+.typewriter-container {
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+  color: rgb(0, 255, 255);
+  display: inline-block;
+  /* background: rgba(8, 45, 103, 0.9); */
+}
+
+.typewriter-text {
+  letter-spacing: 2px;
+  border-right: 3px solid;
+  width: 0%;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: 1;
+  
+  font-weight: 800;
+}
+
+.typewriter-line1 {
+  animation: typing 1s steps(16) forwards;
+}
+
+.typewriter-line2{
+  animation: 1s typing 1s steps(16) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
   }
 }
 
