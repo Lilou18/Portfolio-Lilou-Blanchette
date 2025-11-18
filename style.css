@@ -15,6 +15,7 @@ html {
   display: block;
 }
 
+/*Introduction page*/
 .start-menu {
   position: fixed;
   display: none;
@@ -34,9 +35,10 @@ html {
 }
 
 .lines {
-  background: repeating-linear-gradient(rgb(8, 45, 103),
-      #082d67 20px,
-      rgba(78, 111, 111, 0.85) 25px);
+  background-color: #082d67;
+  /* background-image: repeating-linear-gradient(0deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 3px, #082d67 3px 40px); */
+  background-image: repeating-linear-gradient(0deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 1px, transparent 1px 60px),
+    repeating-linear-gradient(90deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 1px, #082d67 1px, #082d67 60px);
   width: 95%;
   height: 95%;
   position: relative;
@@ -89,6 +91,116 @@ html {
   }
 }
 
+.graph-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-panel h2{
+  color: rgb(0, 255, 255);
+  border-bottom: solid 1px #00ffff;
+  padding-bottom: 10px;
+}
+
+.graph-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+
+}
+
+.diagram-container {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgb(0, 255, 255);
+  border-top: none;
+  border-right: none;
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.graph-panel ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.graph-panel li {
+  color: #00ffff;
+  height: 3em;
+  text-align: center;
+
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(180deg, #00ffff, #0088ff);
+  height: 100px;
+  /* left: 5%;
+  bottom: 0%; */
+}
+
+.bar-one {
+  margin-left: 10px;
+  animation: animate-bar-one 1.5s linear 0s infinite normal none; /*name duration timing-function delay iteration-count direction fill-mode*/
+  /* position: absolute; */
+  /* height: 100px;
+  width: 50px; */
+}
+
+.bar-two {
+  animation: animate-bar-two 2s linear 0s infinite normal none;
+}
+
+.bar-three {
+  animation: animate-bar-three 2.3s linear 0s infinite normal none;
+}
+
+.bar-four {
+  animation: animate-bar-four 1s linear 0s infinite normal none;
+}
+
+.bar-five {
+  animation: animate-bar-five 2.8s linear 0s infinite normal none;
+}
+
+@keyframes animate-bar-one{
+  50%{
+    height: 200px;
+  }
+}
+
+@keyframes animate-bar-two{
+  50%{
+    height: 150px;
+  }
+}
+
+@keyframes animate-bar-three{
+  50%{
+    height: 185px;
+  }
+}
+
+@keyframes animate-bar-four{
+  50%{
+    height: 50px;
+  }
+}
+
+@keyframes animate-bar-five{
+  50%{
+    height: 280px;
+  }
+}
+
+
 #start-button {
   display: flex;
   font-family: "Orbitron", sans-serif;
@@ -129,6 +241,11 @@ html {
   border: 4px solid rgb(0, 255, 255);
   overflow: hidden;
   /* background: rgba(8, 45, 103, 0.9); */
+}
+
+.typewriter-text .console-sign{
+  color: green;
+  font-size: larger;
 }
 
 .typewriter-text {
@@ -186,11 +303,13 @@ html {
     font-size: 0.7em;
   }
 
-  .lines img{
+  .lines img {
     transform: scale(0.7);
     top: -5%;
   }
 }
+
+/*End Start Menu*/
 
 #cvPanel,
 #portfolioPanel,
