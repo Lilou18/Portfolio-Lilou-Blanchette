@@ -34,7 +34,7 @@ html {
 
 }
 
-.lines {
+.start-menu-container {
   background-color: #082d67;
   /* background-image: repeating-linear-gradient(0deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 3px, #082d67 3px 40px); */
   background-image: repeating-linear-gradient(0deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 1px, transparent 1px 60px),
@@ -44,22 +44,38 @@ html {
   position: relative;
   display: flex;
   border: 5px solid #00ffff;
-  top: 0%;
-  left: 0%;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* transform: translate(-50%, -50%); */
   box-sizing: border-box;
-  /* animation: borderGlowV2 3s infinite; */
+  padding: 40px;
+  overflow: hidden;
 }
 
-.lines img {
+.start-menu-panel-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.menu-left-panel {
+  flex: 1;
+}
+
+.menu-right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.start-menu-container img {
   border: 5px solid #00ffff;
   background-color: rgba(0, 0, 0, 0.7);
-  left: 8%;
+  position: relative;
+  /* left: 8%;
   top: 10%;
-  position: absolute;
+  position: absolute; */
   width: auto;
   height: auto;
   transform: scale(1);
@@ -96,7 +112,7 @@ html {
   flex-direction: column;
 }
 
-.graph-panel h2{
+.graph-panel h2 {
   color: rgb(0, 255, 255);
   border-bottom: solid 1px #00ffff;
   padding-bottom: 10px;
@@ -116,8 +132,8 @@ html {
   border: 2px solid rgb(0, 255, 255);
   border-top: none;
   border-right: none;
-  width: 400px;
-  height: 300px;
+  height: 250px;
+  flex: 1;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -133,7 +149,7 @@ html {
 
 .graph-panel li {
   color: #00ffff;
-  height: 3em;
+  height: 2.6em;
   text-align: center;
 
 }
@@ -148,7 +164,8 @@ html {
 
 .bar-one {
   margin-left: 10px;
-  animation: animate-bar-one 1.5s linear 0s infinite normal none; /*name duration timing-function delay iteration-count direction fill-mode*/
+  animation: animate-bar-one 1.5s linear 0s infinite normal none;
+  /*name duration timing-function delay iteration-count direction fill-mode*/
   /* position: absolute; */
   /* height: 100px;
   width: 50px; */
@@ -170,39 +187,40 @@ html {
   animation: animate-bar-five 2.8s linear 0s infinite normal none;
 }
 
-@keyframes animate-bar-one{
-  50%{
+@keyframes animate-bar-one {
+  50% {
     height: 200px;
   }
 }
 
-@keyframes animate-bar-two{
-  50%{
+@keyframes animate-bar-two {
+  50% {
     height: 150px;
   }
 }
 
-@keyframes animate-bar-three{
-  50%{
+@keyframes animate-bar-three {
+  50% {
     height: 185px;
   }
 }
 
-@keyframes animate-bar-four{
-  50%{
+@keyframes animate-bar-four {
+  50% {
     height: 50px;
   }
 }
 
-@keyframes animate-bar-five{
-  50%{
-    height: 280px;
+@keyframes animate-bar-five {
+  50% {
+    height: 240px;
   }
 }
 
 
 #start-button {
-  display: flex;
+  display: block;
+  margin: auto;
   font-family: "Orbitron", sans-serif;
   letter-spacing: 2px;
   font-size: 20px;
@@ -213,7 +231,7 @@ html {
   color: rgb(0, 255, 255);
   position: relative;
   animation: scaleUp 2s infinite;
-  ;
+  width: auto;
   /* animation: borderGlowV2 3s infinite; */
 }
 
@@ -229,29 +247,104 @@ html {
   }
 }
 
-.typewriter-container {
-  position: absolute;
-  bottom: 5%;
-  left: 3%;
-  color: rgb(0, 255, 255);
-  display: inline-block;
-  background-color: black;
-  /* width: 50%; */
-  padding: 1vw 35vw 8vw 2vw;
-  border: 4px solid rgb(0, 255, 255);
-  overflow: hidden;
-  /* background: rgba(8, 45, 103, 0.9); */
+/* https://www.freecodecamp.org/news/apply-borders-to-clip-paths-with-css/ */
+.console-panel-container {
+  position: relative;
+  background-color: rgb(0, 255, 255);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  padding: 2px;
 }
 
-.typewriter-text .console-sign{
+.console-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  /* border: 4px solid rgb(0, 255, 255); */
+  padding: 20px;
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+
+}
+
+.console-wrapper {
+  display: flex;
+  justify-content: space-between;
+  color: #00ffff;
+}
+
+.typewriter-wrapper {
+  display: inline-block;
+}
+
+.typewriter-text {
+  letter-spacing: 2px;
+  font-size: 1em;
+  margin-bottom: 0px;
+}
+
+.console-sign {
+  color: green;
+  font-size: larger;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.typewriter-effect-line1 {
+  border-right: 3px solid #00ffff;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s steps(20, end) forwards, hide-cursor 0s 1s forwards;
+}
+
+.fade-in-delay {
+  opacity: 0;
+  animation: fadeIn-item 0.2s ease 1s forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+@keyframes fadeIn-item {
+  from {
+    opacity: 0;
+
+  }
+
+  to {
+    opacity: 1;
+
+  }
+}
+
+/* .typewriter-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.typewriter-container {
+  position: relative;
+  color: rgb(0, 255, 255);
+  display: inline-block;
+}
+
+.typewriter-text .console-sign {
   color: green;
   font-size: larger;
 }
 
 .typewriter-text {
+  display: flex;
+  align-items: center;
   letter-spacing: 2px;
   border-right: 3px solid;
-  width: 0%;
+  width: 0;
   white-space: nowrap;
   overflow: hidden;
   z-index: 1;
@@ -259,16 +352,11 @@ html {
 }
 
 .typewriter-line1 {
-  animation: typing 1s steps(16) forwards,
-    cursor 1s step-end 1,
-    /* 1: animation duration and 1: nomber of iteration of the animation*/
-    hide-cursor 0s 1s forwards;
-  /*Hide the cursor after 1sec*/
+  animation: typing 1s steps(18, end) forwards, hide-cursor 0s 1s forwards;
 }
 
 .typewriter-line2 {
-  animation: typing 1s 1s steps(16) forwards,
-    cursor 1s 2s step-end infinite;
+  animation: typing 1s 1s steps(18, end) forwards, cursor-blinking .8s infinite;
 }
 
 @keyframes hide-cursor {
@@ -277,26 +365,106 @@ html {
   }
 }
 
-@keyframes cursor {
-  50% {
-    border-color: transparent;
-  }
-}
-
-@keyframes typing {
+@keyframes cursor-blinking {
   from {
-    width: 0;
+    border-color: transparent
   }
 
   to {
-    width: 100%;
+    border-color: #00ffff;
   }
-}
+} */
 
 @media (max-height: 450px) {
-  .typewriter-container {
+  .start-menu {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .start-menu-container {
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .start-menu-panel-container {
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+
+  .menu-left-panel {
+    flex: 0 0 auto;
+    max-width: 200px;
+  }
+
+  .menu-right-panel {
+    gap: 0px;
+  }
+
+  .start-menu-container img {
+    max-width: 150px;
+  }
+
+  .typewriter-text {
+    font-size: 0.6em;
+  }
+
+  .console-panel {
+    padding: 8px;
+  }
+
+  .diagram-container {
+    height: 100px;
+  }
+
+  .graph-panel li {
+    height: 1.3em;
+    font-size: 0.7em;
+  }
+
+  .graph-panel h2 {
+    font-size: 0.8rem;
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+
+  #start-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  @keyframes animate-bar-one {
+    50% {
+      height: 70px;
+    }
+  }
+
+  @keyframes animate-bar-two {
+    50% {
+      height: 55px;
+    }
+  }
+
+  @keyframes animate-bar-three {
+    50% {
+      height: 65px;
+    }
+  }
+
+  @keyframes animate-bar-four {
+    50% {
+      height: 20px;
+    }
+  }
+
+  @keyframes animate-bar-five {
+    50% {
+      height: 40px;
+    }
+  }
+
+  /* .typewriter-container {
     padding: 1vw 30vw 5vw 2vw;
-    /* Mobile - pourcentages plus petits */
   }
 
   .typewriter-text {
@@ -306,7 +474,7 @@ html {
   .lines img {
     transform: scale(0.7);
     top: -5%;
-  }
+  } */
 }
 
 /*End Start Menu*/
