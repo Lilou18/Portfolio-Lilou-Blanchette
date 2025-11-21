@@ -46,7 +46,7 @@ html {
   border: 5px solid #00ffff;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 30px;
   overflow: hidden;
 }
 
@@ -58,38 +58,112 @@ html {
   margin-bottom: 30px;
 }
 
-.menu-left-panel {
-  flex: 1;
-}
+/* Left Panel Start Menu*/
 
-.menu-right-panel {
-  flex: 1;
+.menu-left-panel-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex: 1;
+  position: relative;
+  background-color: rgb(0, 255, 255);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  padding: 2px;
 }
 
-.start-menu-container img {
-  border: 5px solid #00ffff;
-  background-color: rgba(0, 0, 0, 0.7);
+.menu-left-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  color: #00ffff;
+  background-color: rgb(6, 27, 60);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.character-display-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.character-display {
   position: relative;
-  /* left: 8%;
-  top: 10%;
-  position: absolute; */
-  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vw;
+  max-width: 250px;
+  max-height: 250px;
+  /* margin: 0 auto 20px; */
+}
+
+.big-big-circle {
+  width: 100%;
+  height: 100%;
+  border: 5px solid rgba(255, 255, 255, 0);
+  border-left: 5px solid #4450b6;
+  border-bottom: 5px solid #4450b6;
+  border-radius: 50%;
+  animation: spin 10s linear infinite;
+
+}
+
+.big-circle {
+  position: absolute;
+  width: 87%;
+  height: 87%;
+  border: 5px solid rgba(255, 255, 255, 0);
+  border-top: 5px solid #f6ff00;
+  border-bottom: 5px solid #f6ff00;
+  border-radius: 50%;
+  animation: spin 5s reverse infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.character-display img {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  border: 1px solid #00ffff;
+  object-fit: cover;
+
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #00ffff;
+  background-color: rgba(0, 0, 0, 0.7); */
+  /* position: relative;
+  width: 40%;
   height: auto;
-  transform: scale(1);
+  min-width: 200px;
+  max-width: 250px; */
+  border-radius: 50%;
   animation: glitch 3.5s infinite steps(1);
   opacity: 0.8;
 }
 
 @keyframes glitch {
 
-  0%,
+  /* 0%,
   100% {
     background-image: url('./assets/monsterAnimationIdle.png');
     background-size: cover;
-  }
+  } */
 
   92.5% {
     background-image: url('./assets/glitchIdleMonster/glitch-image-1.png');
@@ -107,9 +181,33 @@ html {
   }
 }
 
+.stats-container {
+  display: flex;
+  flex: 1;
+}
+
+/* Right Panel Start Menu*/
+
+.menu-right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.graph-panel-container {
+  position: relative;
+  background-color: rgb(0, 255, 255);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  padding: 2px;
+}
+
 .graph-panel {
   display: flex;
   flex-direction: column;
+  background-color: rgb(6, 27, 60);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  padding: 0px 20px 20px;
 }
 
 .graph-panel h2 {
@@ -250,6 +348,8 @@ html {
 /* https://www.freecodecamp.org/news/apply-borders-to-clip-paths-with-css/ */
 .console-panel-container {
   position: relative;
+  display: flex;
+  flex: 1;
   background-color: rgb(0, 255, 255);
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   padding: 2px;
@@ -385,24 +485,28 @@ html {
   .start-menu-container {
     padding: 10px;
     overflow: hidden;
+    width: 98%;
+    height: 97%;
+    border: 3px solid #00ffff;
+    gap: 10px
   }
 
   .start-menu-panel-container {
     flex-direction: row;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+
   }
 
   .menu-left-panel {
-    flex: 0 0 auto;
-    max-width: 200px;
+    /* max-width: 200px; */
   }
 
   .menu-right-panel {
-    gap: 0px;
+    gap: 10px;
   }
 
   .start-menu-container img {
-    max-width: 150px;
+    /* max-width: 150px; */
   }
 
   .typewriter-text {
@@ -417,6 +521,10 @@ html {
     height: 100px;
   }
 
+  .graph-panel {
+    padding: 0px 10px 10px 5px;
+  }
+
   .graph-panel li {
     height: 1.3em;
     font-size: 0.7em;
@@ -429,8 +537,10 @@ html {
   }
 
   #start-button {
-    padding: 8px 12px;
+    padding: 5px 10px;
     font-size: 0.8rem;
+    border: 2px solid rgb(0, 255, 255);
+    border-radius: 8px;
   }
 
   @keyframes animate-bar-one {
