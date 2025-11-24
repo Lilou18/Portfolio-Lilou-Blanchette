@@ -1,3 +1,7 @@
+:root {
+  --pixelSize: 0.6;
+}
+
 body,
 html {
   margin: 0;
@@ -85,6 +89,7 @@ html {
   background-color: rgb(0, 255, 255);
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   padding: 2px;
+  /* min-width: 0; */
 }
 
 .menu-left-panel {
@@ -94,6 +99,7 @@ html {
   color: #00ffff;
   background-color: rgb(6, 27, 60);
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  overflow: hidden;
 }
 
 .character-display-container {
@@ -231,6 +237,69 @@ html {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+/*Animate sprite sheet with css: https://codepen.io/punkydrewster713/pen/LYYQBEZ*/
+.hot-chocolat-bar {
+  border: 1px solid #00ffff;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 1) 0%, rgba(74, 144, 194, 1) 24%, rgba(74, 144, 194, 1) 87%, rgba(0, 255, 255, 1) 100%);
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
+  padding-bottom: 5px;
+}
+
+.hot-chocolat {
+  overflow: hidden;
+  width: calc(100px * var(--pixelSize));
+  height: calc(125px * var(--pixelSize));
+  /* width: calc(100px * 0.2vh )100px; */
+}
+
+.hot-chocolat-bar img {
+  display: block;
+  width: calc(3100px * var(--pixelSize));
+  /* height: 125px; */
+  animation: moveSpritesheet 3s steps(31) infinite;
+}
+
+@keyframes moveSpritesheet {
+  from {
+    transform: translate3d(0px, 0, 0)
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0)
+  }
+}
+
+
+/* .carousel {
+  border: 1px solid #00ffff;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel ul {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  flex-shrink: 0;
+  width: max-content;
+   
+}
+
+.carousel img{
+  display: block;
+  height: 5vh;
+} */
 
 /* Right Panel Start Menu*/
 
@@ -451,7 +520,8 @@ html {
 .fade-in-delay {
   color: #00ff00;
   opacity: 0;
-  text-shadow: 0 0 8px #00ff00;;
+  text-shadow: 0 0 8px #00ff00;
+  ;
   animation: fadeIn-item 0.2s ease 1s forwards;
 }
 
@@ -542,6 +612,10 @@ html {
 } */
 
 @media (max-height: 450px) {
+    :root {
+    --pixelSize: 0.3;
+  }
+  
   .start-menu {
     height: 100vh;
     width: 100vw;
@@ -595,10 +669,6 @@ html {
 
   .menu-right-panel {
     gap: 10px;
-  }
-
-  .start-menu-container img {
-    /* max-width: 150px; */
   }
 
   .typewriter-text {
