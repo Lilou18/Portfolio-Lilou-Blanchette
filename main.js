@@ -5,6 +5,7 @@ import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
 import { orientationManager } from "./orientationManager.js";
+import { stopProgressBarAnimation } from "./animationManager.js";
 
 function checkOrientation() {
     const overlay = document.getElementById("overlay");
@@ -87,6 +88,7 @@ function startGame(startMenu) {
     });
     gameState.gameStarted = true;
     startMenu.style.display = "none";
+    stopProgressBarAnimation();
 }
 
 window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
