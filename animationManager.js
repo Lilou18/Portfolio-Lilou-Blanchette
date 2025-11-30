@@ -32,30 +32,19 @@ let intervalId;
 function progressBarAnimation() {
     const energyBar = document.getElementById("energyBar");
     let width = 1;
-    intervalId = setInterval(progressBarMove, 20);
-    let filled = false;
+    let barDirection = 1;
+    intervalId = setInterval(() => {
+        width += barDirection;
+        energyBar.style.width = width + "%";
 
-    function progressBarMove() {
-        if (!filled) {
-            width++;
-            energyBar.style.width = width + '%';
-            if (width >= 100) {
-                filled = true;
-            }
+        if(width >= 100 || width <= 0){
+            barDirection *= -1;
         }
-        else {
-            width--;
-            energyBar.style.width = width + '%';
-            if (width <= 0) {
-                filled = false;
-            }
-
-        }
+    }, 20);
 
 
 
 
-    }
 }
 
 export function stopProgressBarAnimation() {
