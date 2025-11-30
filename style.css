@@ -540,14 +540,82 @@ html {
   border-right: 3px solid #00ffff;
   overflow: hidden;
   white-space: nowrap;
-  animation: typing 1s steps(20, end) forwards, hide-cursor 0s 1s forwards;
+  animation: typing 1s steps(17, end) forwards, hide-cursor 0s 1s forwards;
 }
+
+.fade-in-delay-line1 {
+  color: #00ff00;
+  opacity: 0;
+  text-shadow: 0 0 8px #00ff00;
+  animation: fadeIn-item 0.2s ease 1.2s forwards;
+}
+
+.typewriter-effect-line2 {
+  border-right: 3px solid transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: visible-cursor 0s 1.5s forwards, typing 1.3s 1.5s steps(23, end) forwards, hide-cursor 0s 2.8s forwards;
+}
+
+.fade-in-delay-line2 {
+  color: #00ff00;
+  opacity: 0;
+  text-shadow: 0 0 8px #00ff00;
+  animation: fadeIn-item 0.2s ease 3s forwards;
+}
+
+.typewriter-effect-line3 {
+  border-right: 3px solid transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: visible-cursor 0s 3.3s forwards, typing 1.8s 3.3s steps(29, end) forwards, hide-cursor 0s 5.1s forwards;
+}
+
+.fade-in-delay-line3 {
+  color: #00ff00;
+  opacity: 0;
+  text-shadow: 0 0 8px #00ff00;
+  animation: fadeIn-item 0.2s ease 5.3s forwards;
+}
+ 
+.typewriter-effect-line4 {
+  border-right: 3px solid transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: visible-cursor 0s 5.6s forwards, typing 1.6s 5.6s steps(26, end) forwards, hide-cursor 0s 7.2s forwards;
+}
+
+.fade-in-delay-line4 {
+  color: #00ff00;
+  opacity: 0;
+  text-shadow: 0 0 8px #00ff00;
+  animation: fadeIn-item 0.2s ease 7.4s forwards;
+}
+
+.typewriter-effect-line5 {
+  border-right: 3px solid transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: visible-cursor 0s 7.7s forwards, typing 1.8s 7.7s steps(29, end) forwards, hide-cursor 0s 9.5s forwards;
+}
+
+.fade-in-delay-line5 {
+  color: #00ff00;
+  opacity: 0;
+  text-shadow: 0 0 8px #00ff00;
+  animation: fadeIn-item 0.2s ease 9.7s forwards;
+}
+
+
 
 .fade-in-delay {
   color: #00ff00;
   opacity: 0;
   text-shadow: 0 0 8px #00ff00;
-  ;
   animation: fadeIn-item 0.2s ease 1s forwards;
 }
 
@@ -584,6 +652,28 @@ html {
     opacity: 1;
   }
 }
+
+@keyframes visible-cursor{
+    to {
+    border-color: #00ffff;
+  }
+}
+
+@keyframes hide-cursor {
+  to {
+    border-color: transparent;
+  }
+}
+
+@keyframes cursor-blinking {
+  from {
+    border-color: transparent
+  }
+
+  to {
+    border-color: #00ffff;
+  }
+} 
 
 /* .typewriter-wrapper {
   display: block;
