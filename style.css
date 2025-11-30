@@ -228,7 +228,7 @@ html {
 }
 
 .progress-bar {
-  background: linear-gradient(90deg,rgba(255, 215, 0, 1) 0%, rgba(255, 153, 0, 1) 100%);
+  background: linear-gradient(90deg, rgba(255, 215, 0, 1) 0%, rgba(255, 153, 0, 1) 100%);
 }
 
 .stats-container {
@@ -479,6 +479,11 @@ html {
   /* animation: borderGlowV2 3s infinite; */
 }
 
+#start-button:hover {
+  background: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
 @keyframes scaleUp {
 
   0%,
@@ -579,7 +584,7 @@ html {
   text-shadow: 0 0 8px #00ff00;
   animation: fadeIn-item 0.2s ease 5.3s forwards;
 }
- 
+
 .typewriter-effect-line4 {
   border-right: 3px solid transparent;
   overflow: hidden;
@@ -653,8 +658,8 @@ html {
   }
 }
 
-@keyframes visible-cursor{
-    to {
+@keyframes visible-cursor {
+  to {
     border-color: #00ffff;
   }
 }
@@ -673,7 +678,7 @@ html {
   to {
     border-color: #00ffff;
   }
-} 
+}
 
 /* .typewriter-wrapper {
   display: block;
@@ -753,8 +758,24 @@ html {
 
   }
 
-  .menu-left-panel {
-    /* max-width: 200px; */
+  .hot-chocolat-bar {
+    margin-top: 5px;
+  }
+
+  .progress-bar-container {
+    margin: 10px 20px 0px 20px;
+  }
+
+  .progress-label {
+    font-size: 0.6em;
+  }
+
+  .progress-bar-outline {
+    height: 10px;
+  }
+
+  .stats-grid {
+    margin: 10px;
   }
 
   .stat-item {
@@ -1450,6 +1471,11 @@ input[type=text] {
   font-size: 0.9em;
 }
 
+.project-link:hover {
+  background: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
 .technical-project-title {
   letter-spacing: 1px;
   color: #00ffff;
@@ -1642,7 +1668,7 @@ input[type=text] {
 }
 
 .phone {
-  font-size: 80px;
+  font-size: 60px;
   margin-bottom: 40px;
   animation: bounce-rotate 3s ease-in-out infinite;
 }
@@ -1655,14 +1681,16 @@ input[type=text] {
 
 .rotate-device p {
   letter-spacing: 2px;
-  font-size: 2em;
+  font-size: 1.2em;
+  text-align: center;
 }
 
 .rotate-device small {
   color: #87adf3;
   letter-spacing: 2px;
-  font-size: 1.5em;
+  font-size: 1em;
   animation: pulse 2s ease-in-out infinite;
+  text-align: center;
 }
 
 @keyframes rotate {
