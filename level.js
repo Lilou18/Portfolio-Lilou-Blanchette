@@ -1,5 +1,6 @@
 import { GameManager } from "./gameManager.js";
 import { pauseAnimation } from "./animationManager.js";
+import { soundManager } from "./soundManager.js";
 export function level(k, dataLevel) {
 
     //k.setCamPos(0, 0);
@@ -23,6 +24,8 @@ export function level(k, dataLevel) {
     const mapWidth = dataLevel.width * dataLevel.tilewidth;
     const mapHeight = dataLevel.height * dataLevel.tileheight;
     const gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
+
+    // soundManager.addSoundSettingsIcon();
 
     let borderLeft = null;
     let borderRight = null;

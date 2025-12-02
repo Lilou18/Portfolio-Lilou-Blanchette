@@ -6,6 +6,7 @@ import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
 import { orientationManager } from "./orientationManager.js";
 import { stopProgressBarAnimation } from "./animationManager.js";
+import { soundManager } from "./soundManager.js";
 
 function checkOrientation() {
     const overlay = document.getElementById("overlay");
@@ -82,10 +83,11 @@ k.scene("intro", () => {
 
 function startGame(startMenu) {
     k.go("level");
-    k.play("backgroundMusic", {
-        volume: 0.3,
-        loop: true,
-    });
+    soundManager.playBackgroundMusic();
+    // k.play("backgroundMusic", {
+    //     volume: 0.3,
+    //     loop: true,
+    // });
     gameState.gameStarted = true;
     startMenu.style.display = "none";
     stopProgressBarAnimation();

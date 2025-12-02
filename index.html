@@ -96,7 +96,7 @@
                                 <p class="fade-in-delay-line2 typewriter-text">Réussi</p>
 
                             </div>
-                             <div class="console-wrapper">
+                            <div class="console-wrapper">
                                 <div class="typewriter-wrapper">
                                     <p class="typewriter-effect-line3 typewriter-text"><span
                                             class="console-sign">&gt</span>Configuration des coordonnées</p>
@@ -185,6 +185,28 @@
             <button id="btnJump">
                 <i class="fa-solid fa-arrow-up"></i>
             </button>
+        </div>
+    </div>
+    <button id="soundBtn" class="right-corner-btn"><i class="fa-solid fa-volume-high"></i></button>
+    <div id="soundSettingsPanel" class="soundSettingsPanel">
+        <h1>Réglages Audio</h1>
+        <button id="btnCloseSoundSettings">&#128940;</button>
+        <div class="sliders-container">
+            <div class="slider-container">
+                <span>Musique: </span>
+                <div class="slider-value">
+                    <input id="sliderMusic" type="range" min="0" max="1" value="0.5" step="0.1" class="slider">
+                    <span id="musicValue">10</span>
+                </div>
+            </div>
+            <div class="slider-container">
+                <span>Effets Sonores: </span>
+                <div class="slider-value">
+                    <input id="sliderSFX" type="range" min="0" max="1" value="0.5" step="0.1" class="slider">
+                    <span id="sfxValue">8</span>
+                </div>
+
+            </div>
         </div>
     </div>
     <div id="cvPanel">

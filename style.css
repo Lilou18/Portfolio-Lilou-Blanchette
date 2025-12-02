@@ -888,6 +888,146 @@ html {
 
 /*End Start Menu*/
 
+/*Sound settings panel*/
+
+.right-corner-btn {
+  display: none;
+  position: absolute;
+  padding: 12px;
+  top: 3%;
+  right: 1%;
+  border: 2px solid rgb(0, 255, 255);
+  color: #00ffff;
+  font-size: 1em;
+  background-color: rgb(8, 45, 103);
+}
+
+.right-corner-btn:hover {
+  background: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  color: rgb(8, 45, 103);
+}
+
+.soundSettingsPanel {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 30%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(8, 45, 103);
+  border: 3px solid rgb(0, 255, 255);
+  background-image: repeating-linear-gradient(0deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 1px, transparent 1px 60px),
+    repeating-linear-gradient(90deg, rgba(78, 111, 111, 0.3), rgba(78, 111, 111, 0.3) 1px, #082d67 1px, #082d67 60px);
+  z-index: 101;
+  color: #00ffff;
+  letter-spacing: 2px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0px 5px 20px 5px;
+}
+
+.soundSettingsPanel h1 {
+  border-bottom: 2px solid #00ffff;
+}
+
+#btnCloseSoundSettings {
+  position: absolute;
+  top: 8%;
+  right: 3%;
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  color: #00ffff;
+  font-size: 18px;
+}
+
+#btnCloseSoundSettings:hover {
+  background: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  color: rgb(8, 45, 103);
+}
+
+.sliders-container {
+  display: flex;
+  /* Changez inline-block en flex */
+  flex: 1;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slider-container span {
+  font-size: 1.2em;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* Assurez-vous qu'ils prennent toute la largeur disponible */
+
+}
+
+.slider {
+  margin-left: 20px;
+  margin-right: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: #070033;
+  border: 1px solid #00ffff;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 25px;
+  background: #00ffff;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 5px;
+  height: 25px;
+  background: #00ffff;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+.slider::-moz-range-thumb:hover {
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+.slider-value span{
+  font-size: 1em;
+  display: inline-block;
+  width:4ch; /* 3 caractères de largeur (ex: "100", "5", "10") */
+  text-align: right;
+}
+
+/* .slider-container span {
+  flex-shrink: 0;
+}
+
+.slider-container input[type="range"] {
+  margin-left: 20px;
+  flex-grow: 0;
+} */
+
 #cvPanel,
 #portfolioPanel,
 #contact {
@@ -906,7 +1046,7 @@ html {
     inset 0 0 20px rgba(0, 255, 255, 0.1);
 
   display: none;
-  z-index: 1000;
+  z-index: 100;
   overflow: hidden;
   animation: fadeIn 0.5s;
 }

@@ -146,4 +146,8 @@ k.loadSprite("citySign", "./assets/citySign.png", {
 
 k.loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");
 
-k.loadSound("backgroundMusic", "sounds/funky-quirky-upbeat-commercial-music-392401_eUPATFbC.mp3")
+k.loadSound("backgroundMusic", "sounds/funky-quirky-upbeat-commercial-music-392401_eUPATFbC.mp3");
+
+k.loadSound("hitSFX", "sounds/soft-body-impact-295404.mp3");
+
+k.loadSound("collectibleSFX", "sounds/water-drip-45622.mp3");

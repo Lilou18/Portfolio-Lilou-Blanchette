@@ -1,5 +1,6 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
+import { soundManager } from "./soundManager.js";
 
 // Manages user interface interactions and display
 export class UIManager {
@@ -187,7 +188,7 @@ export class UIManager {
     }
 
     displayPanel(panelName) {
-        if (this.panels[panelName] && this.canvas && this.currentPanel == null) {
+        if (this.panels[panelName] && this.canvas && this.currentPanel == null && !soundManager.isSoundSettingsPanelOpen) {
             this.currentPanel = panelName;
             this.panels[panelName].style.display = "block";
             this.canvas.style.filter = "brightness(70%)";
@@ -201,7 +202,7 @@ export class UIManager {
     }
 
     hidePanel(panelName) {
-        if (this.panels[panelName] && this.canvas) {
+        if (this.panels[panelName] && this.canvas && !soundManager.isSoundSettingsPanelOpen) {
             this.currentPanel = null;
             this.panels[panelName].style.display = "none";
             this.canvas.style.filter = "brightness(100%)";

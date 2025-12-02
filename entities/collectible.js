@@ -1,5 +1,6 @@
 import { gameState } from "../gameState.js";
 import { pauseAnimation } from "../animationManager.js";
+import { soundManager } from "../soundManager.js";
 export class Collectible {
     constructor(k, x, y) {
         this.k = k;
@@ -54,7 +55,7 @@ export class Collectible {
     collect() {
         if (!this.destroyed) {
             this.destroyed = true;
-
+            soundManager.playSound("collectibleSFX");
             this.k.tween(
                 this.gameObject.scale,
                 this.k.vec2(0),

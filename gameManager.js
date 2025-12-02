@@ -1,6 +1,7 @@
 import { Collectible } from "./entities/collectible.js";
 import { GroundEnemy } from "./entities/groundEnemy.js";
 import { gameState } from "./gameState.js";
+import { soundManager } from "./soundManager.js";
 
 export class GameManager {
     constructor(k, mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -133,6 +134,7 @@ export class GameManager {
                 this.changeScore(-10);
                 this.enemies.splice(indexCollectible, 1);
                 this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
+                soundManager.playSound("hitSFX");
             }
         });
 
