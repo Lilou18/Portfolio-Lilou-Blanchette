@@ -26,7 +26,7 @@ export class Player {
             this.gameObject = add([
                 sprite("player", { anim: "idle" }),
                 area({
-                    shape: new Polygon([                     
+                    shape: new Polygon([
                         vec2(-40, 0),
                         vec2(40, 0),
                         vec2(40, 100),
@@ -34,7 +34,7 @@ export class Player {
                         vec2(-40, 220),
                         vec2(-40, 100),
                     ]),
-                    offset: vec2(0, 10),                    
+                    offset: vec2(0, 10),
                 }),
                 body(),
                 doubleJump(1),
@@ -253,7 +253,7 @@ export class Player {
             }
 
             // Player jump
-            if (keysPressed.space && this.gameObject.isGrounded()) {
+            if ((keysPressed.space || this.mobileControls.jump) && this.gameObject.isGrounded()) {
                 this.gameObject.jump(this.jumpForce);
                 this.gameObject.play("jump");
                 // We don't want double jump
@@ -272,7 +272,7 @@ export class Player {
         });
     }
 
-    playerMobileControls(){
+    playerMobileControls() {
         const btnLeft = document.getElementById("btnLeft");
         const btnRight = document.getElementById("btnRight");
         const btnJump = document.getElementById("btnJump");
@@ -280,22 +280,31 @@ export class Player {
         this.mobileControls = {
             left: false,
             right: false,
-            jumo: false
+            jump: false
         };
 
-        if(btnLeft){
+        if (btnLeft) {
             btnLeft.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = true;
+                btnLeft.style.color = rgb(8, 45, 103);
+                btnLeft.style.background = 'rgba(0, 255, 255, 0.7)';
+                btnLeft.style.borderColor = rgb(8, 45, 103);
             });
 
-            btnLeft.addEventListener('touchend', (e) =>{
+            btnLeft.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
+                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnLeft.style.borderColor = rgb(0, 255, 255);
             });
             btnLeft.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
+                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnLeft.style.borderColor = rgb(0, 255, 255);
             });
         }
 
@@ -303,16 +312,25 @@ export class Player {
             btnRight.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = true;
+                btnRight.style.color = rgb(8, 45, 103);
+                btnRight.style.background = 'rgba(0, 255, 255, 0.7)';
+                btnRight.style.borderColor = rgb(8, 45, 103);
             });
 
             btnRight.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
+                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnRight.style.borderColor = rgb(0, 255, 255);
             });
 
             btnRight.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
+                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnRight.style.borderColor = rgb(0, 255, 255);
             });
         }
 
@@ -321,9 +339,29 @@ export class Player {
                 e.preventDefault();
                 // No double jump
                 if (!gameState.isGamePaused && this.gameObject.isGrounded()) {
-                    this.gameObject.jump(this.jumpForce);
-                    this.gameObject.play("jump");
+                    this.mobileControls.jump = true;
+                    // this.gameObject.jump(this.jumpForce);
+                    // this.gameObject.play("jump");
+                    btnJump.style.color = rgb(8, 45, 103);
+                    btnJump.style.background = 'rgba(0, 255, 255, 0.7)';
+                    btnJump.style.borderColor = rgb(8, 45, 103);
                 }
+            });
+
+            btnJump.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.mobileControls.jump = false;
+                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnJump.style.borderColor = rgb(0, 255, 255);
+            });
+
+            btnJump.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this.mobileControls.jump = false;
+                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
+                btnJump.style.borderColor = rgb(0, 255, 255);
             });
         }
     }

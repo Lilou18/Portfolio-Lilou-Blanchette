@@ -479,10 +479,7 @@ html {
   /* animation: borderGlowV2 3s infinite; */
 }
 
-#start-button:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-}
+
 
 @keyframes scaleUp {
 
@@ -900,13 +897,9 @@ html {
   color: #00ffff;
   font-size: 1em;
   background-color: rgb(8, 45, 103);
+  opacity: 0.7;
 }
 
-.right-corner-btn:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-  color: rgb(8, 45, 103);
-}
 
 .soundSettingsPanel {
   display: none;
@@ -946,11 +939,7 @@ html {
   font-size: 18px;
 }
 
-#btnCloseSoundSettings:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-  color: rgb(8, 45, 103);
-}
+
 
 .sliders-container {
   display: flex;
@@ -1004,18 +993,13 @@ html {
   cursor: pointer;
 }
 
-.slider::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
-}
 
-.slider::-moz-range-thumb:hover {
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
-}
 
-.slider-value span{
+.slider-value span {
   font-size: 1em;
   display: inline-block;
-  width:4ch; /* 3 caractères de largeur (ex: "100", "5", "10") */
+  width: 4ch;
+  /* 3 caractères de largeur (ex: "100", "5", "10") */
   text-align: right;
 }
 
@@ -1132,10 +1116,7 @@ input[type=text] {
   justify-content: center;
 }
 
-.exit:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-}
+
 
 .browser-content {
   box-sizing: border-box;
@@ -1162,9 +1143,7 @@ input[type=text] {
   border-radius: 10px;
 }
 
-.browser-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 255, 0.8);
-}
+
 
 .content-section {
   margin-bottom: 40px;
@@ -1611,10 +1590,6 @@ input[type=text] {
   font-size: 0.9em;
 }
 
-.project-link:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-}
 
 .technical-project-title {
   letter-spacing: 1px;
@@ -1670,10 +1645,7 @@ input[type=text] {
   padding: 50px 30px 50px 30px;
 }
 
-.contact-item:hover {
-  background: rgba(0, 255, 255, 0.4);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-}
+
 
 .contact-item p {
   word-break: break-all;
@@ -1881,4 +1853,106 @@ input[type=text] {
   50% {
     opacity: 0.5;
   }
+}
+
+@media (max-height: 450px) {
+
+  /*Sound Settings Panel*/
+  .right-corner-btn {
+    padding: 7px;
+    font-size: 0.8em;
+  }
+
+  .soundSettingsPanel {
+    padding-bottom: 0px;
+    height: 40%;
+  }
+
+  .soundSettingsPanel h1 {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .slider-container span {
+    font-size: 0.7em;
+  }
+
+  .slider {
+    height: 5px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4px;
+    height: 20px;
+    background: #00ffff;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 4cap;
+    height: 20px;
+    background: #00ffff;
+    cursor: pointer;
+  }
+
+  #btnCloseSoundSettings {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+
+/*Only devices that can hover*/
+@media (hover: hover) {
+  #start-button:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
+  .right-corner-btn:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    color: rgb(8, 45, 103);
+  }
+
+  #btnCloseSoundSettings:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    color: rgb(8, 45, 103);
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+  }
+
+  .slider::-moz-range-thumb:hover {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+  }
+
+  .exit:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
+  .browser-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 0.8);
+  }
+
+  .project-link:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
+  .contact-item:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
+
 }

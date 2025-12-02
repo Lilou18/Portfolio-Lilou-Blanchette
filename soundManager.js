@@ -1,5 +1,6 @@
 import { k } from "./loader.js";
 import { gameState } from "./gameState.js";
+import { uiManager } from "./uiManager.js";
 
 class SoundManager {
     constructor() {
@@ -51,10 +52,12 @@ class SoundManager {
 
         if(this.isSoundSettingsPanelOpen){
             soundSettingsPanel.style.display = "flex";
+            uiManager.canvas.style.filter = "brightness(70%)";
             gameState.addPauseFlag("soundSettings");
         }
         else{
             soundSettingsPanel.style.display = "none";
+            uiManager.canvas.style.filter = "brightness(100%)";
             gameState.removePauseFlag("soundSettings");
         }
     }
