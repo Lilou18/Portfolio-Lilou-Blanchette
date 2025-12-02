@@ -34,6 +34,12 @@ class SoundManager {
         k.play(soundName, {volume: this.sfxVolume});
     }
 
+    pauseUnpauseBackgroundMusic(){
+        if(this.backgroundMusic){
+            this.backgroundMusic.paused = !this.backgroundMusic.paused;
+        }
+    }
+
     playBackgroundMusic() {
         this.backgroundMusic = k.play("backgroundMusic", {
             volume: this.musicVolume,

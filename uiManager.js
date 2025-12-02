@@ -8,8 +8,9 @@ export class UIManager {
         this.panels = {
             cv: document.getElementById("cvPanel"),
             portfolio: document.getElementById("portfolioPanel"),
-            contact: document.getElementById("contact")
-        }
+            contact: document.getElementById("contact"),
+            soundSettings: document.getElementById("soundSettingsPanel")
+        };
         this.canvas = document.getElementById("gameCanvas");//document.querySelector("canvas");
         this.currentPanel = null;
         this.currentInteraction = null;
@@ -26,26 +27,6 @@ export class UIManager {
         else {
             this.initEventListeners();
         }
-
-        // Pause the game when the window is no longer the focus
-        window.addEventListener('blur', () => {
-            //gameState.isGamePaused = true;
-            gameState.addPauseFlag("windowBlur");
-            this.showPauseText();
-        });
-
-        // Destroy the pause text when the window is the focus
-        window.addEventListener('focus', () => {
-            // If no panel is open then we resume the game
-            gameState.removePauseFlag("windowBlur");
-            // if(!this.currentPanel){
-            //     //gameState.isGamePaused = false;      
-            //     gameState.removePauseFlag("windowBlur");          
-            // }   
-            this.hidePauseText();
-            
-        });
-
     }
 
     initEventListeners() {

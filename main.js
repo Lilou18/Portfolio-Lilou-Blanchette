@@ -7,6 +7,7 @@ import { uiManager } from "./uiManager.js";
 import { orientationManager } from "./orientationManager.js";
 import { stopProgressBarAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
+import { initWindowEvents } from "./windowManager.js";
 
 function checkOrientation() {
     const overlay = document.getElementById("overlay");
@@ -98,6 +99,7 @@ window.matchMedia("(orientation: portrait)").addEventListener("change", (event) 
 });
 
 k.onLoad(() => {
+    initWindowEvents();
     checkOrientation();
     // k.go("level");
 });
