@@ -12,6 +12,7 @@ export class GameManager {
         this.tileHeight = tileHeight;
         this.score = 0;
         this.bestScore = 0;
+        this.isBestScore = false;
         this.enemies = [];
         this.collectibles = [];
 
@@ -47,7 +48,7 @@ export class GameManager {
                 size: 30,
                 font: "orbitron"
             }),
-            this.k.pos(20, 20),
+            this.k.pos(20, 50),
             this.k.color(0, 255, 255),
             this.k.fixed(),
             this.k.z(2),
@@ -55,7 +56,7 @@ export class GameManager {
         ]);
 
         this.bestScoreText = this.k.add([
-            this.k.text(`Meilleure Énergie: ${this.bestScore}`, {
+            this.k.text(``, {
                 size: 30,
                 font: "orbitron"
             }),
@@ -67,10 +68,10 @@ export class GameManager {
         ]);
 
         this.backgroundScore = this.k.add([
-            this.k.rect(410,100, { radius: 8 }),
+            this.k.rect(410, 100, { radius: 8 }),
             this.k.opacity(0.7),
             this.k.fixed(),
-            this.k.pos(10,10),
+            this.k.pos(10, 10),
             this.k.color(8, 45, 103),
             this.k.outline(4, rgb(0, 255, 255)),
             // this.k.outline({
@@ -88,15 +89,30 @@ export class GameManager {
         this.score += amountScore;
         if (this.score < 0) {
             this.score = 0;
+
         }
         if (this.score > 999) {
             this.score = 999;
         }
-        if(this.score > this.bestScore){
+        if (this.score > this.bestScore) {
             this.bestScore = this.score
             this.bestScoreText.text = `Meilleure Énergie: ${this.bestScore}`;
+            this.bestScoreText.color = rgb(255, 215, 0);
+            this.bestScoreText.pos.y = 50;
+            this.scoreText.text = ``;
+            this.isBestScore = true;
         }
-        this.scoreText.text = `Énergie: ${this.score}`;
+        else if (this.isBestScore) {
+            this.isBestScore = false;
+            this.scoreText.pos.y = 20;
+            this.bestScoreText.pos.y = 70;
+            this.bestScoreText.color = rgb(0, 255, 255);
+            this.scoreText.text = `Énergie: ${this.score}`;
+        }
+        else {
+            this.scoreText.text = `Énergie: ${this.score}`;
+        }
+        // this.scoreText.text = `Énergie: ${this.score}`;
     }
 
     // If the screen change size we must update the size of the enemies and the collectibles
@@ -155,7 +171,7 @@ export class GameManager {
         this.k.onUpdate(() => {
 
             // Stop the timers is the game is paused
-            if(gameState.isGamePaused) return;
+            if (gameState.isGamePaused) return;
 
             const dt = this.k.dt();
 
