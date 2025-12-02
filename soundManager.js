@@ -27,8 +27,6 @@ class SoundManager {
 
         this.musicSlider.addEventListener("input", () => this.changeMusicVolume());
         this.sfxSlider.addEventListener("input", () => this.changeSFXVolume());
-
-        this.addSoundSettingsIcon();
     }
 
     playSound(soundName) {
