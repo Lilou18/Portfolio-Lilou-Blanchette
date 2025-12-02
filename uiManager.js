@@ -1,5 +1,6 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
+import { orientationManager } from "./orientationManager.js";
 
 // Manages user interface interactions and display
 export class UIManager {
