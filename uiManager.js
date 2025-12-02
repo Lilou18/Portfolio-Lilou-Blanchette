@@ -1,6 +1,5 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
-import { soundManager } from "./soundManager.js";
 
 // Manages user interface interactions and display
 export class UIManager {
@@ -13,6 +12,7 @@ export class UIManager {
         };
         this.canvas = document.getElementById("gameCanvas");//document.querySelector("canvas");
         this.currentPanel = null;
+        this.isSoundSettingsPanelOpen = false;
         this.currentInteraction = null;
         this.interactionTexts = {};
         this.pauseText = null;
@@ -41,18 +41,25 @@ export class UIManager {
 
     setUpEnterInput() {
         k.onKeyDown("enter", () => {
-            if (this.currentInteraction) {                
+            if (this.currentInteraction) {
                 this.displayPanel(this.currentInteraction);
             }
         });
 
-        k.onKeyDown("escape", () => {
-            if (this.currentInteraction && this.panels[this.currentInteraction] && this.canvas) {
-                if (this.panels[this.currentInteraction].style.display === "block") {                    
-                    this.hidePanel(this.currentInteraction);
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                if (this.isSoundSettingsPanelOpen) {
+                    this.hidePanel("soundSettings");
+                    return;
+                }
+
+                if (this.currentPanel && this.panels[this.currentPanel] && this.canvas) {
+                    if (this.panels[this.currentPanel].style.display === "block") {
+                        this.hidePanel(this.currentPanel);
+                    }
                 }
             }
-        });
+        })
     };
 
     setUpHologramClicks() {
@@ -169,27 +176,54 @@ export class UIManager {
     }
 
     displayPanel(panelName) {
-        if (this.panels[panelName] && this.canvas && this.currentPanel == null && !soundManager.isSoundSettingsPanelOpen) {
+        if (!this.panels[panelName] || !this.canvas) return;
+
+        if (panelName === "soundSettings") {
+            this.panels[panelName].style.display = "flex";
+            gameState.addPauseFlag("soundSettings");
+            this.isSoundSettingsPanelOpen = true;
+            if (!this.currentPanel) {
+                this.canvas.style.filter = "brightness(70%)";
+            }
+            else {
+                this.panels[this.currentPanel].style.filter = "brightness(70%)";
+            }
+            return;
+        }
+
+        if (this.currentPanel == null && !this.isSoundSettingsPanelOpen) {
             this.currentPanel = panelName;
             this.panels[panelName].style.display = "block";
             this.canvas.style.filter = "brightness(70%)";
             // Pause the game when a panel is displayed
             gameState.addPauseFlag("panelOpen");
-            //gameState.isGamePaused = true;
-
-            //this.canvas.blur();
         }
 
     }
 
     hidePanel(panelName) {
-        if (this.panels[panelName] && this.canvas && !soundManager.isSoundSettingsPanelOpen) {
+        if (!this.panels[panelName] || !this.canvas) return;
+
+        if (panelName === "soundSettings") {
+            this.panels[panelName].style.display = "none";
+            gameState.removePauseFlag("soundSettings");
+            this.isSoundSettingsPanelOpen = false;
+
+            if (!this.currentPanel) {
+                this.canvas.style.filter = "brightness(100%)";
+                this.canvas.focus();
+            }
+            else {
+                this.panels[this.currentPanel].style.filter = "brightness(100%)";
+            }
+            return;
+        }
+
+        if (this.currentPanel === panelName && !this.isSoundSettingsPanelOpen) {
             this.currentPanel = null;
             this.panels[panelName].style.display = "none";
             this.canvas.style.filter = "brightness(100%)";
             gameState.removePauseFlag("panelOpen");
-            //gameState.isGamePaused = false;
-
             this.canvas.focus();
         }
     }
@@ -226,7 +260,7 @@ export class UIManager {
             destroy(this.pauseText);
             this.pauseText = null;
         }
-        if(this.backgroundColor){
+        if (this.backgroundColor) {
             destroy(this.backgroundColor);
             this.backgroundColor = null;
         }

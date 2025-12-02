@@ -1,5 +1,4 @@
 import { k } from "./loader.js";
-import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
 
 class SoundManager {
@@ -8,11 +7,11 @@ class SoundManager {
         this.sfxVolume = 0.6;
         this.backgroundMusic = null;
         this.soundBtn = null;
-        this.soundSettingsPanel = null;
-        this.isSoundSettingsPanelOpen = false;
 
-        this.soundSettingsPanel = document.getElementById("soundSettingsPanel");
+        this.setupUI();
+    }
 
+    setupUI() {
         this.musicSlider = document.getElementById("sliderMusic");
         this.musicSlider.value = this.musicVolume;
         this.musicValue = document.getElementById("musicValue");
@@ -24,18 +23,42 @@ class SoundManager {
         this.sfxValue.textContent = this.sfxVolume * 10;
 
         this.btnClosePanel = document.getElementById("btnCloseSoundSettings");
-        this.btnClosePanel.addEventListener("click", () => this.displayHideSoundSettingsPanel());
+        this.btnClosePanel.addEventListener("click", () => this.closeSettings());
 
         this.musicSlider.addEventListener("input", () => this.changeMusicVolume());
         this.sfxSlider.addEventListener("input", () => this.changeSFXVolume());
+
+    }
+
+    addSoundSettingsBtn() {
+        this.soundBtn = document.getElementById("soundBtn");
+        this.soundBtn.style.display = "block";
+        this.soundBtn.addEventListener("click", () => this.toggleSettings());
+    }
+
+    toggleSettings() {
+        if (uiManager.isSoundSettingsPanelOpen) {
+            this.closeSettings();
+        }
+        else {
+            this.openSettings();
+        }
+    }
+
+    openSettings() {
+        uiManager.displayPanel("soundSettings");
+    }
+
+    closeSettings() {
+        uiManager.hidePanel("soundSettings");
     }
 
     playSound(soundName) {
-        k.play(soundName, {volume: this.sfxVolume});
+        k.play(soundName, { volume: this.sfxVolume });
     }
 
-    pauseUnpauseBackgroundMusic(){
-        if(this.backgroundMusic){
+    pauseUnpauseBackgroundMusic() {
+        if (this.backgroundMusic) {
             this.backgroundMusic.paused = !this.backgroundMusic.paused;
         }
     }
@@ -47,28 +70,7 @@ class SoundManager {
         });
     }
 
-    addSoundSettingsIcon() {
-        this.soundBtn = document.getElementById("soundBtn");
-        this.soundBtn.style.display = "block";
-        this.soundBtn.addEventListener("click", () => this.displayHideSoundSettingsPanel());
-    }
-
-    displayHideSoundSettingsPanel(){
-        this.isSoundSettingsPanelOpen = !this.isSoundSettingsPanelOpen;
-
-        if(this.isSoundSettingsPanelOpen){
-            soundSettingsPanel.style.display = "flex";
-            uiManager.canvas.style.filter = "brightness(70%)";
-            gameState.addPauseFlag("soundSettings");
-        }
-        else{
-            soundSettingsPanel.style.display = "none";
-            uiManager.canvas.style.filter = "brightness(100%)";
-            gameState.removePauseFlag("soundSettings");
-        }
-    }
-
-    changeSFXVolume(){
+    changeSFXVolume() {
         this.sfxVolume = this.sfxSlider.value;
         this.sfxValue.textContent = this.sfxVolume * 10;
     }

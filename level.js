@@ -25,7 +25,7 @@ export function level(k, dataLevel) {
     const mapHeight = dataLevel.height * dataLevel.tileheight;
     const gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
 
-    soundManager.addSoundSettingsIcon();
+    soundManager.addSoundSettingsBtn();
 
     let borderLeft = null;
     let borderRight = null;
