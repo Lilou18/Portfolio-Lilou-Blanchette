@@ -82,16 +82,9 @@ export class UIManager {
     createInteractionText(hologramTag) {
         this.removeInteractionText(hologramTag);
 
-        let text;
-        let textSize;
-        if (orientationManager.isMobile) {
-            text = "Appuyez sur \n l'hologramme";
-            textSize = 25;
-        }
-        else {
-            text = "Appuyez sur « Enter » \n ou Cliquez";
-            textSize = 20;
-        }
+        const isMobile = orientationManager.isMobile;
+        const text = isMobile ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
+        const textSize = isMobile ? 25 : 20;
 
         const hologram = get(hologramTag)[0];
         if (!hologram) return;
