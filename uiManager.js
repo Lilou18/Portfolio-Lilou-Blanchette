@@ -79,20 +79,31 @@ export class UIManager {
         });
     }
 
-    createInteractionText(hologramTag, text) {
+    createInteractionText(hologramTag) {
         this.removeInteractionText(hologramTag);
+
+        let text;
+        let textSize;
+        if (orientationManager.isMobile) {
+            text = "Appuyez sur \n l'hologramme";
+            textSize = 25;
+        }
+        else {
+            text = "Appuyez sur « Enter » \n ou Cliquez";
+            textSize = 20;
+        }
 
         const hologram = get(hologramTag)[0];
         if (!hologram) return;
 
         const interactionText = k.add([
             k.text(text, {
-                size: 20,
+                size: textSize,
                 font: "orbitron",
                 align: "center",
             }),
             k.color(255, 255, 255),
-            k.pos(hologram.pos.x, hologram.pos.y - 300),
+            k.pos(hologram.pos.x, hologram.pos.y - 310),
             k.anchor("center"),
             k.z(1),
             `${hologramTag}TextInput`
@@ -104,7 +115,7 @@ export class UIManager {
             const currentHologram = get(hologramTag)[0];
             if (currentHologram) {
                 interactionText.pos.x = currentHologram.pos.x;
-                interactionText.pos.y = currentHologram.pos.y - 300;
+                interactionText.pos.y = currentHologram.pos.y - 310;
             }
         });
     }
@@ -122,14 +133,8 @@ export class UIManager {
             this.setUpHologramClicks();
 
             gameState.player.gameObject.onCollide("cvHologram", () => {
-                //debug.log("Appuie sur ENTRÉE pour voir le CV");
                 this.currentInteraction = "cv";
-                this.createInteractionText("cvHologram", "Appuyez sur Enter \n ou Cliquez");
-                // onKeyDown("enter", () => {
-                //     this.displayPanel("cv");
-                //     //document.getElementById("cvPanel").style.display = "block";
-
-                // })
+                this.createInteractionText("cvHologram");
             });
 
             gameState.player.gameObject.onCollideEnd("cvHologram", () => {
@@ -140,14 +145,8 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollide("portfolioHologram", () => {
-                //debug.log("Appuie sur ENTRÉE pour voir le Portfolio");
                 this.currentInteraction = "portfolio";
-                this.createInteractionText("portfolioHologram", "Appuyez sur Enter \n ou Cliquez");
-                // onKeyDown("enter", () => {
-                //     this.displayPanel("portfolio");
-                //     //document.getElementById("portfolioPanel").style.display = "block";
-
-                // })
+                this.createInteractionText("portfolioHologram");
             });
 
             gameState.player.gameObject.onCollideEnd("portfolioHologram", () => {
@@ -158,9 +157,8 @@ export class UIManager {
             });
 
             gameState.player.gameObject.onCollide("contactHologram", () => {
-                //debug.log("Appuie sur ENTRÉE pour voir Contact");
                 this.currentInteraction = "contact";
-                this.createInteractionText("contactHologram", "Appuyez sur Enter \n ou Cliquez");
+                this.createInteractionText("contactHologram");
 
             });
 
