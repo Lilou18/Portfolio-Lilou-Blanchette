@@ -140,82 +140,67 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
 function setHologram(k, mapPositions) {
     const holograms = [];
 
+    const hologramsConfig = {
+        hologramPortfolio: {
+            sprite: "portfolioHologram",
+            scale: 0.6,
+            yOffset: 10,
+        },
+        hologramCV: {
+            sprite: "cvHologram",
+            scale: 0.6,
+            yOffset: 10,
+        },
+        hologramContact: {
+            sprite: "contactHologram",
+            scale: 0.6,
+            yOffset: 10,
+        },
+        citySign: {
+            sprite: orientationManager.isMobile ? "citySignMobile" : "citySign",
+            scale: 1,
+            yOffset: 0,
+        },
+    };
+
     for (const position of mapPositions) {
-        if (position.name === "hologramPortfolio") {
-            const portfolioHologram = k.add([
-                k.sprite("portfolioHologram", { anim: "hologram" }),
-                k.area(),
-                k.anchor("bot"),
-                k.pos(position.x, position.y), // Initial position from Tiled
-                k.scale(0.6),
-                "portfolioHologram",
-            ]);
+        const config = hologramsConfig[position.name];
 
-            // Store both the hologram object and its original Tiled position
-            holograms.push({
-                object: portfolioHologram,
-                originalX: position.x,
-                originalY: position.y + 10,
-                scale: 0.6,
+        if (!config) continue; // Ignore positions not in the config
+
+        const hologram = k.add([
+            k.sprite(config.sprite, position.name === "citySign" ? {} : { anim: "hologram" }),
+            k.area(),
+            k.anchor("bot"),
+            k.pos(position.x, position.y), // Initial position from Tiled
+            k.scale(config.scale),
+            config.sprite,
+        ]);
+
+        // If not a city sign then we when a pointer cursor when user hover the gameobject
+        if (position.name !== "citySign") {
+            hologram.onHover(() => {
+                k.setCursor("pointer");
+            });
+
+            hologram.onHoverEnd(() => {
+                k.setCursor("default");
             });
         }
-        else if (position.name === "cvPortfolio") {
-            const portfolioHologram = k.add([
-                k.sprite("cvHologram", { anim: "hologram" }),
-                k.area(),
-                k.anchor("bot"),
-                k.pos(position.x, position.y), // Initial position from Tiled
-                k.scale(0.6),
-                "cvHologram",
-            ]);
-
-            // Store both the hologram object and its original Tiled position
-            holograms.push({
-                object: portfolioHologram,
-                originalX: position.x,
-                originalY: position.y + 10,
-                scale: 0.6,
-            });
-
-        }
-        else if (position.name === "hologramContact") {
-            const portfolioHologram = k.add([
-                k.sprite("contactHologram", { anim: "hologram" }),
-                k.area(),
-                k.anchor("bot"),
-                k.pos(position.x, position.y), // Initial position from Tiled
-                k.scale(0.6),
-                "contactHologram",
-            ]);
-            // Store both the hologram object and its original Tiled position
-            holograms.push({
-                object: portfolioHologram,
-                originalX: position.x,
-                originalY: position.y + 10,
-                scale: 0.6,
-            });
-        }
-        else if (position.name === "citySign") {
-            const spriteName = orientationManager.isMobile ? "citySignMobile" : "citySign";
-            const citySign = k.add([
-                k.sprite(spriteName),
-                k.area(),
-                k.anchor("bot"),
-                k.pos(position.x, position.y), // Initial position from Tiled
-                "citySign",
-            ]);
-            // Store both the hologram object and its original Tiled position
-            holograms.push({
-                object: citySign,
-                originalX: position.x,
-                originalY: position.y,
-                scale: 1,
-            });
-
+        else {
+            // Special animation for citySign
             k.wait(0.1, () => {
-                delayedLoop(k, citySign, "hologram", 5);
+                delayedLoop(k, hologram, "hologram", 5);
             });
         }
+
+        // Store both the hologram object and its original Tiled position
+        holograms.push({
+            object: hologram,
+            originalX: position.x,
+            originalY: position.y + config.yOffset,
+            scale: config.scale,
+        });
     }
 
     holograms.forEach(hologram => {
@@ -229,8 +214,8 @@ function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
     if (!animatedObject.exists()) return;
     animatedObject.play(animationName);
 
-    k.loop(delayInSeconds, () =>{
-        
+    k.loop(delayInSeconds, () => {
+
         animatedObject.play(animationName);
     })
 }
