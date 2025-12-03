@@ -1179,6 +1179,7 @@ input[type=text] {
 .download-link:visited {
   text-decoration: none;
 }
+
 /*End CV*/
 
 /*PORTFOLIO*/
@@ -1331,6 +1332,7 @@ input[type=text] {
 
   /* padding: 30px; */
 }
+
 /*End PORTFOLIO*/
 
 /* Contact */
@@ -1460,13 +1462,6 @@ input[type=text] {
   flex-direction: row;
   gap: 40px;
 
-}
-
-/* Hide button for PC user */
-@media (hover: hover) and (pointer: fine) {
-  #mobileControls {
-    display: none;
-  }
 }
 
 /* End Mobile */
@@ -1713,6 +1708,7 @@ input[type=text] {
       height: 40px;
     }
   }
+
   /*End Start Menu*/
 
   /*Sound Settings Panel*/
@@ -1768,6 +1764,110 @@ input[type=text] {
 
 }
 
+@media (max-height: 400px) {
+
+  /*Start Menu*/
+  .graph-panel {
+    padding: 0px 10px 10px 5px;
+  }
+
+  .graph-panel li {
+    height: 1em;
+    font-size: 0.7em;
+  }
+
+  .graph-panel h2 {
+    font-size: 0.8rem;
+    margin: 10px;
+    padding-bottom: 5px;
+  }
+
+  .diagram-container {
+    height: 60px;
+  }
+
+  .bar {
+    height: 50px;
+  }
+
+  .bar-four {
+    animation: animate-bar-five 1.6s linear 0s infinite normal none;
+  }
+
+  @keyframes animate-bar-one {
+    50% {
+      height: 20px;
+    }
+  }
+
+  @keyframes animate-bar-two {
+    50% {
+      height: 10px;
+    }
+  }
+
+  @keyframes animate-bar-three {
+    50% {
+      height: 15px;
+    }
+  }
+
+  @keyframes animate-bar-four {
+    50% {
+      height: 8px;
+    }
+  }
+
+  @keyframes animate-bar-five {
+    50% {
+      height: 2px;
+    }
+  }
+
+  .character-display-container {
+    padding-top: 10px;
+  }
+
+  .character-display {
+    max-width: 95px;
+    max-height: 95px;
+  }
+
+  :root {
+    --pixelSize: 0.2;
+  }
+
+  /*End Start Menu*/
+}
+
+@media (max-width: 1150px) {
+  /*Sound Settings Panel*/
+.soundSettingsPanel{
+  width: 45%;
+}
+
+  .soundSettingsPanel h1{
+    margin-bottom: 0px;
+  }
+  .sliders-container{
+    width: 100%;
+  }
+  
+  .slider-value span{
+    width: 2ch;
+  }
+
+  .slider-container span{
+    font-size: 0.6em;
+  }
+  
+  .slider{
+    margin-left: 5px;
+    margin-right: 0px;
+  }
+  /*End Sound Settings Panel*/
+}
+
 /*Only devices that can hover*/
 @media (hover: hover) {
   #start-button:hover {
@@ -1813,6 +1913,11 @@ input[type=text] {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
   }
+}
 
-
+/* Hide mobile button for PC user */
+@media (hover: hover) and (pointer: fine) {
+  #mobileControls {
+    display: none;
+  }
 }
