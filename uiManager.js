@@ -223,7 +223,7 @@ export class UIManager {
     showPauseText() {
         if (!this.pauseText) {
             this.pauseText = add([
-                text("PAUSED", {
+                text("PAUSE", {
                     size: 64,
                     font: "orbitron",
                 }),

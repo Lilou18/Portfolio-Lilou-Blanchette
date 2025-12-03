@@ -38,10 +38,6 @@ export function level(k, dataLevel) {
             const scale = k.height() / map.height;
             map.scale = k.vec2(scale);
 
-            // Optionnel : centrer horizontalement
-            //const newWidth = map.width * scale;
-            //map.pos.x = (k.width() - newWidth) / 2;
-
             // Align the bottom of the map with the bottom of the screen
             const newHeight = map.height * scale;
             map.pos.y = k.height() - newHeight;

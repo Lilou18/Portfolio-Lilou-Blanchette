@@ -24,13 +24,6 @@ function checkOrientation() {
 
         if (!gameState.gameStarted) {
             k.go("intro");
-            console.log("Hello");
-            // k.go("level");
-            // k.play("backgroundMusic", {
-            //     volume: 0.5,
-            //     loop: true,
-            // });
-            // gameStarted = true;
         } else {
             gameState.removePauseFlag("portraitMode");
         }
@@ -85,10 +78,6 @@ k.scene("intro", () => {
 function startGame(startMenu) {
     k.go("level");
     soundManager.playBackgroundMusic();
-    // k.play("backgroundMusic", {
-    //     volume: 0.3,
-    //     loop: true,
-    // });
     gameState.gameStarted = true;
     startMenu.style.display = "none";
     stopProgressBarAnimation();
@@ -101,5 +90,4 @@ window.matchMedia("(orientation: portrait)").addEventListener("change", (event) 
 k.onLoad(() => {
     initWindowEvents();
     checkOrientation();
-    // k.go("level");
 });
