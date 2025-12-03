@@ -1,6 +1,7 @@
 import { GameManager } from "./gameManager.js";
 import { pauseAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
+import { orientationManager } from "./orientationManager.js";
 export function level(k, dataLevel) {
 
     //k.setCamPos(0, 0);
@@ -195,8 +196,9 @@ function setHologram(k, mapPositions) {
             });
         }
         else if (position.name === "citySign") {
+            const spriteName = orientationManager.isMobile ? "citySignMobile" : "citySign";
             const citySign = k.add([
-                k.sprite("citySign"),
+                k.sprite(spriteName),
                 k.area(),
                 k.anchor("bot"),
                 k.pos(position.x, position.y), // Initial position from Tiled

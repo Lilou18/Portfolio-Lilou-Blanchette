@@ -142,6 +142,20 @@ k.loadSprite("citySign", "./assets/citySign.png", {
     }
 });
 
+k.loadSprite("citySignMobile", "./assets/citySignMobile.png", {
+    sliceX: 17,
+    sliceY: 1,
+    anims: {
+        hologram: {
+            from: 0,
+            to: 16,
+            speed: 15,
+            loop: false,
+        }
+    }
+});
+
+
 
 
 k.loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");
