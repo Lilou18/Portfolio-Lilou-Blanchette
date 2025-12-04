@@ -1,7 +1,7 @@
 import { gameState } from "../gameState.js";
 
 export class Player {
-    constructor(k, posX, posY, speed, jumpForce, setUpCollisionsUI) {
+    constructor(k, posX, posY, speed, jumpForce) {
         this.k = k;
         this.speed = speed;
         this.scrollSpeed = this.speed * 7;
@@ -14,7 +14,7 @@ export class Player {
         this.originalPosX = posX;
         this.originalPosY = posY;
 
-        this.setUpCollisionsUI = setUpCollisionsUI;
+        // this.setUpCollisionsUI = setUpCollisionsUI;
 
         this.makePlayer(k, posX, posY);
         this.playerControls();
@@ -70,9 +70,9 @@ export class Player {
                 // this.scaledJumpForce = this.jumpForce * k.mapScale;
 
 
-                if (this.setUpCollisionsUI) {
-                    this.setUpCollisionsUI();
-                }
+                // if (this.setUpCollisionsUI) {
+                //     this.setUpCollisionsUI();
+                // }
             } else {
                 // If scaling info not available yet, check again next frame
                 k.wait(0.01, checkAndUpdate);

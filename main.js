@@ -36,18 +36,40 @@ k.scene("level", async () => {
 
     console.log("Initializing level...");
     // Initialize the level
-    level(k, levelDataJson);
+    level(k, levelDataJson, () => {
+        console.log("=== SCALING READY - CREATING PLAYER ===");
+        console.log("k.mapScale:", k.mapScale);
+        console.log("k.mapOffsetY:", k.mapOffsetY);
+
+        // Create the player AFTER scaling is initialized
+        let playerPosition = levelDataJson.layers[6].objects[0];
+        console.log("Creating player at:", playerPosition);
+
+        const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
+
+        gameState.player = player;
+        uiManager.setUpCollisionsUI();
+        
+
+        // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
+        //     console.log("Player created callback");
+        //     gameState.player = player;
+        //     uiManager.setUpCollisionsUI();
+        // });
+
+        console.log("=== LEVEL SCENE COMPLETE ===");
+    });
     console.log("Level initialized");
 
     // // Create the player
-    let playerPosition = levelDataJson.layers[6].objects[0];
-    console.log("Creating player at:", playerPosition);
-    debug.log("Creating player at:" + playerPosition.x + " " + playerPosition.y);
-    const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
-        console.log("Player created callback");
-        gameState.player = player;
-        uiManager.setUpCollisionsUI();
-    });
+    // let playerPosition = levelDataJson.layers[6].objects[0];
+    // console.log("Creating player at:", playerPosition);
+    // debug.log("Creating player at:" + playerPosition.x + " " + playerPosition.y);
+    // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
+    //     console.log("Player created callback");
+    //     gameState.player = player;
+    //     uiManager.setUpCollisionsUI();
+    // });
 
     // // Setup the camera
     // const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
@@ -61,11 +83,11 @@ k.scene("level", async () => {
 k.onLoad(async () => {
     await waitForAssets();
     console.log("All assets loaded!");
-    
+
     const loadingScreen = document.getElementById("loading-screen");
     if (loadingScreen) {
         loadingScreen.style.display = "none";
     }
-    
+
     k.go("level");
 });

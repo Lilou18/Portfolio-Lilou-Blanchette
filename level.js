@@ -2,7 +2,7 @@ import { GameManager } from "./gameManager.js";
 import { pauseAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { orientationManager } from "./orientationManager.js";
-export function level(k, dataLevel) {
+export function level(k, dataLevel, onScalingReady) {
 
     //k.setCamPos(0, 0);
     //let posTest = k.getCamPos();
@@ -34,6 +34,8 @@ export function level(k, dataLevel) {
 
     // k.mapScale = 1;
     // k.mapOffsetY = 0;
+
+    let scalingInitialized = false;
 
     k.onDraw(() => {
         if (map.width > 0 && map.height > 0) {
@@ -75,6 +77,14 @@ export function level(k, dataLevel) {
             // Store the current scale and map offset for other objects to use
             k.mapScale = scale;
             k.mapOffsetY = map.pos.y;
+
+            // Call the callback only once when scaling is first initialized
+            if (!scalingInitialized && onScalingReady) {
+                scalingInitialized = true;
+                console.log("Scaling initialized - calling callback");
+                // Use k.wait to ensure it's called in the next frame
+                k.wait(0, onScalingReady);
+            }
 
             const player = k.get("player")[0];
             if (player) {
