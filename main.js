@@ -135,14 +135,16 @@ k.scene("level", async () => {
         canvas.focus();
     }
 
-    const mobileControls = document.getElementById("mobileControls");
-    if (mobileControls && orientationManager.isMobile) {
-        mobileControls.style.display = "flex";
-    }
+
 
     // Load level data
     const levelData = await fetch("./map/level2.json");
     const levelDataJson = await levelData.json();
+
+    const mobileControls = document.getElementById("mobileControls");
+    if (mobileControls && orientationManager.isMobile) {
+        mobileControls.style.display = "flex";
+    }
 
     // Initialize the level
     level(k, levelDataJson);
@@ -182,7 +184,7 @@ function initEventListeners() {
         updateOverlayDisplay();
     });
 
-    document.addEventListener('fullscreenchange', () => {console.log("EVENT"); updateOverlayDisplay();});
+    document.addEventListener('fullscreenchange', () => { console.log("EVENT"); updateOverlayDisplay(); });
     document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
     document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
     document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
