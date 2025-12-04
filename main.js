@@ -28,16 +28,16 @@ k.scene("level", async () => {
         console.log("Mobile controls displayed");
     }
 
-    // console.log("Loading level data...");
-    // // Load level data
-    // const levelData = await fetch("./map/level2.json");
-    // const levelDataJson = await levelData.json();
-    // console.log("Level data loaded:", levelDataJson);
+    console.log("Loading level data...");
+    // Load level data
+    const levelData = await fetch("./map/level2.json");
+    const levelDataJson = await levelData.json();
+    console.log("Level data loaded:", levelDataJson);
 
-    // console.log("Initializing level...");
-    // // Initialize the level
-    // level(k, levelDataJson);
-    // console.log("Level initialized");
+    console.log("Initializing level...");
+    // Initialize the level
+    level(k, levelDataJson);
+    console.log("Level initialized");
 
     // // Create the player
     // let playerPosition = levelDataJson.layers[6].objects[0];
