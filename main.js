@@ -40,13 +40,13 @@ k.scene("level", async () => {
     console.log("Level initialized");
 
     // // Create the player
-    // let playerPosition = levelDataJson.layers[6].objects[0];
-    // console.log("Creating player at:", playerPosition);
-    // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
-    //     console.log("Player created callback");
-    //     gameState.player = player;
-    //     uiManager.setUpCollisionsUI();
-    // });
+    let playerPosition = levelDataJson.layers[6].objects[0];
+    console.log("Creating player at:", playerPosition);
+    const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
+        console.log("Player created callback");
+        gameState.player = player;
+        uiManager.setUpCollisionsUI();
+    });
 
     // // Setup the camera
     // const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
