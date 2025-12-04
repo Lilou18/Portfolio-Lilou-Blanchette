@@ -1,18 +1,20 @@
 import { gameState } from "../gameState.js";
 
 export class Player {
-    constructor(k, posX, posY, speed, jumpForce, setUpCollisionsUI) {
+    constructor(k, posX, posY, speed, jumpForce) {
+        this.k = k;
         this.speed = speed;
         this.scrollSpeed = this.speed * 7;
         this.isScrolling = false;
         this.scrollTimeout = null;
         this.jumpForce = jumpForce;
+        this.originalScale = 1
 
         // Store original position for scaling calculations
         this.originalPosX = posX;
         this.originalPosY = posY;
 
-        this.setUpCollisionsUI = setUpCollisionsUI;
+        // this.setUpCollisionsUI = setUpCollisionsUI;
 
         this.makePlayer(k, posX, posY);
         this.playerControls();
@@ -21,29 +23,29 @@ export class Player {
 
     // Create player gameObject with Kaplay
     makePlayer(k, posX, posY) {
-        this.initialPlayerPositionX = posX,
-            this.initialPlayerPositionY = posY,
-            this.gameObject = add([
-                sprite("player", { anim: "idle" }),
-                area({
-                    shape: new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(40, 220),
-                        vec2(-40, 220),
-                        vec2(-40, 100),
-                    ]),
-                    offset: vec2(0, 10),
-                }),
-                body(),
-                doubleJump(1),
-                anchor("top"),
-                pos(posX, posY),
-                color(),
-                z(10),
-                "player",
-            ]);
+        this.initialPlayerPositionX = posX;
+        this.initialPlayerPositionY = posY;
+        this.gameObject = k.add([
+            k.sprite("player", { anim: "idle" }),
+            k.area({
+                shape: new k.Polygon([
+                    k.vec2(-40, 0),
+                    k.vec2(40, 0),
+                    k.vec2(40, 100),
+                    k.vec2(40, 220),
+                    k.vec2(-40, 220),
+                    k.vec2(-40, 100),
+                ]),
+                offset: k.vec2(0, 10),
+            }),
+            k.body(),
+            k.doubleJump(1),
+            k.anchor("top"),
+            k.pos(posX, posY),
+            k.color(),
+            k.z(10),
+            "player",
+        ]);
 
         this.updateInitialPosition(k);
     }
@@ -68,12 +70,12 @@ export class Player {
                 // this.scaledJumpForce = this.jumpForce * k.mapScale;
 
 
-                if (this.setUpCollisionsUI) {
-                    this.setUpCollisionsUI();
-                }
+                // if (this.setUpCollisionsUI) {
+                //     this.setUpCollisionsUI();
+                // }
             } else {
                 // If scaling info not available yet, check again next frame
-                wait(0.01, checkAndUpdate);
+                k.wait(0.01, checkAndUpdate);
             }
         };
         checkAndUpdate();
@@ -184,13 +186,13 @@ export class Player {
                 }
 
                 // Reset player collider
-                this.gameObject.area.shape = new Polygon([
-                    vec2(-40, 0),
-                    vec2(40, 0),
-                    vec2(40, 100),
-                    vec2(40, 220),
-                    vec2(-40, 220),
-                    vec2(-40, 100),
+                this.gameObject.area.shape = new this.k.Polygon([
+                    this.k.vec2(-40, 0),
+                    this.k.vec2(40, 0),
+                    this.k.vec2(40, 100),
+                    this.k.vec2(40, 220),
+                    this.k.vec2(-40, 220),
+                    this.k.vec2(-40, 100),
                 ]);
             }
         });
@@ -202,30 +204,30 @@ export class Player {
                 // Is the player walking on the right
                 if (!this.gameObject.flipX) {
                     // Change collider shape when player is falling and walking to the right
-                    this.gameObject.area.shape = new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(15, 100),
-                        vec2(50, 215),
-                        vec2(10, 215),
-                        vec2(-15, 100),
-                        vec2(-40, 100),
+                    this.gameObject.area.shape = new this.k.Polygon([
+                        this.k.vec2(-40, 0),
+                        this.k.vec2(40, 0),
+                        this.k.vec2(40, 100),
+                        this.k.vec2(15, 100),
+                        this.k.vec2(50, 215),
+                        this.k.vec2(10, 215),
+                        this.k.vec2(-15, 100),
+                        this.k.vec2(-40, 100),
                     ]);
 
                 }
                 // The player is walking to the left
                 else {
                     // Change collider shape when player is falling and walking to the left
-                    this.gameObject.area.shape = new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(15, 100),
-                        vec2(-10, 215),
-                        vec2(-50, 215),
-                        vec2(-15, 100),
-                        vec2(-40, 100),
+                    this.gameObject.area.shape = new this.k.Polygon([
+                        this.k.vec2(-40, 0),
+                        this.k.vec2(40, 0),
+                        this.k.vec2(40, 100),
+                        this.k.vec2(15, 100),
+                        this.k.vec2(-10, 215),
+                        this.k.vec2(-50, 215),
+                        this.k.vec2(-15, 100),
+                        this.k.vec2(-40, 100),
                     ]);
 
                 }
@@ -233,7 +235,7 @@ export class Player {
             }
         });
 
-        onUpdate(() => {
+        this.k.onUpdate(() => {
             if (gameState.isGamePaused) {
                 if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
                     this.gameObject.play("idle");
@@ -287,24 +289,24 @@ export class Player {
             btnLeft.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = true;
-                btnLeft.style.color = rgb(8, 45, 103);
+                btnLeft.style.color = 'rgb(8, 45, 103)';
                 btnLeft.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnLeft.style.borderColor = rgb(8, 45, 103);
+                btnLeft.style.borderColor = 'rgb(8, 45, 103)';
             });
 
             btnLeft.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
-                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.color = 'rgb(0, 255, 255)';
                 btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnLeft.style.borderColor = rgb(0, 255, 255);
+                btnLeft.style.borderColor = 'rgb(0, 255, 255)';
             });
             btnLeft.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
-                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.color = 'rgb(0, 255, 255)';
                 btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnLeft.style.borderColor = rgb(0, 255, 255);
+                btnLeft.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
 
@@ -312,25 +314,25 @@ export class Player {
             btnRight.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = true;
-                btnRight.style.color = rgb(8, 45, 103);
+                btnRight.style.color = 'rgb(8, 45, 103)';
                 btnRight.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnRight.style.borderColor = rgb(8, 45, 103);
+                btnRight.style.borderColor = 'rgb(8, 45, 103)';
             });
 
             btnRight.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
-                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.color = 'rgb(0, 255, 255)';
                 btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnRight.style.borderColor = rgb(0, 255, 255);
+                btnRight.style.borderColor = 'rgb(0, 255, 255)';
             });
 
             btnRight.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
-                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.color = 'rgb(0, 255, 255)';
                 btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnRight.style.borderColor = rgb(0, 255, 255);
+                btnRight.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
 
@@ -342,26 +344,26 @@ export class Player {
                     this.mobileControls.jump = true;
                     // this.gameObject.jump(this.jumpForce);
                     // this.gameObject.play("jump");
-                    btnJump.style.color = rgb(8, 45, 103);
+                    btnJump.style.color = 'rgb(8, 45, 103)';
                     btnJump.style.background = 'rgba(0, 255, 255, 0.7)';
-                    btnJump.style.borderColor = rgb(8, 45, 103);
+                    btnJump.style.borderColor = 'rgb(8, 45, 103)';
                 }
             });
 
             btnJump.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.jump = false;
-                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.color = 'rgb(0, 255, 255)';
                 btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnJump.style.borderColor = rgb(0, 255, 255);
+                btnJump.style.borderColor = 'rgb(0, 255, 255)';
             });
 
             btnJump.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.jump = false;
-                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.color = 'rgb(0, 255, 255)';
                 btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnJump.style.borderColor = rgb(0, 255, 255);
+                btnJump.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
     }
