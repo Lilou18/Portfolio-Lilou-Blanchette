@@ -32,6 +32,9 @@ export function level(k, dataLevel) {
     let borderRight = null;
     let holograms = [];
 
+    k.mapScale = 1;
+    k.mapOffsetY = 0;
+
     k.onDraw(() => {
         if (map.width > 0 && map.height > 0) {
 
