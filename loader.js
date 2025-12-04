@@ -7,7 +7,7 @@ export const k = kaplay({
     height: 1080,
     stretch: true,
     letterbox: false,
-    pixelDensity: 2,
+    pixelDensity: 1,
     touchToMouse: true,
     //     //debug = false;
 });
