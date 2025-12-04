@@ -68,12 +68,18 @@ function isFullScreenOverlayDisplayed(overlay) {
         document.msFullscreenElement
     );;
 
-    if (!gameState.gameStarted && !isFullScreen) {
+    if (!isFullScreen) {
+        if (gameState.gameStarted) {
+            gameState.addPauseFlag("notFullScreen");
+        }
         overlay.style.display = "flex";
         fullScreenSection.style.display = "flex";
         return true;
     }
     else {
+        if (gameState.gameStarted) {
+            gameState.removePauseFlag("notFullScreen");
+        }
         fullScreenSection.style.display = "none";
         return false;
     }
