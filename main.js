@@ -249,10 +249,16 @@ function safeGo(sceneName) {
     }, 100);
 }
 
+k.scene("intro2", () => {
+    console.log("TEST");
+    k.go("level");
+});
+
 
 k.onLoad(() => {
-    initEventListeners();
-    initWindowEvents();
-    // setupFullScreenBtn();
-    updateOverlayDisplay();
+    k.go("intro2");
+    // initEventListeners();
+    // initWindowEvents();
+    // // setupFullScreenBtn();
+    // updateOverlayDisplay();
 });
