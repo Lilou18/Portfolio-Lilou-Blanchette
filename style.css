@@ -1666,8 +1666,8 @@ input[type=text] {
   }
 
   .character-display {
-    max-width: 0px;
-    max-height: 0px;
+    max-width: 120px;
+    max-height: 120px;
   }
 
   .big-circle {
@@ -1868,8 +1868,8 @@ input[type=text] {
   }
 
   .character-display {
-    max-width: 0px;
-    max-height: 0px;
+    max-width: 95px;
+    max-height: 95px;
   }
 
   :root {
