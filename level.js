@@ -157,7 +157,7 @@ function setHologram(k, mapPositions) {
         },
         hologramCV: {
             sprite: "cvHologram",
-            scale: 0.6,
+            scale: 1.2,
             yOffset: 10,
         },
         hologramContact: {
