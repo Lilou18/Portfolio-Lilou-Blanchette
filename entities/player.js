@@ -23,29 +23,29 @@ export class Player {
 
     // Create player gameObject with Kaplay
     makePlayer(k, posX, posY) {
-        this.initialPlayerPositionX = posX,
-            this.initialPlayerPositionY = posY,
-            this.gameObject = k.add([
-                k.sprite("player", { anim: "idle" }),
-                k.area({
-                    shape: new k.Polygon([
-                        k.vec2(-40, 0),
-                        k.vec2(40, 0),
-                        k.vec2(40, 100),
-                        k.vec2(40, 220),
-                        k.vec2(-40, 220),
-                        k.vec2(-40, 100),
-                    ]),
-                    offset: k.vec2(0, 10),
-                }),
-                k.body(),
-                k.doubleJump(1),
-                k.anchor("top"),
-                k.pos(posX, posY),
-                k.color(),
-                k.z(10),
-                "player",
-            ]);
+        this.initialPlayerPositionX = posX;
+        this.initialPlayerPositionY = posY;
+        this.gameObject = k.add([
+            k.sprite("player", { anim: "idle" }),
+            k.area({
+                shape: new k.Polygon([
+                    k.vec2(-40, 0),
+                    k.vec2(40, 0),
+                    k.vec2(40, 100),
+                    k.vec2(40, 220),
+                    k.vec2(-40, 220),
+                    k.vec2(-40, 100),
+                ]),
+                offset: k.vec2(0, 10),
+            }),
+            k.body(),
+            k.doubleJump(1),
+            k.anchor("top"),
+            k.pos(posX, posY),
+            k.color(),
+            k.z(10),
+            "player",
+        ]);
 
         this.updateInitialPosition(k);
     }
