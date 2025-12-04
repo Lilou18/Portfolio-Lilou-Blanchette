@@ -8,6 +8,7 @@ export class Player {
         this.isScrolling = false;
         this.scrollTimeout = null;
         this.jumpForce = jumpForce;
+        this.originalScale = 1
 
         // Store original position for scaling calculations
         this.originalPosX = posX;
@@ -288,24 +289,24 @@ export class Player {
             btnLeft.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = true;
-                btnLeft.style.color = rgb(8, 45, 103);
+                btnLeft.style.color = 'rgb(8, 45, 103)';
                 btnLeft.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnLeft.style.borderColor = rgb(8, 45, 103);
+                btnLeft.style.borderColor = 'rgb(8, 45, 103)';
             });
 
             btnLeft.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
-                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.color = 'rgb(0, 255, 255)';
                 btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnLeft.style.borderColor = rgb(0, 255, 255);
+                btnLeft.style.borderColor = 'rgb(0, 255, 255)';
             });
             btnLeft.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.left = false;
-                btnLeft.style.color = rgb(0, 255, 255);
+                btnLeft.style.color = 'rgb(0, 255, 255)';
                 btnLeft.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnLeft.style.borderColor = rgb(0, 255, 255);
+                btnLeft.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
 
@@ -313,25 +314,25 @@ export class Player {
             btnRight.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = true;
-                btnRight.style.color = rgb(8, 45, 103);
+                btnRight.style.color = 'rgb(8, 45, 103)';
                 btnRight.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnRight.style.borderColor = rgb(8, 45, 103);
+                btnRight.style.borderColor = 'rgb(8, 45, 103)';
             });
 
             btnRight.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
-                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.color = 'rgb(0, 255, 255)';
                 btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnRight.style.borderColor = rgb(0, 255, 255);
+                btnRight.style.borderColor = 'rgb(0, 255, 255)';
             });
 
             btnRight.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.right = false;
-                btnRight.style.color = rgb(0, 255, 255);
+                btnRight.style.color = 'rgb(0, 255, 255)';
                 btnRight.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnRight.style.borderColor = rgb(0, 255, 255);
+                btnRight.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
 
@@ -343,26 +344,26 @@ export class Player {
                     this.mobileControls.jump = true;
                     // this.gameObject.jump(this.jumpForce);
                     // this.gameObject.play("jump");
-                    btnJump.style.color = rgb(8, 45, 103);
+                    btnJump.style.color = 'rgb(8, 45, 103)';
                     btnJump.style.background = 'rgba(0, 255, 255, 0.7)';
-                    btnJump.style.borderColor = rgb(8, 45, 103);
+                    btnJump.style.borderColor = 'rgb(8, 45, 103)';
                 }
             });
 
             btnJump.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.mobileControls.jump = false;
-                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.color = 'rgb(0, 255, 255)';
                 btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnJump.style.borderColor = rgb(0, 255, 255);
+                btnJump.style.borderColor = 'rgb(0, 255, 255)';
             });
 
             btnJump.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this.mobileControls.jump = false;
-                btnJump.style.color = rgb(0, 255, 255);
+                btnJump.style.color = 'rgb(0, 255, 255)';
                 btnJump.style.background = 'rgba(8, 45, 103, 0.8)';
-                btnJump.style.borderColor = rgb(0, 255, 255);
+                btnJump.style.borderColor = 'rgb(0, 255, 255)';
             });
         }
     }
