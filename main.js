@@ -97,8 +97,8 @@ function updateOverlayDisplay() {
         if (!gameState.gameStarted && !isInIntro) {
             isInIntro = true;
             console.log("TRY TO GO INTO INTRO!");
-            safeGo("intro");
-            // k.go("intro");
+            // safeGo("intro");
+            k.go("intro");
         }
         return;
     }
@@ -109,27 +109,27 @@ function updateOverlayDisplay() {
     const needLandscape = isOrientationOverlayDisplayed(overlay);
     // console.log(needLandscape + " Land");
 
-    // const needFullScreen = isFullScreenOverlayDisplayed(overlay);
+    const needFullScreen = isFullScreenOverlayDisplayed(overlay);
     // console.log(needFullScreen + " Full");
 
     if (!needLandscape) {
 
         overlay.style.display = "none";
-        if (!gameState.gameStarted && !isInIntro) {
-            // k.go("intro");
-            isInIntro = true;
-            console.log("TRY TO GO INTO INTRO!");
-            safeGo("intro");
-        }
-        // if (!needFullScreen) {
-        //     // overlay.style.display = "none";
-        //     // if (!gameState.gameStarted && !isInIntro) {
-        //     //     // k.go("intro");
-        //     //     isInIntro = true;
-        //     //     console.log("TRY TO GO INTO INTRO!");
-        //     //     safeGo("intro");
-        //     // }
+        // if (!gameState.gameStarted && !isInIntro) {
+        //     k.go("intro");
+        //     isInIntro = true;
+        //     console.log("TRY TO GO INTO INTRO!");
+        //     // safeGo("intro");
         // }
+        if (!needFullScreen) {
+            overlay.style.display = "none";
+            if (!gameState.gameStarted && !isInIntro) {
+                k.go("intro");
+                isInIntro = true;
+                console.log("TRY TO GO INTO INTRO!");
+                //safeGo("intro");
+            }
+        }
     }
 }
 
@@ -214,7 +214,8 @@ function startGame(startMenu) {
 
     console.log("GOGOGOGO");
     console.log("TRY TO GO INTO LEVEL!");
-    safeGo("level");
+    // safeGo("level");
+    k.go("level");
     soundManager.playBackgroundMusic();
 
     setTimeout(() => {
@@ -235,25 +236,25 @@ function initEventListeners() {
     document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
 }
 
-let isSwitchingScene = false;
+// let isSwitchingScene = false;
 
-function safeGo(sceneName) {
-    if (isSwitchingScene) return;
+// function safeGo(sceneName) {
+//     if (isSwitchingScene) return;
 
-    isSwitchingScene = true;
-    k.go(sceneName);
+//     isSwitchingScene = true;
+//     k.go(sceneName);
 
-    // petit delay le temps que Kaboom initialise
-    setTimeout(() => {
-        isSwitchingScene = false;
-    }, 100);
-}
+//     // petit delay le temps que Kaboom initialise
+//     setTimeout(() => {
+//         isSwitchingScene = false;
+//     }, 100);
+// }
 
 
 k.onLoad(() => {
-    // initEventListeners();
-    // initWindowEvents();
-    // // setupFullScreenBtn();
-    // updateOverlayDisplay();
-    k.go("level");
+    initEventListeners();
+    initWindowEvents();
+    setupFullScreenBtn();
+    updateOverlayDisplay();
+    // k.go("level");
 });
