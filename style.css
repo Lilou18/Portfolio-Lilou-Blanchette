@@ -1412,8 +1412,8 @@ input[type=text] {
   .portfolio-body {
     grid-template-columns: 1fr;
   }
-  
-  .project-video{
+
+  .project-video {
     max-width: 1000px;
   }
 
@@ -1474,9 +1474,11 @@ input[type=text] {
   background-color: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
   display: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: all;
+  gap: 100px;
 }
 
 .rotate-device {
@@ -1485,6 +1487,7 @@ input[type=text] {
   align-items: center;
   justify-content: center;
   color: #00ffff;
+  border-bottom: 1px solid #00ffff;
 }
 
 .phone {
@@ -1505,12 +1508,13 @@ input[type=text] {
   text-align: center;
 }
 
-.rotate-device small {
+#overlay small {
   color: #87adf3;
   letter-spacing: 2px;
   font-size: 1em;
   animation: pulse 2s ease-in-out infinite;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 @keyframes rotate {
@@ -1561,6 +1565,31 @@ input[type=text] {
   50% {
     opacity: 0.5;
   }
+}
+
+.full-screen {
+  color: #00ffff;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-screen i {
+  margin-bottom: 40px;
+  font-size: 30px;
+}
+
+.fullscreen-btn {
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  letter-spacing: 2px;
+  font-size: 1em;
+  padding: 15px 15px;
+  border: 5px solid rgb(0, 255, 255);
+  border-radius: 12px;
+  background-color: rgb(8, 45, 103);
+  margin-bottom: 10px;
 }
 
 /* End Orientation overlay */
@@ -1851,30 +1880,33 @@ input[type=text] {
 }
 
 @media (max-width: 1150px) {
-  /*Sound Settings Panel*/
-.soundSettingsPanel{
-  width: 45%;
-}
 
-  .soundSettingsPanel h1{
+  /*Sound Settings Panel*/
+  .soundSettingsPanel {
+    width: 45%;
+  }
+
+  .soundSettingsPanel h1 {
     margin-bottom: 0px;
   }
-  .sliders-container{
+
+  .sliders-container {
     width: 100%;
   }
-  
-  .slider-value span{
+
+  .slider-value span {
     width: 2ch;
   }
 
-  .slider-container span{
+  .slider-container span {
     font-size: 0.6em;
   }
-  
-  .slider{
+
+  .slider {
     margin-left: 5px;
     margin-right: 0px;
   }
+
   /*End Sound Settings Panel*/
 }
 

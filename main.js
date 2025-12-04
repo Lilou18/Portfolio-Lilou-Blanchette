@@ -8,30 +8,118 @@ import { orientationManager } from "./orientationManager.js";
 import { stopProgressBarAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { initWindowEvents } from "./windowManager.js";
+import { openFullscreen } from "./windowManager.js";
 
-function checkOrientation() {
-    const overlay = document.getElementById("overlay");
+// function checkOrientation() {
+
+
+
+
+
+//     if (isPortrait && isMobile) {
+
+//         overlay.style.display = "flex";
+//         if (gameState.gameStarted) {
+//             gameState.addPauseFlag("portraitMode");
+//         }
+//     } else {
+
+//         if (!gameState.gameStarted) {
+//             k.go("intro");
+//         } else {
+//             gameState.removePauseFlag("portraitMode");
+//         }
+
+//         overlay.style.display = "none";
+//     }
+
+
+// }
+
+function isOrientationOverlayDisplayed(overlay) {
+    const portraitSection = document.getElementById("portraitSection");
     const isPortrait = orientationManager.isPortrait;
-    const isMobile = orientationManager.isMobile;
 
-    if (isPortrait && isMobile) {
+    if (isPortrait) {
 
         overlay.style.display = "flex";
+        portraitSection.style.display = "flex";
         if (gameState.gameStarted) {
             gameState.addPauseFlag("portraitMode");
         }
-    } else {
-
-        if (!gameState.gameStarted) {
-            k.go("intro");
-        } else {
+        return true;
+    }
+    else {
+        portraitSection.style.display = "none";
+        if (gameState.gameStarted) {
             gameState.removePauseFlag("portraitMode");
         }
-
-        overlay.style.display = "none";
+        return false;
     }
 
+}
 
+function isFullScreenOverlayDisplayed(overlay) {
+    const fullScreenSection = document.getElementById("fullScreenSection");
+    const isFullScreen = (
+        document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement
+    );;
+
+    if (!gameState.gameStarted && !isFullScreen) {
+        overlay.style.display = "flex";
+        fullScreenSection.style.display = "flex";
+        return true;
+    }
+    else {
+        fullScreenSection.style.display = "none";
+        return false;
+    }
+
+}
+
+function updateOverlayDisplay() {
+    console.log("updateOverlayDisplay");
+    const isMobile = orientationManager.isMobile;
+
+
+    if (!isMobile) {
+        if (!gameState.gameStarted) {
+            k.go("intro");
+        }
+        return;
+    }
+
+    console.log("TESTESTEST");
+    const overlay = document.getElementById("overlay");
+
+    const needLandscape = isOrientationOverlayDisplayed(overlay);
+    console.log(needLandscape + " Land");
+
+    const needFullScreen = isFullScreenOverlayDisplayed(overlay);
+    console.log(needFullScreen + " Full");
+
+    if (!needLandscape) {
+
+        if (!needFullScreen) {
+            overlay.style.display = "none";
+            if (!gameState.gameStarted) {
+                k.go("intro");
+            }
+        }
+    }
+}
+
+function setupFullScreenBtn() {
+    const fullScreenBtn = document.getElementById("fullscreenBtn");
+    fullScreenBtn.addEventListener("click", () => {
+        const elem = document.documentElement;
+        openFullscreen(elem);
+        // isFullScreen = true;
+        updateOverlayDisplay();
+    });
 }
 
 k.scene("level", async () => {
@@ -83,11 +171,20 @@ function startGame(startMenu) {
     stopProgressBarAnimation();
 }
 
-window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
-    checkOrientation();
-});
+function initEventListeners() {
+    window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
+        updateOverlayDisplay();
+    });
+
+    document.addEventListener('fullscreenchange', () => {console.log("EVENT"); updateOverlayDisplay();});
+    document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
+    document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
+    document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
+}
 
 k.onLoad(() => {
+    initEventListeners();
     initWindowEvents();
-    checkOrientation();
+    setupFullScreenBtn();
+    updateOverlayDisplay();
 });
