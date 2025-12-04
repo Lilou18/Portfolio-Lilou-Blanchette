@@ -165,3 +165,9 @@ k.loadSound("backgroundMusic", "sounds/funky-quirky-upbeat-commercial-music-3924
 k.loadSound("hitSFX", "sounds/soft-body-impact-295404.mp3");
 
 k.loadSound("collectibleSFX", "sounds/water-drip-45622.mp3");
+
+export function waitForAssets() {
+    return new Promise((resolve) => {
+        k.onLoad(resolve);
+    });
+}
