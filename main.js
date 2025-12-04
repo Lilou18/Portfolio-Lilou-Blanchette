@@ -49,7 +49,13 @@ k.scene("level", async () => {
 
         gameState.player = player;
         uiManager.setUpCollisionsUI();
-        
+
+        // Setup the camera
+        const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
+        const mapHeight = levelDataJson.height * levelDataJson.tileheight;
+        const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
+        console.log("Camera setup complete");
+        console.log("=== LEVEL SCENE COMPLETE ===");
 
         // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
         //     console.log("Player created callback");
