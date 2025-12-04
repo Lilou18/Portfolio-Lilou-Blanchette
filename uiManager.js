@@ -86,7 +86,7 @@ export class UIManager {
         const text = isMobile ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
         const textSize = isMobile ? 25 : 20;
 
-        const hologram = get(hologramTag)[0];
+        const hologram = k.get(hologramTag)[0];
         if (!hologram) return;
 
         const interactionText = k.add([
@@ -105,7 +105,7 @@ export class UIManager {
         this.interactionTexts[hologramTag] = interactionText;
 
         interactionText.onUpdate(() => {
-            const currentHologram = get(hologramTag)[0];
+            const currentHologram = k.get(hologramTag)[0];
             if (currentHologram) {
                 interactionText.pos.x = currentHologram.pos.x;
                 interactionText.pos.y = currentHologram.pos.y - 310;
@@ -222,38 +222,38 @@ export class UIManager {
 
     showPauseText() {
         if (!this.pauseText) {
-            this.pauseText = add([
-                text("PAUSE", {
+            this.pauseText = k.add([
+                k.text("PAUSE", {
                     size: 64,
                     font: "orbitron",
                 }),
-                pos(center()),
-                anchor("center"),
-                fixed(),
-                color(0, 255, 255),
-                z(100),
+                k.pos(k.center()),
+                k.anchor("center"),
+                k.fixed(),
+                k.color(0, 255, 255),
+                k.z(100),
             ]);
 
-            this.backgroundColor = add([
+            this.backgroundColor = k.add([
                 k.rect(350, 80, { radius: 8 }),
-                k.pos(center()),
+                k.pos(k.center()),
                 k.color(8, 45, 103),
-                anchor("center"),
+                k.anchor("center"),
                 k.opacity(0.7),
                 k.fixed(),
-                k.outline(4, rgb(0, 255, 255)),
-                z(99),
+                k.outline(4, k.rgb(0, 255, 255)),
+                k.z(99),
             ])
         }
     }
 
     hidePauseText() {
         if (this.pauseText) {
-            destroy(this.pauseText);
+            k.destroy(this.pauseText);
             this.pauseText = null;
         }
         if (this.backgroundColor) {
-            destroy(this.backgroundColor);
+            k.destroy(this.backgroundColor);
             this.backgroundColor = null;
         }
     }
