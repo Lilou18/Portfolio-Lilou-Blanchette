@@ -103,18 +103,33 @@ k.loadSprite("contactHologram", "./assets/hologramContact.png", {
     }
 });
 
-k.loadSprite("cvHologram", "./assets/hologramCV.png", {
-    sliceX: 19,
+// k.loadSprite("cvHologram", "./assets/hologramCV.png", {
+//     sliceX: 19,
+//     sliceY: 1,
+//     anims: {
+//         hologram: {
+//             from: 0,
+//             to: 18,
+//             speed: 15,
+//             loop: true,
+//         }
+//     }
+// });
+
+k.loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
+    sliceX: 9,
     sliceY: 1,
     anims: {
         hologram: {
             from: 0,
-            to: 18,
-            speed: 15,
+            to: 8,
+            speed: 6,
             loop: true,
         }
     }
 });
+
+
 
 k.loadSprite("collectible", "./assets/collectible.png", {
     sliceX: 31,
