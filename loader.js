@@ -7,7 +7,7 @@ export const k = kaplay({
     height: 1080,
     stretch: true,
     letterbox: false,
-    pixelDensity: 1,
+    pixelDensity: 2,
     touchToMouse: true,
     //     //debug = false;
 });
@@ -117,13 +117,13 @@ k.loadSprite("enemyVeryFast", "./assets/enemyRed.png", {
 // });
 
 k.loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
-    sliceX: 19,
+    sliceX: 9,
     sliceY: 1,
     anims: {
         hologram: {
             from: 0,
-            to: 18,
-            speed: 15,
+            to: 8,
+            speed: 8,
             loop: true,
         }
     }
