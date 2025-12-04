@@ -1868,8 +1868,8 @@ input[type=text] {
   }
 
   .character-display {
-    max-width: 95px;
-    max-height: 95px;
+    max-width: 0px;
+    max-height: 0px;
   }
 
   :root {
