@@ -36,6 +36,8 @@ import { openFullscreen } from "./windowManager.js";
 
 // }
 
+let isInIntro = false;
+
 function isOrientationOverlayDisplayed(overlay) {
     const portraitSection = document.getElementById("portraitSection");
     const isPortrait = orientationManager.isPortrait;
@@ -87,34 +89,47 @@ function isFullScreenOverlayDisplayed(overlay) {
 }
 
 function updateOverlayDisplay() {
-    console.log("updateOverlayDisplay");
+    // console.log("updateOverlayDisplay");
     const isMobile = orientationManager.isMobile;
 
 
     if (!isMobile) {
-        if (!gameState.gameStarted) {
-            k.go("intro");
+        if (!gameState.gameStarted && !isInIntro) {
+            isInIntro = true;
+            console.log("TRY TO GO INTO INTRO!");
+            safeGo("intro");
+            // k.go("intro");
         }
         return;
     }
 
-    console.log("TESTESTEST");
+    // console.log("TESTESTEST");
     const overlay = document.getElementById("overlay");
 
     const needLandscape = isOrientationOverlayDisplayed(overlay);
-    console.log(needLandscape + " Land");
+    // console.log(needLandscape + " Land");
 
-    const needFullScreen = isFullScreenOverlayDisplayed(overlay);
-    console.log(needFullScreen + " Full");
+    // const needFullScreen = isFullScreenOverlayDisplayed(overlay);
+    // console.log(needFullScreen + " Full");
 
     if (!needLandscape) {
 
-        if (!needFullScreen) {
-            overlay.style.display = "none";
-            if (!gameState.gameStarted) {
-                k.go("intro");
-            }
+        overlay.style.display = "none";
+        if (!gameState.gameStarted && !isInIntro) {
+            // k.go("intro");
+            isInIntro = true;
+            console.log("TRY TO GO INTO INTRO!");
+            safeGo("intro");
         }
+        // if (!needFullScreen) {
+        //     // overlay.style.display = "none";
+        //     // if (!gameState.gameStarted && !isInIntro) {
+        //     //     // k.go("intro");
+        //     //     isInIntro = true;
+        //     //     console.log("TRY TO GO INTO INTRO!");
+        //     //     safeGo("intro");
+        //     // }
+        // }
     }
 }
 
@@ -130,28 +145,34 @@ function setupFullScreenBtn() {
 
 k.scene("level", async () => {
 
+    console.log("=== LEVEL SCENE STARTING ===");
     const canvas = document.getElementById("gameCanvas");
     if (canvas) {
         canvas.focus();
     }
 
-
-
-    // Load level data
-    const levelData = await fetch("./map/level2.json");
-    const levelDataJson = await levelData.json();
-
     const mobileControls = document.getElementById("mobileControls");
     if (mobileControls && orientationManager.isMobile) {
         mobileControls.style.display = "flex";
+        console.log("Mobile controls displayed");
     }
 
+    console.log("Loading level data...");
+    // Load level data
+    const levelData = await fetch("./map/level2.json");
+    const levelDataJson = await levelData.json();
+    console.log("Level data loaded:", levelDataJson);
+
+    console.log("Initializing level...");
     // Initialize the level
     level(k, levelDataJson);
+    console.log("Level initialized");
 
     // Create the player
     let playerPosition = levelDataJson.layers[6].objects[0];
+    console.log("Creating player at:", playerPosition);
     const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670, () => {
+        console.log("Player created callback");
         gameState.player = player;
         uiManager.setUpCollisionsUI();
     });
@@ -160,6 +181,8 @@ k.scene("level", async () => {
     const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
     const mapHeight = levelDataJson.height * levelDataJson.tileheight;
     const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
+    console.log("Camera setup complete");
+    console.log("=== LEVEL SCENE COMPLETE ===");
 });
 
 k.scene("intro", () => {
@@ -167,16 +190,38 @@ k.scene("intro", () => {
     const startMenu = document.getElementById("start-menu");
     if (startButton && startMenu) {
         startMenu.style.display = "flex";
-        startButton.addEventListener("click", () => startGame(startMenu));
+        startButton.addEventListener("click", () => startGame(startMenu), { once: true });
     }
 });
 
 function startGame(startMenu) {
-    k.go("level");
-    soundManager.playBackgroundMusic();
+    if (gameState.gameStarted) {
+        return;
+    }
+    console.log("ONLY ONCE!");
     gameState.gameStarted = true;
+    // k.go("level");
+    // soundManager.playBackgroundMusic();
     startMenu.style.display = "none";
-    stopProgressBarAnimation();
+
+
+    try {
+        stopProgressBarAnimation();
+        console.log("Progress bar animation stopped");
+    } catch (error) {
+        console.error("Error stopping progress bar:", error);
+    }
+
+    console.log("GOGOGOGO");
+    console.log("TRY TO GO INTO LEVEL!");
+    safeGo("level");
+    soundManager.playBackgroundMusic();
+
+    setTimeout(() => {
+        console.log("Going to level scene...");
+        // k.go("level");
+        // soundManager.playBackgroundMusic();
+    }, 100);
 }
 
 function initEventListeners() {
@@ -184,15 +229,30 @@ function initEventListeners() {
         updateOverlayDisplay();
     });
 
-    document.addEventListener('fullscreenchange', () => { console.log("EVENT"); updateOverlayDisplay(); });
+    document.addEventListener('fullscreenchange', () => { updateOverlayDisplay(); });
     document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
     document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
     document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
 }
 
+let isSwitchingScene = false;
+
+function safeGo(sceneName) {
+    if (isSwitchingScene) return;
+
+    isSwitchingScene = true;
+    k.go(sceneName);
+
+    // petit delay le temps que Kaboom initialise
+    setTimeout(() => {
+        isSwitchingScene = false;
+    }, 100);
+}
+
+
 k.onLoad(() => {
     initEventListeners();
     initWindowEvents();
-    setupFullScreenBtn();
+    // setupFullScreenBtn();
     updateOverlayDisplay();
 });
