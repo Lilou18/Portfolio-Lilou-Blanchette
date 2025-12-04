@@ -114,7 +114,7 @@ function updateOverlayDisplay() {
 
     if (!needLandscape) {
 
-        overlay.style.display = "none";
+        // overlay.style.display = "none";
         // if (!gameState.gameStarted && !isInIntro) {
         //     k.go("intro");
         //     isInIntro = true;
