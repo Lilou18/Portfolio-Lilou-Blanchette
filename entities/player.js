@@ -2,6 +2,7 @@ import { gameState } from "../gameState.js";
 
 export class Player {
     constructor(k, posX, posY, speed, jumpForce, setUpCollisionsUI) {
+        this.k = k;
         this.speed = speed;
         this.scrollSpeed = this.speed * 7;
         this.isScrolling = false;
@@ -23,25 +24,25 @@ export class Player {
     makePlayer(k, posX, posY) {
         this.initialPlayerPositionX = posX,
             this.initialPlayerPositionY = posY,
-            this.gameObject = add([
-                sprite("player", { anim: "idle" }),
-                area({
-                    shape: new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(40, 220),
-                        vec2(-40, 220),
-                        vec2(-40, 100),
+            this.gameObject = k.add([
+                k.sprite("player", { anim: "idle" }),
+                k.area({
+                    shape: new k.Polygon([
+                        k.vec2(-40, 0),
+                        k.vec2(40, 0),
+                        k.vec2(40, 100),
+                        k.vec2(40, 220),
+                        k.vec2(-40, 220),
+                        k.vec2(-40, 100),
                     ]),
-                    offset: vec2(0, 10),
+                    offset: k.vec2(0, 10),
                 }),
-                body(),
-                doubleJump(1),
-                anchor("top"),
-                pos(posX, posY),
-                color(),
-                z(10),
+                k.body(),
+                k.doubleJump(1),
+                k.anchor("top"),
+                k.pos(posX, posY),
+                k.color(),
+                k.z(10),
                 "player",
             ]);
 
@@ -73,7 +74,7 @@ export class Player {
                 }
             } else {
                 // If scaling info not available yet, check again next frame
-                wait(0.01, checkAndUpdate);
+                k.wait(0.01, checkAndUpdate);
             }
         };
         checkAndUpdate();
@@ -184,13 +185,13 @@ export class Player {
                 }
 
                 // Reset player collider
-                this.gameObject.area.shape = new Polygon([
-                    vec2(-40, 0),
-                    vec2(40, 0),
-                    vec2(40, 100),
-                    vec2(40, 220),
-                    vec2(-40, 220),
-                    vec2(-40, 100),
+                this.gameObject.area.shape = new this.k.Polygon([
+                    this.k.vec2(-40, 0),
+                    this.k.vec2(40, 0),
+                    this.k.vec2(40, 100),
+                    this.k.vec2(40, 220),
+                    this.k.vec2(-40, 220),
+                    this.k.vec2(-40, 100),
                 ]);
             }
         });
@@ -202,30 +203,30 @@ export class Player {
                 // Is the player walking on the right
                 if (!this.gameObject.flipX) {
                     // Change collider shape when player is falling and walking to the right
-                    this.gameObject.area.shape = new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(15, 100),
-                        vec2(50, 215),
-                        vec2(10, 215),
-                        vec2(-15, 100),
-                        vec2(-40, 100),
+                    this.gameObject.area.shape = new this.k.Polygon([
+                        this.k.vec2(-40, 0),
+                        this.k.vec2(40, 0),
+                        this.k.vec2(40, 100),
+                        this.k.vec2(15, 100),
+                        this.k.vec2(50, 215),
+                        this.k.vec2(10, 215),
+                        this.k.vec2(-15, 100),
+                        this.k.vec2(-40, 100),
                     ]);
 
                 }
                 // The player is walking to the left
                 else {
                     // Change collider shape when player is falling and walking to the left
-                    this.gameObject.area.shape = new Polygon([
-                        vec2(-40, 0),
-                        vec2(40, 0),
-                        vec2(40, 100),
-                        vec2(15, 100),
-                        vec2(-10, 215),
-                        vec2(-50, 215),
-                        vec2(-15, 100),
-                        vec2(-40, 100),
+                    this.gameObject.area.shape = new this.k.Polygon([
+                        this.k.vec2(-40, 0),
+                        this.k.vec2(40, 0),
+                        this.k.vec2(40, 100),
+                        this.k.vec2(15, 100),
+                        this.k.vec2(-10, 215),
+                        this.k.vec2(-50, 215),
+                        this.k.vec2(-15, 100),
+                        this.k.vec2(-40, 100),
                     ]);
 
                 }
@@ -233,7 +234,7 @@ export class Player {
             }
         });
 
-        onUpdate(() => {
+        this.k.onUpdate(() => {
             if (gameState.isGamePaused) {
                 if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
                     this.gameObject.play("idle");
