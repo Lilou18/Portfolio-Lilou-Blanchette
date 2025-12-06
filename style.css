@@ -34,7 +34,7 @@ html {
   background: linear-gradient(0.25turn, #082d67, #00ffff, #082d67);
   /* background: linear-gradient(180deg, #00ffff, rgb(8, 45, 103), #00ffff); */
   /* animation: borderGlow 3s infinite; */
-
+  overflow: hidden;
 
 }
 
@@ -50,7 +50,7 @@ html {
   border: 5px solid #00ffff;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 30px;
+  padding: clamp(2px, 2vh, 30px);
   overflow: hidden;
   animation: pulse-glow 2s infinite alternate;
 }
@@ -77,7 +77,9 @@ html {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: clamp(5px, calc(100vh - 450px), 30px);
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* Left Panel Start Menu*/
@@ -90,6 +92,8 @@ html {
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   padding: 2px;
   /* min-width: 0; */
+  min-height: 0;
+  overflow: hidden;
 }
 
 .menu-left-panel {
@@ -100,13 +104,15 @@ html {
   background-color: rgb(6, 27, 60);
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   overflow: hidden;
+  min-height: 0;
 }
 
 .character-display-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
+  padding-top: clamp(2px, 2vh, 30px);
+  flex-shrink: 1;
 }
 
 .character-display {
@@ -114,22 +120,39 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vw;
+  /* width: 100vw;
+  height: 100vw; */
+  width: clamp(50px, 20vh, 250px);
+  aspect-ratio: 1 / 1;
   max-width: 250px;
   max-height: 250px;
   /* margin: 0 auto 20px; */
 }
 
+/* .character-display {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: clamp(1px, 20vh, 250px);
+  aspect-ratio: 1 / 1;
+  
+} */
+
+.character-display img,
+.big-circle,
 .big-big-circle {
+  position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.big-big-circle {
   border: 5px solid rgba(255, 255, 255, 0);
-  border-left: 5px solid #4450b6;
-  border-bottom: 5px solid #4450b6;
+  border-left: clamp(3px, calc(100vh - 450px), 5px) solid #4450b6;
+  border-bottom: clamp(3px, calc(100vh - 450px), 5px) solid #4450b6;
   border-radius: 50%;
   animation: spin 10s linear infinite;
-
 }
 
 .big-circle {
@@ -137,8 +160,8 @@ html {
   width: 87%;
   height: 87%;
   border: 5px solid rgba(255, 255, 255, 0);
-  border-top: 5px solid #f6ff00;
-  border-bottom: 5px solid #f6ff00;
+  border-top: clamp(3px, calc(100vh - 450px), 5px) solid #f6ff00;
+  border-bottom: clamp(3px, calc(100vh - 450px), 5px) solid #f6ff00;
   border-radius: 50%;
   animation: spin 5s reverse infinite;
 }
@@ -193,13 +216,15 @@ html {
 .progress-bar-container {
   display: flex;
   align-items: center;
-  margin: 20px 20px 0px 20px;
+  margin: clamp(5px, calc(100vh - 450px), 20px) clamp(10px, 1vw, 20px) 0px clamp(10px, 1vw, 20px);
+  flex-shrink: 0;
+  /* margin: 20px 20px 0px 20px; */
 }
 
 .progress-label {
   letter-spacing: 1px;
   padding-right: 5px;
-  font-size: 1em;
+  font-size: clamp(0.6em, 1.5vh, 1em);
 
 }
 
@@ -208,7 +233,8 @@ html {
   flex: 1;
   background-color: #43444383;
   border: 1px solid #00ffff;
-  height: 30px;
+  /* height: 30px; */
+  height: clamp(15px, calc(100vh - 450px), 30px);
 
 }
 
@@ -219,6 +245,8 @@ html {
 .stats-container {
   display: flex;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .stats-grid {
@@ -227,21 +255,23 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 10px;
-  margin: 20px;
+  gap: clamp(5px, 1vh, 10px);
+  margin: clamp(5px, 1vh, 20px) clamp(10px, 1vw, 20px);
   letter-spacing: 2px;
+  min-height: 0;
 }
 
 .stat-item {
-  font-size: 1em;
+  font-size: clamp(0.6em, 1.5vh, 1em);
   border: 1px solid rgb(0, 255, 255);
-  padding: 20px;
+  padding: clamp(5px, 1vh, 20px);
   background-color: rgb(3, 12, 27);
+  min-height: 0;
+  overflow: hidden;
 }
 
 .stat-value {
   display: block;
-  font-size: 1em;
   font-weight: bold;
   color: white;
   text-shadow: 0px 0px 10px white;
@@ -258,9 +288,7 @@ html {
   display: flex;
   gap: 20px;
   justify-content: center;
-  overflow: hidden;
-  margin-top: 20px;
-  padding-bottom: 5px;
+  margin-top: clamp(6px, calc(100vh - 450px), 20px);
 }
 
 .hot-chocolat {
@@ -294,14 +322,25 @@ html {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 0;
 }
 
+.console-panel-container,
 .graph-panel-container {
   position: relative;
   background-color: rgb(0, 255, 255);
   clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   padding: 2px;
+  min-height: 0;
+  overflow: hidden;
 }
+
+/* .graph-panel-container {
+  position: relative;
+  background-color: rgb(0, 255, 255);
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  padding: 2px;
+} */
 
 .graph-panel {
   display: flex;
@@ -427,9 +466,9 @@ html {
   margin: auto;
   font-family: "Orbitron", sans-serif;
   letter-spacing: 2px;
-  font-size: 20px;
-  padding: 20px 20px;
-  border: 5px solid rgb(0, 255, 255);
+  font-size: clamp(0.8rem, 2vh, 1rem);
+  padding: clamp(5px, 1.5vh, 20px) clamp(10px, 1.5vw, 20px);
+  border: clamp(2px, 0.5vh, 5px) solid rgb(0, 255, 255);
   border-radius: 12px;
   background-color: rgb(8, 45, 103);
   color: rgb(0, 255, 255);
@@ -455,12 +494,8 @@ html {
 
 /* https://www.freecodecamp.org/news/apply-borders-to-clip-paths-with-css/ */
 .console-panel-container {
-  position: relative;
   display: flex;
   flex: 1;
-  background-color: rgb(0, 255, 255);
-  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-  padding: 2px;
 }
 
 .console-panel {
@@ -1618,7 +1653,7 @@ input[type=text] {
     --pixelSize: 0.3;
   }
 
-  .start-menu {
+  /* .start-menu {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -1749,7 +1784,7 @@ input[type=text] {
     50% {
       height: 40px;
     }
-  }
+  } */
 
   /*End Start Menu*/
 
@@ -1809,7 +1844,7 @@ input[type=text] {
 @media (max-height: 400px) {
 
   /*Start Menu*/
-  .graph-panel {
+  /* .graph-panel {
     padding: 0px 10px 10px 5px;
   }
 
@@ -1873,7 +1908,7 @@ input[type=text] {
   .character-display {
     max-width: 95px;
     max-height: 95px;
-  }
+  } */
 
   :root {
     --pixelSize: 0.2;
