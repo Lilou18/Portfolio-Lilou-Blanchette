@@ -78,7 +78,8 @@ function updateOverlayDisplay() {
 
     const needLandscape = isOrientationOverlayDisplayed(overlay);
 
-    const needFullScreen = isFullScreenOverlayDisplayed(overlay);
+    // const needFullScreen = isFullScreenOverlayDisplayed(overlay);
+    const needFullScreen = false;
 
     if (!needLandscape) {
 
@@ -171,10 +172,10 @@ function initEventListeners() {
         updateOverlayDisplay();
     });
 
-    document.addEventListener('fullscreenchange', () => { updateOverlayDisplay(); });
-    document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
-    document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
-    document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
+    // document.addEventListener('fullscreenchange', () => { updateOverlayDisplay(); });
+    // document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
+    // document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
+    // document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
 }
 
 k.onLoad(() => {
