@@ -4,7 +4,7 @@ import { Player } from "./entities/player.js";
 import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
-import { deviceInfo } from "./orientationManager.js";
+import { deviceInfo } from "./deviceInfo.js";
 import { stopProgressBarAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { initWindowEvents } from "./windowManager.js";
@@ -36,6 +36,8 @@ function isOrientationOverlayDisplayed(overlay) {
 }
 
 function isFullScreenOverlayDisplayed(overlay) {
+    if (deviceInfo.isIOS) return false;
+
     const fullScreenSection = document.getElementById("fullScreenSection");
     const isFullScreen = (
         document.fullscreenElement ||
@@ -95,12 +97,15 @@ function updateOverlayDisplay() {
 }
 
 function setupFullScreenBtn() {
-    const fullScreenBtn = document.getElementById("fullscreenBtn");
-    fullScreenBtn.addEventListener("click", () => {
-        const elem = document.documentElement;
-        openFullscreen(elem);
-        updateOverlayDisplay();
-    });
+    if (!deviceInfo.isIOS) {
+        const fullScreenBtn = document.getElementById("fullscreenBtn");
+        fullScreenBtn.addEventListener("click", () => {
+            const elem = document.documentElement;
+            openFullscreen(elem);
+            updateOverlayDisplay();
+        });
+    }
+
 }
 
 k.scene("level", async () => {
@@ -120,7 +125,7 @@ k.scene("level", async () => {
     // Load level data
     const levelData = await fetch("./map/level2.json");
     const levelDataJson = await levelData.json();
-   
+
     // Initialize the level
     level(k, levelDataJson, () => {
         // Create the player
@@ -151,7 +156,7 @@ function startGame(startMenu) {
     if (gameState.gameStarted) {
         return;
     }
-    
+
     gameState.gameStarted = true;
     startMenu.style.display = "none";
 
@@ -171,10 +176,14 @@ function initEventListeners() {
         updateOverlayDisplay();
     });
 
-    document.addEventListener('fullscreenchange', () => { updateOverlayDisplay(); });
-    document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
-    document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
-    document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
+    if (!deviceInfo.isIOS) {
+        document.addEventListener('fullscreenchange', () => { updateOverlayDisplay(); });
+        document.addEventListener('mozfullscreenchange', updateOverlayDisplay);
+        document.addEventListener('MSFullscreenChange', updateOverlayDisplay);
+        document.addEventListener('webkitfullscreenchange', updateOverlayDisplay);
+    }
+
+
 }
 
 k.onLoad(() => {

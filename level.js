@@ -1,7 +1,7 @@
 import { GameManager } from "./gameManager.js";
 import { pauseAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
-import { deviceInfo } from "./orientationManager.js";
+import { deviceInfo } from "./deviceInfo.js";
 export function level(k, dataLevel, onScalingReady) {
 
     //k.setCamPos(0, 0);

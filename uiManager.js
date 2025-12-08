@@ -1,6 +1,6 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
-import { deviceInfo } from "./orientationManager.js";
+import { deviceInfo } from "./deviceInfo.js";
 
 // Manages user interface interactions and display
 export class UIManager {
