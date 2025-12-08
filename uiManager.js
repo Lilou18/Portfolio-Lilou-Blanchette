@@ -1,6 +1,6 @@
 import { gameState } from "./gameState.js";
 import { k } from "./loader.js"
-import { orientationManager } from "./orientationManager.js";
+import { deviceInfo } from "./orientationManager.js";
 
 // Manages user interface interactions and display
 export class UIManager {
@@ -82,7 +82,7 @@ export class UIManager {
     createInteractionText(hologramTag) {
         this.removeInteractionText(hologramTag);
 
-        const isMobile = orientationManager.isMobile;
+        const isMobile = deviceInfo.isMobile;
         const text = isMobile ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
         const textSize = isMobile ? 25 : 20;
 

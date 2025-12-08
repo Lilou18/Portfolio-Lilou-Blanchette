@@ -4,7 +4,7 @@ import { Player } from "./entities/player.js";
 import { Camera } from "./Camera.js";
 import { gameState } from "./gameState.js";
 import { uiManager } from "./uiManager.js";
-import { orientationManager } from "./orientationManager.js";
+import { deviceInfo } from "./orientationManager.js";
 import { stopProgressBarAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { initWindowEvents } from "./windowManager.js";
@@ -14,7 +14,7 @@ let isInIntro = false;
 
 function isOrientationOverlayDisplayed(overlay) {
     const portraitSection = document.getElementById("portraitSection");
-    const isPortrait = orientationManager.isPortrait;
+    const isPortrait = deviceInfo.isPortrait;
 
     if (isPortrait) {
 
@@ -63,7 +63,7 @@ function isFullScreenOverlayDisplayed(overlay) {
 }
 
 function updateOverlayDisplay() {
-    const isMobile = orientationManager.isMobile;
+    const isMobile = deviceInfo.isMobile;
 
 
     if (!isMobile) {
@@ -112,7 +112,7 @@ k.scene("level", async () => {
     }
 
     const mobileControls = document.getElementById("mobileControls");
-    if (mobileControls && orientationManager.isMobile) {
+    if (mobileControls && deviceInfo.isMobile) {
         mobileControls.style.display = "flex";
     }
 

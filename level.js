@@ -1,7 +1,7 @@
 import { GameManager } from "./gameManager.js";
 import { pauseAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
-import { orientationManager } from "./orientationManager.js";
+import { deviceInfo } from "./orientationManager.js";
 export function level(k, dataLevel, onScalingReady) {
 
     //k.setCamPos(0, 0);
@@ -166,7 +166,7 @@ function setHologram(k, mapPositions) {
             yOffset: 10,
         },
         citySign: {
-            sprite: orientationManager.isMobile ? "citySignMobile" : "citySign",
+            sprite: deviceInfo.isMobile ? "citySignMobile" : "citySign",
             scale: 1,
             yOffset: 0,
         },
