@@ -1709,6 +1709,33 @@ input[type=text] {
     --pixelSize: 0.3;
   }
 
+  .nav-browser {
+    height: 30px;
+  }
+
+  .dot-point {
+    height: 10px;
+    width: 10px;
+  }
+
+  .small-dot-point {
+    height: 6px;
+    width: 6px;
+  }
+
+  input[type=text] {
+    height: 15px;
+    width: 15px;
+    font-size: 0.8em;
+    margin: 20px;
+  }
+
+  .nav-btn {
+    height: 20px;
+    width: 20px;
+    font-size: 0.9em;
+  }
+
   /*Sound Settings Panel*/
   /* .right-corner-btn {
     padding: 7px;
