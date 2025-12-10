@@ -15,8 +15,8 @@ export const k = kaplay({
 k.loadSprite("level", "./map/level2.png");
 
 k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {
-    sliceX: 28,
-    sliceY: 1,
+    sliceX: 6,
+    sliceY: 5,
     anims: {
         idle: 17,
         run: {

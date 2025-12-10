@@ -92,6 +92,8 @@ export class Player {
             space: false
         };
 
+        let isJumping = false;
+
         // Event to control player movement
         window.addEventListener('keydown', (e) => {
             const key = e.key.toLowerCase();
@@ -99,7 +101,10 @@ export class Player {
             if (key === 'arrowright') keysPressed.right = true;
             if (key === 'a') keysPressed.a = true;
             if (key === 'd') keysPressed.d = true;
-            if (key === ' ') keysPressed.space = true;
+            if (key === ' '){
+                keysPressed.space = true;
+                isJumping = false;
+            } 
         });
 
         // Event to ensure that released keys are properly registered
@@ -109,7 +114,11 @@ export class Player {
             if (key === 'arrowright') keysPressed.right = false;
             if (key === 'a') keysPressed.a = false;
             if (key === 'd') keysPressed.d = false;
-            if (key === ' ') keysPressed.space = false;
+            if (key === ' '){
+                keysPressed.space = false;
+                isJumping = false;
+
+            }
         });
 
         // Pause the game when the window is no longer the focus
@@ -181,8 +190,9 @@ export class Player {
                 const rightPressed = keysPressed.right || keysPressed.d || this.mobileControls.right;
                 const isMoving = leftPressed || rightPressed || this.isScrolling;
 
-                if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
+                if (!isMoving && this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded() && !isJumping) {
                     this.gameObject.play("idle");
+                    isJumping = true;
                 }
 
                 // Reset player collider
@@ -200,6 +210,61 @@ export class Player {
         this.gameObject.onFall(() => {
             if (!gameState.isGamePaused && this.gameObject.curAnim() !== "fall") {
                 this.gameObject.play("fall");
+
+                // // Is the player walking on the right
+                // if (!this.gameObject.flipX) {
+                //     // Change collider shape when player is falling and walking to the right
+                //     this.gameObject.area.shape = new this.k.Polygon([
+                //         this.k.vec2(-40, 0),
+                //         this.k.vec2(40, 0),
+                //         this.k.vec2(40, 100),
+                //         this.k.vec2(15, 100),
+                //         this.k.vec2(50, 215),
+                //         this.k.vec2(10, 215),
+                //         this.k.vec2(-15, 100),
+                //         this.k.vec2(-40, 100),
+                //     ]);
+
+                // }
+                // // The player is walking to the left
+                // else {
+                //     // Change collider shape when player is falling and walking to the left
+                //     this.gameObject.area.shape = new this.k.Polygon([
+                //         this.k.vec2(-40, 0),
+                //         this.k.vec2(40, 0),
+                //         this.k.vec2(40, 100),
+                //         this.k.vec2(15, 100),
+                //         this.k.vec2(-10, 215),
+                //         this.k.vec2(-50, 215),
+                //         this.k.vec2(-15, 100),
+                //         this.k.vec2(-40, 100),
+                //     ]);
+
+                // }
+
+            }
+        });
+
+        this.k.onUpdate(() => {
+            if (gameState.isGamePaused) {
+                if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
+                    this.gameObject.play("idle");
+                }
+                return;
+            }
+
+            // Check if the player should move
+            const leftPressed = keysPressed.left || keysPressed.a || this.mobileControls.left;
+            const rightPressed = keysPressed.right || keysPressed.d || this.mobileControls.right;
+
+            if (leftPressed) {
+                moveLeft(this.speed);
+            }
+            if (rightPressed) {
+                moveRight(this.speed);
+            }
+            
+            if (!gameState.isGamePaused && this.gameObject.curAnim() === "fall") {
 
                 // Is the player walking on the right
                 if (!this.gameObject.flipX) {
@@ -233,33 +298,13 @@ export class Player {
                 }
 
             }
-        });
-
-        this.k.onUpdate(() => {
-            if (gameState.isGamePaused) {
-                if (this.gameObject.curAnim() !== "idle" && this.gameObject.isGrounded()) {
-                    this.gameObject.play("idle");
-                }
-                return;
-            }
-
-            // Check if the player should move
-            const leftPressed = keysPressed.left || keysPressed.a || this.mobileControls.left;
-            const rightPressed = keysPressed.right || keysPressed.d || this.mobileControls.right;
-
-            if (leftPressed) {
-                moveLeft(this.speed);
-            }
-            if (rightPressed) {
-                moveRight(this.speed);
-            }
 
             // Player jump
             if ((keysPressed.space || this.mobileControls.jump) && this.gameObject.isGrounded()) {
                 this.gameObject.jump(this.jumpForce);
                 this.gameObject.play("jump");
                 // We don't want double jump
-                keysPressed.space = false;
+                // keysPressed.space = false;
             }
 
             const isMoving = leftPressed || rightPressed || this.isScrolling;
