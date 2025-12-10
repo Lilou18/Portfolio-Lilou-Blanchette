@@ -1877,6 +1877,11 @@ input[type=text] {
     background: rgba(0, 255, 255, 0.8);
   }
 
+  .cv-icons:hover {
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
   .project-link:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
