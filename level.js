@@ -4,6 +4,7 @@ import { soundManager } from "./soundManager.js";
 import { deviceInfo } from "./deviceInfo.js";
 export function level(k, dataLevel, onScalingReady) {
 
+    debug.inspect = true
     //k.setCamPos(0, 0);
     //let posTest = k.getCamPos();
     //console.log(posTest);
@@ -38,7 +39,7 @@ export function level(k, dataLevel, onScalingReady) {
     let scalingInitialized = false;
 
     k.onDraw(() => {
-        if (map.width > 0 && map.height > 0) {
+        if (map.width > 0 && map.height > 0 && !scalingInitialized) {
 
             const scale = k.height() / map.height;
             map.scale = k.vec2(scale);
