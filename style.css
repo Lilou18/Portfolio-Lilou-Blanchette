@@ -246,7 +246,7 @@ html {
 .stats-container {
   display: flex;
   flex: 1;
-  min-height: 0;
+ 
   overflow: hidden;
   max-height: clamp(150px, 25vh, 550px);
 }
@@ -260,7 +260,7 @@ html {
   gap: clamp(5px, 1vh, 10px);
   margin: clamp(5px, 1vh, 20px) clamp(10px, 1vw, 20px);
   letter-spacing: 2px;
-  min-height: 0;
+
 }
 
 .stat-item {
@@ -268,7 +268,7 @@ html {
   border: 1px solid rgb(0, 255, 255);
   padding: clamp(5px, 1vh, 20px);
   background-color: rgb(3, 12, 27);
-  min-height: 0;
+  
   overflow: hidden;
   display: flex;
   flex-direction: column;
