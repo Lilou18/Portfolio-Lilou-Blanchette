@@ -4,7 +4,6 @@ import { soundManager } from "./soundManager.js";
 import { deviceInfo } from "./deviceInfo.js";
 export function level(k, dataLevel, onScalingReady) {
 
-    debug.inspect = true
     //k.setCamPos(0, 0);
     //let posTest = k.getCamPos();
     //console.log(posTest);
