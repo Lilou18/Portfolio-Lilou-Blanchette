@@ -117,7 +117,8 @@ k.scene("level", async () => {
     }
 
     const mobileControls = document.getElementById("mobileControls");
-    if (mobileControls && deviceInfo.isMobile) {
+    if (mobileControls && (deviceInfo.isMobile || deviceInfo.isTouchEnabled)) {
+        console.log(deviceInfo.isTouchEnabled);
         mobileControls.style.display = "flex";
     }
 
