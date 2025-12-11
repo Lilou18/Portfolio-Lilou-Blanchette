@@ -12,7 +12,11 @@ export const k = kaplay({
     //     //debug = false;
 });
 
-k.loadSprite("level", "./map/level2.png");
+k.loadSprite("levelP1", "./map/levelP1.png");
+
+k.loadSprite("levelP2", "./map/levelP2.png");
+
+k.loadSprite("levelP3", "./map/levelP3.png");
 
 k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {
     sliceX: 6,

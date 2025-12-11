@@ -13,7 +13,11 @@ export function level(k, dataLevel, onScalingReady) {
 
     const levelLayers = dataLevel.layers;
 
-    const map = k.add([k.pos(0, 0), k.sprite("level")]);
+    const mapPart1 = k.add([k.pos(0, 0), k.sprite("levelP1")]);
+    const mapPart2 = k.add([k.pos(2176, 0), k.sprite("levelP2")]);
+    const mapPart3 = k.add([k.pos(4352, 0), k.sprite("levelP3")]);
+
+    const mapParts = [mapPart1, mapPart2, mapPart3];
 
     const colliders = [];
     for (const layer of levelLayers) {
@@ -39,14 +43,27 @@ export function level(k, dataLevel, onScalingReady) {
     let scalingInitialized = false;
 
     k.onDraw(() => {
-        if (map.width > 0 && map.height > 0 && !scalingInitialized) {
+        // if (map.width > 0 && map.height > 0 && !scalingInitialized) {
+        if (mapPart1.height > 0 && mapPart2.height > 0 && mapPart3.height && !scalingInitialized) {
 
-            const scale = k.height() / map.height;
-            map.scale = k.vec2(scale);
+            const scale = k.height() / mapPart1.height;
+
+            mapParts.forEach((part, index) => {
+                part.scale = k.vec2(scale);
+                // Adjust the position with the new scale
+                part.pos.x = (index * 2176) * scale;
+
+                // Align the bottom of the map with the bottom of the screen
+                part.pos.y = k.height() - (part.height * scale);
+            });
+
+            const newHeight = mapPart1.height * scale;
+            const mapOffsetY = k.height() - newHeight;
+            // map.scale = k.vec2(scale);
 
             // Align the bottom of the map with the bottom of the screen
-            const newHeight = map.height * scale;
-            map.pos.y = k.height() - newHeight;
+            // const newHeight = map.height * scale;
+            // map.pos.y = k.height() - newHeight;
 
             const scaledMapWidth = mapWidth * scale;
             const scaledMapHeight = mapHeight * scale;
@@ -68,16 +85,17 @@ export function level(k, dataLevel, onScalingReady) {
 
             if (holograms) {
                 // Update hologram positions
-                updateHologramPositions(k, holograms, scale, map.pos.y);
+                updateHologramPositions(k, holograms, scale, mapOffsetY);
 
             }
             if (gameManager) {
-                gameManager.updateScale(scale, map.pos.y);
+                gameManager.updateScale(scale, mapOffsetY);
             }
 
             // Store the current scale and map offset for other objects to use
             k.mapScale = scale;
-            k.mapOffsetY = map.pos.y;
+            k.mapOffsetY = mapOffsetY;
+            // k.mapOffsetY = map.pos.y;
 
             // Call the callback only once when scaling is first initialized
             if (!scalingInitialized && onScalingReady) {
@@ -96,7 +114,7 @@ export function level(k, dataLevel, onScalingReady) {
 
     });
 
-    setMapColliders(k, map, colliders);
+    setMapColliders(k, mapPart1, colliders);
     // Create borders and store references
     const borders = setMapBorders(k, dataLevel.tilewidth, mapHeight, mapWidth);
     borderLeft = borders.left;
@@ -108,9 +126,9 @@ export function level(k, dataLevel, onScalingReady) {
     // gameManager.initiateSpawn();
 }
 
-function setMapColliders(k, map, colliders) {
+function setMapColliders(k, mapPart, colliders) {
     for (const collider of colliders) {
-        map.add([
+        mapPart.add([
             k.pos(collider.x, collider.y),
             k.area({
                 shape: new k.Rect(k.vec2(0), collider.width, collider.height)
