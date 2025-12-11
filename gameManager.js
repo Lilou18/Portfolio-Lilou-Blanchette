@@ -32,10 +32,10 @@ export class GameManager {
         this.pendingCollectibleSpawns = [];
 
         this.setupUI();
-        // this.setupCollisions();
-        // this.setupSpawning();
-        // this.initiateSpawn();
-        // this.spawnInitialCollectibles();
+        this.setupCollisions();
+        this.setupSpawning();
+        this.initiateSpawn();
+        this.spawnInitialCollectibles();
 
         // const test = new Collectible(k, 1000, 600);
         // this.collectibles.push(test);

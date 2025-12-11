@@ -6,41 +6,41 @@ export function level(k, dataLevel, onScalingReady) {
 
 
     // ===== FPS COUNTER OPTIMISÉ =====
-    let fps = 60;
-    let frames = 0;
-    let lastTime = performance.now();
+    // let fps = 60;
+    // let frames = 0;
+    // let lastTime = performance.now();
 
-    const fpsText = k.add([
-        k.text("FPS: 60", { size: 20 }),
-        k.pos(10, 10),
-        k.fixed(),
-        k.z(1000),
-        k.color(0, 255, 0)
-    ]);
+    // const fpsText = k.add([
+    //     k.text("FPS: 60", { size: 20 }),
+    //     k.pos(10, 10),
+    //     k.fixed(),
+    //     k.z(1000),
+    //     k.color(0, 255, 0)
+    // ]);
 
-    // Un SEUL onUpdate pour le FPS
-    k.onUpdate(() => {
-        frames++;
-        const now = performance.now();
+    // // Un SEUL onUpdate pour le FPS
+    // k.onUpdate(() => {
+    //     frames++;
+    //     const now = performance.now();
 
-        // Mettre à jour seulement toutes les 500ms
-        if (now >= lastTime + 500) {
-            fps = Math.round((frames * 1000) / (now - lastTime));
-            frames = 0;
-            lastTime = now;
+    //     // Mettre à jour seulement toutes les 500ms
+    //     if (now >= lastTime + 500) {
+    //         fps = Math.round((frames * 1000) / (now - lastTime));
+    //         frames = 0;
+    //         lastTime = now;
 
-            fpsText.text = `FPS: ${fps}`;
+    //         fpsText.text = `FPS: ${fps}`;
 
-            // Couleur selon performance
-            if (fps < 30) {
-                fpsText.color = k.rgb(255, 0, 0);
-            } else if (fps < 50) {
-                fpsText.color = k.rgb(255, 255, 0);
-            } else {
-                fpsText.color = k.rgb(0, 255, 0);
-            }
-        }
-    });
+    //         // Couleur selon performance
+    //         if (fps < 30) {
+    //             fpsText.color = k.rgb(255, 0, 0);
+    //         } else if (fps < 50) {
+    //             fpsText.color = k.rgb(255, 255, 0);
+    //         } else {
+    //             fpsText.color = k.rgb(0, 255, 0);
+    //         }
+    //     }
+    // });
 
     // ===== FIN FPS COUNTER =====
     // debug.inspect = true
