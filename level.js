@@ -167,7 +167,7 @@ function setHologram(k, mapPositions) {
             yOffset: 10,
         },
         citySign: {
-            sprite: deviceInfo.isMobile ? "citySignMobile" : "citySign",
+            sprite: deviceInfo.isMobile || deviceInfo.isTouchEnabled ? "citySignMobile" : "citySign",
             scale: 1,
             yOffset: 0,
         },
