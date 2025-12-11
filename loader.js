@@ -183,8 +183,8 @@ k.loadSprite("citySign", "./assets/citySign.png", {
 });
 
 k.loadSprite("citySignMobile", "./assets/citySignMobile.png", {
-    sliceX: 7,
-    sliceY: 1,
+    sliceX: 3,
+    sliceY: 3,
     anims: {
         hologram: {
             from: 0,
