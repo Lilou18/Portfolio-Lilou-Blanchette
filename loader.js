@@ -117,8 +117,8 @@ k.loadSprite("enemyVeryFast", "./assets/enemyRed.png", {
 // });
 
 k.loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
-    sliceX: 9,
-    sliceY: 1,
+    sliceX: 3,
+    sliceY: 3,
     anims: {
         hologram: {
             from: 0,
@@ -130,8 +130,8 @@ k.loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
 });
 
 k.loadSprite("portfolioHologram", "./assets/hologramPortfolioMobile.png", {
-    sliceX: 9,
-    sliceY: 1,
+    sliceX: 3,
+    sliceY: 3,
     anims: {
         hologram: {
             from: 0,
@@ -143,8 +143,8 @@ k.loadSprite("portfolioHologram", "./assets/hologramPortfolioMobile.png", {
 });
 
 k.loadSprite("contactHologram", "./assets/hologramContactMobile.png", {
-    sliceX: 9,
-    sliceY: 1,
+    sliceX: 3,
+    sliceY: 3,
     anims: {
         hologram: {
             from: 0,
