@@ -8,14 +8,15 @@ export const k = kaplay({
     height: 1080,
     stretch: true,
     letterbox: false,
-    pixelDensity: deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2,
+    crisp: false,
+    pixelDensity: Math.min(devicePixelRatio, 2),
     touchToMouse: true,
+    texFilter: "linear",
     //     //debug = false;
 });
 
 
 
-console.log("PixelDensity =", deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2);
 
 k.loadSprite("levelP1", "./map/levelP1.png");
 

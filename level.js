@@ -25,7 +25,6 @@ export function level(k, dataLevel, onScalingReady) {
 
         if (timer >= 1) {
             test.text = "FPS: " + frames;
-            console.log("WUT?");
             frames = 0;
             timer = 0;
         }
