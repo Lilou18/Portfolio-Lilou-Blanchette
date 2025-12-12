@@ -175,6 +175,11 @@ export class Player {
             // Accumule le scroll (horizontal et vertical)
             scrollDelta += e.deltaX || e.deltaY;
 
+            scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+
+             console.log(scrollDelta);
+
+
             isScrolling = true;
             this.isScrolling = true;
 
