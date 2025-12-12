@@ -16,6 +16,9 @@ export class Player {
 
         // this.setUpCollisionsUI = setUpCollisionsUI;
 
+        this.scrollAccumulator = 0;
+        this.scrollThreshold = 50;
+
         this.makePlayer(k, posX, posY);
         this.playerControls();
         this.playerMobileControls();
@@ -101,10 +104,10 @@ export class Player {
             if (key === 'arrowright') keysPressed.right = true;
             if (key === 'a') keysPressed.a = true;
             if (key === 'd') keysPressed.d = true;
-            if (key === ' '){
+            if (key === ' ') {
                 keysPressed.space = true;
                 isJumping = false;
-            } 
+            }
         });
 
         // Event to ensure that released keys are properly registered
@@ -114,7 +117,7 @@ export class Player {
             if (key === 'arrowright') keysPressed.right = false;
             if (key === 'a') keysPressed.a = false;
             if (key === 'd') keysPressed.d = false;
-            if (key === ' '){
+            if (key === ' ') {
                 keysPressed.space = false;
                 isJumping = false;
 
@@ -161,27 +164,58 @@ export class Player {
         }
 
         // Scrolling event to move the player
+        // window.addEventListener("wheel", (e) => {
+        //     if (gameState.isGamePaused) return;
+
+        //     this.isScrolling = true;
+
+        //     if (this.scrollTimeout) {
+        //         clearTimeout(this.scrollTimeout);
+        //     }
+        //     if (e.deltaY > 0) {
+        //         // Scroll down moves the player to the right
+        //         moveRight(this.scrollSpeed);
+        //     } else if (e.deltaY < 0) {
+        //         // Scroll up moves the player to the left
+        //         moveLeft(this.scrollSpeed);
+        //     }
+
+        //     // Small delay between scroll detection for a smooth walking animation
+        //     this.scrollTimeout = setTimeout(() => {
+        //         this.isScrolling = false;
+        //     }, 200);
+        // });
+
         window.addEventListener("wheel", (e) => {
             if (gameState.isGamePaused) return;
 
-            this.isScrolling = true;
+            e.preventDefault(); // Empêcher le scroll de la page
 
-            if (this.scrollTimeout) {
-                clearTimeout(this.scrollTimeout);
-            }
-            if (e.deltaY > 0) {
-                // Scroll down moves the player to the right
-                moveRight(this.scrollSpeed);
-            } else if (e.deltaY < 0) {
-                // Scroll up moves the player to the left
-                moveLeft(this.scrollSpeed);
-            }
+            // Accumuler les valeurs de scroll
+            this.scrollAccumulator += e.deltaY;
 
-            // Small delay between scroll detection for a smooth walking animation
-            this.scrollTimeout = setTimeout(() => {
-                this.isScrolling = false;
-            }, 200);
-        });
+            // Ne déplacer que quand on atteint le seuil
+            if (Math.abs(this.scrollAccumulator) >= this.scrollThreshold) {
+                this.isScrolling = true;
+
+                if (this.scrollTimeout) {
+                    clearTimeout(this.scrollTimeout);
+                }
+
+                if (this.scrollAccumulator > 0) {
+                    moveRight(this.scrollSpeed);
+                } else {
+                    moveLeft(this.scrollSpeed);
+                }
+
+                // Réinitialiser l'accumulateur
+                this.scrollAccumulator = 0;
+
+                this.scrollTimeout = setTimeout(() => {
+                    this.isScrolling = false;
+                }, 200);
+            }
+        }, { passive: false });
 
         // Reset collider and animation when player hits the ground
         this.gameObject.onGround(() => {
@@ -263,7 +297,7 @@ export class Player {
             if (rightPressed) {
                 moveRight(this.speed);
             }
-            
+
             if (!gameState.isGamePaused && this.gameObject.curAnim() === "fall") {
 
                 // Is the player walking on the right
