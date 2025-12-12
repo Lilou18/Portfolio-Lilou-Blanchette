@@ -5,73 +5,33 @@ import { deviceInfo } from "./deviceInfo.js";
 export function level(k, dataLevel, onScalingReady) {
 
 
-    let test = k.add([
-        k.text(`FPS: `, {
-            size: 30,
-            font: "orbitron"
-        }),
-        k.pos(0, 0),
-        k.color(0, 255, 0),
-        k.fixed(),
-        k.z(2),
-        "test"
-    ]);
-    let timer = 0;
-    let frames = 0;
-
-    k.onUpdate(() => {
-        timer += k.dt();
-        frames++;
-
-        if (timer >= 1) {
-            test.text = "FPS: " + frames;
-            frames = 0;
-            timer = 0;
-        }
-    });
-    // ===== FPS COUNTER OPTIMISÉ =====
-    // let fps = 60;
-    // let frames = 0;
-    // let lastTime = performance.now();
-
-    // const fpsText = k.add([
-    //     k.text("FPS: 60", { size: 20 }),
-    //     k.pos(10, 10),
+    // let test = k.add([
+    //     k.text(`FPS: `, {
+    //         size: 30,
+    //         font: "orbitron"
+    //     }),
+    //     k.pos(0, 0),
+    //     k.color(0, 255, 0),
     //     k.fixed(),
-    //     k.z(1000),
-    //     k.color(0, 255, 0)
+    //     k.z(2),
+    //     "test"
     // ]);
+    // let timer = 0;
+    // let frames = 0;
 
-    // // Un SEUL onUpdate pour le FPS
     // k.onUpdate(() => {
+    //     timer += k.dt();
     //     frames++;
-    //     const now = performance.now();
 
-    //     // Mettre à jour seulement toutes les 500ms
-    //     if (now >= lastTime + 500) {
-    //         fps = Math.round((frames * 1000) / (now - lastTime));
+    //     if (timer >= 1) {
+    //         test.text = "FPS: " + frames;
     //         frames = 0;
-    //         lastTime = now;
-
-    //         fpsText.text = `FPS: ${fps}`;
-
-    //         // Couleur selon performance
-    //         if (fps < 30) {
-    //             fpsText.color = k.rgb(255, 0, 0);
-    //         } else if (fps < 50) {
-    //             fpsText.color = k.rgb(255, 255, 0);
-    //         } else {
-    //             fpsText.color = k.rgb(0, 255, 0);
-    //         }
+    //         timer = 0;
     //     }
     // });
 
-    // ===== FIN FPS COUNTER =====
     // debug.inspect = true
-    //k.setCamPos(0, 0);
-    //let posTest = k.getCamPos();
-    //console.log(posTest);
-    //k.setCamPos(526.5,560);
+
     k.setGravity(1400);
 
     const levelLayers = dataLevel.layers;
@@ -100,13 +60,9 @@ export function level(k, dataLevel, onScalingReady) {
     let borderRight = null;
     let holograms = [];
 
-    // k.mapScale = 1;
-    // k.mapOffsetY = 0;
-
     let scalingInitialized = false;
 
     k.onDraw(() => {
-        // if (map.width > 0 && map.height > 0 && !scalingInitialized) {
         if (mapPart1.height > 0 && mapPart2.height > 0 && mapPart3.height && !scalingInitialized) {
 
             const scale = k.height() / mapPart1.height;
@@ -207,7 +163,7 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
     const borderLeft = k.add([
         k.rect(tilewidth, mapheight),
         k.area(),
-        k.opacity(0), // Make invisible (was opacity(1))
+        k.opacity(0),
         k.body({ isStatic: true }),
         k.pos(-128, 0),
         "borderLeft",
@@ -216,13 +172,12 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
     const borderRight = k.add([
         k.rect(tilewidth, mapheight),
         k.area(),
-        k.opacity(0), // Make invisible (was opacity(1))
+        k.opacity(0),
         k.body({ isStatic: true }),
         k.pos(mapWidth, 0),
         "border",
     ]);
 
-    // console.log("Initial map width:", mapWidth);
 
     // Return references to the borders so they can be updated
     return { left: borderLeft, right: borderRight };
@@ -268,7 +223,7 @@ function setHologram(k, mapPositions) {
             config.sprite,
         ]);
 
-        // If not a city sign then we when a pointer cursor when user hover the gameobject
+        // If not a city sign then we want a pointer cursor when user hover the gameobject
         if (position.name !== "citySign") {
             hologram.onHover(() => {
                 k.setCursor("pointer");
