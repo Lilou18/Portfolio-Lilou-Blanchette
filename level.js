@@ -139,7 +139,7 @@ export function level(k, dataLevel, onScalingReady) {
             // Call the callback only once when scaling is first initialized
             if (!scalingInitialized && onScalingReady) {
                 scalingInitialized = true;
-                console.log("Scaling initialized - calling callback");
+                // console.log("Scaling initialized - calling callback");
                 // Use k.wait to ensure it's called in the next frame
                 k.wait(0, onScalingReady);
             }
@@ -198,7 +198,7 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
         "border",
     ]);
 
-    console.log("Initial map width:", mapWidth);
+    // console.log("Initial map width:", mapWidth);
 
     // Return references to the borders so they can be updated
     return { left: borderLeft, right: borderRight };

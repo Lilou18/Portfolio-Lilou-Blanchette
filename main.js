@@ -110,7 +110,7 @@ function setupFullScreenBtn() {
 
 k.scene("level", async () => {
 
-    console.log("=== LEVEL SCENE STARTING ===");
+    // console.log("=== LEVEL SCENE STARTING ===");
     const canvas = document.getElementById("gameCanvas");
     if (canvas) {
         canvas.focus();
@@ -118,7 +118,7 @@ k.scene("level", async () => {
 
     const mobileControls = document.getElementById("mobileControls");
     if (mobileControls && (deviceInfo.isMobile || deviceInfo.isTouchEnabled)) {
-        console.log(deviceInfo.isTouchEnabled);
+        // console.log(deviceInfo.isTouchEnabled);
         mobileControls.style.display = "flex";
     }
 
