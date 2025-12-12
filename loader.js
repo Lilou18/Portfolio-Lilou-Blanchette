@@ -1,4 +1,5 @@
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
+import { deviceInfo } from "./deviceInfo.js";
 
 export const k = kaplay({
     canvas: document.getElementById("gameCanvas"),
@@ -7,10 +8,14 @@ export const k = kaplay({
     height: 1080,
     stretch: true,
     letterbox: false,
-    pixelDensity: 2,
+    pixelDensity: deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2,
     touchToMouse: true,
     //     //debug = false;
 });
+
+
+
+console.log("PixelDensity =", deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2);
 
 k.loadSprite("levelP1", "./map/levelP1.png");
 
