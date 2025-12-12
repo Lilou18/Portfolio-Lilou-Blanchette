@@ -16,8 +16,6 @@ export class Player {
 
         // this.setUpCollisionsUI = setUpCollisionsUI;
 
-        this.scrollAccumulator = 0;
-        this.scrollThreshold = 50;
 
         this.makePlayer(k, posX, posY);
         this.playerControls();
@@ -164,58 +162,36 @@ export class Player {
         }
 
         // Scrolling event to move the player
-        // window.addEventListener("wheel", (e) => {
-        //     if (gameState.isGamePaused) return;
+        // Scrolling event to move the player
+        let scrollDelta = 0;
+        let isScrolling = false;
+        let scrollTimeout = null;
 
-        //     this.isScrolling = true;
-
-        //     if (this.scrollTimeout) {
-        //         clearTimeout(this.scrollTimeout);
-        //     }
-        //     if (e.deltaY > 0) {
-        //         // Scroll down moves the player to the right
-        //         moveRight(this.scrollSpeed);
-        //     } else if (e.deltaY < 0) {
-        //         // Scroll up moves the player to the left
-        //         moveLeft(this.scrollSpeed);
-        //     }
-
-        //     // Small delay between scroll detection for a smooth walking animation
-        //     this.scrollTimeout = setTimeout(() => {
-        //         this.isScrolling = false;
-        //     }, 200);
-        // });
-
-        window.addEventListener("wheel", (e) => {
+        window.addEventListener('wheel', (e) => {
             if (gameState.isGamePaused) return;
 
-            e.preventDefault(); // Empêcher le scroll de la page
+            e.preventDefault();
 
-            // Accumuler les valeurs de scroll
-            this.scrollAccumulator += e.deltaY;
+            // Accumule le scroll (horizontal et vertical)
+            scrollDelta += e.deltaX || e.deltaY;
 
-            // Ne déplacer que quand on atteint le seuil
-            if (Math.abs(this.scrollAccumulator) >= this.scrollThreshold) {
-                this.isScrolling = true;
+            isScrolling = true;
+            this.isScrolling = true;
 
-                if (this.scrollTimeout) {
-                    clearTimeout(this.scrollTimeout);
+            // Clear le timeout précédent
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+
+            // Arrête le scroll après 150ms d'inactivité
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                this.isScrolling = false;
+                scrollDelta = 0;
+                if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "idle") {
+                    this.gameObject.play("idle");
                 }
-
-                if (this.scrollAccumulator > 0) {
-                    moveRight(this.scrollSpeed);
-                } else {
-                    moveLeft(this.scrollSpeed);
-                }
-
-                // Réinitialiser l'accumulateur
-                this.scrollAccumulator = 0;
-
-                this.scrollTimeout = setTimeout(() => {
-                    this.isScrolling = false;
-                }, 200);
-            }
+            }, 150);
         }, { passive: false });
+
 
         // Reset collider and animation when player hits the ground
         this.gameObject.onGround(() => {
@@ -285,6 +261,27 @@ export class Player {
                     this.gameObject.play("idle");
                 }
                 return;
+            }
+
+            if (isScrolling && Math.abs(scrollDelta) > 0) {
+                const scrollSpeed = this.scrollSpeed;
+                // Augmente le multiplicateur pour un mouvement plus rapide
+                // const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 3; //Math.min(Math.abs(scrollDelta) * 3, scrollSpeed);
+                const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 4;
+                
+                if (moveAmount < 0) {
+                    moveLeft(Math.abs(moveAmount));
+                } else {
+                    moveRight(moveAmount);
+                }
+                
+                // Réduit progressivement le delta pour un mouvement fluide
+                scrollDelta *= 0.90;
+                
+                // Si le delta devient trop petit, on le remet à 0
+                if (Math.abs(scrollDelta) < 0.5) {
+                    scrollDelta = 0;
+                }
             }
 
             // Check if the player should move
