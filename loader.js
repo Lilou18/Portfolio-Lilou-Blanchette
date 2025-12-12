@@ -8,8 +8,7 @@ export const k = kaplay({
     height: 1080,
     stretch: true,
     letterbox: false,
-    // pixelDensity: deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2,
-    pixelDensity: window.devicePixelRatio,
+    pixelDensity: deviceInfo.isMobile || deviceInfo.isTouchEnabled ? 1 : 2,
     touchToMouse: true,
     //     //debug = false;
 });
