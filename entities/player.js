@@ -175,7 +175,7 @@ export class Player {
             e.preventDefault();
 
             const now = Date.now();
-            const currentDelta = Math.abs(e.deltaX || e.deltaY);
+            const currentDelta = Math.abs(e.deltaY);
 
 
             // Détection du type d'input
@@ -186,7 +186,7 @@ export class Player {
 
             if (isTouchpad) {
                 // Mode touchpad : accumulation fluide
-                const direction = Math.sign(e.deltaX || e.deltaY);
+                const direction = Math.sign(e.deltaY);
                 const isSlowing = currentDelta < Math.abs(lastDeltaValue);
                 if(currentDelta < 10 && isSlowing){
                     scrollDelta = 0;
@@ -201,14 +201,14 @@ export class Player {
                 lastDeltaValue = scrollDelta;
             } else {
                 // Mode molette : avec cooldown pour éviter les doubles événements
-                const scrollCooldown = 60;
+                const scrollCooldown = 70;
 
                 if (now - lastScrollTime < scrollCooldown) {
                     return; // Ignore les événements trop rapprochés
                 }
 
                 lastScrollTime = now;
-                const direction = Math.sign(e.deltaX || e.deltaY);
+                const direction = Math.sign(e.deltaY);
                 scrollDelta += direction * 250; // Distance fixe par cran
                 scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
             }
