@@ -171,12 +171,37 @@ export class Player {
 
             e.preventDefault();
 
-            // Accumule le scroll (horizontal et vertical)
-            scrollDelta += e.deltaX || e.deltaY;
+            const direction = Math.sign(e.deltaX || e.deltaY);
+            let normalizedDelta = 0;
 
-            scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+            // Normalize
+            switch (e.deltaMode) {
+                case 0: // DOM_DELTA_PIXEL
+                    console.log("PIXELS")
+                    normalizedDelta = direction * 100;
+                    break;
+                case 1: // DOM_DELTA_LINE
+                    console.log("LINE");
+                    normalizedDelta = direction * 50;
+                    break;
+                case 2: // DOM_DELTA_PAGE
+                    console.log("PAGE");
+                    normalizedDelta = direction * 50;
+                    break;
+            }
 
-             console.log(scrollDelta);
+            scrollDelta += normalizedDelta;
+
+            console.log(scrollDelta);
+
+            // scrollDelta += normalizedDelta;
+
+            // // Accumule le scroll (horizontal et vertical)
+            // scrollDelta += e.deltaX || e.deltaY;
+
+            // scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+
+            // console.log(scrollDelta);
 
 
             isScrolling = true;
@@ -272,16 +297,16 @@ export class Player {
                 // Augmente le multiplicateur pour un mouvement plus rapide
                 // const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 3; //Math.min(Math.abs(scrollDelta) * 3, scrollSpeed);
                 const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 4;
-                
+
                 if (moveAmount < 0) {
                     moveLeft(Math.abs(moveAmount));
                 } else {
                     moveRight(moveAmount);
                 }
-                
+
                 // Réduit progressivement le delta pour un mouvement fluide
                 scrollDelta *= 0.90;
-                
+
                 // Si le delta devient trop petit, on le remet à 0
                 if (Math.abs(scrollDelta) < 0.5) {
                     scrollDelta = 0;
