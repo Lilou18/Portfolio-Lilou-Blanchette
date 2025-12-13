@@ -166,7 +166,8 @@ export class Player {
         let isScrolling = false;
         let scrollTimeout = null;
         let lastScrollTime = 0;
-        const scrollCooldown = 50; // ms minimum entre chaque cran détecté
+        let lastDeltaValue = 0;
+        let consecutiveSmallDeltas = 0;
 
         window.addEventListener('wheel', (e) => {
             if (gameState.isGamePaused) return;
@@ -174,23 +175,33 @@ export class Player {
             e.preventDefault();
 
             const now = Date.now();
+            const currentDelta = Math.abs(e.deltaX || e.deltaY);
 
-            // Ignorer les événements trop rapprochés (même cran)
-            if (now - lastScrollTime < scrollCooldown) {
-                return;
+            // Détection du type d'input
+            // Touchpad : valeurs petites et fluides (< 50 généralement)
+            // Molette : valeurs plus grandes et discrètes (> 50)
+            const isTouchpad = currentDelta < 50;
+
+            if (isTouchpad) {
+                // Mode touchpad : accumulation fluide
+                const direction = Math.sign(e.deltaX || e.deltaY);
+                scrollDelta += direction * 50; // Quantité fixe par événement
+                scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+            } else {
+                // Mode molette : avec cooldown pour éviter les doubles événements
+                const scrollCooldown = 50;
+
+                if (now - lastScrollTime < scrollCooldown) {
+                    return; // Ignore les événements trop rapprochés
+                }
+
+                lastScrollTime = now;
+                const direction = Math.sign(e.deltaX || e.deltaY);
+                scrollDelta += direction * 200; // Distance fixe par cran
+                scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
             }
 
-            lastScrollTime = now;
-
-            const direction = Math.sign(e.deltaX || e.deltaY);
-
-            // Distance fixe par cran, peu importe la souris
-            const fixedScrollAmount = 200; // Ajuste cette valeur selon tes besoins
-
-            scrollDelta += direction * fixedScrollAmount;
-            scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
-
-            console.log(scrollDelta);
+            console.log(`Delta: ${currentDelta}, Mode: ${isTouchpad ? 'Touchpad' : 'Molette'}, ScrollDelta: ${scrollDelta}`);
 
             isScrolling = true;
             this.isScrolling = true;
