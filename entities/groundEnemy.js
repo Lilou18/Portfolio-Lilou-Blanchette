@@ -27,7 +27,9 @@ export class GroundEnemy {
         this.gameObject = k.add([
             k.sprite(enemySprites[this.enemyType.name], { anim: "walk" }),
             area({
-                shape: new Rect(vec2(0, 0), 90, 100),
+                // shape: new Rect(vec2(0, 0), 90, 100),
+                // shape: new k.Polygon([k.vec2(-45, 0), k.vec2(-45, -100), k.vec2(45, -100), k.vec2(45, 0)]),
+                shape: new k.Polygon([k.vec2(-45, 0), k.vec2(-45, -100), k.vec2(0, -100), k.vec2(45, -30), k.vec2(45, 0)]),
             }),
             k.anchor("bot"),
             k.scale(1),

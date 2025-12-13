@@ -5,30 +5,30 @@ import { deviceInfo } from "./deviceInfo.js";
 export function level(k, dataLevel, onScalingReady) {
 
 
-    // let test = k.add([
-    //     k.text(`FPS: `, {
-    //         size: 30,
-    //         font: "orbitron"
-    //     }),
-    //     k.pos(0, 0),
-    //     k.color(0, 255, 0),
-    //     k.fixed(),
-    //     k.z(2),
-    //     "test"
-    // ]);
-    // let timer = 0;
-    // let frames = 0;
+    let test = k.add([
+        k.text(`FPS: `, {
+            size: 30,
+            font: "orbitron"
+        }),
+        k.pos(0, 0),
+        k.color(0, 255, 0),
+        k.fixed(),
+        k.z(2),
+        "test"
+    ]);
+    let timer = 0;
+    let frames = 0;
 
-    // k.onUpdate(() => {
-    //     timer += k.dt();
-    //     frames++;
+    k.onUpdate(() => {
+        timer += k.dt();
+        frames++;
 
-    //     if (timer >= 1) {
-    //         test.text = "FPS: " + frames;
-    //         frames = 0;
-    //         timer = 0;
-    //     }
-    // });
+        if (timer >= 1) {
+            test.text = "FPS: " + frames;
+            frames = 0;
+            timer = 0;
+        }
+    });
 
     // debug.inspect = true
 
