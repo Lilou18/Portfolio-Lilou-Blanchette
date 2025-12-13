@@ -162,26 +162,14 @@ export class Player {
         }
 
         // Scrolling event to move the player
-        // Scrolling event to move the player
         let scrollDelta = 0;
         let isScrolling = false;
         let scrollTimeout = null;
-        let lastScrollTime = 0;
-        const scrollThrottle = 10;
 
         window.addEventListener('wheel', (e) => {
             if (gameState.isGamePaused) return;
 
             e.preventDefault();
-
-            const now = Date.now();                       // ← NOUVELLE LIGNE
-            
-            // Ignore l'événement s'il est trop rapproché du précédent
-            if (now - lastScrollTime < scrollThrottle) {  // ← NOUVEAU BLOC
-                return;                                   // ← (3 lignes)
-            }                                             // ←
-            
-            lastScrollTime = now;
 
             // Accumule le scroll (horizontal et vertical)
             scrollDelta += e.deltaX || e.deltaY;
