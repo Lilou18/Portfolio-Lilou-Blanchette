@@ -83,7 +83,7 @@ export class UIManager {
         this.removeInteractionText(hologramTag);
 
         const isMobile = deviceInfo.isMobile;
-        const text = isMobile ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
+        const text = isMobile || deviceInfo.isTouchEnabled ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
         const textSize = isMobile ? 25 : 20;
 
         const hologram = k.get(hologramTag)[0];
