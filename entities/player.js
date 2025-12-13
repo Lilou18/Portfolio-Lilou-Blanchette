@@ -188,7 +188,7 @@ export class Player {
                 // Mode touchpad : accumulation fluide
                 const direction = Math.sign(e.deltaY);
                 const isSlowing = currentDelta < Math.abs(lastDeltaValue);
-                if(currentDelta < 10 && isSlowing){
+                if(isSlowing){
                     scrollDelta = 0;
                     isScrolling = false;
                     this.isScrolling = false;
