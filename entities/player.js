@@ -194,13 +194,14 @@ export class Player {
                     this.isScrolling = false;
                     return;
                 }
-                scrollDelta += direction; // Quantité fixe par événement
+                // scrollDelta += direction; // Quantité fixe par événement
+                scrollDelta = scrollDelta * 0.8 + direction * 1;
                 scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
 
                 lastDeltaValue = scrollDelta;
             } else {
                 // Mode molette : avec cooldown pour éviter les doubles événements
-                const scrollCooldown = 50;
+                const scrollCooldown = 60;
 
                 if (now - lastScrollTime < scrollCooldown) {
                     return; // Ignore les événements trop rapprochés
