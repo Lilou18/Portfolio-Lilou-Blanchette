@@ -188,7 +188,7 @@ export class Player {
                 // Mode touchpad : accumulation fluide
                 const direction = Math.sign(e.deltaY);
                 const isSlowing = currentDelta < Math.abs(lastDeltaValue);
-                if(isSlowing){
+                if (isSlowing) {
                     scrollDelta = 0;
                     isScrolling = false;
                     this.isScrolling = false;
@@ -465,10 +465,12 @@ export class Player {
         if (btnLeft) {
             btnLeft.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                this.mobileControls.left = true;
-                btnLeft.style.color = 'rgb(8, 45, 103)';
-                btnLeft.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnLeft.style.borderColor = 'rgb(8, 45, 103)';
+                if (!gameState.isGamePaused) {
+                    this.mobileControls.left = true;
+                    btnLeft.style.color = 'rgb(8, 45, 103)';
+                    btnLeft.style.background = 'rgba(0, 255, 255, 0.7)';
+                    btnLeft.style.borderColor = 'rgb(8, 45, 103)';
+                }
             });
 
             btnLeft.addEventListener('touchend', (e) => {
@@ -490,10 +492,12 @@ export class Player {
         if (btnRight) {
             btnRight.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                this.mobileControls.right = true;
-                btnRight.style.color = 'rgb(8, 45, 103)';
-                btnRight.style.background = 'rgba(0, 255, 255, 0.7)';
-                btnRight.style.borderColor = 'rgb(8, 45, 103)';
+                if (!gameState.isGamePaused) {
+                    this.mobileControls.right = true;
+                    btnRight.style.color = 'rgb(8, 45, 103)';
+                    btnRight.style.background = 'rgba(0, 255, 255, 0.7)';
+                    btnRight.style.borderColor = 'rgb(8, 45, 103)';
+                }
             });
 
             btnRight.addEventListener('touchend', (e) => {
