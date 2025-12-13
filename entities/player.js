@@ -187,8 +187,17 @@ export class Player {
             if (isTouchpad) {
                 // Mode touchpad : accumulation fluide
                 const direction = Math.sign(e.deltaX || e.deltaY);
-                scrollDelta += direction * 50; // Quantité fixe par événement
+                const isSlowing = currentDelta < Math.abs(lastDeltaValue);
+                if(currentDelta < 10 && isSlowing){
+                    scrollDelta = 0;
+                    isScrolling = false;
+                    this.isScrolling = false;
+                    return;
+                }
+                scrollDelta += direction; // Quantité fixe par événement
                 scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+
+                lastDeltaValue = scrollDelta;
             } else {
                 // Mode molette : avec cooldown pour éviter les doubles événements
                 const scrollCooldown = 50;
@@ -203,12 +212,14 @@ export class Player {
                 scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
             }
 
-            console.log(`Delta: ${currentDelta}, Mode: ${isTouchpad ? 'Touchpad' : 'Molette'}, ScrollDelta: ${scrollDelta}`);
+            console.log(`Delta: ${currentDelta},Last Delta: ${lastDeltaValue}, Mode: ${isTouchpad ? 'Touchpad' : 'Molette'}, ScrollDelta: ${scrollDelta}`);
 
             isScrolling = true;
             this.isScrolling = true;
 
             if (scrollTimeout) clearTimeout(scrollTimeout);
+
+            const timeoutDuration = isTouchpad ? 100 : 150;
 
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
@@ -217,7 +228,7 @@ export class Player {
                 if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "idle") {
                     this.gameObject.play("idle");
                 }
-            }, 150);
+            }, timeoutDuration);
         }, { passive: false });
 
         // // Scrolling event to move the player
