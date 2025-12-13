@@ -177,9 +177,11 @@ export class Player {
             const now = Date.now();
             const currentDelta = Math.abs(e.deltaX || e.deltaY);
 
+
             // Détection du type d'input
             // Touchpad : valeurs petites et fluides (< 50 généralement)
             // Molette : valeurs plus grandes et discrètes (> 50)
+            // https://stackoverflow.com/questions/10744645/detect-touchpad-vs-mouse-in-javascript?utm_source=chatgpt.com
             const isTouchpad = currentDelta < 50;
 
             if (isTouchpad) {
@@ -197,7 +199,7 @@ export class Player {
 
                 lastScrollTime = now;
                 const direction = Math.sign(e.deltaX || e.deltaY);
-                scrollDelta += direction * 200; // Distance fixe par cran
+                scrollDelta += direction * 250; // Distance fixe par cran
                 scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
             }
 
