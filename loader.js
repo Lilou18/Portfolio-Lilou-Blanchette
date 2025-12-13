@@ -180,8 +180,8 @@ k.loadSprite("collectible", "./assets/collectible.png", {
 });
 
 k.loadSprite("citySign", "./assets/citySign.png", {
-    sliceX: 17,
-    sliceY: 1,
+    sliceX: 5,
+    sliceY: 4,
     anims: {
         hologram: {
             from: 0,
