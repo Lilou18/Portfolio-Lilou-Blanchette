@@ -1284,6 +1284,9 @@ input[type=text] {
   border: 2px solid rgba(0, 255, 255, 13);
   border-radius: 12px;
   overflow: hidden;
+  height: 100%;
+  display: flex;    
+  flex-direction: column;
 }
 
 .project-video {
@@ -1307,6 +1310,10 @@ input[type=text] {
 
 .project-content {
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
 }
 
 .project-title {
@@ -1375,6 +1382,7 @@ input[type=text] {
 .project-skills {
   display: flex;
   flex-wrap: wrap;
+  margin-top: auto;
   gap: 8px;
   margin-bottom: 20px;
 
@@ -1391,6 +1399,7 @@ input[type=text] {
 }
 
 .project-links {
+  
   display: flex;
   flex-direction: row;
   border-top: 1px solid #00ffff;
