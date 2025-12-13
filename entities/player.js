@@ -165,52 +165,38 @@ export class Player {
         let scrollDelta = 0;
         let isScrolling = false;
         let scrollTimeout = null;
+        let lastScrollTime = 0;
+        const scrollCooldown = 50; // ms minimum entre chaque cran détecté
 
         window.addEventListener('wheel', (e) => {
             if (gameState.isGamePaused) return;
 
             e.preventDefault();
 
-            const direction = Math.sign(e.deltaX || e.deltaY);
-            let normalizedDelta = 0;
+            const now = Date.now();
 
-            // Normalize
-            switch (e.deltaMode) {
-                case 0: // DOM_DELTA_PIXEL
-                    console.log("PIXELS")
-                    normalizedDelta = direction * 100;
-                    break;
-                case 1: // DOM_DELTA_LINE
-                    console.log("LINE");
-                    normalizedDelta = direction * 50;
-                    break;
-                case 2: // DOM_DELTA_PAGE
-                    console.log("PAGE");
-                    normalizedDelta = direction * 50;
-                    break;
+            // Ignorer les événements trop rapprochés (même cran)
+            if (now - lastScrollTime < scrollCooldown) {
+                return;
             }
 
-            scrollDelta += normalizedDelta;
+            lastScrollTime = now;
+
+            const direction = Math.sign(e.deltaX || e.deltaY);
+
+            // Distance fixe par cran, peu importe la souris
+            const fixedScrollAmount = 200; // Ajuste cette valeur selon tes besoins
+
+            scrollDelta += direction * fixedScrollAmount;
+            scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
 
             console.log(scrollDelta);
-
-            // scrollDelta += normalizedDelta;
-
-            // // Accumule le scroll (horizontal et vertical)
-            // scrollDelta += e.deltaX || e.deltaY;
-
-            // scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
-
-            // console.log(scrollDelta);
-
 
             isScrolling = true;
             this.isScrolling = true;
 
-            // Clear le timeout précédent
             if (scrollTimeout) clearTimeout(scrollTimeout);
 
-            // Arrête le scroll après 150ms d'inactivité
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
                 this.isScrolling = false;
@@ -220,6 +206,66 @@ export class Player {
                 }
             }, 150);
         }, { passive: false });
+
+        // // Scrolling event to move the player
+        // let scrollDelta = 0;
+        // let isScrolling = false;
+        // let scrollTimeout = null;
+
+        // window.addEventListener('wheel', (e) => {
+        //     if (gameState.isGamePaused) return;
+
+        //     e.preventDefault();
+
+        //     const direction = Math.sign(e.deltaX || e.deltaY);
+        //     let normalizedDelta = 0;
+
+        //     // Normalize
+        //     switch (e.deltaMode) {
+        //         case 0: // DOM_DELTA_PIXEL
+        //             console.log("PIXELS")
+        //             normalizedDelta = direction * 100;
+        //             break;
+        //         case 1: // DOM_DELTA_LINE
+        //             console.log("LINE");
+        //             normalizedDelta = direction * 50;
+        //             break;
+        //         case 2: // DOM_DELTA_PAGE
+        //             console.log("PAGE");
+        //             normalizedDelta = direction * 50;
+        //             break;
+        //     }
+
+        //     scrollDelta += normalizedDelta;
+
+        //     console.log(scrollDelta);
+
+        //     // scrollDelta += normalizedDelta;
+
+        //     // // Accumule le scroll (horizontal et vertical)
+        //     // scrollDelta += e.deltaX || e.deltaY;
+
+        //     // scrollDelta = Math.max(-400, Math.min(scrollDelta, 400));
+
+        //     // console.log(scrollDelta);
+
+
+        //     isScrolling = true;
+        //     this.isScrolling = true;
+
+        //     // Clear le timeout précédent
+        //     if (scrollTimeout) clearTimeout(scrollTimeout);
+
+        //     // Arrête le scroll après 150ms d'inactivité
+        //     scrollTimeout = setTimeout(() => {
+        //         isScrolling = false;
+        //         this.isScrolling = false;
+        //         scrollDelta = 0;
+        //         if (this.gameObject.isGrounded() && this.gameObject.curAnim() !== "idle") {
+        //             this.gameObject.play("idle");
+        //         }
+        //     }, 150);
+        // }, { passive: false });
 
 
         // Reset collider and animation when player hits the ground
@@ -296,6 +342,7 @@ export class Player {
                 const scrollSpeed = this.scrollSpeed;
                 // Augmente le multiplicateur pour un mouvement plus rapide
                 // const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 3; //Math.min(Math.abs(scrollDelta) * 3, scrollSpeed);
+                // const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 4;
                 const moveAmount = Math.sign(scrollDelta) * Math.abs(scrollDelta) * 4;
 
                 if (moveAmount < 0) {
