@@ -125,47 +125,30 @@ export class UIManager {
             this.setUpEnterInput();
             this.setUpHologramClicks();
 
-            gameState.player.gameObject.onCollide("cvHologram", () => {
-                this.currentInteraction = "cv";
-                this.createInteractionText("cvHologram");
-            });
+            const hologramConfig = {
+                cvHologram: "cv",
+                portfolioHologram: "portfolio",
+                contactHologram: "contact",
+            };
 
-            gameState.player.gameObject.onCollideEnd("cvHologram", () => {
-                if (this.currentInteraction === "cv") {
-                    this.currentInteraction = null;
-                }
-                this.removeInteractionText("cvHologram");
-            });
+            for (let hologram in hologramConfig) {
+                gameState.player.gameObject.onCollide(hologram, () => {
+                    this.currentInteraction = hologramConfig[hologram];
+                    this.createInteractionText(hologram);
+                });
 
-            gameState.player.gameObject.onCollide("portfolioHologram", () => {
-                this.currentInteraction = "portfolio";
-                this.createInteractionText("portfolioHologram");
-            });
+                gameState.player.gameObject.onCollideEnd(hologram, () => {
+                    if (this.currentInteraction === hologramConfig[hologram]) {
+                        this.currentInteraction = null;
+                    }
+                    this.removeInteractionText(hologram);
+                });
 
-            gameState.player.gameObject.onCollideEnd("portfolioHologram", () => {
-                if (this.currentInteraction === "portfolio") {
-                    this.currentInteraction = null;
-                }
-                this.removeInteractionText("portfolioHologram");
-            });
-
-            gameState.player.gameObject.onCollide("contactHologram", () => {
-                this.currentInteraction = "contact";
-                this.createInteractionText("contactHologram");
-
-            });
-
-            gameState.player.gameObject.onCollideEnd("contactHologram", () => {
-                if (this.currentInteraction === "contact") {
-                    this.currentInteraction = null;
-                }
-                this.removeInteractionText("contactHologram");
-            });
-
-
-
+            };
         }
     }
+
+
 
     displayPanel(panelName) {
         if (!this.panels[panelName] || !this.canvas) return;
