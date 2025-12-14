@@ -11,7 +11,7 @@ export class GroundEnemy {
 
         const enemyTypes = [
             { speed: 220, color: [255, 255, 0], name: "normal" }, // Normal - Jaune 250
-            { speed: 280, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
+            { speed: 290, color: [255, 165, 0], name: "fast" },   // Rapide - Orange 350
             { speed: 560, color: [255, 0, 0], name: "veryFast" } // Très rapide - Rouge 500
         ];
 
