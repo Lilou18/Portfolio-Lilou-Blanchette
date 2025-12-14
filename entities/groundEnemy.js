@@ -42,9 +42,7 @@ export class GroundEnemy {
         // this.gameObject.hidden = true;
 
         this.gameObject.onEnterScreen(() => {
-            this.gameObject.hidden = false;
-
-           
+            this.gameObject.hidden = false;           
         });
 
         this.gameObject.onExitScreen(() => {

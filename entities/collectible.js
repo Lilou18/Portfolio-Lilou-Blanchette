@@ -59,14 +59,17 @@ export class Collectible {
         this.gameObject.onUpdate(() => {
             if (this.destroyed) return;
 
+
+
             if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
                 return; // The game is paused
             }
 
-            this.animationTime += this.k.dt();
-            const amount = Math.sin(this.animationTime * 3 + this.variationMovement) * 10;
-            this.gameObject.pos.y = this.scaledY + amount;
-
+            if (!this.gameObject.hidden) {
+                this.animationTime += this.k.dt();
+                const amount = Math.sin(this.animationTime * 3 + this.variationMovement) * 10;
+                this.gameObject.pos.y = this.scaledY + amount;
+            }
         });
     }
 
