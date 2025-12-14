@@ -17,6 +17,13 @@ html {
 
 #gameCanvas {
   display: block;
+  filter: brightness(100%);
+  transition: filter 0.3s ease;
+  will-change: filter;
+}
+
+#gameCanvas.dimmed {
+  filter: brightness(70%);
 }
 
 /*Start Menu*/
@@ -859,9 +866,9 @@ html {
   width: 90%;
   height: 90%;
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 100, 255, 0.05) 100%);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-
+  /* -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); */
+  background: rgba(0, 50, 100, 0.85);
   border: 2px solid #00ffff;
   border-radius: 12px;
   box-shadow:
@@ -872,18 +879,36 @@ html {
   z-index: 100;
   overflow: hidden;
   animation: fadeIn 0.5s;
+
+  filter: brightness(100%);
+  transition: filter 0.3s ease;
+}
+
+#cvPanel.dimmed,
+#portfolioPanel.dimmed,
+#contact.dimmed {
+  filter: brightness(70%);
+}
+
+#cvPanel,
+#portfolioPanel,
+#contact,
+.soundSettingsPanel {
+  will-change: opacity, transform;
 }
 
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: scale(0)
+    transform: translate3d(0, 20px, 0);
+    /* transform: scale(0) */
   }
 
   100% {
     opacity: 1;
-    transform: scale(1)
+    transform: translate3d(0, 0, 0);
+    /* transform: scale(1) */
   }
 }
 
@@ -1005,7 +1030,7 @@ input[type=text] {
   background: linear-gradient(180deg, #00ffff, rgb(0, 183, 255), #00ffff);
   border-radius: 8px;
   z-index: -1;
-  animation: borderGlow 3s infinite;
+  /* animation: borderGlow 3s infinite; */
 }
 
 @keyframes borderGlow {
@@ -1285,7 +1310,7 @@ input[type=text] {
   border-radius: 12px;
   overflow: hidden;
   height: 100%;
-  display: flex;    
+  display: flex;
   flex-direction: column;
 }
 
@@ -1296,6 +1321,18 @@ input[type=text] {
   padding-top: 56.25%;
   border-radius: 8px 8px 0px 0px;
   overflow: hidden;
+}
+
+/* .ytp-title-beacon-pulse {
+  animation: none !important;
+} */
+
+.ytp-title-beacon,
+.ytp-title-beacon-pulse,
+.ytp-gradient-top,
+.ytp-gradient-bottom {
+  animation: none !important;
+  transition: none !important;
 }
 
 .project-video iframe {
@@ -1399,7 +1436,7 @@ input[type=text] {
 }
 
 .project-links {
-  
+
   display: flex;
   flex-direction: row;
   border-top: 1px solid #00ffff;
@@ -1566,6 +1603,7 @@ input[type=text] {
   left: 0%;
   background-color: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: none;
   flex-direction: column;
   align-items: center;
