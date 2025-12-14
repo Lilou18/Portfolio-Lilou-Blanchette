@@ -170,54 +170,60 @@ export class UIManager {
     displayPanel(panelName) {
         if (!this.panels[panelName] || !this.canvas) return;
 
-        if (panelName === "soundSettings") {
-            this.panels[panelName].style.display = "flex";
-            gameState.addPauseFlag("soundSettings");
-            this.isSoundSettingsPanelOpen = true;
-            if (!this.currentPanel) {
-                this.canvas.style.filter = "brightness(70%)";
-            }
-            else {
-                this.panels[this.currentPanel].style.filter = "brightness(70%)";
-            }
-            return;
-        }
 
-        if (this.currentPanel == null && !this.isSoundSettingsPanelOpen) {
-            this.currentPanel = panelName;
-            this.panels[panelName].style.display = "block";
-            this.canvas.style.filter = "brightness(70%)";
-            // Pause the game when a panel is displayed
-            gameState.addPauseFlag("panelOpen");
-        }
+        requestAnimationFrame(() => {
+            if (panelName === "soundSettings") {
+                this.panels[panelName].style.display = "flex";
+                gameState.addPauseFlag("soundSettings");
+                this.isSoundSettingsPanelOpen = true;
+                if (!this.currentPanel) {
+                    this.canvas.style.filter = "brightness(70%)";
+                }
+                else {
+                    this.panels[this.currentPanel].style.filter = "brightness(70%)";
+                }
+                return;
+            }
+
+            if (this.currentPanel == null && !this.isSoundSettingsPanelOpen) {
+                this.currentPanel = panelName;
+                this.panels[panelName].style.display = "block";
+                this.canvas.style.filter = "brightness(70%)";
+                // Pause the game when a panel is displayed
+                gameState.addPauseFlag("panelOpen");
+            }
+
+        });
 
     }
 
     hidePanel(panelName) {
         if (!this.panels[panelName] || !this.canvas) return;
 
-        if (panelName === "soundSettings") {
-            this.panels[panelName].style.display = "none";
-            gameState.removePauseFlag("soundSettings");
-            this.isSoundSettingsPanelOpen = false;
+        requestAnimationFrame(() => {
+            if (panelName === "soundSettings") {
+                this.panels[panelName].style.display = "none";
+                gameState.removePauseFlag("soundSettings");
+                this.isSoundSettingsPanelOpen = false;
 
-            if (!this.currentPanel) {
+                if (!this.currentPanel) {
+                    this.canvas.style.filter = "brightness(100%)";
+                    this.canvas.focus();
+                }
+                else {
+                    this.panels[this.currentPanel].style.filter = "brightness(100%)";
+                }
+                return;
+            }
+
+            if (this.currentPanel === panelName && !this.isSoundSettingsPanelOpen) {
+                this.currentPanel = null;
+                this.panels[panelName].style.display = "none";
                 this.canvas.style.filter = "brightness(100%)";
+                gameState.removePauseFlag("panelOpen");
                 this.canvas.focus();
             }
-            else {
-                this.panels[this.currentPanel].style.filter = "brightness(100%)";
-            }
-            return;
-        }
-
-        if (this.currentPanel === panelName && !this.isSoundSettingsPanelOpen) {
-            this.currentPanel = null;
-            this.panels[panelName].style.display = "none";
-            this.canvas.style.filter = "brightness(100%)";
-            gameState.removePauseFlag("panelOpen");
-            this.canvas.focus();
-        }
+        });
     }
 
     showPauseText() {
