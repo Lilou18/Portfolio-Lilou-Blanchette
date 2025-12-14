@@ -34,10 +34,22 @@ export class GroundEnemy {
             k.anchor("bot"),
             k.scale(1),
             k.pos(x, y),
+            offscreen({ hidden: true }),
             "enemy"
         ]);
 
         this.originalAnimationSpeed = this.gameObject.animSpeed;
+        // this.gameObject.hidden = true;
+
+        this.gameObject.onEnterScreen(() => {
+            this.gameObject.hidden = false;
+
+           
+        });
+
+        this.gameObject.onExitScreen(() => {
+            this.gameObject.hidden = true;
+        });
 
         // if (this.enemyType.name === "veryFast") {
         //     this.gameObject = k.add([
@@ -107,9 +119,9 @@ export class GroundEnemy {
 
         });
 
-        this.gameObject.onCollide("borderLeft", () => {
-            this.destroy();
-        });
+        // this.gameObject.onCollide("borderLeft", () => {
+        //     this.destroy();
+        // });
     }
 
     // Update the scale of the enemy if screen changed

@@ -20,11 +20,23 @@ export class Collectible {
             k.scale(0.6),
             k.pos(x, y),
             k.z(1),
+            offscreen({ hidden: true }),
             //k.color(245, 66, 242),
             "collectible"
         ]);
 
         this.originalAnimationSpeed = this.gameObject.animSpeed;
+
+        this.gameObject.onEnterScreen(() => {
+            this.gameObject.hidden = false;
+
+
+        });
+
+        this.gameObject.onExitScreen(() => {
+            this.gameObject.hidden = true;
+        });
+
         this.gameObject.play("mug");
         this.update();
 

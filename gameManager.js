@@ -16,7 +16,7 @@ export class GameManager {
         this.enemies = [];
         this.collectibles = [];
 
-
+        // this.test = 0;
 
         this.enemySpawnTimer = 0;
         this.enemySpawnInterval = Math.random() * (3 - 2) + 2;
@@ -164,11 +164,28 @@ export class GameManager {
 
         });
 
+        this.k.onCollide("enemy", "borderLeft", (enemy) => {
+            const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
+            if (indexCollectible != -1) {
+                this.enemies[indexCollectible].destroy();                
+                this.enemies.splice(indexCollectible, 1);                
+            }
+        });
+
     }
 
     // Spawn an enemy after the delay
     setupSpawning() {
         this.k.onUpdate(() => {
+
+            // this.collectibles.forEach((collectible) => {
+            //     if(collectible.gameObject.hidden){
+            //         this.test += 1;
+            //         console.log("HIDDEN")
+            //     }
+            // });
+            // console.log("HIDDEN COLLECTIBLE " + this.test);
+            // this.test= 0 ;
 
             // Stop the timers is the game is paused
             if (gameState.isGamePaused) return;

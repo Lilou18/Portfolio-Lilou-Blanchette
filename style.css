@@ -1030,7 +1030,7 @@ input[type=text] {
   background: linear-gradient(180deg, #00ffff, rgb(0, 183, 255), #00ffff);
   border-radius: 8px;
   z-index: -1;
-  /* animation: borderGlow 3s infinite; */
+  animation: borderGlow 3s infinite;
 }
 
 @keyframes borderGlow {
