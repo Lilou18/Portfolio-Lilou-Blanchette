@@ -9,7 +9,7 @@ export const k = kaplay({
     stretch: true,
     letterbox: false,
     crisp: false,
-    pixelDensity: 1,
+    pixelDensity: 0.75,
     touchToMouse: true,
     texFilter: "linear",
     //     //debug = false;
