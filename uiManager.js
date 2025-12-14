@@ -104,13 +104,13 @@ export class UIManager {
 
         this.interactionTexts[hologramTag] = interactionText;
 
-        interactionText.onUpdate(() => {
-            const currentHologram = k.get(hologramTag)[0];
-            if (currentHologram) {
-                interactionText.pos.x = currentHologram.pos.x;
-                interactionText.pos.y = currentHologram.pos.y - 310;
-            }
-        });
+        // interactionText.onUpdate(() => {
+        //     const currentHologram = k.get(hologramTag)[0];
+        //     if (currentHologram) {
+        //         interactionText.pos.x = currentHologram.pos.x;
+        //         interactionText.pos.y = currentHologram.pos.y - 310;
+        //     }
+        // });
     }
 
     removeInteractionText(hologramTag) {

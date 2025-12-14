@@ -1,5 +1,5 @@
 import { gameState } from "../gameState.js";
-import { pauseAnimation } from "../animationManager.js";
+import { handlePauseAnimation } from "../animationManager.js";
 
 export class GroundEnemy {
     constructor(k, x, y) {
@@ -36,6 +36,8 @@ export class GroundEnemy {
             k.pos(x, y),
             "enemy"
         ]);
+
+        this.originalAnimationSpeed = this.gameObject.animSpeed;
 
         // if (this.enemyType.name === "veryFast") {
         //     this.gameObject = k.add([
@@ -91,13 +93,18 @@ export class GroundEnemy {
 
     // Manage walking animation and collision with the left border
     update() {
-        pauseAnimation(this.gameObject)
         this.gameObject.onUpdate(() => {
-            if (!this.destroyed && !gameState.isGamePaused) {
-                const movement = this.speed * this.k.dt();
-                this.currentOffset += movement;
-                this.gameObject.move(- this.speed, 0)
+            if (this.destroyed) return;
+
+            if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
+                return; // The game is paused
             }
+
+
+            const movement = this.speed * this.k.dt();
+            this.currentOffset += movement;
+            this.gameObject.move(- this.speed, 0)
+
         });
 
         this.gameObject.onCollide("borderLeft", () => {

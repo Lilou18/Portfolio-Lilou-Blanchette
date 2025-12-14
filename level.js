@@ -1,7 +1,8 @@
 import { GameManager } from "./gameManager.js";
-import { pauseAnimation } from "./animationManager.js";
+import { handlePauseAnimation } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { deviceInfo } from "./deviceInfo.js";
+import { gameState } from "./gameState.js";
 export function level(k, dataLevel, onScalingReady) {
 
 
@@ -223,6 +224,8 @@ function setHologram(k, mapPositions) {
             config.sprite,
         ]);
 
+        const originalAnimSpeed = hologram.animSpeed || 1;
+
         // If not a city sign then we want a pointer cursor when user hover the gameobject
         if (position.name !== "citySign") {
             hologram.onHover(() => {
@@ -247,11 +250,17 @@ function setHologram(k, mapPositions) {
             originalY: position.y + config.yOffset,
             scale: config.scale,
         });
+
+        hologram.onUpdate(() => {
+            if(handlePauseAnimation(hologram, originalAnimSpeed)){
+                return;
+            }
+        })
     }
 
-    holograms.forEach(hologram => {
-        pauseAnimation(hologram.object);
-    });
+    // holograms.forEach(hologram => {
+    //     handlePauseAnimation(hologram.object);
+    // });
 
     return holograms;
 }
@@ -261,8 +270,10 @@ function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
     animatedObject.play(animationName);
 
     k.loop(delayInSeconds, () => {
-
-        animatedObject.play(animationName);
+        if(animatedObject.exists() && !gameState.isGamePaused){
+            animatedObject.play(animationName);
+        }
+        
     })
 }
 
