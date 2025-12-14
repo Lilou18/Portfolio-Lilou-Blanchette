@@ -20,7 +20,7 @@ export class Collectible {
             k.scale(0.6),
             k.pos(x, y),
             k.z(1),
-            offscreen({ hidden: true }),
+            k.offscreen({ hidden: true }),
             //k.color(245, 66, 242),
             "collectible"
         ]);

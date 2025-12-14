@@ -221,10 +221,12 @@ function setHologram(k, mapPositions) {
             k.anchor("bot"),
             k.pos(position.x, position.y), // Initial position from Tiled
             k.scale(config.scale),
+            k.offscreen({ hidden: true, padding: 2000 }),
             config.sprite,
         ]);
 
         const originalAnimSpeed = hologram.animSpeed || 1;
+
 
         // If not a city sign then we want a pointer cursor when user hover the gameobject
         if (position.name !== "citySign") {
@@ -234,6 +236,16 @@ function setHologram(k, mapPositions) {
 
             hologram.onHoverEnd(() => {
                 k.setCursor("default");
+            });
+
+            hologram.onEnterScreen(() => {
+                hologram.hidden = false;
+
+
+            });
+
+            hologram.onExitScreen(() => {
+                hologram.hidden = true;
             });
         }
         else {
@@ -251,8 +263,10 @@ function setHologram(k, mapPositions) {
             scale: config.scale,
         });
 
+
+
         hologram.onUpdate(() => {
-            if(handlePauseAnimation(hologram, originalAnimSpeed)){
+            if (handlePauseAnimation(hologram, originalAnimSpeed)) {
                 return;
             }
         })
@@ -270,10 +284,10 @@ function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
     animatedObject.play(animationName);
 
     k.loop(delayInSeconds, () => {
-        if(animatedObject.exists() && !gameState.isGamePaused){
+        if (animatedObject.exists() && !gameState.isGamePaused) {
             animatedObject.play(animationName);
         }
-        
+
     })
 }
 

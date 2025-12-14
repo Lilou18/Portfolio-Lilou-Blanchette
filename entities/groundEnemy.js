@@ -34,7 +34,7 @@ export class GroundEnemy {
             k.anchor("bot"),
             k.scale(1),
             k.pos(x, y),
-            offscreen({ hidden: true }),
+            k.offscreen({ hidden: true }),
             "enemy"
         ]);
 
