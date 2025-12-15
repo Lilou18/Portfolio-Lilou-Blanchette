@@ -118,12 +118,28 @@ export class GameManager {
     // If the screen change size we must update the size of the enemies and the collectibles
     updateScale(mapScale, mapOffsetY) {
         this.enemies.forEach(enemy => {
-            enemy.updateScale(mapScale, mapOffsetY);
+            if (!enemy) {
+                alert(`CRITICAL: Enemy at index ${index} is NULL!`);
+                return;
+            }
+            try {
+                enemy.updateScale(mapScale, mapOffsetY);
+            } catch (e) {
+                alert(`ERROR updating enemy scale: ${e.message}`);
+            }
 
         });
 
         this.collectibles.forEach(collectible => {
-            collectible.updateScale(mapScale, mapOffsetY);
+            if (!collectible) {
+                alert(`CRITICAL: Collectible at index ${index} is NULL!`);
+                return;
+            }
+            try {
+                collectible.updateScale(mapScale, mapOffsetY);
+            } catch (e) {
+                alert(`ERROR updating collectible scale: ${e.message}`);
+            }
         });
     }
 
@@ -152,7 +168,7 @@ export class GameManager {
                 this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
                 soundManager.playSound("hitSFX");
             }
-            else{
+            else {
                 alert("CRITICAL: Enemy not found in list!");
             }
         });
@@ -170,8 +186,8 @@ export class GameManager {
         this.k.onCollide("enemy", "borderLeft", (enemy) => {
             const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
             if (indexCollectible != -1) {
-                this.enemies[indexCollectible].destroy();                
-                this.enemies.splice(indexCollectible, 1);                
+                this.enemies[indexCollectible].destroy();
+                this.enemies.splice(indexCollectible, 1);
             }
         });
 

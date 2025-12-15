@@ -85,12 +85,14 @@ export function level(k, dataLevel, onScalingReady) {
             const scale = k.height() / mapPart1.height;
 
             mapParts.forEach((part, index) => {
-                part.scale = k.vec2(scale);
-                // Adjust the position with the new scale
-                part.pos.x = (index * 2176) * scale;
+                if (part) {
+                    part.scale = k.vec2(scale);
+                    // Adjust the position with the new scale
+                    part.pos.x = (index * 2176) * scale;
 
-                // Align the bottom of the map with the bottom of the screen
-                part.pos.y = k.height() - (part.height * scale);
+                    // Align the bottom of the map with the bottom of the screen
+                    part.pos.y = k.height() - (part.height * scale);
+                }
             });
 
             const newHeight = mapPart1.height * scale;
@@ -317,11 +319,27 @@ function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
 
 function updateHologramPositions(k, holograms, scale, mapOffsetY) {
     for (const hologramData of holograms) {
-        // Calculate the scaled position relative to the map's new position
-        hologramData.object.pos.x = hologramData.originalX * scale;
-        hologramData.object.pos.y = mapOffsetY + (hologramData.originalY * scale);
+        if (!hologramData) {
+            alert("CRITICAL: hologramData is NULL!");
+            continue;
+        }
+        if (!hologramData.object) {
+            alert("CRITICAL: hologramData.object is NULL!");
+            continue;
+        }
 
-        // Update scale - combine the original scale (0.6) with the map scale
-        hologramData.object.scale = k.vec2(hologramData.scale * scale);
+        try {
+            hologramData.object.pos.x = hologramData.originalX * scale;
+            hologramData.object.pos.y = mapOffsetY + (hologramData.originalY * scale);
+            hologramData.object.scale = k.vec2(hologramData.scale * scale);
+        } catch (e) {
+            alert(`ERROR updating hologram: ${e.message}`);
+        }
+        // // Calculate the scaled position relative to the map's new position
+        // hologramData.object.pos.x = hologramData.originalX * scale;
+        // hologramData.object.pos.y = mapOffsetY + (hologramData.originalY * scale);
+
+        // // Update scale - combine the original scale (0.6) with the map scale
+        // hologramData.object.scale = k.vec2(hologramData.scale * scale);
     }
 }
