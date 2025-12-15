@@ -27,15 +27,17 @@ export class Collectible {
 
         this.originalAnimationSpeed = this.gameObject.animSpeed;
 
-        this.gameObject.onEnterScreen(() => {
-            this.gameObject.hidden = false;
+        this.gameObject.hidden = true;
+
+        // this.gameObject.onEnterScreen(() => {
+        //     this.gameObject.hidden = false;
 
 
-        });
+        // });
 
-        this.gameObject.onExitScreen(() => {
-            this.gameObject.hidden = true;
-        });
+        // this.gameObject.onExitScreen(() => {
+        //     this.gameObject.hidden = true;
+        // });
 
         this.gameObject.play("mug");
         this.update();
