@@ -130,16 +130,16 @@ k.scene("level", async () => {
     // Initialize the level
     level(k, levelDataJson, () => {
         // Create the player
-        let playerPosition = levelDataJson.layers[6].objects[0];
-        const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
+        // let playerPosition = levelDataJson.layers[6].objects[0];
+        // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
 
-        gameState.player = player;
-        uiManager.setUpCollisionsUI();
+        // gameState.player = player;
+        // uiManager.setUpCollisionsUI();
 
-        // Setup the camera
-        const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
-        const mapHeight = levelDataJson.height * levelDataJson.tileheight;
-        const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
+        // // Setup the camera
+        // const mapWidth = levelDataJson.width * levelDataJson.tilewidth;
+        // const mapHeight = levelDataJson.height * levelDataJson.tileheight;
+        // const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
 
         // player.hidden = true;
         // player.paused = true;

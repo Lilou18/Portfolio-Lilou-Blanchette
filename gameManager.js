@@ -158,20 +158,20 @@ export class GameManager {
         // });
 
         // Collision between a player and an enemy
-        this.k.onCollide("player", "enemy", (player, enemy) => {
+        // this.k.onCollide("player", "enemy", (player, enemy) => {
 
-            const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
-            if (indexCollectible != -1) {
-                this.enemies[indexCollectible].destroy();
-                this.changeScore(-10);
-                this.enemies.splice(indexCollectible, 1);
-                this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
-                soundManager.playSound("hitSFX");
-            }
-            else {
-                alert("CRITICAL: Enemy not found in list!");
-            }
-        });
+        //     const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
+        //     if (indexCollectible != -1) {
+        //         this.enemies[indexCollectible].destroy();
+        //         this.changeScore(-10);
+        //         this.enemies.splice(indexCollectible, 1);
+        //         this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
+        //         soundManager.playSound("hitSFX");
+        //     }
+        //     else {
+        //         alert("CRITICAL: Enemy not found in list!");
+        //     }
+        // });
 
         // No collision between enemies
         this.k.onCollide("enemy", "enemy", () => {
