@@ -100,6 +100,10 @@ window.addEventListener('unhandledrejection', (event) => {
     displayError('❌ UNHANDLED PROMISE', String(event.reason));
 });
 
+window.onerror = function (msg, url, line, col, err) {
+    alert(msg + "\n" + line + ":" + col)
+}
+
 // ============ FIN GESTION D'ERREURS ============
 
 
