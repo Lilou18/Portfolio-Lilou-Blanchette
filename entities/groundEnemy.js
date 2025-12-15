@@ -44,7 +44,7 @@ export class GroundEnemy {
         // this.gameObject.hidden = true;
 
         this.gameObject.onEnterScreen(() => {
-            this.gameObject.hidden = false;           
+            this.gameObject.hidden = false;
         });
 
         this.gameObject.onExitScreen(() => {
@@ -106,7 +106,7 @@ export class GroundEnemy {
     // Manage walking animation and collision with the left border
     update() {
         this.gameObject.onUpdate(() => {
-            if (this.destroyed) return;
+            if (this.destroyed || !this.gameObject) return;
 
             if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
                 return; // The game is paused
@@ -126,7 +126,7 @@ export class GroundEnemy {
 
     // Update the scale of the enemy if screen changed
     updateScale(mapScale, mapOffsetY) {
-        if (!this.destroyed) {
+        if (!this.destroyed && this.gameObject) {
             const currentX = this.originalX - this.currentOffset;
             const scaledX = currentX * mapScale;
             const scaledY = mapOffsetY + (this.originalY * mapScale);
@@ -144,6 +144,9 @@ export class GroundEnemy {
     destroy() {
         if (!this.destroyed) {
             this.destroyed = true;
+            if (this.gameObject.area) {
+                this.gameObject.area.enabled = false;
+            }
 
             this.k.tween(
                 this.gameObject.scale,

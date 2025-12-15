@@ -118,12 +118,16 @@ export class GameManager {
     // If the screen change size we must update the size of the enemies and the collectibles
     updateScale(mapScale, mapOffsetY) {
         this.enemies.forEach(enemy => {
-            enemy.updateScale(mapScale, mapOffsetY);
+            if(enemy && enemy.gameObject){
+                enemy.updateScale(mapScale, mapOffsetY);
+            }
 
         });
 
         this.collectibles.forEach(collectible => {
-            collectible.updateScale(mapScale, mapOffsetY);
+            if(collectible && collectible.gameObject){
+                collectible.updateScale(mapScale, mapOffsetY);
+            }
         });
     }
 

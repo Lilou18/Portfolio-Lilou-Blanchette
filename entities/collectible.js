@@ -45,7 +45,7 @@ export class Collectible {
     }
 
     updateScale(mapScale, mapOffsetY) {
-        if (!this.destroyed) {
+        if (!this.destroyed && this.gameObject) {
             const scaledX = this.originalX * mapScale;
             this.scaledY = mapOffsetY + (this.originalY * mapScale);
 
@@ -59,7 +59,7 @@ export class Collectible {
     update() {
 
         this.gameObject.onUpdate(() => {
-            if (this.destroyed) return;
+            if (this.destroyed || !this.gameObject) return;
 
 
 
@@ -78,6 +78,9 @@ export class Collectible {
     collect() {
         if (!this.destroyed) {
             this.destroyed = true;
+            if (this.gameObject.area) {
+                this.gameObject.area.enabled = false;
+            }
             soundManager.playSound("collectibleSFX");
             this.k.tween(
                 this.gameObject.scale,
