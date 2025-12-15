@@ -1,6 +1,10 @@
 import { gameState } from "./gameState.js";
 
 export function handlePauseAnimation(gameObject, originalAnimationSpeed) {
+    if (!gameObject || !gameObject.exists?.()) {
+        alert("CRITICAL: ANIMATE NULL OBJECT");
+        return false;
+    }
     const isGamePaused = gameState.isGamePaused;
 
     if (isGamePaused) {
