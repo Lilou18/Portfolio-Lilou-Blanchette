@@ -15,8 +15,8 @@ function getResolution() {
             targetHeight = 540;
         } else {
             // Tablettes (iPad, etc.)
-            targetWidth = 1280;
-            targetHeight = 720;
+            targetWidth = 1024;
+            targetHeight = 576;
         }
     } else {
         // Desktop : pleine résolution
