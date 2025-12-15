@@ -49,21 +49,55 @@ export const k = kaplay({
 
 // ============ GESTION D'ERREURS GLOBALE ============
 
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-    alert(`❌ UNHANDLED ERROR\n\nMessage: ${msg}\n\nFile: ${url}\nLine: ${lineNo}\n\nError: ${error ? error.stack : 'No stack trace'}`);
-    console.error("Unhandled error:", error);
+// Créer un div pour afficher les erreurs
+const errorDiv = document.createElement('div');
+errorDiv.id = 'error-display';
+errorDiv.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: #ff0000;
+    font-family: monospace;
+    padding: 20px;
+    overflow: auto;
+    z-index: 10000;
+    display: none;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+`;
+document.body.appendChild(errorDiv);
+
+function displayError(title, message) {
+    errorDiv.style.display = 'block';
+    errorDiv.innerHTML += `<div style="margin-bottom: 20px; border-bottom: 1px solid #ff0000;">
+        <strong style="color: #ffff00;">${title}</strong>
+        <p>${message}</p>
+    </div>`;
+    console.error(`${title}: ${message}`);
+}
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    const errorMsg = `
+Message: ${msg}
+File: ${url}
+Line: ${lineNo}
+Column: ${columnNo}
+Stack: ${error ? error.stack : 'No stack'}`;
+
+    displayError('❌ UNHANDLED ERROR', errorMsg);
     return false;
 };
 
 window.addEventListener('error', (event) => {
-    alert(`❌ ERROR EVENT\n\n${event.message}\n\n${event.filename}:${event.lineno}`);
-    console.error("Error event:", event);
+    displayError('❌ ERROR EVENT', `${event.message}\n${event.filename}:${event.lineno}\n${event.error?.stack || ''}`);
 });
 
-// Capture les rejets de Promise non gérées
 window.addEventListener('unhandledrejection', (event) => {
-    alert(`❌ UNHANDLED PROMISE REJECTION\n\n${event.reason}`);
-    console.error("Unhandled rejection:", event.reason);
+    displayError('❌ UNHANDLED PROMISE', String(event.reason));
 });
 
 // ============ FIN GESTION D'ERREURS ============
