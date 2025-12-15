@@ -138,6 +138,14 @@ export function level(k, dataLevel, onScalingReady) {
 
     });
 
+    debug.log("=== CANVAS INFO ===");
+    debug.log("k.width():", k.width());
+    debug.log("k.height():", k.height());
+    debug.log("canvas.width:", k.canvas.width);
+    debug.log("canvas.height:", k.canvas.height);
+    debug.log("pixelDensity:", window.devicePixelRatio);
+    debug.log("window size:", window.innerWidth, "x", window.innerHeight);
+
     setMapColliders(k, mapPart1, colliders);
     // Create borders and store references
     const borders = setMapBorders(k, dataLevel.tilewidth, mapHeight, mapWidth);

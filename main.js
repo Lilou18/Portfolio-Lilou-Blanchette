@@ -141,6 +141,9 @@ k.scene("level", async () => {
         const mapHeight = levelDataJson.height * levelDataJson.tileheight;
         const camera = new Camera(player.gameObject, 0, 0, mapWidth, mapHeight);
 
+        player.hidden = true;
+        player.paused = true;
+
     });
 });
 
