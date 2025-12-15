@@ -152,6 +152,9 @@ export class GameManager {
                 this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
                 soundManager.playSound("hitSFX");
             }
+            else{
+                alert("CRITICAL: Enemy not found in list!");
+            }
         });
 
         // No collision between enemies

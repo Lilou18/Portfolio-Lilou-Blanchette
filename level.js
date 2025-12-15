@@ -25,6 +25,18 @@ export function level(k, dataLevel, onScalingReady) {
         frames++;
 
         if (timer >= 1) {
+            const enemies = k.get("enemy");
+            const collectibles = k.get("collectible");
+
+            test.text = `FPS: ${frames} | Enemies: ${enemies.length} | Collectibles: ${collectibles.length}`;
+
+            // Alert si trop d'objets
+            if (enemies.length > 50) {
+                alert(`WARNING: ${enemies.length} enemies in scene!`);
+            }
+            if (collectibles.length > 20) {
+                alert(`WARNING: ${collectibles.length} collectibles in scene!`);
+            }
             test.text = "FPS: " + frames;
             frames = 0;
             timer = 0;

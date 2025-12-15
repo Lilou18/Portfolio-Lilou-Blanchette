@@ -44,7 +44,7 @@ export class GroundEnemy {
         // this.gameObject.hidden = true;
 
         this.gameObject.onEnterScreen(() => {
-            this.gameObject.hidden = false;           
+            this.gameObject.hidden = false;
         });
 
         this.gameObject.onExitScreen(() => {
@@ -108,6 +108,16 @@ export class GroundEnemy {
         this.gameObject.onUpdate(() => {
             if (this.destroyed) return;
 
+            if (!this.gameObject) {
+                alert("CRITICAL: this.gameObject is NULL in onUpdate!");
+                return;
+            }
+
+            if (!this.gameObject.exists()) {
+                alert("CRITICAL: gameObject.exists() returned false!");
+                return;
+            }
+
             if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
                 return; // The game is paused
             }
@@ -115,7 +125,12 @@ export class GroundEnemy {
 
             const movement = this.speed * this.k.dt();
             this.currentOffset += movement;
-            this.gameObject.move(- this.speed, 0)
+
+            if (this.gameObject && this.gameObject.exists()) {
+                this.gameObject.move(-this.speed, 0);
+            } else {
+                alert("CRITICAL: gameObject disappeared before move()!");
+            }
 
         });
 
@@ -127,6 +142,18 @@ export class GroundEnemy {
     // Update the scale of the enemy if screen changed
     updateScale(mapScale, mapOffsetY) {
         if (!this.destroyed) {
+
+
+            if (!this.gameObject) {
+                alert("CRITICAL: updateScale - gameObject is NULL!");
+                return;
+            }
+
+            if (!this.gameObject.exists()) {
+                alert("CRITICAL: updateScale - gameObject.exists() is false!");
+                return;
+            }
+
             const currentX = this.originalX - this.currentOffset;
             const scaledX = currentX * mapScale;
             const scaledY = mapOffsetY + (this.originalY * mapScale);
@@ -145,11 +172,22 @@ export class GroundEnemy {
         if (!this.destroyed) {
             this.destroyed = true;
 
+            if (!this.gameObject || !this.gameObject.exists()) {
+                alert("CRITICAL: Trying to destroy but gameObject is invalid!");
+                return;
+            }
+
             this.k.tween(
                 this.gameObject.scale,
                 this.k.vec2(0),
                 0.2,
-                (val) => { this.gameObject.scale = val },
+                (val) => {
+                    if (this.gameObject && this.gameObject.exists()) {
+                        this.gameObject.scale = val;
+                    } else {
+                        alert("CRITICAL: gameObject disappeared during tween!");
+                    }
+                },
                 this.k.easings.easeOutBack
             ).then(() => {
                 this.gameObject.destroy();
