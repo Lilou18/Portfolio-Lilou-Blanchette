@@ -177,21 +177,23 @@ export class GroundEnemy {
                 return;
             }
 
-            this.k.tween(
-                this.gameObject.scale,
-                this.k.vec2(0),
-                0.2,
-                (val) => {
-                    if (this.gameObject && this.gameObject.exists()) {
-                        this.gameObject.scale = val;
-                    } else {
-                        alert("CRITICAL: gameObject disappeared during tween!");
-                    }
-                },
-                this.k.easings.easeOutBack
-            ).then(() => {
-                this.gameObject.destroy();
-            });
+            this.gameObject.destroy();
+
+            // this.k.tween(
+            //     this.gameObject.scale,
+            //     this.k.vec2(0),
+            //     0.2,
+            //     (val) => {
+            //         if (this.gameObject && this.gameObject.exists()) {
+            //             this.gameObject.scale = val;
+            //         } else {
+            //             alert("CRITICAL: gameObject disappeared during tween!");
+            //         }
+            //     },
+            //     this.k.easings.easeOutBack
+            // ).then(() => {
+            //     this.gameObject.destroy();
+            // });
         }
     }
 }

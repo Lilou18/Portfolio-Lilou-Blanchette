@@ -82,15 +82,16 @@ export class Collectible {
         if (!this.destroyed) {
             this.destroyed = true;
             soundManager.playSound("collectibleSFX");
-            this.k.tween(
-                this.gameObject.scale,
-                this.k.vec2(0),
-                0.2,
-                (val) => { this.gameObject.scale = val },
-                this.k.easings.easeOutBack
-            ).then(() => {
-                this.gameObject.destroy();
-            });
+            this.gameObject.destroy();
+            // this.k.tween(
+            //     this.gameObject.scale,
+            //     this.k.vec2(0),
+            //     0.2,
+            //     (val) => { this.gameObject.scale = val },
+            //     this.k.easings.easeOutBack
+            // ).then(() => {
+            //     this.gameObject.destroy();
+            // });
         }
     }
 }
