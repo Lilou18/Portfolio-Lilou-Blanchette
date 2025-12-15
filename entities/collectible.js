@@ -62,6 +62,10 @@ export class Collectible {
             if (this.destroyed) return;
 
 
+            if (!this.gameObject) {
+                alert("CRITICAL: Collectible gameObject is NULL!");
+                return;
+            }
 
             if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
                 return; // The game is paused

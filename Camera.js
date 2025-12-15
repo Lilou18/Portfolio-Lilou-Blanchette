@@ -17,10 +17,14 @@ export class Camera {
 
     follow() {
         onUpdate(() => {
+            if (!this.followedGameObject) {
+                alert("CRITICAL: followedGameObject is NULL in Camera!");
+                return;
+            }
             const screenWidth = width();
             const playerPosX = this.followedGameObject.pos.x + this.offsetX;
             const halfScreen = screenWidth / 2;
-            
+
             // Use the scaled map width for calculations
             const scaledMapWidth = this.getScaledMapWidth();
 
@@ -30,15 +34,15 @@ export class Camera {
             let posX;
 
             // Left boundary: camera can't go further left than halfScreen
-            if(playerPosX < halfScreen){
+            if (playerPosX < halfScreen) {
                 posX = halfScreen;
             }
             // Right boundary: camera can't go further right than scaledMapWidth - halfScreen
-            else if(playerPosX > scaledMapWidth - halfScreen){
+            else if (playerPosX > scaledMapWidth - halfScreen) {
                 posX = scaledMapWidth - halfScreen;
             }
             // Normal following
-            else{
+            else {
                 posX = playerPosX;
             }
 

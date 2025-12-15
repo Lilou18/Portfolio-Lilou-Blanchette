@@ -47,7 +47,26 @@ export const k = kaplay({
     //     //debug = false;
 });
 
+// ============ GESTION D'ERREURS GLOBALE ============
 
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    alert(`❌ UNHANDLED ERROR\n\nMessage: ${msg}\n\nFile: ${url}\nLine: ${lineNo}\n\nError: ${error ? error.stack : 'No stack trace'}`);
+    console.error("Unhandled error:", error);
+    return false;
+};
+
+window.addEventListener('error', (event) => {
+    alert(`❌ ERROR EVENT\n\n${event.message}\n\n${event.filename}:${event.lineno}`);
+    console.error("Error event:", event);
+});
+
+// Capture les rejets de Promise non gérées
+window.addEventListener('unhandledrejection', (event) => {
+    alert(`❌ UNHANDLED PROMISE REJECTION\n\n${event.reason}`);
+    console.error("Unhandled rejection:", event.reason);
+});
+
+// ============ FIN GESTION D'ERREURS ============
 
 
 k.loadSprite("levelP1", "./map/levelP1.png");
