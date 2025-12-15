@@ -41,9 +41,9 @@ export function level(k, dataLevel, onScalingReady) {
     const mapPart2 = k.add([k.pos(2176, 0), k.sprite("levelP2")]);
     const mapPart3 = k.add([k.pos(4352, 0), k.sprite("levelP3")]);
 
-    mapPart1.hidden = true;
-    mapPart2.hidden = true;
-    mapPart3.hidden = true;
+    // mapPart1.hidden = true;
+    // mapPart2.hidden = true;
+    // mapPart3.hidden = true;
 
     const mapParts = [mapPart1, mapPart2, mapPart3];
 
