@@ -158,15 +158,15 @@ export class GameManager {
             }
         });
 
-        // No collision between enemies
-        this.k.onCollide("enemy", "enemy", () => {
+        // // No collision between enemies
+        // this.k.onCollide("enemy", "enemy", () => {
 
-        });
+        // });
 
-        // No collision between collectibles
-        this.k.onCollide("collectible", "enemy", () => {
+        // // No collision between collectibles
+        // this.k.onCollide("collectible", "enemy", () => {
 
-        });
+        // });
 
         this.k.onCollide("enemy", "borderLeft", (enemy) => {
             const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
