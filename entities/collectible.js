@@ -46,6 +46,11 @@ export class Collectible {
 
     updateScale(mapScale, mapOffsetY) {
         if (!this.destroyed) {
+
+            if (!this.gameObject || !this.gameObject.exists()) {
+                return;
+            }
+
             const scaledX = this.originalX * mapScale;
             this.scaledY = mapOffsetY + (this.originalY * mapScale);
 
@@ -59,13 +64,7 @@ export class Collectible {
     update() {
 
         this.gameObject.onUpdate(() => {
-            if (this.destroyed) return;
-
-
-            if (!this.gameObject) {
-                alert("CRITICAL: Collectible gameObject is NULL!");
-                return;
-            }
+            if (this.destroyed || !this.gameObject || !this.gameObject.exists()) return;
 
             if (handlePauseAnimation(this.gameObject, this.originalAnimationSpeed)) {
                 return; // The game is paused
