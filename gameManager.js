@@ -19,7 +19,7 @@ export class GameManager {
         // this.test = 0;
 
         this.enemySpawnTimer = 0;
-        this.enemySpawnInterval = Math.random() * (3 - 2) + 2;
+        this.enemySpawnInterval = 1;
         //this.enemySpawnInterval = (Math.random() * 3) + 1;
 
         this.playerJumpHeight = 200;
