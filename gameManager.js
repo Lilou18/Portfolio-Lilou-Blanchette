@@ -16,6 +16,9 @@ export class GameManager {
         this.enemies = [];
         // this.collectibles = [];
 
+        this.totalEnemiesSpawned = 0;
+        this.totalEnemiesDestroyed = 0;
+
         // this.test = 0;
 
         this.enemySpawnTimer = 0;
@@ -158,20 +161,20 @@ export class GameManager {
         // });
 
         // Collision between a player and an enemy
-        // this.k.onCollide("player", "enemy", (player, enemy) => {
+        this.k.onCollide("player", "enemy", (player, enemy) => {
 
-        //     const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
-        //     if (indexCollectible != -1) {
-        //         this.enemies[indexCollectible].destroy();
-        //         this.changeScore(-10);
-        //         this.enemies.splice(indexCollectible, 1);
-        //         this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
-        //         soundManager.playSound("hitSFX");
-        //     }
-        //     else {
-        //         alert("CRITICAL: Enemy not found in list!");
-        //     }
-        // });
+            const indexCollectible = this.enemies.findIndex(element => element.gameObject === enemy);
+            if (indexCollectible != -1) {
+                this.enemies[indexCollectible].destroy();
+                this.changeScore(-10);
+                this.enemies.splice(indexCollectible, 1);
+                this.k.tween(this.k.RED, this.k.WHITE, 0.15, (p) => player.color = p);
+                soundManager.playSound("hitSFX");
+            }
+            else {
+                alert("CRITICAL: Enemy not found in list!");
+            }
+        });
 
         // No collision between enemies
         this.k.onCollide("enemy", "enemy", () => {
@@ -243,6 +246,7 @@ export class GameManager {
         // }
 
         const enemy = new GroundEnemy(this.k, originalX, originalY + 40);
+        this.totalEnemiesSpawned++;
         this.enemies.push(enemy);
 
         if (this.k.mapScale && this.k.mapOffsetY !== undefined) {
