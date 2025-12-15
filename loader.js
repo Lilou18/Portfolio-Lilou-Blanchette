@@ -1,11 +1,43 @@
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
 import { deviceInfo } from "./deviceInfo.js";
 
+function getResolution() {
+    const isTouchDevice = deviceInfo.isMobile || deviceInfo.isTouchEnabled;
+    const screenWidth = window.innerWidth;
+
+    let targetWidth, targetHeight;
+
+    if (isTouchDevice) {
+        // Tous les appareils touch : résolution réduite pour performance
+        if (screenWidth < 768) {
+            // Téléphones
+            targetWidth = 960;
+            targetHeight = 540;
+        } else {
+            // Tablettes (iPad, etc.)
+            targetWidth = 1280;
+            targetHeight = 720;
+        }
+    } else {
+        // Desktop : pleine résolution
+        targetWidth = 1920;
+        targetHeight = 1080;
+    }
+
+    console.log(`🎮 Résolution du jeu: ${targetWidth}×${targetHeight}`);
+    console.log(`📱 Touch device: ${isTouchDevice}`);
+    console.log("SCREEN WIDTH " + screenWidth);
+
+    return { width: targetWidth, height: targetHeight };
+}
+
+const resolution = getResolution();
+
 export const k = kaplay({
     canvas: document.getElementById("gameCanvas"),
     background: [167, 234, 252],
-    width: 1920,
-    height: 1080,
+    width: resolution.width,
+    height: resolution.height,
     stretch: true,
     letterbox: false,
     crisp: false,
