@@ -33,8 +33,8 @@ export const k = kaplay({
 // Configure le canvas pour adapter à la fenêtre avec CSS
 const canvas = k.canvas;
 canvas.style.display = "block";
-canvas.style.width = "100vw";
-canvas.style.height = "100vh";
+canvas.style.width = "100dvw";
+canvas.style.height = "100dvh";
 canvas.style.margin = "0";
 canvas.style.padding = "0";
 
