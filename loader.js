@@ -1,19 +1,61 @@
 import kaplay from "https://unpkg.com/kaplay@4000.0.0-alpha.23/dist/kaplay.mjs";
 import { deviceInfo } from "./deviceInfo.js";
 
+// Ratio de référence
+const REFERENCE_WIDTH = 1920;
+const REFERENCE_HEIGHT = 1080;
+const ASPECT_RATIO = REFERENCE_WIDTH / REFERENCE_HEIGHT;
+
+function getInitialDimensions() {
+    // Utilise une résolution haute pour éviter la pixélisation au downscale
+    // Fullscreen basé sur la fenêtre actuelle
+    const canvasWidth = Math.max(window.innerWidth, 1920);
+    const canvasHeight = Math.max(window.innerHeight, 1080);
+    
+    return { width: canvasWidth, height: canvasHeight };
+}
+
+const dimensions = getInitialDimensions();
+
 export const k = kaplay({
     canvas: document.getElementById("gameCanvas"),
     background: [167, 234, 252],
-    width: 1920,
-    height: 1080,
+    width: dimensions.width,
+    height: dimensions.height,
     stretch: true,
     letterbox: false,
     crisp: false,
     pixelDensity: 1,
     touchToMouse: true,
-    texFilter: "linear",
-    //     //debug = false;
+    texFilter: "nearest",
 });
+
+// Configure le canvas pour adapter à la fenêtre avec CSS
+const canvas = k.canvas;
+canvas.style.display = "block";
+canvas.style.width = "100vw";
+canvas.style.height = "100vh";
+canvas.style.margin = "0";
+canvas.style.padding = "0";
+
+// Configure le body pour fullscreen
+document.body.style.margin = "0";
+document.body.style.padding = "0";
+document.body.style.overflow = "hidden";
+
+// Gère le redimensionnement de la fenêtre
+window.addEventListener("resize", () => {
+    // Kaplay va s'adapter automatiquement au resize
+    // On stocke juste les nouvelles dimensions pour le calcul du scale dans level.js
+    k.gameWidth = window.innerWidth;
+    k.gameHeight = window.innerHeight;
+});
+
+// Initialise les valeurs de référence
+k.gameWidth = dimensions.width;
+k.gameHeight = dimensions.height;
+k.referenceWidth = REFERENCE_WIDTH;
+k.referenceHeight = REFERENCE_HEIGHT;
 
 
 
