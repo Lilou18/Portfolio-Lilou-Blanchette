@@ -1,4 +1,4 @@
-import { gameState } from "../gameState.js";
+import { gameState } from "./gameState.js";
 import { world } from "./animationManager.js";
 
 export class Player {
