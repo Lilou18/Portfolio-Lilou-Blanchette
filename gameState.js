@@ -1,7 +1,8 @@
-/**
+export const gameState = {
+    /**
  * Global game state manager.
  */
-export const gameState = {
+
     player: null,           // Reference to the player entity
     gameStarted: false,     //Indicates whether the game has started
     pauseFlags: new Set(),  // Collection of active pause flags
@@ -19,14 +20,14 @@ export const gameState = {
      * Adds a pause flag to the game.
      * @param {string} flag Reason why the game is paused
      */
-    addPauseFlag(flag){
+    addPauseFlag(flag) {
         this.pauseFlags.add(flag);
     },
     /**
      * // Removes a pause flag from the game.
      * @param {string} flag Reason why the game was paused
      */
-    removePauseFlag(flag){
+    removePauseFlag(flag) {
         this.pauseFlags.delete(flag);
     },
     /**
@@ -34,7 +35,7 @@ export const gameState = {
      * @param {string} flag Reason why the game is paused
      * @returns {boolean}
      */
-    isGamePauseFor(flag){
+    isGamePauseFor(flag) {
         return this.pauseFlags.has(flag);
     }
 }
