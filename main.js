@@ -429,13 +429,13 @@
 
 
 import { k } from "./loader.js";
-import { level } from "./level.js";
-import { gameState } from "./gameState.js";
-import { Player } from "./player.js";
+//import { level } from "./level.js";
+//import { gameState } from "./gameState.js";
+//import { Player } from "./player.js";
 //import { Camera } from "./camera.js";
 //import { uiManager } from "./uiManager.js";
 //import { applicationManager } from "./applicationManager.js";
-import { createWorld } from "./animationManager.js";
+//import { createWorld } from "./animationManager.js";
 
 k.scene("level", async () => {
     // Load level data
@@ -460,10 +460,10 @@ k.scene("level", async () => {
     // uiManager.setUpHologramInteractions();
 
     k.onLoad(() => {
-        const world = createWorld();
+        //const world = createWorld();
 
         // Initialize the level
-        const levelControl = level(k, levelDataJson);
+        //const levelControl = level(k, levelDataJson);
 
         // Create the player
         //let playerPosition = levelDataJson.layers[6].objects[0];
