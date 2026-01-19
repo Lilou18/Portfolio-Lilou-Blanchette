@@ -307,6 +307,7 @@ export function level(k, dataLevel) {
 
     // Fonction pour mettre à jour le player
     function updatePlayer(scaleX, scaleY) {
+        if (!player?.gameObject?.exists()) return;
         if (player && player.gameObject) {
             //console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
 
@@ -427,7 +428,9 @@ export function level(k, dataLevel) {
             setPlayer: (playerInstance) => {
                 player = playerInstance;
                 const { scaleX, scaleY } = getCurrentScale();
-                updatePlayer(scaleX, scaleY);
+                k.wait(0.01, () => {
+                    updatePlayer(scaleX, scaleY);
+                });
             },
             getCurrentScale,
             getScaledMapWidth() {
