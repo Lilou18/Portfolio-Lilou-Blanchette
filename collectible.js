@@ -19,6 +19,7 @@ export class Collectible {
         // Original spawn position (used as reference for scaling)
         this.originalX = x;
         this.originalY = y;
+        this.originalScale = 0.2;
         this.scaledY = y;
 
         // State tracking
@@ -33,7 +34,8 @@ export class Collectible {
             k.sprite("collectible", { anim: "mug" }),
             k.area(),                                           // Enables collision detection
             k.anchor("center"),
-            k.scale(0.6),
+            // k.scale(0.6),
+            k.scale(this.originalScale),
             k.pos(x, y),
             k.z(1),
             k.offscreen({ hide: true}),
@@ -68,7 +70,7 @@ export class Collectible {
             this.gameObject.pos.y = this.scaledY;
 
             // Scale the sprite proportionally with the map
-            this.gameObject.scale = this.k.vec2(0.6 * scaleX, 0.6 * scaleY);
+            this.gameObject.scale = this.k.vec2(this.originalScale * scaleX, this.originalScale * scaleY);
 
             // Store scale values to use in the floating animation
             this.lastScaleY = scaleY;
