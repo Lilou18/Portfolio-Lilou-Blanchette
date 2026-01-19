@@ -11,6 +11,7 @@ export const k = kaplay({
 });
 
 debug.log("Pixel density: " +  pixelDensityTest);
+debug.log("Window density: " + window.devicePixelRatio);
 
 loadSprite("levelP1", "./assets/levelP1.png");
 loadSprite("levelP2", "./assets/levelP2.png");
