@@ -7,7 +7,7 @@ export const k = kaplay({
     crisp: false,
     pixelDensity: 1,
     touchToMouse: true,
-    pixelDensity: 1.5,
+    pixelDensity: 1,
     // pixelDensity: Math.min(2, window.devicePixelRatio),
 });
 
