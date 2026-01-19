@@ -430,8 +430,8 @@
 
 import { k } from "./loader.js";
 import { level } from "./level.js";
-//import { gameState } from "./gameState.js";
-//import { Player } from "./player.js";
+import { gameState } from "./gameState.js";
+import { Player } from "./player.js";
 //import { Camera } from "./camera.js";
 //import { uiManager } from "./uiManager.js";
 //import { applicationManager } from "./applicationManager.js";
@@ -442,23 +442,6 @@ k.scene("level", async () => {
     const levelData = await fetch("level2.json");
     const levelDataJson = await levelData.json();
 
-    // const world = createWorld();
-
-    // // Initialize the level
-    // const levelControl = level(k, levelDataJson);
-
-    // // Create the player
-    // let playerPosition = levelDataJson.layers[6].objects[0];
-    // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
-    // gameState.player = player;
-    // levelControl.setPlayer(gameState.player);
-
-    // // Setup the camera
-    // const camera = new Camera(player.gameObject, levelControl);
-    // camera.setMapParts(levelControl.getMapParts());
-
-    // uiManager.setUpHologramInteractions();
-
     k.onLoad(() => {
         const world = createWorld();
 
@@ -466,10 +449,10 @@ k.scene("level", async () => {
         const levelControl = level(k, levelDataJson);
 
         // Create the player
-        //let playerPosition = levelDataJson.layers[6].objects[0];
-        //const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
-        //gameState.player = player;
-        //levelControl.setPlayer(gameState.player);
+        let playerPosition = levelDataJson.layers[6].objects[0];
+        const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
+        gameState.player = player;
+        levelControl.setPlayer(gameState.player);
 
         // Setup the camera
         //const camera = new Camera(player.gameObject, levelControl);

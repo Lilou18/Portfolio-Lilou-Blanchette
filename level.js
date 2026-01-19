@@ -266,7 +266,7 @@ export function level(k, dataLevel) {
         updateBorders(scaleX, scaleY);
 
         // Mettre à jour le player
-        //updatePlayer(scaleX, scaleY);
+        updatePlayer(scaleX, scaleY);
 
         // Update Holograms
         updateHolograms(scaleX, scaleY);
