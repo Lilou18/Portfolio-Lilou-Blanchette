@@ -458,8 +458,8 @@ export function level(k, dataLevel) {
         //uiManager.setLevelControl(levelControl);
 
         // Appliquer le scaling initial
-        k.wait(0.01, () => {
-            //updateScaling(); // <-- maintenant safe
+        k.wait(0.05, () => {
+            updateScaling(); // <-- maintenant safe
         });
     }
 
