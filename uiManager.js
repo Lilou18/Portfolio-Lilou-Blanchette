@@ -143,7 +143,7 @@ export class UIManager {
         // Adjust text content and text size if it's on a mobile device or touchscreen device
         const isMobile = deviceInfo.isMobile;
         const text = isMobile || deviceInfo.isTouchEnabled ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
-        const textSize = isMobile ? 25 : 20;
+        const textSize = isMobile ? 30 : 20;
 
         const hologram = world.get(hologramTag)[0];
         if (!hologram) return;
