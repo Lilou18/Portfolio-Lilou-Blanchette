@@ -72,7 +72,7 @@ export class UIManager {
     }
 
     /**
-     * Show or hide mobile controls based on device type
+     * Show or hide mobile controls based on the device type (phone or touchscreen).
      */
     initializeMobileControls() {
         if (this.mobileControls && (deviceInfo.isMobile || deviceInfo.isTouchEnabled)) {
@@ -140,7 +140,7 @@ export class UIManager {
         // Remove any text that might be left
         this.removeInteractionText(hologramTag);
 
-        // Adjust text content and text size if it's on a mobile device
+        // Adjust text content and text size if it's on a mobile device or touchscreen device
         const isMobile = deviceInfo.isMobile;
         const text = isMobile || deviceInfo.isTouchEnabled ? "Appuyez sur \n l'hologramme" : "Appuyez sur « Enter » \n ou Cliquez";
         const textSize = isMobile ? 25 : 20;

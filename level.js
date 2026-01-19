@@ -308,7 +308,7 @@ export function level(k, dataLevel) {
     // Fonction pour mettre à jour le player
     function updatePlayer(scaleX, scaleY) {
         if (player && player.gameObject) {
-            console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
+            //console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
 
             // Première fois: mémoriser la position originale du joueur
             if (!playerRelativePos && player.originalPosX === undefined) {
@@ -318,7 +318,7 @@ export function level(k, dataLevel) {
                     originalX: player.initialPlayerPositionX,
                     originalY: player.initialPlayerPositionY
                 };
-                console.log("Position originale mémorisée:", playerRelativePos);
+                //console.log("Position originale mémorisée:", playerRelativePos);
             }
 
             // Si le scale a changé (resize), recalculer la position relative en fonction de la position actuelle
@@ -328,7 +328,7 @@ export function level(k, dataLevel) {
                     originalX: player.gameObject.pos.x / lastScaleX,
                     originalY: player.gameObject.pos.y / lastScaleY
                 };
-                console.log("Position relative mise à jour avant resize:", playerRelativePos);
+                //console.log("Position relative mise à jour avant resize:", playerRelativePos);
             }
 
             // Utiliser la moyenne des deux scales pour un scaling uniforme
@@ -341,7 +341,7 @@ export function level(k, dataLevel) {
                     playerRelativePos.originalX * scaleX,
                     playerRelativePos.originalY * scaleY
                 );
-                console.log("Nouvelle position du joueur:", player.gameObject.pos);
+                //console.log("Nouvelle position du joueur:", player.gameObject.pos);
             }
 
             player.updateSpeeds(scaleX, scaleY);
@@ -350,7 +350,7 @@ export function level(k, dataLevel) {
             lastScaleX = scaleX;
             lastScaleY = scaleY;
 
-            console.log("UPDATE PLAYER POSITION : " + player.gameObject.pos);
+            //console.log("UPDATE PLAYER POSITION : " + player.gameObject.pos);
         }
     }
 

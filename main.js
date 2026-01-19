@@ -434,7 +434,7 @@ import { gameState } from "./gameState.js";
 import { Player } from "./player.js";
 import { Camera } from "./camera.js";
 import { uiManager } from "./uiManager.js";
-import { initWindowEvents } from "./windowManager.js";
+import { applicationManager } from "./applicationManager.js";
 import { createWorld } from "./animationManager.js";
 
 k.scene("level", async () => {
@@ -460,8 +460,6 @@ k.scene("level", async () => {
     // uiManager.setUpHologramInteractions();
 
     k.onLoad(() => {
-        initWindowEvents();
-        
         const world = createWorld();
 
         // Initialize the level
@@ -480,6 +478,7 @@ k.scene("level", async () => {
         uiManager.setUpHologramInteractions();
 
         uiManager.initializeMobileControls();
+
     });
 
 });

@@ -14,6 +14,19 @@
   <body>
     <script type="module" src="main.js"></script>
     <canvas id="gameCanvas" tabindex="0"></canvas>
+    <div id="overlay">
+        <div id="portraitSection" class="rotate-device">
+            <i class="fa-solid fa-mobile-screen phone"></i>
+            <i class="fa-solid fa-arrow-rotate-right turn-arrow-right"></i>
+            <p>Meilleure expérience en mode paysage</p>
+            <small>Tournez votre appareil</small>
+        </div>
+        <div id="fullScreenSection" class="full-screen">
+            <i class="fa-solid fa-up-right-and-down-left-from-center fa-beat"></i>
+            <button id="fullscreenBtn" class="fullscreen-btn">Activer le Plein Écran</button>
+            <!-- <small>Recommandé pour une immersion totale</small> -->
+        </div>
+    </div>
     <div id="mobileControls">
         <div class="left-controls">
             <button id="btnLeft">
