@@ -422,7 +422,7 @@ export function level(k, dataLevel) {
         borders = setMapBorders(k, 128, height(), mapPart1.width);
 
         // Create the holograms
-        holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
+        //holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
 
         levelControl = {
             setPlayer: (playerInstance) => {
@@ -459,7 +459,7 @@ export function level(k, dataLevel) {
 
         // Appliquer le scaling initial
         k.wait(0.01, () => {
-            updateScaling(); // <-- maintenant safe
+            //updateScaling(); // <-- maintenant safe
         });
     }
 
@@ -469,7 +469,7 @@ export function level(k, dataLevel) {
     // Sur resize, juste mettre à jour le scaling
     const resizeHandler = onResize(() => {
         console.log("RESIZE EVENT TRIGGERED");
-        updateScaling();
+        //updateScaling();
     });
 
 
