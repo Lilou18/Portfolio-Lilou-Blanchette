@@ -381,6 +381,10 @@ export function level(k, dataLevel) {
         const mapOffsetY = canvasHeight - mapHeight;
 
         for (const data of holograms) {
+            if (!data.object || !data.object.exists()) {
+                console.warn("Hologram pas prêt :", data);
+                continue;
+            }
             // Position map → écran
             data.object.pos.x = data.originalX * scaleX;
             data.object.pos.y = mapOffsetY + (data.originalY * scaleY);
@@ -451,7 +455,9 @@ export function level(k, dataLevel) {
         //uiManager.setLevelControl(levelControl);
 
         // Appliquer le scaling initial
-        updateScaling();
+        k.wait(0.01, () => {
+            updateScaling(); // <-- maintenant safe
+        });
     }
 
     // Initialisation
