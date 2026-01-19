@@ -1,5 +1,5 @@
 import kaplay from "https://unpkg.com/kaplay@4000.0.0-alpha.23/dist/kaplay.mjs";
-
+const pixelDensityTest = Math.min(2, window.devicePixelRatio);
 export const k = kaplay({
     canvas: document.getElementById("gameCanvas"),
     background: "#5ba675",
@@ -9,6 +9,8 @@ export const k = kaplay({
     touchToMouse: true,
     pixelDensity: Math.min(2, window.devicePixelRatio),
 });
+
+debug.log("Pixel density: " +  pixelDensityTest);
 
 loadSprite("levelP1", "./assets/levelP1.png");
 loadSprite("levelP2", "./assets/levelP2.png");
