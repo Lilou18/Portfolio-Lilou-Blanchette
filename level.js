@@ -556,22 +556,23 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
         },
     };
 
-    // for (const position of hologramsMapPosition) {
-    //     const config = hologramsConfig[position.name];
+    for (const position of hologramsMapPosition) {
+        const config = hologramsConfig[position.name];
 
-    //     if (!config) continue; // Ignore positions not in the config
-    //     //("---------------------------------------------------");
-    //     //console.log(config.sprite);
-    //     const hologram = k.add([
-    //         k.sprite(config.sprite, position.name === "citySign" ? {} : { anim: "hologram" }),
-    //         k.area(),
-    //         k.anchor("bot"),
-    //         k.pos(position.x, position.y), // Position originale de Tiled
-    //         k.scale(config.scale),
-    //         //k.offscreen({ hidden: true, padding: 2000 }),
-    //         k.z(1),
-    //         config.sprite,
-    //     ]);
+        if (!config) continue; // Ignore positions not in the config
+        //("---------------------------------------------------");
+        //console.log(config.sprite);
+        const hologram = k.add([
+            // k.sprite(config.sprite, position.name === "citySign" ? {} : { anim: "hologram" }),
+            k.sprite(config.sprite),
+            k.area(),
+            k.anchor("bot"),
+            k.pos(position.x, position.y), // Position originale de Tiled
+            k.scale(config.scale),
+            //k.offscreen({ hidden: true, padding: 2000 }),
+            k.z(1),
+            config.sprite,
+        ]);
 
     //     if (hologram.is(config.sprite)) {
     //         //debug.log("IT IS TRUE!");
@@ -613,7 +614,7 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
     //     // });
     //     //console.log(hologram.pos.x);
     //     //console.log(hologram.pos.y)
-    // }
+    }
 
     return holograms;
 }
