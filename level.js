@@ -493,7 +493,7 @@ function setMapColliders(k, mapPart, colliders) {
     const colliderObjects = [];
 
     for (const collider of colliders) {
-        const colliderObj = mapPart.add([
+        const colliderObj = k.add([
             k.pos(collider.x, collider.y),
             k.area({
                 shape: new k.Rect(k.vec2(0), collider.width, collider.height)
