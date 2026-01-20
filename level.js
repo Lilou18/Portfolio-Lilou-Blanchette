@@ -410,7 +410,7 @@ export function level(k, dataLevel, worldInstance) {
 
         mapParts = [mapPart1, mapPart2, mapPart3];
 
-        k.wait(1, () => {
+        k.wait(0.05, () => {
             // Créer les colliders une seule fois
             const levelLayers = dataLevel.layers;
             const colliders = [];
