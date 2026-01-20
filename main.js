@@ -446,7 +446,7 @@ k.scene("level", async () => {
         const world = createWorld();
 
         // Initialize the level
-        const levelControl = level(k, levelDataJson);
+        const levelControl = level(k, levelDataJson, world);
 
         // // Create the player
         // let playerPosition = levelDataJson.layers[6].objects[0];

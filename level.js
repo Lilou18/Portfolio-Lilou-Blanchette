@@ -210,11 +210,11 @@ import { gameState } from "./gameState.js";
 import { deviceInfo } from "./deviceInfo.js";
 import { uiManager } from "./uiManager.js";
 import { GameManager } from "./gameManager.js";
-import { world } from "./animationManager.js";
+//import { world } from "./animationManager.js";
 
 export let levelControl = null;
 
-export function level(k, dataLevel) {
+export function level(k, dataLevel, worldInstance) {
 
     k.setGravity(1400);
 
@@ -423,9 +423,13 @@ export function level(k, dataLevel) {
 
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
-        if(dataLevel.layers[6] && levelLayers[6].objects){
-            holograms = setHolograms(k, levelLayers[6].objects);
+        if (dataLevel.layers[6] && levelLayers[6].objects) {
+            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
         }
+
+        console.log("Nombre de layers:", dataLevel.layers.length);
+        console.log("Layer 6:", dataLevel.layers[6]);
+        console.log("Layer 6 objects:", dataLevel.layers[6]?.objects);
 
         levelControl = {
             setPlayer: (playerInstance) => {
@@ -521,7 +525,7 @@ function setMapBorders(k, tilewidth, mapheight, mapWidth) {
     return { left: borderLeft, right: borderRight };
 }
 
-function setHolograms(k, hologramsMapPosition) {
+function setHolograms(k, hologramsMapPosition, worldInstance) {
     const holograms = [];
 
     const hologramsConfig = {
@@ -553,7 +557,7 @@ function setHolograms(k, hologramsMapPosition) {
         if (!config) continue; // Ignore positions not in the config
         //("---------------------------------------------------");
         //console.log(config.sprite);
-        const hologram = world.add([
+        const hologram = worldInstance.add([
             k.sprite(config.sprite, position.name === "citySign" ? {} : { anim: "hologram" }),
             k.area(),
             k.anchor("bot"),
