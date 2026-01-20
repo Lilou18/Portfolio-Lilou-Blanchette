@@ -269,7 +269,7 @@ export function level(k, dataLevel) {
         //updatePlayer(scaleX, scaleY);
 
         // Update Holograms
-        updateHolograms(scaleX, scaleY);
+        //updateHolograms(scaleX, scaleY);
 
         if (gameManager) {
             gameManager.updateScale();
@@ -422,7 +422,7 @@ export function level(k, dataLevel) {
         borders = setMapBorders(k, 128, height(), mapPart1.width);
 
         // Create the holograms
-        //holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
+        holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
 
         levelControl = {
             setPlayer: (playerInstance) => {
