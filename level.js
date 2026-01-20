@@ -240,6 +240,7 @@ export function level(k, dataLevel, worldInstance) {
 
     // Fonction pour calculer et appliquer le scaling
     function updateScaling() {
+        console.log("updateScaling appelée");
         const canvasWidth = width();
         const canvasHeight = height();
 
@@ -248,10 +249,12 @@ export function level(k, dataLevel, worldInstance) {
         const scaleY = canvasHeight / mapParts[0].height;
         const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
 
+        console.log("Avant mapParts forEach");
         // Mettre à jour l'échelle et la position sans détruire
         mapParts.forEach((part, index) => {
             part.scale = vec2(scaleX, scaleY);
         });
+        console.log("Apres mapParts forEach");
 
         // Repositionner les parties
         mapParts[0].pos = vec2(0, 0);
@@ -424,7 +427,7 @@ export function level(k, dataLevel, worldInstance) {
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
         if (dataLevel.layers[6] && levelLayers[6].objects) {
-            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
+            //holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
         }
 
         console.log("Nombre de layers:", dataLevel.layers.length);
@@ -466,7 +469,9 @@ export function level(k, dataLevel, worldInstance) {
 
         // Appliquer le scaling initial
         k.wait(0.05, () => {
+            console.log("AVANT updateScaling");
             updateScaling(); // <-- maintenant safe
+            console.log("APRES updateScaling");
         });
     }
 
