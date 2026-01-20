@@ -562,9 +562,16 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
 
     for (const position of hologramsMapPosition) {
 
+        console.log("hologramsMapPosition:", hologramsMapPosition); // ← Ajoute ça
+
+        if (!hologramsMapPosition || !Array.isArray(hologramsMapPosition)) {
+            console.error("❌ hologramsMapPosition invalid:", hologramsMapPosition);
+            return holograms;
+        }
+
         console.log("POSITION:", position);
 
-        if (!position || typeof position.x !== "number" || typeof position.y !== "number") {
+        if (!position || !position.x || !position.y || typeof position.x !== "number" || typeof position.y !== "number") {
             console.error("❌ Position invalide:", position);
             continue;
         }
