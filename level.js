@@ -427,7 +427,7 @@ export function level(k, dataLevel, worldInstance) {
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
         if (dataLevel.layers[6] && levelLayers[6].objects) {
-            //holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
+            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
         }
 
         console.log("Nombre de layers:", dataLevel.layers.length);
@@ -577,40 +577,40 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
             //debug.log("IT IS TRUE!");
         }
 
-        const originalAnimSpeed = hologram.animSpeed || 1;
+        // const originalAnimSpeed = hologram.animSpeed || 1;
 
-        // If not a city sign then we want a pointer cursor when user hover the gameobject
-        if (position.name !== "citySign") {
-            hologram.onHover(() => {
-                k.setCursor("pointer");
-            });
+        // // If not a city sign then we want a pointer cursor when user hover the gameobject
+        // if (position.name !== "citySign") {
+        //     hologram.onHover(() => {
+        //         k.setCursor("pointer");
+        //     });
 
-            hologram.onHoverEnd(() => {
-                k.setCursor("default");
-            });
+        //     hologram.onHoverEnd(() => {
+        //         k.setCursor("default");
+        //     });
 
-            // hologram.onEnterScreen(() => {
-            //     hologram.hidden = false;
-            // });
+        //     // hologram.onEnterScreen(() => {
+        //     //     hologram.hidden = false;
+        //     // });
 
-            // hologram.onExitScreen(() => {
-            //     hologram.hidden = true;
-            // });
-        }
-        else {
-            // Special animation for citySign
-            k.wait(0.1, () => {
-                delayedLoop(k, hologram, "hologram", 5);
-            });
-        }
+        //     // hologram.onExitScreen(() => {
+        //     //     hologram.hidden = true;
+        //     // });
+        // }
+        // else {
+        //     // Special animation for citySign
+        //     k.wait(0.1, () => {
+        //         delayedLoop(k, hologram, "hologram", 5);
+        //     });
+        // }
 
-        // Mémoriser la position originale et le scale
-        holograms.push({
-            object: hologram,
-            originalX: position.x,
-            originalY: position.y + config.yOffset,
-            originalScale: config.scale,
-        });
+        // // Mémoriser la position originale et le scale
+        // holograms.push({
+        //     object: hologram,
+        //     originalX: position.x,
+        //     originalY: position.y + config.yOffset,
+        //     originalScale: config.scale,
+        // });
         //console.log(hologram.pos.x);
         //console.log(hologram.pos.y)
     }
