@@ -557,9 +557,26 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
     };
 
     for (const position of hologramsMapPosition) {
-        const config = hologramsConfig[position.name];
 
-        if (!config) continue; // Ignore positions not in the config
+        console.log("POSITION:", position);
+
+        if (!position || typeof position.x !== "number" || typeof position.y !== "number") {
+            console.error("❌ Position invalide:", position);
+            continue;
+        }
+
+        if (!position.name) {
+            console.error("❌ Position sans nom:", position);
+            continue;
+        }
+
+
+        const config = hologramsConfig[position.name];
+        if (!config) {
+            console.error("NO config");
+            continue; // Ignore positions not in the config
+        }
+        console.log("test");
         //("---------------------------------------------------");
         //console.log(config.sprite);
         const hologram = k.add([
@@ -574,46 +591,46 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
             config.sprite,
         ]);
 
-    //     if (hologram.is(config.sprite)) {
-    //         //debug.log("IT IS TRUE!");
-    //     }
+        //     if (hologram.is(config.sprite)) {
+        //         //debug.log("IT IS TRUE!");
+        //     }
 
-    //     // const originalAnimSpeed = hologram.animSpeed || 1;
+        //     // const originalAnimSpeed = hologram.animSpeed || 1;
 
-    //     // // If not a city sign then we want a pointer cursor when user hover the gameobject
-    //     // if (position.name !== "citySign") {
-    //     //     hologram.onHover(() => {
-    //     //         k.setCursor("pointer");
-    //     //     });
+        //     // // If not a city sign then we want a pointer cursor when user hover the gameobject
+        //     // if (position.name !== "citySign") {
+        //     //     hologram.onHover(() => {
+        //     //         k.setCursor("pointer");
+        //     //     });
 
-    //     //     hologram.onHoverEnd(() => {
-    //     //         k.setCursor("default");
-    //     //     });
+        //     //     hologram.onHoverEnd(() => {
+        //     //         k.setCursor("default");
+        //     //     });
 
-    //     //     // hologram.onEnterScreen(() => {
-    //     //     //     hologram.hidden = false;
-    //     //     // });
+        //     //     // hologram.onEnterScreen(() => {
+        //     //     //     hologram.hidden = false;
+        //     //     // });
 
-    //     //     // hologram.onExitScreen(() => {
-    //     //     //     hologram.hidden = true;
-    //     //     // });
-    //     // }
-    //     // else {
-    //     //     // Special animation for citySign
-    //     //     k.wait(0.1, () => {
-    //     //         delayedLoop(k, hologram, "hologram", 5);
-    //     //     });
-    //     // }
+        //     //     // hologram.onExitScreen(() => {
+        //     //     //     hologram.hidden = true;
+        //     //     // });
+        //     // }
+        //     // else {
+        //     //     // Special animation for citySign
+        //     //     k.wait(0.1, () => {
+        //     //         delayedLoop(k, hologram, "hologram", 5);
+        //     //     });
+        //     // }
 
-    //     // // Mémoriser la position originale et le scale
-    //     // holograms.push({
-    //     //     object: hologram,
-    //     //     originalX: position.x,
-    //     //     originalY: position.y + config.yOffset,
-    //     //     originalScale: config.scale,
-    //     // });
-    //     //console.log(hologram.pos.x);
-    //     //console.log(hologram.pos.y)
+        //     // // Mémoriser la position originale et le scale
+        //     // holograms.push({
+        //     //     object: hologram,
+        //     //     originalX: position.x,
+        //     //     originalY: position.y + config.yOffset,
+        //     //     originalScale: config.scale,
+        //     // });
+        //     //console.log(hologram.pos.x);
+        //     //console.log(hologram.pos.y)
     }
 
     return holograms;
