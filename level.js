@@ -218,13 +218,13 @@ export function level(k, dataLevel, worldInstance) {
 
     k.setGravity(1400);
 
-    // let mapParts = [];
-    // let colliderObjects = [];
-    // let player = null;
-    // let borders = null;
+    let mapParts = [];
+    let colliderObjects = [];
+    let player = null;
+    let borders = null;
     let holograms = [];
-    // let gameManager = null;
-    // const FIXED_VIEW_WIDTH = 1820;
+    let gameManager = null;
+    const FIXED_VIEW_WIDTH = 1820;
 
     // Fonction pour calculer le scale actuel
     // function getCurrentScale() {
@@ -404,25 +404,25 @@ export function level(k, dataLevel, worldInstance) {
     // Initialisation unique
     function initializeMap() {
         // Créer les trois parties du background une seule fois
-        // const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
-        // const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
-        // const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
+        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
+        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
+        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
 
-        // mapParts = [mapPart1, mapPart2, mapPart3];
+        mapParts = [mapPart1, mapPart2, mapPart3];
 
         // Créer les colliders une seule fois
         const levelLayers = dataLevel.layers;
-        // const colliders = [];
-        // for (const layer of levelLayers) {
-        //     if (layer.name === "colliders") {
-        //         colliders.push(...layer.objects);
-        //         break;
-        //     }
-        // }
-        // colliderObjects = setMapColliders(k, mapPart1, colliders);
+        const colliders = [];
+        for (const layer of levelLayers) {
+            if (layer.name === "colliders") {
+                colliders.push(...layer.objects);
+                break;
+            }
+        }
+        colliderObjects = setMapColliders(k, mapPart1, colliders);
 
-        // // Créer les bordures invisibles
-        // borders = setMapBorders(k, 128, height(), mapPart1.width);
+        // Créer les bordures invisibles
+        borders = setMapBorders(k, 128, height(), mapPart1.width);
 
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
@@ -489,46 +489,46 @@ export function level(k, dataLevel, worldInstance) {
     // return levelControl;
 }
 
-// function setMapColliders(k, mapPart, colliders) {
-//     const colliderObjects = [];
+function setMapColliders(k, mapPart, colliders) {
+    const colliderObjects = [];
 
-//     for (const collider of colliders) {
-//         const colliderObj = mapPart.add([
-//             k.pos(collider.x, collider.y),
-//             k.area({
-//                 shape: new k.Rect(k.vec2(0), collider.width, collider.height)
-//             }),
-//             k.body({ isStatic: true }),
-//             "collider"
-//         ]);
-//         colliderObjects.push(colliderObj);
-//     }
+    for (const collider of colliders) {
+        const colliderObj = mapPart.add([
+            k.pos(collider.x, collider.y),
+            k.area({
+                shape: new k.Rect(k.vec2(0), collider.width, collider.height)
+            }),
+            k.body({ isStatic: true }),
+            "collider"
+        ]);
+        colliderObjects.push(colliderObj);
+    }
 
-//     return colliderObjects;
-// }
+    return colliderObjects;
+}
 
-// function setMapBorders(k, tilewidth, mapheight, mapWidth) {
-//     const borderLeft = k.add([
-//         k.rect(tilewidth, mapheight),
-//         k.area(),
-//         k.opacity(0),
-//         k.body({ isStatic: true }),
-//         k.pos(-128, 0),
-//         "borderLeft",
-//     ]);
+function setMapBorders(k, tilewidth, mapheight, mapWidth) {
+    const borderLeft = k.add([
+        k.rect(tilewidth, mapheight),
+        k.area(),
+        k.opacity(0),
+        k.body({ isStatic: true }),
+        k.pos(-128, 0),
+        "borderLeft",
+    ]);
 
-//     const borderRight = k.add([
-//         k.rect(tilewidth, mapheight),
-//         k.area(),
-//         k.opacity(0),
-//         k.body({ isStatic: true }),
-//         k.pos(mapWidth, 0),
-//         "borderRight",
-//     ]);
+    const borderRight = k.add([
+        k.rect(tilewidth, mapheight),
+        k.area(),
+        k.opacity(0),
+        k.body({ isStatic: true }),
+        k.pos(mapWidth, 0),
+        "borderRight",
+    ]);
 
-//     // Return references to the borders so they can be updated
-//     return { left: borderLeft, right: borderRight };
-// }
+    // Return references to the borders so they can be updated
+    return { left: borderLeft, right: borderRight };
+}
 
 function setHolograms(k, hologramsMapPosition, worldInstance) {
     const holograms = [];
@@ -566,7 +566,7 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
         }
 
         if (!position.name) {
-            console.error("❌ Position sans nom:", position);
+            //console.error("❌ Position sans nom:", position);
             continue;
         }
 
