@@ -427,7 +427,7 @@ export function level(k, dataLevel, worldInstance) {
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
         if (dataLevel.layers[6] && levelLayers[6].objects) {
-            //holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
+            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
         }
 
         console.log("Nombre de layers:", dataLevel.layers.length);
