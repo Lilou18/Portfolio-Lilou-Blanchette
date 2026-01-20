@@ -218,145 +218,145 @@ export function level(k, dataLevel, worldInstance) {
 
     k.setGravity(1400);
 
-    let mapParts = [];
-    let colliderObjects = [];
-    let player = null;
-    let borders = null;
+    // let mapParts = [];
+    // let colliderObjects = [];
+    // let player = null;
+    // let borders = null;
     let holograms = [];
-    let gameManager = null;
-    const FIXED_VIEW_WIDTH = 1820;
+    // let gameManager = null;
+    // const FIXED_VIEW_WIDTH = 1820;
 
     // Fonction pour calculer le scale actuel
-    function getCurrentScale() {
-        if (mapParts.length === 0) return { scaleX: 1, scaleY: 1 };
+    // function getCurrentScale() {
+    //     if (mapParts.length === 0) return { scaleX: 1, scaleY: 1 };
 
-        const canvasWidth = width();
-        const canvasHeight = height();
-        const scaleY = canvasHeight / mapParts[0].height;
-        const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
+    //     const canvasWidth = width();
+    //     const canvasHeight = height();
+    //     const scaleY = canvasHeight / mapParts[0].height;
+    //     const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
 
-        return { scaleX, scaleY };
-    }
+    //     return { scaleX, scaleY };
+    // }
 
-    // Fonction pour calculer et appliquer le scaling
-    function updateScaling() {
-        console.log("updateScaling appelée");
-        const canvasWidth = width();
-        const canvasHeight = height();
+    // // Fonction pour calculer et appliquer le scaling
+    // function updateScaling() {
+    //     console.log("updateScaling appelée");
+    //     const canvasWidth = width();
+    //     const canvasHeight = height();
 
-        if (mapParts.length === 0) return;
+    //     if (mapParts.length === 0) return;
 
-        const scaleY = canvasHeight / mapParts[0].height;
-        const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
+    //     const scaleY = canvasHeight / mapParts[0].height;
+    //     const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
 
-        console.log("Avant mapParts forEach");
-        // Mettre à jour l'échelle et la position sans détruire
-        mapParts.forEach((part, index) => {
-            part.scale = vec2(scaleX, scaleY);
-        });
-        console.log("Apres mapParts forEach");
+    //     console.log("Avant mapParts forEach");
+    //     // Mettre à jour l'échelle et la position sans détruire
+    //     mapParts.forEach((part, index) => {
+    //         part.scale = vec2(scaleX, scaleY);
+    //     });
+    //     console.log("Apres mapParts forEach");
 
-        // Repositionner les parties
-        mapParts[0].pos = vec2(0, 0);
-        if (mapParts[1]) {
-            mapParts[1].pos = vec2(mapParts[0].width * scaleX, 0);
-        }
-        if (mapParts[2]) {
-            mapParts[2].pos = vec2((mapParts[0].width + mapParts[1].width) * scaleX, 0);
-        }
+    //     // Repositionner les parties
+    //     mapParts[0].pos = vec2(0, 0);
+    //     if (mapParts[1]) {
+    //         mapParts[1].pos = vec2(mapParts[0].width * scaleX, 0);
+    //     }
+    //     if (mapParts[2]) {
+    //         mapParts[2].pos = vec2((mapParts[0].width + mapParts[1].width) * scaleX, 0);
+    //     }
 
-        // Mettre à jour les bordures
-        updateBorders(scaleX, scaleY);
+    //     // Mettre à jour les bordures
+    //     updateBorders(scaleX, scaleY);
 
-        // Mettre à jour le player
-        //updatePlayer(scaleX, scaleY);
+    //     // Mettre à jour le player
+    //     //updatePlayer(scaleX, scaleY);
 
-        // Update Holograms
-        //updateHolograms(scaleX, scaleY);
+    //     // Update Holograms
+    //     //updateHolograms(scaleX, scaleY);
 
-        if (gameManager) {
-            gameManager.updateScale();
-        }
+    //     if (gameManager) {
+    //         gameManager.updateScale();
+    //     }
 
-        k.setGravity(1400 * scaleY);
+    //     k.setGravity(1400 * scaleY);
 
-        // update text over the holograms
-        //uiManager.updateInteractionTextsOnResize();
-    }
+    //     // update text over the holograms
+    //     //uiManager.updateInteractionTextsOnResize();
+    // }
 
-    // Fonction pour mettre à jour les bordures
-    function updateBorders(scaleX, scaleY) {
-        if (!borders) return;
+    // // Fonction pour mettre à jour les bordures
+    // function updateBorders(scaleX, scaleY) {
+    //     if (!borders) return;
 
-        const canvasHeight = height();
-        const mapTotalWidth = (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
-        const borderWidth = 128 * scaleX;
+    //     const canvasHeight = height();
+    //     const mapTotalWidth = (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
+    //     const borderWidth = 128 * scaleX;
 
-        // Bordure gauche
-        borders.left.width = borderWidth;
-        borders.left.height = canvasHeight;
-        borders.left.pos = vec2(-borderWidth, 0);
+    //     // Bordure gauche
+    //     borders.left.width = borderWidth;
+    //     borders.left.height = canvasHeight;
+    //     borders.left.pos = vec2(-borderWidth, 0);
 
-        // Bordure droite
-        borders.right.width = borderWidth;
-        borders.right.height = canvasHeight;
-        borders.right.pos = vec2(mapTotalWidth, 0);
-    }
+    //     // Bordure droite
+    //     borders.right.width = borderWidth;
+    //     borders.right.height = canvasHeight;
+    //     borders.right.pos = vec2(mapTotalWidth, 0);
+    // }
 
-    // Stocker la position relative du joueur
-    let playerRelativePos = null;
-    let lastScaleX = null;
-    let lastScaleY = null;
+    // // Stocker la position relative du joueur
+    // let playerRelativePos = null;
+    // let lastScaleX = null;
+    // let lastScaleY = null;
 
-    // Fonction pour mettre à jour le player
-    function updatePlayer(scaleX, scaleY) {
-        if (!player?.gameObject?.exists()) return;
-        if (player && player.gameObject) {
-            //console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
+    // // Fonction pour mettre à jour le player
+    // function updatePlayer(scaleX, scaleY) {
+    //     if (!player?.gameObject?.exists()) return;
+    //     if (player && player.gameObject) {
+    //         //console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
 
-            // Première fois: mémoriser la position originale du joueur
-            if (!playerRelativePos && player.originalPosX === undefined) {
-                playerRelativePos = {
-                    //originalX: player.originalPosX,
-                    //originalY: player.originalPosY
-                    originalX: player.initialPlayerPositionX,
-                    originalY: player.initialPlayerPositionY
-                };
-                //console.log("Position originale mémorisée:", playerRelativePos);
-            }
+    //         // Première fois: mémoriser la position originale du joueur
+    //         if (!playerRelativePos && player.originalPosX === undefined) {
+    //             playerRelativePos = {
+    //                 //originalX: player.originalPosX,
+    //                 //originalY: player.originalPosY
+    //                 originalX: player.initialPlayerPositionX,
+    //                 originalY: player.initialPlayerPositionY
+    //             };
+    //             //console.log("Position originale mémorisée:", playerRelativePos);
+    //         }
 
-            // Si le scale a changé (resize), recalculer la position relative en fonction de la position actuelle
-            if (lastScaleX !== null && (lastScaleX !== scaleX || lastScaleY !== scaleY)) {
-                // Avant le resize, mémoriser la position relative actuelle
-                playerRelativePos = {
-                    originalX: player.gameObject.pos.x / lastScaleX,
-                    originalY: player.gameObject.pos.y / lastScaleY
-                };
-                //console.log("Position relative mise à jour avant resize:", playerRelativePos);
-            }
+    //         // Si le scale a changé (resize), recalculer la position relative en fonction de la position actuelle
+    //         if (lastScaleX !== null && (lastScaleX !== scaleX || lastScaleY !== scaleY)) {
+    //             // Avant le resize, mémoriser la position relative actuelle
+    //             playerRelativePos = {
+    //                 originalX: player.gameObject.pos.x / lastScaleX,
+    //                 originalY: player.gameObject.pos.y / lastScaleY
+    //             };
+    //             //console.log("Position relative mise à jour avant resize:", playerRelativePos);
+    //         }
 
-            // Utiliser la moyenne des deux scales pour un scaling uniforme
-            const uniformScale = (scaleX + scaleY) / 2;
-            player.gameObject.scale = vec2(uniformScale);
+    //         // Utiliser la moyenne des deux scales pour un scaling uniforme
+    //         const uniformScale = (scaleX + scaleY) / 2;
+    //         player.gameObject.scale = vec2(uniformScale);
 
-            // Recalculer la position avec le nouveau scale
-            if (playerRelativePos) {
-                player.gameObject.pos = vec2(
-                    playerRelativePos.originalX * scaleX,
-                    playerRelativePos.originalY * scaleY
-                );
-                //console.log("Nouvelle position du joueur:", player.gameObject.pos);
-            }
+    //         // Recalculer la position avec le nouveau scale
+    //         if (playerRelativePos) {
+    //             player.gameObject.pos = vec2(
+    //                 playerRelativePos.originalX * scaleX,
+    //                 playerRelativePos.originalY * scaleY
+    //             );
+    //             //console.log("Nouvelle position du joueur:", player.gameObject.pos);
+    //         }
 
-            player.updateSpeeds(scaleX, scaleY);
+    //         player.updateSpeeds(scaleX, scaleY);
 
-            // Mémoriser le scale actuel
-            lastScaleX = scaleX;
-            lastScaleY = scaleY;
+    //         // Mémoriser le scale actuel
+    //         lastScaleX = scaleX;
+    //         lastScaleY = scaleY;
 
-            //console.log("UPDATE PLAYER POSITION : " + player.gameObject.pos);
-        }
-    }
+    //         //console.log("UPDATE PLAYER POSITION : " + player.gameObject.pos);
+    //     }
+    // }
 
     // Fonction pour mettre à jour les holograms
     // function updateHolograms(scaleX, scaleY) {
@@ -377,158 +377,158 @@ export function level(k, dataLevel, worldInstance) {
     //         hologramData.object.scale = vec2(hologramData.originalScale * uniformScale);
     //     }
     // }
-    function updateHolograms(scaleX, scaleY) {
-        if (!holograms || holograms.length === 0) return;
+    // function updateHolograms(scaleX, scaleY) {
+    //     if (!holograms || holograms.length === 0) return;
 
-        const mapHeight = mapParts[0].height * scaleY;
-        const canvasHeight = height();
-        const mapOffsetY = canvasHeight - mapHeight;
+    //     const mapHeight = mapParts[0].height * scaleY;
+    //     const canvasHeight = height();
+    //     const mapOffsetY = canvasHeight - mapHeight;
 
-        for (const data of holograms) {
-            if (!data.object || !data.object.exists()) {
-                console.warn("Hologram pas prêt :", data);
-                continue;
-            }
-            // Position map → écran
-            data.object.pos.x = data.originalX * scaleX;
-            data.object.pos.y = mapOffsetY + (data.originalY * scaleY);
+    //     for (const data of holograms) {
+    //         if (!data.object || !data.object.exists()) {
+    //             console.warn("Hologram pas prêt :", data);
+    //             continue;
+    //         }
+    //         // Position map → écran
+    //         data.object.pos.x = data.originalX * scaleX;
+    //         data.object.pos.y = mapOffsetY + (data.originalY * scaleY);
 
-            // SCALE NON UNIFORME COMME LA MAP
-            data.object.scale = vec2(
-                data.originalScale * scaleX,
-                data.originalScale * scaleY
-            );
-        }
-    }
+    //         // SCALE NON UNIFORME COMME LA MAP
+    //         data.object.scale = vec2(
+    //             data.originalScale * scaleX,
+    //             data.originalScale * scaleY
+    //         );
+    //     }
+    // }
 
     // Initialisation unique
     function initializeMap() {
         // Créer les trois parties du background une seule fois
-        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
-        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
-        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
+        // const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
+        // const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
+        // const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
 
-        mapParts = [mapPart1, mapPart2, mapPart3];
+        // mapParts = [mapPart1, mapPart2, mapPart3];
 
         // Créer les colliders une seule fois
         const levelLayers = dataLevel.layers;
-        const colliders = [];
-        for (const layer of levelLayers) {
-            if (layer.name === "colliders") {
-                colliders.push(...layer.objects);
-                break;
-            }
-        }
-        colliderObjects = setMapColliders(k, mapPart1, colliders);
+        // const colliders = [];
+        // for (const layer of levelLayers) {
+        //     if (layer.name === "colliders") {
+        //         colliders.push(...layer.objects);
+        //         break;
+        //     }
+        // }
+        // colliderObjects = setMapColliders(k, mapPart1, colliders);
 
-        // Créer les bordures invisibles
-        borders = setMapBorders(k, 128, height(), mapPart1.width);
+        // // Créer les bordures invisibles
+        // borders = setMapBorders(k, 128, height(), mapPart1.width);
 
         // Create the holograms
         // holograms = setHolograms(k, levelLayers[6].objects);
         if (dataLevel.layers[6] && levelLayers[6].objects) {
-            //holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
+            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
         }
 
-        console.log("Nombre de layers:", dataLevel.layers.length);
-        console.log("Layer 6:", dataLevel.layers[6]);
-        console.log("Layer 6 objects:", dataLevel.layers[6]?.objects);
+        // console.log("Nombre de layers:", dataLevel.layers.length);
+        // console.log("Layer 6:", dataLevel.layers[6]);
+        // console.log("Layer 6 objects:", dataLevel.layers[6]?.objects);
 
-        levelControl = {
-            setPlayer: (playerInstance) => {
-                player = playerInstance;
-                const { scaleX, scaleY } = getCurrentScale();
-                k.wait(0.01, () => {
-                    updatePlayer(scaleX, scaleY);
-                });
-            },
-            getCurrentScale,
-            getScaledMapWidth() {
-                if (mapParts.length === 0) return 0;
-                const { scaleX } = getCurrentScale();
-                return (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
-            },
-            getMapParts() {
-                return mapParts;
-            },
-            getMapOffsetY() {
-                const mapParts = this.getMapParts();
-                const { scaleY } = this.getCurrentScale();
-                const mapHeight = mapParts[0].height * scaleY;
-                const canvasHeight = k.height();
-                return canvasHeight - mapHeight;
-            }
-        };
+        // levelControl = {
+        //     setPlayer: (playerInstance) => {
+        //         player = playerInstance;
+        //         const { scaleX, scaleY } = getCurrentScale();
+        //         k.wait(0.01, () => {
+        //             updatePlayer(scaleX, scaleY);
+        //         });
+        //     },
+        //     getCurrentScale,
+        //     getScaledMapWidth() {
+        //         if (mapParts.length === 0) return 0;
+        //         const { scaleX } = getCurrentScale();
+        //         return (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
+        //     },
+        //     getMapParts() {
+        //         return mapParts;
+        //     },
+        //     getMapOffsetY() {
+        //         const mapParts = this.getMapParts();
+        //         const { scaleY } = this.getCurrentScale();
+        //         const mapHeight = mapParts[0].height * scaleY;
+        //         const canvasHeight = k.height();
+        //         return canvasHeight - mapHeight;
+        //     }
+        // };
 
-        // Create the gameManager
-        const mapWidth = dataLevel.width * dataLevel.tilewidth;
-        const mapHeight = dataLevel.height * dataLevel.tileheight;
-        //gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
-        //gameManager.setLevelControl(levelControl);
-        //uiManager.setLevelControl(levelControl);
+        // // Create the gameManager
+        // const mapWidth = dataLevel.width * dataLevel.tilewidth;
+        // const mapHeight = dataLevel.height * dataLevel.tileheight;
+        // //gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
+        // //gameManager.setLevelControl(levelControl);
+        // //uiManager.setLevelControl(levelControl);
 
-        // Appliquer le scaling initial
-        k.wait(0.05, () => {
-            console.log("AVANT updateScaling");
-            updateScaling(); // <-- maintenant safe
-            console.log("APRES updateScaling");
-        });
+        // // Appliquer le scaling initial
+        // k.wait(0.05, () => {
+        //     console.log("AVANT updateScaling");
+        //     updateScaling(); // <-- maintenant safe
+        //     console.log("APRES updateScaling");
+        // });
     }
 
     // Initialisation
     initializeMap();
 
-    // Sur resize, juste mettre à jour le scaling
-    const resizeHandler = onResize(() => {
-        console.log("RESIZE EVENT TRIGGERED");
-        //updateScaling();
-    });
+    // // Sur resize, juste mettre à jour le scaling
+    // const resizeHandler = onResize(() => {
+    //     console.log("RESIZE EVENT TRIGGERED");
+    //     //updateScaling();
+    // });
 
 
 
-    return levelControl;
+    // return levelControl;
 }
 
-function setMapColliders(k, mapPart, colliders) {
-    const colliderObjects = [];
+// function setMapColliders(k, mapPart, colliders) {
+//     const colliderObjects = [];
 
-    for (const collider of colliders) {
-        const colliderObj = mapPart.add([
-            k.pos(collider.x, collider.y),
-            k.area({
-                shape: new k.Rect(k.vec2(0), collider.width, collider.height)
-            }),
-            k.body({ isStatic: true }),
-            "collider"
-        ]);
-        colliderObjects.push(colliderObj);
-    }
+//     for (const collider of colliders) {
+//         const colliderObj = mapPart.add([
+//             k.pos(collider.x, collider.y),
+//             k.area({
+//                 shape: new k.Rect(k.vec2(0), collider.width, collider.height)
+//             }),
+//             k.body({ isStatic: true }),
+//             "collider"
+//         ]);
+//         colliderObjects.push(colliderObj);
+//     }
 
-    return colliderObjects;
-}
+//     return colliderObjects;
+// }
 
-function setMapBorders(k, tilewidth, mapheight, mapWidth) {
-    const borderLeft = k.add([
-        k.rect(tilewidth, mapheight),
-        k.area(),
-        k.opacity(0),
-        k.body({ isStatic: true }),
-        k.pos(-128, 0),
-        "borderLeft",
-    ]);
+// function setMapBorders(k, tilewidth, mapheight, mapWidth) {
+//     const borderLeft = k.add([
+//         k.rect(tilewidth, mapheight),
+//         k.area(),
+//         k.opacity(0),
+//         k.body({ isStatic: true }),
+//         k.pos(-128, 0),
+//         "borderLeft",
+//     ]);
 
-    const borderRight = k.add([
-        k.rect(tilewidth, mapheight),
-        k.area(),
-        k.opacity(0),
-        k.body({ isStatic: true }),
-        k.pos(mapWidth, 0),
-        "borderRight",
-    ]);
+//     const borderRight = k.add([
+//         k.rect(tilewidth, mapheight),
+//         k.area(),
+//         k.opacity(0),
+//         k.body({ isStatic: true }),
+//         k.pos(mapWidth, 0),
+//         "borderRight",
+//     ]);
 
-    // Return references to the borders so they can be updated
-    return { left: borderLeft, right: borderRight };
-}
+//     // Return references to the borders so they can be updated
+//     return { left: borderLeft, right: borderRight };
+// }
 
 function setHolograms(k, hologramsMapPosition, worldInstance) {
     const holograms = [];
@@ -636,17 +636,32 @@ function setHolograms(k, hologramsMapPosition, worldInstance) {
     return holograms;
 }
 
-function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
-    if (!animatedObject.exists()) return;
-    animatedObject.play(animationName);
+// function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
+//     if (!animatedObject.exists()) return;
+//     animatedObject.play(animationName);
 
-    k.loop(delayInSeconds, () => {
-        if (animatedObject.exists() && !gameState.isGamePaused) {
-            animatedObject.play(animationName);
-        }
+//     k.loop(delayInSeconds, () => {
+//         if (animatedObject.exists() && !gameState.isGamePaused) {
+//             animatedObject.play(animationName);
+//         }
 
-    })
-}
+//     })
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // for (const position of hologramsMapPosition) {
 //     const config = hologramsConfig[position.name];
 
