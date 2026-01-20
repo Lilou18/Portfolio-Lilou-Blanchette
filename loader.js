@@ -11,9 +11,9 @@ export const k = kaplay({
     // pixelDensity: Math.min(2, window.devicePixelRatio),
 });
 
-loadSprite("levelP1", "./assets/levelP1.png");
-loadSprite("levelP2", "./assets/levelP2.png");
-loadSprite("levelP3", "./assets/levelP3.png");
+k.loadSprite("levelP1", "./assets/levelP1.png");
+k.loadSprite("levelP2", "./assets/levelP2.png");
+k.loadSprite("levelP3", "./assets/levelP3.png");
 
 k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {
     sliceX: 6,
@@ -104,7 +104,7 @@ k.loadSprite("enemyVeryFast", "./assets/enemyRed.png", {
     },
 })
 
-loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
+k.loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
     sliceX: 3,
     sliceY: 3,
     anims: {
@@ -117,7 +117,7 @@ loadSprite("cvHologram", "./assets/hologramCVMobile.png", {
     }
 });
 
-loadSprite("portfolioHologram", "./assets/hologramPortfolioMobile.png", {
+k.loadSprite("portfolioHologram", "./assets/hologramPortfolioMobile.png", {
     sliceX: 3,
     sliceY: 3,
     anims: {
@@ -130,7 +130,7 @@ loadSprite("portfolioHologram", "./assets/hologramPortfolioMobile.png", {
     }
 });
 
-loadSprite("contactHologram", "./assets/hologramContactMobile.png", {
+k.loadSprite("contactHologram", "./assets/hologramContactMobile.png", {
     sliceX: 3,
     sliceY: 3,
     anims: {
@@ -143,7 +143,7 @@ loadSprite("contactHologram", "./assets/hologramContactMobile.png", {
     }
 });
 
-loadSprite("citySign", "./assets/citySign.png", {
+k.loadSprite("citySign", "./assets/citySign.png", {
     sliceX: 5,
     sliceY: 4,
     anims: {
@@ -156,7 +156,7 @@ loadSprite("citySign", "./assets/citySign.png", {
     }
 });
 
-loadSprite("citySignMobile", "./assets/citySignMobile.png", {
+k.loadSprite("citySignMobile", "./assets/citySignMobile.png", {
     sliceX: 3,
     sliceY: 3,
     anims: {
@@ -169,4 +169,4 @@ loadSprite("citySignMobile", "./assets/citySignMobile.png", {
     }
 });
 
-loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");
+k.loadFont("orbitron", "./fonts/static/Orbitron-Regular.ttf");
