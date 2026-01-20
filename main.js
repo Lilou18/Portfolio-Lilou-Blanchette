@@ -514,6 +514,18 @@ async function main() {
         }
 
         for (const collider of colliders) {
+            if (
+                !collider ||
+                typeof collider.x !== "number" ||
+                typeof collider.y !== "number" ||
+                typeof collider.width !== "number" ||
+                typeof collider.height !== "number" ||
+                collider.width <= 0 ||
+                collider.height <= 0
+            ) {
+                console.warn("❌ Error collider:", collider);
+                continue;
+            }
             const colliderObj = k.add([
                 k.pos(collider.x, collider.y),
                 k.area({
