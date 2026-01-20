@@ -410,25 +410,29 @@ export function level(k, dataLevel, worldInstance) {
 
         mapParts = [mapPart1, mapPart2, mapPart3];
 
-        // Créer les colliders une seule fois
-        const levelLayers = dataLevel.layers;
-        const colliders = [];
-        for (const layer of levelLayers) {
-            if (layer.name === "colliders") {
-                colliders.push(...layer.objects);
-                break;
+        k.wait(1, () => {
+            // Créer les colliders une seule fois
+            const levelLayers = dataLevel.layers;
+            const colliders = [];
+            for (const layer of levelLayers) {
+                if (layer.name === "colliders") {
+                    colliders.push(...layer.objects);
+                    break;
+                }
             }
-        }
-        colliderObjects = setMapColliders(k, mapPart1, colliders);
+            colliderObjects = setMapColliders(k, mapPart1, colliders);
 
-        // Créer les bordures invisibles
-        borders = setMapBorders(k, 128, height(), mapPart1.width);
+            // Créer les bordures invisibles
+            borders = setMapBorders(k, 128, height(), mapPart1.width);
 
-        // Create the holograms
-        // holograms = setHolograms(k, levelLayers[6].objects);
-        if (dataLevel.layers[6] && levelLayers[6].objects) {
-            holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
-        }
+            // Create the holograms
+            // holograms = setHolograms(k, levelLayers[6].objects);
+            if (dataLevel.layers[6] && levelLayers[6].objects) {
+                holograms = setHolograms(k, levelLayers[6].objects, worldInstance);
+            }
+        });
+
+
 
         // console.log("Nombre de layers:", dataLevel.layers.length);
         // console.log("Layer 6:", dataLevel.layers[6]);
