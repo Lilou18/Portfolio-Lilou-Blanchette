@@ -577,13 +577,13 @@ function setHolograms(k, hologramsMapPosition) {
                 k.setCursor("default");
             });
 
-            hologram.onEnterScreen(() => {
-                hologram.hidden = false;
-            });
+            // hologram.onEnterScreen(() => {
+            //     hologram.hidden = false;
+            // });
 
-            hologram.onExitScreen(() => {
-                hologram.hidden = true;
-            });
+            // hologram.onExitScreen(() => {
+            //     hologram.hidden = true;
+            // });
         }
         else {
             // Special animation for citySign
