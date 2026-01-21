@@ -523,7 +523,7 @@ async function main() {
                 collider.width <= 0 ||
                 collider.height <= 0
             ) {
-                console.warn("❌ Error collider:", collider);
+                console.error("❌ Error collider:", collider);
                 continue;
             }
             const colliderObj = k.add([
