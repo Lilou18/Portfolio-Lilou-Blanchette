@@ -21,7 +21,7 @@ export class Player {
         // Movement properties
         this.baseSpeed = speed;                         // Original movement speed
         this.speed = speed;                             // Current movement speed (scaled)
-        this.baseScrollSpeed = speed * 5;               // Original movement speed when scrolling
+        this.baseScrollSpeed = speed * 2;               // Original movement speed when scrolling
         this.scrollSpeed = this.baseScrollSpeed;        // Current scroll speed (scaled)
 
         // Jump properties

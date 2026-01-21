@@ -6,7 +6,7 @@ export const k = kaplay({
     texFilter: "linear",
     crisp: false,
     touchToMouse: true,
-    pixelDensity: 1.1,
+    pixelDensity: 1.2,
     maxFPS: 60,
     // pixelDensity: Math.min(2, window.devicePixelRatio),
 });
