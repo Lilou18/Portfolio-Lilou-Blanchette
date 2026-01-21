@@ -79,7 +79,6 @@ export class Camera {
             if (this.mapCenterY === null) return;
 
             const screenWidth = width();
-            const playerWorldPosX = this.followedGameObject.worldPos().x;
             const playerPosX = this.followedGameObject.pos.x;
 
             const halfScreen = screenWidth / 2;
