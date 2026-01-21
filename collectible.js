@@ -32,9 +32,8 @@ export class Collectible {
         // Create the game object in the world
         this.gameObject = world.add([
             k.sprite("collectible", { anim: "mug" }),
-            k.area(),                                           // Enables collision detection
+            k.area({ isSensor: true }),                                           // Enables collision detection
             k.anchor("center"),
-            // k.scale(0.6),
             k.scale(this.originalScale),
             k.pos(x, y),
             k.z(1),
@@ -93,7 +92,8 @@ export class Collectible {
                 const amount = Math.sin(this.animationTime * 3 + this.variationMovement) * scaledAmplitude;
 
                 // Apply animation offset to scaled Y position
-                this.gameObject.pos.y = this.scaledY + amount;
+                // this.gameObject.pos.y = this.scaledY + amount;
+                this.gameObject.pos = this.k.vec2(this.gameObject.pos.x,  this.scaledY + amount);
             }
         });
     }

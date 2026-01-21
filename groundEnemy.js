@@ -53,6 +53,7 @@ export class GroundEnemy {
                 // Custom polygon shape for accurate collision detection
                 // Matches the enemy sprite visual bounds
                 shape: new k.Polygon([k.vec2(-45, 0), k.vec2(-45, -100), k.vec2(0, -100), k.vec2(45, -30), k.vec2(45, 0)]),
+                isSensor: true,
             }),
             k.anchor("bot"),
             k.scale(1),

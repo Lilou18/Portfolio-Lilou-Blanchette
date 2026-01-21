@@ -543,7 +543,7 @@ function setHolograms(k, hologramsMapPosition) {
         //console.log(config.sprite);
         const hologram = world.add([
             k.sprite(config.sprite, position.name === "citySign" ? {} : { anim: "hologram" }),
-            k.area(),
+            k.area({ isSensor: true }),
             k.anchor("bot"),
             k.pos(position.x, position.y), // Position originale de Tiled
             k.scale(config.scale),
