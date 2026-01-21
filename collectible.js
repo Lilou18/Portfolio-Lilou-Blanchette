@@ -19,7 +19,8 @@ export class Collectible {
         // Original spawn position (used as reference for scaling)
         this.originalX = x;
         this.originalY = y;
-        this.originalScale = 0.2;
+        // this.originalScale = 0.2;
+        this.originalScale = 0.6;
         this.scaledY = y;
 
         // State tracking
