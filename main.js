@@ -471,7 +471,7 @@
 
 
 
-import kaplay from "https://unpkg.com/kaplay@4000.0.0-alpha.23/dist/kaplay.mjs";
+import kaplay from "https://unpkg.com/kaplay@4000.0.0-alpha.26/dist/kaplay.mjs";
 
 export const k = kaplay({
     canvas: document.getElementById("gameCanvas"),
