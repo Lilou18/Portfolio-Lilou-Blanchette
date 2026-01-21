@@ -547,7 +547,7 @@ function setHolograms(k, hologramsMapPosition) {
             k.anchor("bot"),
             k.pos(position.x, position.y), // Position originale de Tiled
             k.scale(config.scale),
-            k.offscreen({ hidden: true, padding: 2000 }),
+            k.offscreen({ hide: true, distance: 500 }),
             k.z(1),
             config.sprite,
         ]);
