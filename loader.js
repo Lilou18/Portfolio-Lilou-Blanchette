@@ -39,22 +39,9 @@ k.loadSprite("player", "./assets/monsterWalkingIdleJump.png", {
     },
 });
 
-// k.loadSprite("collectible", "./assets/collectible.png", {
-//     sliceX: 31,
-//     sliceY: 1,
-//     anims: {
-//         mug: {
-//             from: 0,
-//             to: 30,
-//             speed: 12,
-//             loop: true,
-//         }
-//     }
-// });
-
 k.loadSprite("collectible", "./assets/collectible.png", {
-    sliceX: 6,
-    sliceY: 6,
+    sliceX: 31,
+    sliceY: 1,
     anims: {
         mug: {
             from: 0,
@@ -64,6 +51,19 @@ k.loadSprite("collectible", "./assets/collectible.png", {
         }
     }
 });
+
+// k.loadSprite("collectible", "./assets/collectible.png", {
+//     sliceX: 6,
+//     sliceY: 6,
+//     anims: {
+//         mug: {
+//             from: 0,
+//             to: 30,
+//             speed: 12,
+//             loop: true,
+//         }
+//     }
+// });
 
 k.loadSprite("enemyNormal", "./assets/enemyYellow.png", {
     sliceX: 9,
