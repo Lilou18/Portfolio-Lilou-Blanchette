@@ -443,16 +443,16 @@ k.scene("level", async () => {
     const levelDataJson = await levelData.json();
 
     // Debug stats
-    let debugStats = {
-        fps: 0,
-        memory: 0,
-        gcCount: 0,
-        objects: 0,
-        lastMemory: 0,
-        frameCount: 0,
-        lastTime: Date.now(),
-        enabled: true
-    };
+    // let debugStats = {
+    //     fps: 0,
+    //     memory: 0,
+    //     gcCount: 0,
+    //     objects: 0,
+    //     lastMemory: 0,
+    //     frameCount: 0,
+    //     lastTime: Date.now(),
+    //     enabled: true
+    // };
     // const world = createWorld();
 
     // // Initialize the level
@@ -492,92 +492,92 @@ k.scene("level", async () => {
 
     });
 
-    // let lastTime = performance.now();
-    // let frames = 0;
-    // let fps = 0;
+    let lastTime = performance.now();
+    let frames = 0;
+    let fps = 0;
 
-    // // Affichage dans Kaplay
-    // const fpsText = k.add([
-    //     k.text("FPS: 0"),
-    //     k.pos(10, 10),
-    //     k.fixed(),
-    //     k.z(1000),
-    // ]);
-
-    // function updateFPS() {
-    //     frames++;
-    //     const now = performance.now();
-
-    //     if (now - lastTime >= 1000) {
-    //         fps = frames;
-    //         frames = 0;
-    //         lastTime = now;
-    //         fpsText.text = `FPS: ${fps}`;
-    //     }
-
-    //     requestAnimationFrame(updateFPS);
-    // }
-
-    // updateFPS();
-
-    // Debug overlay UI
-    const debugText = k.add([
-        k.text(""),
+    // Affichage dans Kaplay
+    const fpsText = k.add([
+        k.text("FPS: 0"),
         k.pos(10, 10),
         k.fixed(),
         k.z(1000),
-        k.color(255, 255, 0),
     ]);
 
-    // Update debug stats
-    k.onUpdate(() => {
-        if (!debugStats.enabled) return;
+    function updateFPS() {
+        frames++;
+        const now = performance.now();
 
-        debugStats.frameCount++;
-        const now = Date.now();
-
-        // Calcul FPS
-        if (now - debugStats.lastTime > 1000) {
-            debugStats.fps = debugStats.frameCount;
-            debugStats.frameCount = 0;
-            debugStats.lastTime = now;
+        if (now - lastTime >= 1000) {
+            fps = frames;
+            frames = 0;
+            lastTime = now;
+            fpsText.text = `FPS: ${fps}`;
         }
 
-        // Mémoire et GC
-        if (performance.memory) {
-            const current = performance.memory.usedJSHeapSize;
-            const delta = current - debugStats.lastMemory;
+        requestAnimationFrame(updateFPS);
+    }
 
-            // Si la mémoire baisse de plus de 2MB = GC
-            if (delta < -2000000) {
-                debugStats.gcCount++;
-                console.log(`🗑️ GC Event #${debugStats.gcCount}`);
-            }
+    updateFPS();
 
-            debugStats.memory = (current / 1024 / 1024).toFixed(1);
-            debugStats.lastMemory = current;
-        }
+//     // Debug overlay UI
+//     const debugText = k.add([
+//         k.text(""),
+//         k.pos(10, 10),
+//         k.fixed(),
+//         k.z(1000),
+//         k.color(255, 255, 0),
+//     ]);
 
-        // Nombre d'objets
-        debugStats.objects = k.get("*").length;
-    });
+//     // Update debug stats
+//     k.onUpdate(() => {
+//         if (!debugStats.enabled) return;
 
-    // Draw debug overlay
-    k.onDraw(() => {
-        if (!debugStats.enabled) return;
+//         debugStats.frameCount++;
+//         const now = Date.now();
 
-        const text = `FPS: ${debugStats.fps}
-Memory: ${debugStats.memory}MB
-GC: ${debugStats.gcCount}
-Objects: ${debugStats.objects}`;
+//         // Calcul FPS
+//         if (now - debugStats.lastTime > 1000) {
+//             debugStats.fps = debugStats.frameCount;
+//             debugStats.frameCount = 0;
+//             debugStats.lastTime = now;
+//         }
 
-        debugText.text = text;
-    });
+//         // Mémoire et GC
+//         if (performance.memory) {
+//             const current = performance.memory.usedJSHeapSize;
+//             const delta = current - debugStats.lastMemory;
 
-    // Toggle avec un tap/clic
-    k.onMousePress(() => {
-        debugStats.enabled = !debugStats.enabled;
-    });
+//             // Si la mémoire baisse de plus de 2MB = GC
+//             if (delta < -2000000) {
+//                 debugStats.gcCount++;
+//                 console.log(`🗑️ GC Event #${debugStats.gcCount}`);
+//             }
+
+//             debugStats.memory = (current / 1024 / 1024).toFixed(1);
+//             debugStats.lastMemory = current;
+//         }
+
+//         // Nombre d'objets
+//         debugStats.objects = k.get("*").length;
+//     });
+
+//     // Draw debug overlay
+//     k.onDraw(() => {
+//         if (!debugStats.enabled) return;
+
+//         const text = `FPS: ${debugStats.fps}
+// Memory: ${debugStats.memory}MB
+// GC: ${debugStats.gcCount}
+// Objects: ${debugStats.objects}`;
+
+//         debugText.text = text;
+//     });
+
+//     // Toggle avec un tap/clic
+//     k.onMousePress(() => {
+//         debugStats.enabled = !debugStats.enabled;
+//     });
 
 });
 
