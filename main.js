@@ -429,7 +429,7 @@
 
 
 import { k } from "./loader.js";
-import { level } from "./level.js";
+//import { level } from "./level.js";
 // import { gameState } from "./gameState.js";
 // import { Player } from "./player.js";
 // import { Camera } from "./camera.js";
@@ -484,78 +484,78 @@ k.scene("level", async () => {
         const FIXED_VIEW_WIDTH = 1820;
 
 
-        // Initialisation unique
-        function initializeMap() {
-            // Créer les trois parties du background une seule fois
-            const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
-            const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
-            const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
+        // // Initialisation unique
+        // function initializeMap() {
+        //     // Créer les trois parties du background une seule fois
+        //     const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
+        //     const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
+        //     const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
 
-            mapParts = [mapPart1, mapPart2, mapPart3];
+        //     mapParts = [mapPart1, mapPart2, mapPart3];
 
-            // Créer les colliders une seule fois
-            const levelLayers = dataLevel.layers;
-            const colliders = [];
-            for (const layer of levelLayers) {
-                if (layer.name === "colliders") {
-                    colliders.push(...layer.objects);
-                    break;
-                }
-            }
+        //     // Créer les colliders une seule fois
+        //     const levelLayers = dataLevel.layers;
+        //     const colliders = [];
+        //     for (const layer of levelLayers) {
+        //         if (layer.name === "colliders") {
+        //             colliders.push(...layer.objects);
+        //             break;
+        //         }
+        //     }
 
-            // levelControl = {
-            //     getCurrentScale,
-            //     getScaledMapWidth() {
-            //         if (mapParts.length === 0) return 0;
-            //         const { scaleX } = getCurrentScale();
-            //         return (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
-            //     },
-            //     getMapParts() {
-            //         return mapParts;
-            //     },
-            //     getMapOffsetY() {
-            //         const mapParts = this.getMapParts();
-            //         const { scaleY } = this.getCurrentScale();
-            //         const mapHeight = mapParts[0].height * scaleY;
-            //         const canvasHeight = k.height();
-            //         return canvasHeight - mapHeight;
-            //     }
-            // };
+        //     // levelControl = {
+        //     //     getCurrentScale,
+        //     //     getScaledMapWidth() {
+        //     //         if (mapParts.length === 0) return 0;
+        //     //         const { scaleX } = getCurrentScale();
+        //     //         return (mapParts[0].width + mapParts[1].width + mapParts[2].width) * scaleX;
+        //     //     },
+        //     //     getMapParts() {
+        //     //         return mapParts;
+        //     //     },
+        //     //     getMapOffsetY() {
+        //     //         const mapParts = this.getMapParts();
+        //     //         const { scaleY } = this.getCurrentScale();
+        //     //         const mapHeight = mapParts[0].height * scaleY;
+        //     //         const canvasHeight = k.height();
+        //     //         return canvasHeight - mapHeight;
+        //     //     }
+        //     // };
 
-            // Appliquer le scaling initial
-            updateScaling();
-        }
+        //     // Appliquer le scaling initial
+        //     updateScaling();
+        // }
 
-        // Fonction pour calculer et appliquer le scaling
-        function updateScaling() {
-            const canvasWidth = width();
-            const canvasHeight = height();
+        // // Fonction pour calculer et appliquer le scaling
+        // function updateScaling() {
+        //     const canvasWidth = width();
+        //     const canvasHeight = height();
 
-            if (mapParts.length === 0) return;
+        //     if (mapParts.length === 0) return;
 
-            const scaleY = canvasHeight / mapParts[0].height;
-            const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
+        //     const scaleY = canvasHeight / mapParts[0].height;
+        //     const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
 
-            // Mettre à jour l'échelle et la position sans détruire
-            mapParts.forEach((part, index) => {
-                part.scale = vec2(scaleX, scaleY);
-            });
+        //     // Mettre à jour l'échelle et la position sans détruire
+        //     mapParts.forEach((part, index) => {
+        //         part.scale = vec2(scaleX, scaleY);
+        //     });
 
-            // Repositionner les parties
-            mapParts[0].pos = vec2(0, 0);
-            if (mapParts[1]) {
-                mapParts[1].pos = vec2(mapParts[0].width * scaleX, 0);
-            }
-            if (mapParts[2]) {
-                mapParts[2].pos = vec2((mapParts[0].width + mapParts[1].width) * scaleX, 0);
-            }
+        //     // Repositionner les parties
+        //     mapParts[0].pos = vec2(0, 0);
+        //     if (mapParts[1]) {
+        //         mapParts[1].pos = vec2(mapParts[0].width * scaleX, 0);
+        //     }
+        //     if (mapParts[2]) {
+        //         mapParts[2].pos = vec2((mapParts[0].width + mapParts[1].width) * scaleX, 0);
+        //     }
 
-            k.setGravity(1400 * scaleY);
+        //     k.setGravity(1400 * scaleY);
 
-        }
+        // }
 
-        // Initialisation
-        initializeMap();
+        // // Initialisation
+        // initializeMap();
 
 
         // // Initialize the level
