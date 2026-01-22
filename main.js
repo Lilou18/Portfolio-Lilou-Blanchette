@@ -493,15 +493,35 @@ k.scene("level", async () => {
 
         //     mapParts = [mapPart1, mapPart2, mapPart3];
 
-        //     // Créer les colliders une seule fois
-        //     const levelLayers = dataLevel.layers;
-        //     const colliders = [];
-        //     for (const layer of levelLayers) {
-        //         if (layer.name === "colliders") {
-        //             colliders.push(...layer.objects);
-        //             break;
-        //         }
-        //     }
+        // Créer les colliders une seule fois
+        const levelLayers = dataLevel.layers;
+        const colliders = [];
+        for (const layer of levelLayers) {
+            if (layer.name === "colliders") {
+                colliders.push(...layer.objects);
+                break;
+            }
+        }
+
+        colliderObjects = setMapColliders(k, colliders);
+
+        function setMapColliders(k, colliders) {
+            const colliderObjects = [];
+
+            for (const collider of colliders) {
+                const colliderObj = k.add([
+                    k.pos(collider.x, collider.y),
+                    k.area({
+                        shape: new k.Rect(k.vec2(0), collider.width, collider.height)
+                    }),
+                    k.body({ isStatic: true }),
+                    "collider"
+                ]);
+                colliderObjects.push(colliderObj);
+            }
+
+            return colliderObjects;
+        }
 
         //     // levelControl = {
         //     //     getCurrentScale,
