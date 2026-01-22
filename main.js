@@ -431,7 +431,7 @@
 import { k } from "./loader.js";
 //import { level } from "./level.js";
 // import { gameState } from "./gameState.js";
-// import { Player } from "./player.js";
+import { Player } from "./player.js";
 // import { Camera } from "./camera.js";
 // import { uiManager } from "./uiManager.js";
 // import { applicationManager } from "./applicationManager.js";
@@ -483,11 +483,23 @@ k.scene("level", async () => {
         let gameManager = null;
         const FIXED_VIEW_WIDTH = 1820;
 
+        // Fonction pour calculer le scale actuel
+        function getCurrentScale() {
+            if (mapParts.length === 0) return { scaleX: 1, scaleY: 1 };
+
+            const canvasWidth = width();
+            const canvasHeight = height();
+            const scaleY = canvasHeight / mapParts[0].height;
+            const scaleX = canvasWidth / FIXED_VIEW_WIDTH;
+
+            return { scaleX, scaleY };
+        }
+
 
         // // Initialisation unique
         // function initializeMap() {
         //     // Créer les trois parties du background une seule fois
-        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
+        //const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
         //const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
         //const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
 
@@ -522,6 +534,8 @@ k.scene("level", async () => {
 
             return colliderObjects;
         }
+
+
 
 
         //     // levelControl = {
@@ -583,10 +597,61 @@ k.scene("level", async () => {
         // const levelControl = level(k, levelDataJson);
 
         // // Create the player
-        // let playerPosition = levelDataJson.layers[6].objects[0];
-        // const player = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
-        // gameState.player = player;
+        let playerPosition = dataLevel.layers[6].objects[0];
+        const playertest = new Player(k, playerPosition.x, playerPosition.y, 400, 670);
+        gameState.player = playertest;
         // levelControl.setPlayer(gameState.player);
+
+        const { scaleX, scaleY } = getCurrentScale();
+        updatePlayer(scaleX, scaleY);
+
+        function updatePlayer(scaleX, scaleY) {
+            if (player && player.gameObject) {
+                //console.log("RESIZE PLAYER - scaleX:", scaleX, "scaleY:", scaleY);
+
+                // Première fois: mémoriser la position originale du joueur
+                if (!playerRelativePos && player.originalPosX === undefined) {
+                    playerRelativePos = {
+                        //originalX: player.originalPosX,
+                        //originalY: player.originalPosY
+                        originalX: player.initialPlayerPositionX,
+                        originalY: player.initialPlayerPositionY
+                    };
+                    //console.log("Position originale mémorisée:", playerRelativePos);
+                }
+
+                // Si le scale a changé (resize), recalculer la position relative en fonction de la position actuelle
+                if (lastScaleX !== null && (lastScaleX !== scaleX || lastScaleY !== scaleY)) {
+                    // Avant le resize, mémoriser la position relative actuelle
+                    playerRelativePos = {
+                        originalX: player.gameObject.pos.x / lastScaleX,
+                        originalY: player.gameObject.pos.y / lastScaleY
+                    };
+                    //console.log("Position relative mise à jour avant resize:", playerRelativePos);
+                }
+
+                // Utiliser la moyenne des deux scales pour un scaling uniforme
+                const uniformScale = (scaleX + scaleY) / 2;
+                player.gameObject.scale = vec2(uniformScale);
+
+                // Recalculer la position avec le nouveau scale
+                if (playerRelativePos) {
+                    player.gameObject.pos = vec2(
+                        playerRelativePos.originalX * scaleX,
+                        playerRelativePos.originalY * scaleY
+                    );
+                    //console.log("Nouvelle position du joueur:", player.gameObject.pos);
+                }
+
+                player.updateSpeeds(scaleX, scaleY);
+
+                // Mémoriser le scale actuel
+                lastScaleX = scaleX;
+                lastScaleY = scaleY;
+
+                //console.log("UPDATE PLAYER POSITION : " + player.gameObject.pos);
+            }
+        }
 
         // // Setup the camera
         // const camera = new Camera(player.gameObject, levelControl);
