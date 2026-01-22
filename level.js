@@ -446,8 +446,8 @@ export function level(k, dataLevel) {
         // Create the gameManager
         const mapWidth = dataLevel.width * dataLevel.tilewidth;
         const mapHeight = dataLevel.height * dataLevel.tileheight;
-        //gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
-        //gameManager.setLevelControl(levelControl);
+        gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
+        gameManager.setLevelControl(levelControl);
         uiManager.setLevelControl(levelControl);
 
         // Appliquer le scaling initial

@@ -9,6 +9,8 @@ export const k = kaplay({
     //pixelDensity: 2,
     maxFPS: 60,
     pixelDensity: 1,
+    narrowPhaseCollisionAlgorithm: "sat",
+    broadPhaseCollisionAlgorithm: "sap",
 });
 
 loadSprite("levelP1", "./assets/levelP1.png");
