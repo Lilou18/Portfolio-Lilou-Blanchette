@@ -417,6 +417,7 @@ export function level(k, dataLevel) {
         borders = setMapBorders(k, 128, height(), mapPart1.width);
 
         // Create the holograms
+        // Is nothing working?
         //holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
 
         levelControl = {
