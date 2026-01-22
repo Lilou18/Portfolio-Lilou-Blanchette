@@ -430,7 +430,7 @@
 
 import { k } from "./loader.js";
 //import { level } from "./level.js";
-// import { gameState } from "./gameState.js";
+import { gameState } from "./gameState.js";
 import { Player } from "./player.js";
 // import { Camera } from "./camera.js";
 // import { uiManager } from "./uiManager.js";
