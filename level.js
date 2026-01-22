@@ -578,9 +578,9 @@ function setHolograms(k, hologramsMapPosition) {
         }
         else {
             // Special animation for citySign
-            k.wait(0.1, () => {
-                delayedLoop(k, hologram, "hologram", 5);
-            });
+            // k.wait(0.1, () => {
+            //     delayedLoop(k, hologram, "hologram", 5);
+            // });
         }
 
         // Mémoriser la position originale et le scale
@@ -597,17 +597,17 @@ function setHolograms(k, hologramsMapPosition) {
     return holograms;
 }
 
-function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
-    if (!animatedObject.exists()) return;
-    animatedObject.play(animationName);
+// function delayedLoop(k, animatedObject, animationName, delayInSeconds) {
+//     if (!animatedObject.exists()) return;
+//     animatedObject.play(animationName);
 
-    k.loop(delayInSeconds, () => {
-        if (animatedObject.exists() && !gameState.isGamePaused) {
-            animatedObject.play(animationName);
-        }
+//     k.loop(delayInSeconds, () => {
+//         if (animatedObject.exists() && !gameState.isGamePaused) {
+//             animatedObject.play(animationName);
+//         }
 
-    })
-}
+//     })
+// }
 // for (const position of hologramsMapPosition) {
 //     const config = hologramsConfig[position.name];
 
