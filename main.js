@@ -429,7 +429,7 @@
 
 
 import { k } from "./loader.js";
-// import { level } from "./level.js";
+ import { level } from "./level.js";
 // import { gameState } from "./gameState.js";
 // import { Player } from "./player.js";
 // import { Camera } from "./camera.js";
@@ -439,8 +439,8 @@ import { k } from "./loader.js";
 
 k.scene("level", async () => {
     // Load level data
-   // const levelData = await fetch("level2.json");
-    //const levelDataJson = await levelData.json();
+    const levelData = await fetch("level2.json");
+    const levelDataJson = await levelData.json();
 
     // Debug stats
     // let debugStats = {
@@ -456,7 +456,7 @@ k.scene("level", async () => {
     // const world = createWorld();
 
     // // Initialize the level
-    // const levelControl = level(k, levelDataJson);
+    const levelControl = level(k, levelDataJson);
 
     // // Create the player
     // let playerPosition = levelDataJson.layers[6].objects[0];
@@ -520,64 +520,64 @@ k.scene("level", async () => {
 
     updateFPS();
 
-//     // Debug overlay UI
-//     const debugText = k.add([
-//         k.text(""),
-//         k.pos(10, 10),
-//         k.fixed(),
-//         k.z(1000),
-//         k.color(255, 255, 0),
-//     ]);
+    //     // Debug overlay UI
+    //     const debugText = k.add([
+    //         k.text(""),
+    //         k.pos(10, 10),
+    //         k.fixed(),
+    //         k.z(1000),
+    //         k.color(255, 255, 0),
+    //     ]);
 
-//     // Update debug stats
-//     k.onUpdate(() => {
-//         if (!debugStats.enabled) return;
+    //     // Update debug stats
+    //     k.onUpdate(() => {
+    //         if (!debugStats.enabled) return;
 
-//         debugStats.frameCount++;
-//         const now = Date.now();
+    //         debugStats.frameCount++;
+    //         const now = Date.now();
 
-//         // Calcul FPS
-//         if (now - debugStats.lastTime > 1000) {
-//             debugStats.fps = debugStats.frameCount;
-//             debugStats.frameCount = 0;
-//             debugStats.lastTime = now;
-//         }
+    //         // Calcul FPS
+    //         if (now - debugStats.lastTime > 1000) {
+    //             debugStats.fps = debugStats.frameCount;
+    //             debugStats.frameCount = 0;
+    //             debugStats.lastTime = now;
+    //         }
 
-//         // Mémoire et GC
-//         if (performance.memory) {
-//             const current = performance.memory.usedJSHeapSize;
-//             const delta = current - debugStats.lastMemory;
+    //         // Mémoire et GC
+    //         if (performance.memory) {
+    //             const current = performance.memory.usedJSHeapSize;
+    //             const delta = current - debugStats.lastMemory;
 
-//             // Si la mémoire baisse de plus de 2MB = GC
-//             if (delta < -2000000) {
-//                 debugStats.gcCount++;
-//                 console.log(`🗑️ GC Event #${debugStats.gcCount}`);
-//             }
+    //             // Si la mémoire baisse de plus de 2MB = GC
+    //             if (delta < -2000000) {
+    //                 debugStats.gcCount++;
+    //                 console.log(`🗑️ GC Event #${debugStats.gcCount}`);
+    //             }
 
-//             debugStats.memory = (current / 1024 / 1024).toFixed(1);
-//             debugStats.lastMemory = current;
-//         }
+    //             debugStats.memory = (current / 1024 / 1024).toFixed(1);
+    //             debugStats.lastMemory = current;
+    //         }
 
-//         // Nombre d'objets
-//         debugStats.objects = k.get("*").length;
-//     });
+    //         // Nombre d'objets
+    //         debugStats.objects = k.get("*").length;
+    //     });
 
-//     // Draw debug overlay
-//     k.onDraw(() => {
-//         if (!debugStats.enabled) return;
+    //     // Draw debug overlay
+    //     k.onDraw(() => {
+    //         if (!debugStats.enabled) return;
 
-//         const text = `FPS: ${debugStats.fps}
-// Memory: ${debugStats.memory}MB
-// GC: ${debugStats.gcCount}
-// Objects: ${debugStats.objects}`;
+    //         const text = `FPS: ${debugStats.fps}
+    // Memory: ${debugStats.memory}MB
+    // GC: ${debugStats.gcCount}
+    // Objects: ${debugStats.objects}`;
 
-//         debugText.text = text;
-//     });
+    //         debugText.text = text;
+    //     });
 
-//     // Toggle avec un tap/clic
-//     k.onMousePress(() => {
-//         debugStats.enabled = !debugStats.enabled;
-//     });
+    //     // Toggle avec un tap/clic
+    //     k.onMousePress(() => {
+    //         debugStats.enabled = !debugStats.enabled;
+    //     });
 
 });
 
