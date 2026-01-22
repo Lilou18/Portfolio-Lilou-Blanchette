@@ -396,9 +396,9 @@ export function level(k, dataLevel) {
     // Initialisation unique
     function initializeMap() {
         // Créer les trois parties du background une seule fois
-        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0),]);
-        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0),]);
-        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0),]);
+        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0), opacity(0)]);
+        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0), opacity(0)]);
+        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0), opacity(0)]);
 
         mapParts = [mapPart1, mapPart2, mapPart3];
 
@@ -418,7 +418,7 @@ export function level(k, dataLevel) {
 
         // Create the holograms
         // Is nothing working?
-        //holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
+        holograms = setHolograms(k, levelLayers[6].objects, FIXED_VIEW_WIDTH);
 
         levelControl = {
             setPlayer: (playerInstance) => {
@@ -447,8 +447,8 @@ export function level(k, dataLevel) {
         // Create the gameManager
         const mapWidth = dataLevel.width * dataLevel.tilewidth;
         const mapHeight = dataLevel.height * dataLevel.tileheight;
-        //gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
-        //gameManager.setLevelControl(levelControl);
+        gameManager = new GameManager(k, mapWidth, mapHeight, dataLevel.tilewidth, dataLevel.tileheight);
+        gameManager.setLevelControl(levelControl);
         uiManager.setLevelControl(levelControl);
 
         // Appliquer le scaling initial
@@ -550,6 +550,7 @@ function setHolograms(k, hologramsMapPosition) {
             k.scale(config.scale),
             k.offscreen({ hide: true, distance: 500 }),
             k.z(1),
+            opacity(0),
             config.sprite,
         ]);
 
