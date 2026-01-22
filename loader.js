@@ -6,9 +6,9 @@ export const k = kaplay({
     texFilter: "linear",
     crisp: false,
     touchToMouse: true,
-    pixelDensity: 1,
+    //pixelDensity: 2,
     maxFPS: 60,
-    // pixelDensity: Math.min(2, window.devicePixelRatio),
+    pixelDensity: Math.min(2, window.devicePixelRatio),
 });
 
 loadSprite("levelP1", "./assets/levelP1.png");
