@@ -396,9 +396,9 @@ export function level(k, dataLevel) {
     // Initialisation unique
     function initializeMap() {
         // Créer les trois parties du background une seule fois
-        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0), opacity(0)]);
-        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0), opacity(0)]);
-        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0), opacity(0)]);
+        const mapPart1 = k.add([pos(0, 0), sprite("levelP1"), k.z(0)]);
+        const mapPart2 = k.add([pos(0, 0), sprite("levelP2"), k.z(0)]);
+        const mapPart3 = k.add([pos(0, 0), sprite("levelP3"), k.z(0)]);
 
         mapParts = [mapPart1, mapPart2, mapPart3];
 

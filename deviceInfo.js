@@ -26,6 +26,18 @@ export const deviceInfo = {
     isIOS: !window.MSStream && /iPad|iPhone|iPod/.test(navigator.userAgent),
 
     /**
+     * @see {@link https://stackoverflow.com/questions/56578799/tell-ipados-from-macos-on-the-web}
+     */
+    isIpad: (/iPad/.test(navigator.userAgent) || navigator.userAgent.match(/Mac/)) && navigator.maxTouchPoints && navigator.maxTouchPoints > 0,
+
+
+    /**
+     * @see {@link https://stackoverflow.com/questions/50195475/detect-if-device-is-tablet}
+     */
+    isTablet: /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i.test(navigator.userAgent),
+
+
+    /**
      * Whether the device is currently in portrait orientation.
      * @returns {boolean}
      */
