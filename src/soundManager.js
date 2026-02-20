@@ -1,0 +1,137 @@
+import { k } from "./loader.js";
+import { uiManager } from "./uiManager.js";
+
+class SoundManager {
+    constructor() {
+        this.musicVolume = 0.1;
+        this.sfxVolume = 0.6;
+        this.backgroundMusic = null;
+        this.soundBtn = null;
+
+        this.pauseFlags = new Set();
+        this.setupUI();
+    }
+
+    /**
+     * Event listener for sound settings panel button and sliders.
+     */
+    setupUI() {
+        this.musicSlider = document.getElementById("sliderMusic");
+        this.musicSlider.value = this.musicVolume;
+        this.musicValue = document.getElementById("musicValue");
+        this.musicValue.textContent = this.musicVolume * 10;
+
+        this.sfxSlider = document.getElementById("sliderSFX");
+        this.sfxSlider.value = this.sfxVolume;
+        this.sfxValue = document.getElementById("sfxValue");
+        this.sfxValue.textContent = this.sfxVolume * 10;
+
+        this.btnClosePanel = document.getElementById("btnCloseSoundSettings");
+        this.btnClosePanel.addEventListener("click", () => this.closeSettings());
+
+        this.musicSlider.addEventListener("input", () => this.changeMusicVolume());
+        this.sfxSlider.addEventListener("input", () => this.changeSFXVolume());
+
+    }
+
+    /**
+     * Event listener for sound settings button.
+     */
+    addSoundSettingsBtn() {
+        this.soundBtn = document.getElementById("soundBtn");
+        this.soundBtn.addEventListener("click", () => {
+            this.soundBtn.blur();
+            this.toggleSettings();
+        });
+    }
+
+    /**
+     * Open or close sound settings depending on state.
+     */
+    toggleSettings() {
+        if (uiManager.isSoundSettingsPanelOpen) {
+            this.closeSettings();
+        }
+        else {
+            this.openSettings();
+        }
+    }
+
+    /**
+     * Open the sound settings panel.
+     */
+    openSettings() {
+        uiManager.displayPanel("soundSettings");
+    }
+
+    /**
+     * Close the sound settings panel.
+     */
+    closeSettings() {
+        uiManager.hidePanel("soundSettings");
+    }
+
+    /**
+    * Add a pause flag to the background music and stop the background music. 
+    * @param {string} flag windowBlur or videoPlaying
+    */
+    addPauseFlagMusic(flag) {
+        this.pauseFlags.add(flag);
+        this.backgroundMusic && (this.backgroundMusic.paused = true);
+    }
+
+    /**
+     * Remove a pause flag to the background music. If there is no more pause flag, the music is resumed.
+     * @param {string} flag
+     */
+    removePauseFlagMusic(flag) {
+        this.pauseFlags.delete(flag);
+        if (this.pauseFlags.size === 0 && this.backgroundMusic) {
+            this.backgroundMusic.paused = false;
+        }
+    }
+
+    /**
+     * Play a specefic sound.
+     * 
+     * @param {string} soundName 
+     */
+    playSound(soundName) {
+        k.play(soundName, { volume: this.sfxVolume });
+    }
+
+    /**
+     * Play the background music when the game start.
+     */
+    playBackgroundMusic() {
+        this.backgroundMusic = k.play("backgroundMusic", {
+            volume: this.musicVolume,
+            loop: false,
+            paused: false,
+        });
+
+        // Make my own loop beacuse Kaplay loop has a bug in current version for sounds
+        this.backgroundMusic.onEnd(() => {
+            this.playBackgroundMusic();
+        });
+    }
+
+    /**
+     * Modify SFX volume with the slider.
+     */
+    changeSFXVolume() {
+        this.sfxVolume = this.sfxSlider.value;
+        this.sfxValue.textContent = this.sfxVolume * 10;
+    }
+
+    /**
+     * Modifiy the music volume with the slider.
+     */
+    changeMusicVolume() {
+        this.backgroundMusic.volume = this.musicSlider.value;
+        this.musicVolume = this.musicSlider.value;
+        this.musicValue.textContent = this.musicVolume * 10;
+    }
+}
+
+export const soundManager = new SoundManager();
