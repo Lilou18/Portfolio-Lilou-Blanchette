@@ -77,7 +77,7 @@ class SoundManager {
     */
     addPauseFlagMusic(flag) {
         this.pauseFlags.add(flag);
-        this.backgroundMusic && (this.backgroundMusic.paused = true);
+        this.backgroundMusic?.pause();
     }
 
     /**
@@ -87,7 +87,7 @@ class SoundManager {
     removePauseFlagMusic(flag) {
         this.pauseFlags.delete(flag);
         if (this.pauseFlags.size === 0 && this.backgroundMusic) {
-            this.backgroundMusic.paused = false;
+            this.backgroundMusic.play();
         }
     }
 
@@ -104,16 +104,12 @@ class SoundManager {
      * Play the background music when the game start.
      */
     playBackgroundMusic() {
-        this.backgroundMusic = k.play("backgroundMusic", {
-            volume: this.musicVolume,
-            loop: false,
-            paused: false,
-        });
-
-        // Make my own loop beacuse Kaplay loop has a bug in current version for sounds
-        this.backgroundMusic.onEnd(() => {
-            this.playBackgroundMusic();
-        });
+        if(!this.backgroundMusic){
+            this.backgroundMusic = new Audio("src/sounds/funky-quirky-upbeat-commercial-music-392401_eUPATFbC.mp3");
+            this.backgroundMusic.volume = this.musicVolume;
+            this.backgroundMusic.loop = true;
+            this.backgroundMusic.play();
+        }
     }
 
     /**
