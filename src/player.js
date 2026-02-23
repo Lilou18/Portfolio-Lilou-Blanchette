@@ -194,6 +194,19 @@ export class Player {
             }
         });
 
+        // Reset all keys when there is a full screen change
+        document.addEventListener("fullscreenchange", () => {
+            keysPressed.left = false;
+            keysPressed.right = false;
+            keysPressed.a = false;
+            keysPressed.d = false;
+            keysPressed.space = false;
+
+            if (this.gameObject.isGrounded()) {
+                this.gameObject.play("idle");
+            }
+        });
+
     }
 
     /**
