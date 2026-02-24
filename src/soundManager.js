@@ -1,5 +1,6 @@
 import { k } from "./loader.js";
 import { uiManager } from "./uiManager.js";
+import { deviceInfo } from "./deviceInfo.js";
 
 class SoundManager {
     constructor() {
@@ -16,6 +17,9 @@ class SoundManager {
      * Event listener for sound settings panel button and sliders.
      */
     setupUI() {
+        // IOS can't change the volume with Javascript
+        if (deviceInfo.isIOS) return;
+
         this.musicSlider = document.getElementById("sliderMusic");
         this.musicSlider.value = this.musicVolume;
         this.musicValue = document.getElementById("musicValue");
@@ -39,6 +43,12 @@ class SoundManager {
      */
     addSoundSettingsBtn() {
         this.soundBtn = document.getElementById("soundBtn");
+        // IOS can't change the volume with Javascript
+        if (deviceInfo.isIOS) {
+            this.soundBtn.style.display = "none";
+            return;
+        }
+
         this.soundBtn.addEventListener("click", () => {
             this.soundBtn.blur();
             this.toggleSettings();
@@ -104,7 +114,7 @@ class SoundManager {
      * Play the background music when the game start.
      */
     playBackgroundMusic() {
-        if(!this.backgroundMusic){
+        if (!this.backgroundMusic) {
             this.backgroundMusic = new Audio("src/sounds/funky-quirky-upbeat-commercial-music-392401_eUPATFbC.mp3");
             this.backgroundMusic.volume = this.musicVolume;
             this.backgroundMusic.loop = true;
