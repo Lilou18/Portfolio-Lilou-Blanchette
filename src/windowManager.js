@@ -40,6 +40,15 @@ class WindowManager {
     initWindowEvents() {
         window.addEventListener('blur', this.looseWindowFocus);
         window.addEventListener('focus', this.handleWindowFocus);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                this.handleWindowFocus();
+            } else {
+                this.looseWindowFocus();
+            }
+        });
+
         window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
             this.checkOrientation();
         });
@@ -52,7 +61,7 @@ class WindowManager {
     initFullScreenEvents() {
         if (!this.fullScreenBtn) return;
 
-        if(!this.canUseFullscreen()){
+        if (!this.canUseFullscreen()) {
             this.fullScreenBtn.style.display = "none";
             return;
         }
