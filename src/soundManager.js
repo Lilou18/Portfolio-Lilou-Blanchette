@@ -18,7 +18,7 @@ class SoundManager {
      */
     setupUI() {
         // IOS can't change the volume with Javascript
-        if (deviceInfo.isIOS) return;
+        if (deviceInfo.isIOS || deviceInfo.isIpad) return;
 
         this.musicSlider = document.getElementById("sliderMusic");
         this.musicSlider.value = this.musicVolume;
@@ -44,7 +44,7 @@ class SoundManager {
     addSoundSettingsBtn() {
         this.soundBtn = document.getElementById("soundBtn");
         // IOS can't change the volume with Javascript
-        if (deviceInfo.isIOS) {
+        if (deviceInfo.isIOS || deviceInfo.isIpad) {
             this.soundBtn.style.display = "none";
             return;
         }
