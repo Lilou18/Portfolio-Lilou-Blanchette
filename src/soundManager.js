@@ -4,7 +4,7 @@ import { deviceInfo } from "./deviceInfo.js";
 
 class SoundManager {
     constructor() {
-        this.musicVolume = 0.5;
+        this.musicVolume = 0.7;
         this.sfxVolume = 0.6;
         this.backgroundMusic = null;
         this.soundBtn = null;
