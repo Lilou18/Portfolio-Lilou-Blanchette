@@ -682,13 +682,14 @@ html {
   letter-spacing: 2px;
   font-size: clamp(0.8rem, 2dvh, 1rem);
   padding: clamp(5px, 1.5dvh, 20px) clamp(10px, 1.5vw, 20px);
-  border: clamp(2px, 0.5dvh, 5px) solid rgb(0, 255, 255);
+  border: clamp(2px, 0.5dvh, 5px) solid #00ff00;;
   border-radius: 12px;
-  background-color: rgb(8, 45, 103);
-  color: rgb(0, 255, 255);
+  background-color: black;
+  color: #00ff00;
   position: relative;
   animation: scaleUp 2s infinite;
   width: auto;
+  box-shadow: #00ff00;
   /* animation: borderGlowV2 3s infinite; */
 }
 
@@ -698,11 +699,15 @@ html {
 
   0%,
   100% {
-    transform: scale(0.8)
+    transform: scale(0.8);
+    color: #00ffff;
+    border-color: #00ffff;
   }
 
   50% {
-    transform: scale(1)
+    transform: scale(1);
+    color: #00ff00;
+    border-color: #00ff00;
   }
 }
 
