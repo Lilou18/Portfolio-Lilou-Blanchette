@@ -1112,9 +1112,8 @@ input[type=text] {
 
 .copy-tooltip {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(8, 45, 103, 0.7);
+  background: rgba(8, 45, 103, 1);
+  border: 1px solid #00ffff;
   color: #00ffff;
   font-size: 0.75rem;
   padding: 3px 8px;
@@ -1124,15 +1123,25 @@ input[type=text] {
   pointer-events: none;
 }
 
+.contact-item .copy-tooltip {
+  top: 10px;
+  right: 10px;
+}
+
+.cv-icons .copy-tooltip {
+  bottom: calc(100% + 5px);
+  right: 50%;
+  transform: translateX(50%);
+}
+
 .copy-tooltip i {
   font-size: 1rem;
 }
 
 .cv-icons .copy-icon {
-    border-left: 2px solid #00ffff;
-    padding-left: 10px;
+  border-left: 2px solid #00ffff;
+  padding-left: 10px;
 }
-
 
 /* Classic Portfolio */
 body.classic-mode .nav-browser {
