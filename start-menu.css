@@ -91,10 +91,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: clamp(70px, calc(100dvh - 450px), 150px);
+    width: clamp(70px, calc(100dvh - 450px), 180px);
     aspect-ratio: 1 / 1;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 180px;
+    max-height: 180px;
     margin-top: clamp(0.625rem, 0.323rem + 1.724dvh, 1.875rem);
 }
 
@@ -791,7 +791,7 @@
 
 
 /* Media queries*/
-@media (min-height: 450px) {
+@media (min-height: 485px) {
     .start-menu-container {
         width: 95%;
         height: 95%;
