@@ -9,8 +9,9 @@
     --fs-p-menu: clamp(0.5rem, 0.355rem + 0.828vh, 1.1rem);
 
     /* --fs-h3-menu: clamp(1.2rem, 1.121rem + 0.421vw, 1.5rem); */
-    --fs-h3-menu: clamp(0.7rem, 0.507rem + 1.103vh, 1.5rem);
-    --fs-h2-menu: clamp(0.9rem, 0.671rem + 1.31vh, 1.85rem);
+    --fs-h3-menu: clamp(0.5rem, 0.259rem + 1.379vh, 1.5rem);
+    --fs-h2-menu: clamp(0.7rem, 0.422rem + 1.586vh, 1.85rem);
+
 }
 
 /* À METTRE DISPLAY NONE!!!!!!!!!!!!!!!!*/
@@ -187,7 +188,7 @@
 .menu-skills {
     display: flex;
     flex-direction: column;
-    padding: 0px 20px;
+    padding: 0px clamp(0.313rem, -0.574rem + 2.027dvw, 1.25rem);
     gap: clamp(0.125rem, -0.071rem + 1.121vh, 0.938rem);
 }
 
