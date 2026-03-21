@@ -76,7 +76,21 @@
     flex-direction: column;
     gap: clamp(5px, 1vh, 14px);
     min-height: 0;
-    overflow: hidden;
+    overflow-y: auto;    /* ← remplace overflow: hidden */
+    overflow-x: hidden;
+}
+
+.bio-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.bio-panel::-webkit-scrollbar-track {
+    background: var(--dark-blue-bg);
+}
+
+.bio-panel::-webkit-scrollbar-thumb {
+    background: var(--cyan-flash);
+    border-radius: 2px;
 }
 
 .identity {
