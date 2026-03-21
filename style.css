@@ -435,6 +435,14 @@ input[type=text] {
   padding: 5px 10px;
   font-size: 0.9em;
   letter-spacing: 1px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 2px 0 0 rgb(17, 28, 65),
+    0 4px 0 0 rgb(17, 28, 65),
+    0 6px 0 0 rgb(17, 28, 65),
+    0 8px 0 0 rgb(17, 28, 65),
+    0 8px 16px 0 rgba(17, 28, 65, 0.5);
+  transition: transform 250ms, box-shadow 250ms;
 }
 
 .cv-body {
@@ -799,6 +807,14 @@ input[type=text] {
   border-radius: 25px;
   text-decoration: none;
   font-size: 0.9em;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 2px 0 0 rgb(17, 28, 65),
+    0 4px 0 0 rgb(17, 28, 65),
+    0 6px 0 0 rgb(17, 28, 65),
+    0 8px 0 0 rgb(17, 28, 65),
+    0 8px 16px 0 rgba(17, 28, 65, 0.5);
+  transition: transform 250ms, box-shadow 250ms;
 }
 
 
@@ -865,6 +881,14 @@ input[type=text] {
   border: 1px solid #00ffff;
   border-radius: 12px;
   padding: 50px 30px 50px 30px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 2px 0 0 rgb(17, 28, 65),
+    0 4px 0 0 rgb(17, 28, 65),
+    0 6px 0 0 rgb(17, 28, 65),
+    0 8px 0 0 rgb(17, 28, 65),
+    0 8px 16px 0 rgba(17, 28, 65, 0.5);
+  transition: transform 250ms, box-shadow 250ms;
 }
 
 .contact-item p {
@@ -1296,6 +1320,7 @@ body.classic-mode .browser-content {
   justify-content: center;
   width: 25px;
   height: 25px;
+  font-size: clamp(0.8rem, 0.721rem + 0.421vw, 1.1rem);
 }
 
 #classicExitBtn {
@@ -1326,6 +1351,11 @@ body.classic-mode .browser-content {
   .contact-item {
     padding: 30px 20px 30px 20px;
   }
+
+  .classic-window-btn:not(#classicExitBtn) {
+    display: none;
+  }
+
 }
 
 @media (max-height: 340px) {
@@ -1532,9 +1562,24 @@ body.classic-mode .browser-content {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
   }
 
-  .contact-item:hover {
+  /* .contact-item:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  } */
+
+  .cv-icons:hover,
+  .contact-item:hover,
+  .project-link:hover {
+
+    background: rgba(0, 255, 255, 0.4);
+    transform: translateY(4px);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+      0 1px 0 0 rgb(17, 28, 65),
+      0 2px 0 0 rgb(17, 28, 65),
+      0 3px 0 0 rgb(17, 28, 65),
+      0 4px 0 0 rgb(17, 28, 65),
+      0 4px 8px 0 rgba(17, 28, 65, 0.5);
   }
 
   [data-copy]:hover .copy-tooltip {
