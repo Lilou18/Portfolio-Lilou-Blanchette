@@ -1104,6 +1104,37 @@ input[type=text] {
 
 /* End Score Panel */
 
+/* Classic Portfolio */
+body.classic-mode {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+body.classic-mode #gameCanvas {
+    display: none;
+}
+
+body.classic-mode #cvPanel,
+body.classic-mode #portfolioPanel,
+body.classic-mode #contact {
+    position: relative;
+    top: unset;
+    left: unset;
+    width: 100%;
+    height: auto;
+    flex: 1;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+    z-index: auto;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+/* End classic portfolio */
+
 /*Media Queries*/
 
 @media (max-width: 1290px) {

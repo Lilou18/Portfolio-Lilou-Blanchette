@@ -28,6 +28,9 @@ export class UIManager {
         this.currentInteraction = null;             // Current hologram being interacted with
         this.interactionTexts = {};                 // Map of hologram tags to text objects
 
+        // Classic portfolio mode flag — disables game-specific panel behaviour
+        this.isClassicMode = false;
+
         // Pause overlay elements
         this.pauseText = null;
         this.backgroundColor = null;
@@ -70,6 +73,11 @@ export class UIManager {
         const closeButtons = document.querySelectorAll("[data-close-panel]");
         closeButtons.forEach((button) => {
             button.addEventListener("click", () => {
+                // In classic mode, the X returns to the start menu
+                if(this.isClassicMode){
+                    this.exitClassicPortfolio();
+                    return;
+                }
                 const panelName = button.getAttribute("data-close-panel");
                 this.hidePanel(panelName);
             });
@@ -107,6 +115,8 @@ export class UIManager {
                 isVideoPlaying ? soundManager.addPauseFlagMusic("videoPlaying") : soundManager.removePauseFlagMusic("videoPlaying");
             }
         });
+
+        this.setupPanelKeyboardControls();
     }
 
     /**
@@ -146,12 +156,20 @@ export class UIManager {
     setupPanelKeyboardControls() {
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
+                if(this.isClassicMode) return;
                 this.displayPanel(this.currentInteraction);
             }
         });
 
         window.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
+
+                // In classic mode, the Escape returns to the start menu
+                if(this.isClassicMode){
+                    this.exitClassicPortfolio();
+                    return;
+                }
+
                 // Close sound settings panel first if open
                 if (this.isSoundSettingsPanelOpen) {
                     this.hidePanel("soundSettings");
@@ -276,8 +294,7 @@ export class UIManager {
      */
     setUpHologramInteractions() {
         if (gameState.player) {
-            // Setup keyboard and click events
-            this.setupPanelKeyboardControls();
+            // Setup click events
             this.setUpHologramClicks();
 
             const hologramConfig = {
@@ -488,6 +505,62 @@ export class UIManager {
         if (this.backgroundColor) {
             this.backgroundColor.opacity = 0;
         }
+    }
+
+    /**
+     * Activates classic portfolio mode.
+     * Loads all iframes upfront, shows the CV panel by default,
+     * wires up tab listeners, and disables game-specific panel behaviour.
+     */
+    displayClassicPortfolio() {
+        this.isClassicMode = true;
+
+        document.body.classList.add("classic-mode");
+
+        // Load iframes immediately — no need to wait for the portfolio tab
+        this.loadPortfolioIframes();
+
+        this.classicSwitchPanel("cv");
+    }
+
+    /**
+     * Deactivates classic portfolio mode and returns to the start menu.
+     * Hides the current panel, hides the classic nav, shows the start menu.
+     */
+    exitClassicPortfolio() {
+        this.isClassicMode = false;
+        document.body.classList.remove("classic-mode");
+
+        // Hide only the currently visible panel
+        if (this.currentPanel && this.panels[this.currentPanel]) {
+            this.panels[this.currentPanel].style.display = "none";
+        }
+        this.currentPanel = null;
+
+        // Swap navs
+        const classicNav = document.getElementById("classicNav");
+        if (classicNav) classicNav.style.display = "none";
+
+        // Show start menu again
+        const startMenu = document.getElementById("start-menu");
+        if (startMenu) startMenu.style.display = "flex";
+    }
+
+    /**
+     * Display a panel with the classic mode.
+     * Only hides the currently active panel before showing the new one.
+     * 
+     * @param {string} panelName - "cv" | "portfolio" | "contact"
+     */
+    classicSwitchPanel(panelName) {
+        // Hide only the currently visible panel
+        if (this.currentPanel && this.currentPanel !== panelName) {
+            const current = this.panels[this.currentPanel];
+            if (current) current.style.display = "none";
+        }
+
+        this.currentPanel = panelName;
+        if (this.panels[panelName]) this.panels[panelName].style.display = "block";
     }
 
 

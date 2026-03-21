@@ -29,6 +29,14 @@ k.scene("intro", () => {
         startMenu.style.display = "flex";
         startButton.addEventListener("click", () => startGame(startMenu), { once: true });
     }
+
+    const classicPortfolioBtn = document.getElementById("portfolioClassic");
+    if (classicPortfolioBtn && startMenu) {
+        classicPortfolioBtn.addEventListener("click", () => {
+            startMenu.style.display = "none";
+            uiManager.displayClassicPortfolio();
+        });
+    }
 });
 
 /**

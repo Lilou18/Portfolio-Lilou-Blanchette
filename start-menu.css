@@ -97,8 +97,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: clamp(4px, .8vh, 10px); */
     border-bottom: 1px solid rgba(0, 255, 255, .5);
+    /* Retirer min-height: 0 — ne pas toucher à identity */
 }
 
 .character-display {
@@ -106,11 +106,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: clamp(70px, calc(100dvh - 450px), 180px);
+    /* Remplacer le width clamp par ceci : */
+    width: min(180px, calc(100dvh - 450px), 25dvw);
     aspect-ratio: 1 / 1;
     max-width: 180px;
     max-height: 180px;
+    min-width: 70px;
+    min-height: 70px;
     margin-top: clamp(0.625rem, 0.323rem + 1.724dvh, 1.875rem);
+    flex-shrink: 1;
 }
 
 .character-display img,
@@ -204,6 +208,7 @@
     flex-direction: column;
     padding: 0px clamp(0.313rem, -0.574rem + 2.027dvw, 1.25rem);
     gap: clamp(0.125rem, -0.071rem + 1.121vh, 0.938rem);
+    flex-shrink: 0;  /* ← ces sections ne se compressent pas */
 }
 
 .menu-formation {
