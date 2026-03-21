@@ -123,6 +123,18 @@ class SoundManager {
     }
 
     /**
+    * Stop the background music and reset it so it can be replayed.
+    */
+    stopBackgroundMusic() {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.pause();
+            this.backgroundMusic.currentTime = 0;
+            this.backgroundMusic = null;
+        }
+        this.pauseFlags.clear();
+    }
+
+    /**
      * Modify SFX volume with the slider.
      */
     changeSFXVolume() {

@@ -27,7 +27,7 @@ k.scene("intro", () => {
     const startMenu = document.getElementById("start-menu");
     if (startButton && startMenu) {
         startMenu.style.display = "flex";
-        startButton.addEventListener("click", () => startGame(startMenu), { once: true });
+        startButton.addEventListener("click", () => startGame(startMenu));
     }
 
     const classicPortfolioBtn = document.getElementById("portfolioClassic");

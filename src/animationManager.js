@@ -23,6 +23,7 @@ export function createWorld() {
 
         // Update to sync animation pause state with the game state
         k.onUpdate(() => {
+            if (!world) return;
             // Pause all animations attached to the world when the game is paused
             world.paused = gameState.isGamePaused;
         });
@@ -30,6 +31,9 @@ export function createWorld() {
     return world;
 }
 
+export function resetWorld() {
+    world = null;
+}
 
 let intervalId;
 /**

@@ -3,6 +3,8 @@ import { k } from "./loader.js"
 import { deviceInfo } from "./deviceInfo.js";
 import { world } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
+import { resetWorld } from "./animationManager.js";
+import { setupCopyButtons } from "./utils.js";
 
 // Manages user interface interactions and display panels.
 export class UIManager {
@@ -70,18 +72,48 @@ export class UIManager {
      * Initialize event listeners for the buttons to close the panels.
      */
     initEventListeners() {
+        const exitGameBtn = document.getElementById("exitGameBtn");
+        exitGameBtn.addEventListener("click", () => {
+            if (this.currentPanel) {
+                gameState.removePauseFlag("panelOpen");
+                this.panels[this.currentPanel].style.display = "none";
+                this.currentPanel = null;
+            }
+
+            if (this.isSoundSettingsPanelOpen) {
+                gameState.removePauseFlag("soundSettings");
+                this.panels.soundSettings.style.display = "none";
+                this.isSoundSettingsPanelOpen = false;
+            }
+
+            this.canvas.classList.remove("dimmed");
+
+            if (this.nav) this.nav.style.display = "none";
+
+            soundManager.stopBackgroundMusic();
+
+            const scorePanel = document.getElementById("scorePanel");
+            if (scorePanel) scorePanel.style.display = "none";
+
+            gameState.gameStarted = false;
+
+            resetWorld();
+
+            k.go("intro");
+        });
+
         const closeButtons = document.querySelectorAll("[data-close-panel]");
         closeButtons.forEach((button) => {
             button.addEventListener("click", () => {
-                // In classic mode, the X returns to the start menu
-                if(this.isClassicMode){
-                    this.exitClassicPortfolio();
-                    return;
-                }
                 const panelName = button.getAttribute("data-close-panel");
                 this.hidePanel(panelName);
             });
         });
+
+        // In classic mode, the X returns to the start menu
+        document.getElementById("classicExitBtn")?.addEventListener("click", () => this.exitClassicPortfolio())
+
+        setupCopyButtons();
 
         // https://medium.com/@mihauco/youtube-iframe-api-without-youtube-iframe-api-f0ac5fcf7c74
         window.addEventListener("message", (event) => {
@@ -156,7 +188,7 @@ export class UIManager {
     setupPanelKeyboardControls() {
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                if(this.isClassicMode) return;
+                if (this.isClassicMode) return;
                 this.displayPanel(this.currentInteraction);
             }
         });
@@ -165,7 +197,7 @@ export class UIManager {
             if (e.key === "Escape") {
 
                 // In classic mode, the Escape returns to the start menu
-                if(this.isClassicMode){
+                if (this.isClassicMode) {
                     this.exitClassicPortfolio();
                     return;
                 }
@@ -517,6 +549,14 @@ export class UIManager {
 
         document.body.classList.add("classic-mode");
 
+        if (this.nav) this.nav.style.display = "none";
+        const classicNav = document.getElementById("classicNav");
+        if (classicNav) classicNav.style.display = "flex";
+
+        document.getElementById("classicTabCV")?.addEventListener("click", () => this.classicSwitchPanel("cv"));
+        document.getElementById("classicTabPortfolio")?.addEventListener("click", () => this.classicSwitchPanel("portfolio"));
+        document.getElementById("classicTabContact")?.addEventListener("click", () => this.classicSwitchPanel("contact"));
+
         // Load iframes immediately — no need to wait for the portfolio tab
         this.loadPortfolioIframes();
 
@@ -561,6 +601,10 @@ export class UIManager {
 
         this.currentPanel = panelName;
         if (this.panels[panelName]) this.panels[panelName].style.display = "block";
+
+        document.getElementById("classicTabCV")?.classList.toggle("classic-active-tab", panelName === "cv");
+        document.getElementById("classicTabPortfolio")?.classList.toggle("classic-active-tab", panelName === "portfolio");
+        document.getElementById("classicTabContact")?.classList.toggle("classic-active-tab", panelName === "contact");
     }
 
 

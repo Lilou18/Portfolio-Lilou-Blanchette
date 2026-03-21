@@ -665,7 +665,7 @@ input[type=text] {
 .project-video {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   padding-top: 56.25%;
   border-radius: 8px 8px 0px 0px;
   overflow: hidden;
@@ -1104,36 +1104,206 @@ input[type=text] {
 
 /* End Score Panel */
 
+/* Copy Paste */
+[data-copy] {
+  cursor: pointer;
+  position: relative;
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(8, 45, 103, 0.7);
+  color: #00ffff;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.copy-tooltip i {
+  font-size: 1rem;
+}
+
+.cv-icons .copy-icon {
+    border-left: 2px solid #00ffff;
+    padding-left: 10px;
+}
+
+
 /* Classic Portfolio */
+body.classic-mode .nav-browser {
+  display: none;
+}
+
 body.classic-mode {
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
 }
 
 body.classic-mode #gameCanvas {
-    display: none;
+  display: none;
 }
 
 body.classic-mode #cvPanel,
 body.classic-mode #portfolioPanel,
 body.classic-mode #contact {
-    position: relative;
-    top: unset;
-    left: unset;
-    width: 100%;
-    height: auto;
-    flex: 1;
-    border-radius: 0;
-    box-shadow: none;
-    animation: none;
-    z-index: auto;
-    min-height: 0;
-    box-sizing: border-box;
+  position: relative;
+  top: unset;
+  left: unset;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
+  z-index: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* flex: 1 avec min-height: 0 permet au panel de prendre l'espace restant sans déborder */
+  flex: 1;
+  min-height: 0;
+  height: unset;
 }
 
+body.classic-mode .browser-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Classic Nav */
+#classicNav {
+  background: rgba(27, 27, 57, 0.85);
+  /* border-bottom: 2px solid #505081; */
+  border: 2px solid #00ffff;
+  border-bottom: none;
+  box-shadow: 0 0 30px rgba(134, 134, 172, 0.464);
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.classic-nav-browser {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 100, 255, 0.1) 100%);
+}
+
+.classic-tabs-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 5px 10px 0px 10px;
+  box-sizing: border-box;
+}
+
+.classic-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(8, 39, 97, 0.692);
+  color: white;
+  border: 1px solid #00ffff;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 0.721rem + 0.421vw, 1.1rem);
+}
+
+.classic-active-tab {
+  border-color: #00ffff;
+  border-width: 4px;
+  background-color: rgba(0, 255, 255, 0.4);
+}
+
+.classic-nav-separator {
+  border: 1px solid #00ffff;
+  width: 100%;
+  margin: 0;
+}
+
+.classic-adress-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  /* background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 100, 255, 0.1) 100%); */
+}
+
+.classic-nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.classic-nav-btn {
+  background: transparent;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  color: #00ffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  font-size: clamp(0.8rem, 0.721rem + 0.421vw, 1.1rem);
+}
+
+#classicNav input[type=text] {
+  background: transparent;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 18px;
+  height: 25px;
+  font-size: 0.9rem;
+  flex: 1;
+  padding: 0px 20px;
+  margin: 0;
+  outline: none;
+}
+
+.classic-window-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-bottom: 5px;
+  gap: 12px;
+}
+
+.classic-window-btn {
+  background: transparent;
+  border: 1px solid #00ffff;
+  border-radius: 6px;
+  color: #00ffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+}
+
+#classicExitBtn {
+  cursor: pointer;
+}
+
+.classic-tab,
+.classic-nav-btn,
+.classic-window-btn {
+  font-family: inherit;
+}
+
+/* End Classic Nav */
+
 /* End classic portfolio */
+
+
 
 /*Media Queries*/
 
@@ -1331,7 +1501,9 @@ body.classic-mode #contact {
     box-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
   }
 
-  .exit:hover {
+  .exit:hover,
+  #classicExitBtn:hover,
+  .classic-tab:hover:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
     cursor: pointer;
@@ -1354,6 +1526,10 @@ body.classic-mode #contact {
   .contact-item:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  }
+
+  [data-copy]:hover .copy-tooltip {
+    opacity: 1;
   }
 }
 
