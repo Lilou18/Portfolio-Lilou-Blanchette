@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="start-menu.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
     <button id="soundBtn" class="icon-btn"><i class="fa-solid fa-volume-high"></i></button>
     <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
 </nav>
+
 <body>
     <script type="module" src="./src/main.js"></script>
     <canvas id="gameCanvas" tabindex="0"></canvas>
@@ -52,6 +54,134 @@
         </div>
     </div>
     <div id="start-menu" class="start-menu">
+        <div class="start-menu-container">
+            <div class="panels-container">
+                <div class="bio-panel">
+                    <div class="identity">
+                        <div class="character-display">
+                            <div class="big-big-circle"></div>
+                            <div class="big-circle"></div>
+                            <img class="glitch" src="./src/assets/monsterAnimationIdle.png" alt="monster character">
+                        </div>
+                        <h2>Lilou Blanchette</h2>
+                        <h3>Game Designer & Developer</h3>
+                    </div>
+                    <div class="menu-formation">
+                        <p class="menu-formation-label">Formation</p>
+                        <div class="menu-formation-items">
+                            <div class="menu-formation-item">
+                                <p class="formation-prog">DESS Design de jeux</p>
+                                <p class="formation-school">Université de Montréal</p>
+                                <p class="formation-year">2024 – 2025</p>
+                            </div>
+                            <div class="menu-formation-item">
+                                <p class="formation-prog">Baccalauréat en informatique</p>
+                                <p class="formation-school">Université de Montréal</p>
+                                <p class="formation-year">2020 – 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-skills">
+                        <p class="menu-skills-label">Compétences</p>
+                        <div class="menu-project-skills">
+                            <span class="menu-skill-tag">Unity</span>
+                            <span class="menu-skill-tag">C#</span>
+                            <span class="menu-skill-tag">Gameplay Programming</span>
+                            <span class="menu-skill-tag">Game Design</span>
+                            <span class="menu-skill-tag">System Design</span>
+                            <span class="menu-skill-tag">Level Design</span>
+                            <span class="menu-skill-tag">Python</span>
+                            <span class="menu-skill-tag">Java</span>
+                            <span class="menu-skill-tag">Communication</span>
+                            <span class="menu-skill-tag">Collaboration</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="menu-right-panel">
+                    <div class="console-panel">
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line1 typewriter-text"><span
+                                        class="console-sign">&gt</span>Préparation du CV</p>
+                            </div>
+                            <p class="fade-in-delay-line1 typewriter-text">Réussi</p>
+
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line2 typewriter-text"><span
+                                        class="console-sign">&gt</span>Chargement du Portfolio</p>
+                            </div>
+                            <p class="fade-in-delay-line2 typewriter-text">Réussi</p>
+
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line3 typewriter-text"><span
+                                        class="console-sign">&gt</span>Configuration des coordonnées</p>
+                            </div>
+                            <p class="fade-in-delay-line3 typewriter-text">Réussi</p>
+
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line4 typewriter-text"><span
+                                        class="console-sign">&gt</span>Initialisation de la ville</p>
+                            </div>
+                            <p class="fade-in-delay-line4 typewriter-text">Réussi</p>
+
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line5 typewriter-text"><span
+                                        class="console-sign">&gt</span>Mise en place des hologrammes</p>
+                            </div>
+                            <p class="fade-in-delay-line5 typewriter-text">Réussi</p>
+
+                        </div>
+                    </div>
+                    <div class="graph-panel">
+                        <h3>Analyse de performance</h3>
+                        <div class="graph-content">
+                            <ul>
+                                <li>60</li>
+                                <li>50</li>
+                                <li>40</li>
+                                <li>30</li>
+                                <li>20</li>
+                                <li>10</li>
+                            </ul>
+                            <div class="diagram-container">
+                                <div class="bar bar-one"></div>
+                                <div class="bar bar-two"></div>
+                                <div class="bar bar-three"></div>
+                                <div class="bar bar-four"></div>
+                                <div class="bar bar-five"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolios-container">
+                <button class="portfolio-btn portfolio-classic">
+                    <i class="fa-regular fa-file-lines portfolio-icon"></i>
+                    <h3 class="portfolio-label">Portfolio classique</h3>
+                    <p>CV, projets et coordonnées<br>dans une interface épurée</p>
+                </button>
+                <button class="portfolio-btn portfolio-gaming">
+                    <i class="fa-solid fa-gamepad portfolio-icon"></i>
+                    <h3 class="portfolio-label">Portfolio intéractif</h3>
+                    <p>Explorez la ville et découvrez<br>les projets en jouant</p>
+                </button>
+            </div>
+            <div class="console-bar">
+                <span class="console-bar-text" id="consoleBar">// EN ATTENTE — CHOISISSEZ VOTRE INTERFACE</span>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="start-menu" class="start-menu">
         <div class="start-menu-container">
             <div class="start-menu-panel-container">
                 <div class="menu-left-panel-container">
@@ -177,7 +307,7 @@
             </div>
             <button id="start-button">Démarrer</button>
         </div>
-    </div>
+    </div> -->
     <div id="soundSettingsPanel" class="soundSettingsPanel">
         <h1>Réglages Audio</h1>
         <button id="btnCloseSoundSettings"><i class="fa-solid fa-xmark"></i></button>
@@ -405,7 +535,8 @@
                     <div class="portfolio-body">
                         <div class="project">
                             <div class="project-video">
-                                <iframe data-src="https://www.youtube.com/embed/IYampwPriVI?si=gTgGJrUHRdD1J2FL&enablejsapi=1"
+                                <iframe
+                                    data-src="https://www.youtube.com/embed/IYampwPriVI?si=gTgGJrUHRdD1J2FL&enablejsapi=1"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
@@ -528,7 +659,8 @@
                         </div>
                         <div class="project">
                             <div class="project-video">
-                                <iframe data-src="https://www.youtube.com/embed/rpOdbWPnK1k?si=E-mUeWTnAv6Pqt_p&enablejsapi=1"
+                                <iframe
+                                    data-src="https://www.youtube.com/embed/rpOdbWPnK1k?si=E-mUeWTnAv6Pqt_p&enablejsapi=1"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
