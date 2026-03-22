@@ -668,6 +668,7 @@ input[type=text] {
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-video {
@@ -702,18 +703,28 @@ input[type=text] {
 }
 
 .project-content {
-  padding: 30px;
   display: flex;
   flex-direction: column;
   min-height: 0;
   flex: 1;
 }
 
+.project-content>*:not(.project-video) {
+  padding-left: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+  padding-right: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+}
+
 .project-title {
   color: rgb(0, 255, 255);
-  font-size: 1.3em;
   font-weight: bold;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  margin: 0px;
+  padding-top: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+  padding-bottom: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+  /* margin-top: calc(-1 * clamp(0rem, -0.164rem + 0.877vw, 0.625rem)); */
+  border-bottom: 3px solid #00ffff;
 }
 
 .project-role {
@@ -798,6 +809,7 @@ input[type=text] {
   border-top: 1px solid #00ffff;
   gap: 16px;
   padding-top: 20px;
+  padding-bottom: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
 }
 
 .project-link {
@@ -825,9 +837,10 @@ input[type=text] {
   position: relative;
   border-bottom: 2px solid #00ffff;
   border-top: 2px solid #00ffff;
-  padding: 30px;
-
-  /* padding: 30px; */
+  padding-top: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+  padding-bottom: clamp(0.625rem, -0.268rem + 2.381vw, 1.875rem);
+  margin: 0px;
+  margin-top: calc(-1 * clamp(0rem, -0.164rem + 0.877vw, 0.625rem));
 }
 
 /*End PORTFOLIO*/
@@ -1192,7 +1205,7 @@ body.classic-mode #contact {
   width: 100%;
   border-radius: 0;
   box-shadow: none;
-  animation: none;
+  /* animation: none; */
   z-index: auto;
   box-sizing: border-box;
   overflow: hidden;
@@ -1508,11 +1521,6 @@ body.classic-mode .browser-content {
 
 /*Only devices that can hover*/
 @media (hover: hover) {
-  #start-button:hover {
-    background: rgba(0, 255, 255, 0.4);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-    cursor: pointer;
-  }
 
   .right-corner-btn:hover {
     background: rgba(0, 255, 255, 0.4);
@@ -1557,15 +1565,12 @@ body.classic-mode .browser-content {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
   }
 
-  .project-link:hover {
-    background: rgba(0, 255, 255, 0.4);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  .project:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 12px 40px rgba(0, 255, 255, 0.6),
+      0 0 20px rgba(0, 255, 255, 0.6);
   }
-
-  /* .contact-item:hover {
-    background: rgba(0, 255, 255, 0.4);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-  } */
 
   .cv-icons:hover,
   .contact-item:hover,

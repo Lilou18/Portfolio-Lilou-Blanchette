@@ -72,36 +72,35 @@ export class UIManager {
      * Initialize event listeners for the buttons to close the panels.
      */
     initEventListeners() {
+        // When the player click on the exit button
         const exitGameBtn = document.getElementById("exitGameBtn");
         exitGameBtn.addEventListener("click", () => {
+            // Cleanup UI
             if (this.currentPanel) {
-                gameState.removePauseFlag("panelOpen");
                 this.panels[this.currentPanel].style.display = "none";
                 this.currentPanel = null;
             }
 
             if (this.isSoundSettingsPanelOpen) {
-                gameState.removePauseFlag("soundSettings");
                 this.panels.soundSettings.style.display = "none";
                 this.isSoundSettingsPanelOpen = false;
             }
+
+            const scorePanel = document.getElementById("scorePanel");
+            if (scorePanel) scorePanel.style.display = "none";
 
             this.canvas.classList.remove("dimmed");
 
             if (this.nav) this.nav.style.display = "none";
 
+            // Cleanup game state
             soundManager.stopBackgroundMusic();
-
-            const scorePanel = document.getElementById("scorePanel");
-            if (scorePanel) scorePanel.style.display = "none";
-
-            gameState.gameStarted = false;
-
             resetWorld();
-
+            gameState.resetGame();
             k.go("intro");
         });
 
+        // Close opened panel while in game
         const closeButtons = document.querySelectorAll("[data-close-panel]");
         closeButtons.forEach((button) => {
             button.addEventListener("click", () => {

@@ -38,5 +38,19 @@ export const gameState = {
      */
     isGamePauseFor(flag) {
         return this.pauseFlags.has(flag);
+    },
+
+    /**
+     * Resets the game state to its initial values.
+     * Called when the player exits the game to return to the start menu.
+     */
+    resetGame() {
+        if (this.player) {
+            this.player.destroyWheelEvent();
+        }
+        this.player = null;
+        this.gameStarted = false;
+        this.isInIntroScene = false;
+        this.pauseFlags.clear();
     }
 }

@@ -742,6 +742,7 @@
     letter-spacing: 1px;
     padding: clamp(8px, 1.5vh, 18px) clamp(6px, 1vw, 14px);
     font-size: var(--fs-p-menu);
+    animation: scaleUp 3s infinite;
 }
 
 .portfolio-btn::before {
@@ -755,6 +756,35 @@
 .portfolio-btn:hover::before {
     opacity: 1;
 }
+
+@keyframes scaleUp {
+
+  0%,
+  100% {
+    transform: scale(0.98);
+
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+/* @keyframes scaleUp {
+
+  0%,
+  100% {
+    transform: scale(0.8);
+    color: #00ffff;
+    border-color: #00ffff;
+  }
+
+  50% {
+    transform: scale(1);
+    color: #00ff00;
+    border-color: #00ff00;
+  }
+} */
 
 .portfolio-classic::before {
     background: rgba(0, 255, 255, 0.3);
