@@ -54,11 +54,11 @@ function startGame(startMenu) {
     startMenu.style.display = "none";
 
 
-    try {
-        stopProgressBarAnimation();
-    } catch (error) {
-        console.error("Error stopping progress bar:", error);
-    }
+    // try {
+    //     stopProgressBarAnimation();
+    // } catch (error) {
+    //     console.error("Error stopping progress bar:", error);
+    // }
 
     k.go("level");
     soundManager.playBackgroundMusic();
@@ -86,7 +86,9 @@ k.scene("level", async () => {
 
     // When the canvas resizes, we update the scale and position of the gameObjects.
     k.onResize(() => {
+        if (!gameState.gameStarted) return;
         k.wait(0.01, () => {
+            if (!gameState.gameStarted) return;
             levelInstance.layoutLevel();
             gameManager.onResize();
             uiManager.updateInteractionTextsOnResize();

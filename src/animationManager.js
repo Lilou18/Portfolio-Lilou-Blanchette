@@ -67,4 +67,4 @@ export function stopProgressBarAnimation() {
 
 
 // Automatically start the menu energy bar animation
-progressBarAnimation();
+// progressBarAnimation();

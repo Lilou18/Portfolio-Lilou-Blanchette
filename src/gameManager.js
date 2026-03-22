@@ -131,6 +131,7 @@ export class GameManager {
             },
         }
         this.k.wait(2, () => {
+            if (!gameState.gameStarted) return;
             this.spawnEnemyAtRatio(initialEnemies.firstEnemy);
             this.spawnEnemyAtRatio(initialEnemies.secondEnemy);
             this.spawnEnemyAtRatio(initialEnemies.thirdEnemy);
@@ -239,6 +240,7 @@ export class GameManager {
     */
     spawnCollectibleAfterDelay(delay) {
         this.k.wait(delay, () => {
+            if (!gameState.gameStarted) return;
             // If the game is paused then we wait 1 second then check again
             // if we can now spawn the collectible.
             if (gameState.isGamePaused) {

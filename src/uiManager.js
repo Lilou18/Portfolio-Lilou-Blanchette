@@ -5,6 +5,7 @@ import { world } from "./animationManager.js";
 import { soundManager } from "./soundManager.js";
 import { resetWorld } from "./animationManager.js";
 import { setupCopyButtons } from "./utils.js";
+import { ClassicPortfolioManager } from "./classicPortfolioManager.js";
 
 // Manages user interface interactions and display panels.
 export class UIManager {
@@ -45,6 +46,8 @@ export class UIManager {
         this.iframeStates = {};
 
         this.setupEventListeners();
+
+        this.classicPortfolioManager = new ClassicPortfolioManager(this);
     };
 
     /**
@@ -78,6 +81,7 @@ export class UIManager {
             // Cleanup UI
             if (this.currentPanel) {
                 this.panels[this.currentPanel].style.display = "none";
+                this.panels[this.currentPanel].classList.remove("dimmed");
                 this.currentPanel = null;
             }
 
@@ -90,13 +94,14 @@ export class UIManager {
             if (scorePanel) scorePanel.style.display = "none";
 
             this.canvas.classList.remove("dimmed");
+            this.canvas.style.pointerEvents = "";
 
             if (this.nav) this.nav.style.display = "none";
 
             // Cleanup game state
             soundManager.stopBackgroundMusic();
-            resetWorld();
             gameState.resetGame();
+            resetWorld();
             k.go("intro");
         });
 
@@ -154,6 +159,8 @@ export class UIManager {
      * Initializes all UI elements required during gameplay.
      */
     onGameplayStart() {
+        this.interactionTexts = {};
+        this.currentInteraction = null;
         this.initializeMobileControls();
         this.setUpHologramInteractions();
         this.displayNavBar();
@@ -398,6 +405,7 @@ export class UIManager {
 
 
         requestAnimationFrame(() => {
+            if (!gameState.gameStarted) return;
             // Sound settings panel can be open alongside other panels
             if (panelName === "soundSettings") {
                 this.panels[panelName].style.display = "flex";
@@ -540,26 +548,9 @@ export class UIManager {
 
     /**
      * Activates classic portfolio mode.
-     * Loads all iframes upfront, shows the CV panel by default,
-     * wires up tab listeners, and disables game-specific panel behaviour.
      */
     displayClassicPortfolio() {
-        this.isClassicMode = true;
-
-        document.body.classList.add("classic-mode");
-
-        if (this.nav) this.nav.style.display = "none";
-        const classicNav = document.getElementById("classicNav");
-        if (classicNav) classicNav.style.display = "flex";
-
-        document.getElementById("classicTabCV")?.addEventListener("click", () => this.classicSwitchPanel("cv"));
-        document.getElementById("classicTabPortfolio")?.addEventListener("click", () => this.classicSwitchPanel("portfolio"));
-        document.getElementById("classicTabContact")?.addEventListener("click", () => this.classicSwitchPanel("contact"));
-
-        // Load iframes immediately — no need to wait for the portfolio tab
-        this.loadPortfolioIframes();
-
-        this.classicSwitchPanel("cv");
+        this.classicPortfolioManager.displayClassicPortfolio();
     }
 
     /**
@@ -567,22 +558,7 @@ export class UIManager {
      * Hides the current panel, hides the classic nav, shows the start menu.
      */
     exitClassicPortfolio() {
-        this.isClassicMode = false;
-        document.body.classList.remove("classic-mode");
-
-        // Hide only the currently visible panel
-        if (this.currentPanel && this.panels[this.currentPanel]) {
-            this.panels[this.currentPanel].style.display = "none";
-        }
-        this.currentPanel = null;
-
-        // Swap navs
-        const classicNav = document.getElementById("classicNav");
-        if (classicNav) classicNav.style.display = "none";
-
-        // Show start menu again
-        const startMenu = document.getElementById("start-menu");
-        if (startMenu) startMenu.style.display = "flex";
+        this.classicPortfolioManager.exitClassicPortfolio();
     }
 
     /**

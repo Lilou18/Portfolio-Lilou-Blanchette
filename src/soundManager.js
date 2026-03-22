@@ -49,6 +49,10 @@ class SoundManager {
             return;
         }
 
+        // To keep adding multiple listener to the same button
+        if (this.soundBtnInitialized) return;
+        this.soundBtnInitialized = true;
+
         this.soundBtn.addEventListener("click", () => {
             this.soundBtn.blur();
             this.toggleSettings();
