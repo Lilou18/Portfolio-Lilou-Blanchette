@@ -101,9 +101,15 @@ export class ClassicPortfolioManager {
             activeDropdownTab.innerHTML = `<span>${this.tabInfo[panelName].icon}</span> ${this.tabInfo[panelName].label}`;
         }
 
+        // Update active tab
         document.getElementById("classicTabCV")?.classList.toggle("classic-active-tab", panelName === "cv");
         document.getElementById("classicTabPortfolio")?.classList.toggle("classic-active-tab", panelName === "portfolio");
         document.getElementById("classicTabContact")?.classList.toggle("classic-active-tab", panelName === "contact");
+
+        // Update dropdown tabs
+        document.getElementById("dropdownTabCV")?.classList.toggle("active-dropdown-tab", panelName === "cv");
+        document.getElementById("dropdownTabPortfolio")?.classList.toggle("active-dropdown-tab", panelName === "portfolio");
+        document.getElementById("dropdownTabContact")?.classList.toggle("active-dropdown-tab", panelName === "contact");
     }
 
     /**
