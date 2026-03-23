@@ -1136,6 +1136,10 @@ body.classic-mode .nav-browser {
   display: none;
 }
 
+body.classic-mode #mobileControls {
+  display: none !important;
+}
+
 body.classic-mode {
   overflow: hidden;
   display: flex;
@@ -1504,7 +1508,8 @@ body.classic-mode .browser-content {
   .exit:hover,
   #classicExitBtn:hover,
   .classic-tab:hover:hover,
-  .dropdown-tab:hover, .tabs-menu:hover {
+  .dropdown-tab:hover,
+  .tabs-menu:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
     cursor: pointer;
