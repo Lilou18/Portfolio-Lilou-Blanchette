@@ -1217,8 +1217,6 @@ body.classic-mode .browser-content {
 
 /* Classic Nav */
 #classicNav {
-  /* background: rgba(27, 27, 57, 0.85); */
-  /* border-bottom: 2px solid #505081; */
   border: 2px solid #00ffff;
   border-bottom: none;
   box-shadow: 0 0 30px rgba(134, 134, 172, 0.464);
@@ -1230,8 +1228,7 @@ body.classic-mode .browser-content {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background: #06204c;
-  /* background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 100, 255, 0.1) 100%); */
+  background: color-mix(in srgb, #00ffff 20%, #06204c);
 }
 
 .classic-tabs-row {
@@ -1357,7 +1354,6 @@ body.classic-mode .browser-content {
   align-items: center;
   padding: 10px;
   gap: 10px;
-  /* background: linear-gradient(90deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 100, 255, 0.1) 100%); */
 }
 
 .classic-nav-buttons {
@@ -1389,6 +1385,7 @@ body.classic-mode .browser-content {
   padding: 0px 20px;
   margin: 0;
   outline: none;
+  background-color: rgba(8, 39, 97, 0.692);
 }
 
 .classic-window-buttons {
@@ -1414,6 +1411,7 @@ body.classic-mode .browser-content {
 
 #classicExitBtn {
   cursor: pointer;
+  color: white;
 }
 
 .classic-tab,
