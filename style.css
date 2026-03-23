@@ -32,37 +32,16 @@ html {
   position: fixed;
   top: 12px;
   right: 12px;
-
   display: none;
   flex-direction: row;
   gap: 10px;
-
   z-index: 10;
-  /* au-dessus du canvas */
   pointer-events: none;
-  /* laisse le jeu capter les inputs */
 }
 
 #gameNav .icon-btn {
   pointer-events: auto;
-  /* mais PAS les boutons */
 }
-
-/* .right-corner-btn {
-  display: none;
-  position: absolute;
-  padding: clamp(7px, 1.2dvh, 12px);
-  top: 3%;
-  right: 1%;
-  border: 2px solid rgb(0, 255, 255);
-  color: #00ffff;
-  font-size: clamp(0.8em, 2dvh, 1em);
-  background-color: rgb(8, 45, 103);
-  opacity: 0.7;
-  cursor: pointer;
-  pointer-events: auto;
-} */
-
 
 .soundSettingsPanel {
   display: none;
@@ -921,9 +900,7 @@ input[type=text] {
     border-right: none;
     border-bottom: 2px solid #00ffff;
   }
-}
 
-@media (max-width: 1200px) {
   .portfolio-body {
     grid-template-columns: 1fr;
   }
@@ -931,7 +908,6 @@ input[type=text] {
   .project-video {
     max-width: 1000px;
   }
-
 }
 
 /* Mobile */
@@ -1083,31 +1059,6 @@ input[type=text] {
   }
 }
 
-/* .full-screen {
-  color: #00ffff;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.full-screen i {
-  margin-bottom: 40px;
-  font-size: 30px;
-}
-
-.fullscreen-btn {
-  color: #00ffff;
-  border: 2px solid #00ffff;
-  letter-spacing: 2px;
-  font-size: 1em;
-  padding: 15px 15px;
-  border: 5px solid rgb(0, 255, 255);
-  border-radius: 12px;
-  background-color: rgb(8, 45, 103);
-  margin-bottom: 10px;
-} */
-
 /* End Orientation overlay */
 
 /* Score Panel */
@@ -1229,7 +1180,6 @@ body.classic-mode .browser-content {
   box-shadow: 0 0 30px rgba(134, 134, 172, 0.464);
   flex-direction: column;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .classic-nav-browser {
@@ -1242,13 +1192,15 @@ body.classic-mode .browser-content {
 .classic-tabs-row {
   display: flex;
   flex-direction: row;
+  position: relative;
   align-items: flex-end;
   gap: 10px;
   padding: 5px 10px 0px 10px;
   box-sizing: border-box;
 }
 
-.classic-tab {
+.classic-tab,
+.tab-mobile {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1267,6 +1219,84 @@ body.classic-mode .browser-content {
   border-color: #00ffff;
   border-width: 4px;
   background-color: rgba(0, 255, 255, 0.4);
+}
+
+.tabs-menu {
+  display: none;
+  color: white;
+  background-color: rgba(8, 39, 97, 0.692);
+  border: 1px solid #00ffff;
+  border-radius: 6px 6px 0px 0px;
+  border-bottom: none;
+  width: 35px;
+  align-self: stretch;
+  cursor: pointer;
+  font-size: clamp(0.8rem, 0.721rem + 0.421vw, 1.1rem);
+}
+
+.tab-mobile {
+  display: none;
+  flex: 1;
+}
+
+.tabs-dropdown {
+  z-index: 1000;
+  display: block;
+  position: absolute;
+  top: calc(100% + 2px);
+  left: -1px;
+  right: -1px;
+  background: rgb(8, 39, 97);
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.7);
+  border: 2px solid #00ffff;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  animation: dropDown 0.2s ease;
+}
+
+@keyframes dropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-tab {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  gap: 10px;
+  text-decoration: none;
+  color: #00ffff;
+  border-bottom: 1px solid #00ffff;
+  background: rgba(8, 39, 97, 0.3);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.dropdown-tab:last-child {
+  border-bottom: none;
+}
+
+.active-dropdown-tab {
+  background: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.close-tab {
+  margin-left: auto;
+}
+
+.hidden {
+  display: none;
 }
 
 .classic-nav-separator {
@@ -1342,7 +1372,8 @@ body.classic-mode .browser-content {
 
 .classic-tab,
 .classic-nav-btn,
-.classic-window-btn {
+.classic-window-btn,
+.classic-active-tab {
   font-family: inherit;
 }
 
@@ -1369,17 +1400,6 @@ body.classic-mode .browser-content {
     display: none;
   }
 
-}
-
-@media (max-height: 340px) {
-
-  .console-panel-container {
-    flex: 1;
-  }
-
-  .console-panel {
-    flex: 1;
-  }
 }
 
 @media (max-height: 450px) {
@@ -1415,58 +1435,6 @@ body.classic-mode .browser-content {
     width: 20px;
     font-size: 0.9em;
   }
-
-  /*Sound Settings Panel*/
-  /* .right-corner-btn {
-    padding: 7px;
-    font-size: 0.8em;
-  }
-
-  .soundSettingsPanel {
-    padding-bottom: 0px;
-    height: 40%;
-  }
-
-  .soundSettingsPanel h1 {
-    font-size: 1em;
-    margin-bottom: 20px;
-  }
-
-  .slider-container span {
-    font-size: 0.7em;
-  }
-
-  .slider {
-    height: 5px;
-  }
-
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 4px;
-    height: 20px;
-    background: #00ffff;
-    cursor: pointer;
-  }
-
-  .slider::-moz-range-thumb {
-    width: 4cap;
-    height: 20px;
-    background: #00ffff;
-    cursor: pointer;
-  }
-
-  #btnCloseSoundSettings {
-    width: 20px;
-    height: 20px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
-
-  /*End Sound Settings Panel*/
-
 }
 
 @media (max-height: 400px) {
@@ -1476,38 +1444,23 @@ body.classic-mode .browser-content {
   }
 }
 
-@media (max-width: 1150px) {
-
-  /*Sound Settings Panel*/
-  /* .soundSettingsPanel {
-    width: 45%;
+@media(max-width: 450px) {
+  .classic-tab {
+    display: none;
   }
 
-  .soundSettingsPanel h1 {
-    margin-bottom: 0px;
+  .tabs-menu {
+    display: inline-block;
   }
 
-  .sliders-container {
-    width: 100%;
+  .tab-mobile {
+    display: flex;
   }
 
-  .slider-value span {
-    width: 2ch;
-  }
-
-  .slider-container span {
-    font-size: 0.6em;
-  }
-
-  .slider {
-    margin-left: 5px;
-    margin-right: 0px;
-  } */
-
-  /*End Sound Settings Panel*/
 }
 
-@media (max-height: 300px) {
+
+/* @media (max-height: 300px) {
   .stat-item {
     flex-direction: row;
     justify-content: space-between;
@@ -1517,7 +1470,7 @@ body.classic-mode .browser-content {
   .stat-value {
     margin-top: 0px;
   }
-}
+} */
 
 /*Only devices that can hover*/
 @media (hover: hover) {
@@ -1550,7 +1503,8 @@ body.classic-mode .browser-content {
 
   .exit:hover,
   #classicExitBtn:hover,
-  .classic-tab:hover:hover {
+  .classic-tab:hover:hover,
+  .dropdown-tab:hover, .tabs-menu:hover {
     background: rgba(0, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
     cursor: pointer;

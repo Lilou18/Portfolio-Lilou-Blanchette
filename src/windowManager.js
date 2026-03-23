@@ -109,6 +109,10 @@ class WindowManager {
         this.onOrientationChangeCallback = cb;
     }
 
+    setIsClassicModeGetter(isClassicMode) {
+        this.isClassicModeGetter = isClassicMode;
+    }
+
     /**
      * Checks the current device orientation and shows/hides
      * the portrait overlay as needed.
@@ -123,6 +127,10 @@ class WindowManager {
 
         // Display the overlay if in portrait mode
         if (deviceInfo.isPortrait) {
+
+            // We allow vertical mode for the classic portfolio
+            if(uiManager.isClassicMode) return;
+
             gameState.addPauseFlag("portraitMode");
             this.showPortraitOverlay();
         }

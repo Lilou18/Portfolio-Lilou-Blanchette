@@ -26,9 +26,10 @@
         <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
         <button id="exitGameBtn" class="icon-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></button>
     </nav>
-    <nav id="classicNav" style="display:none">
-        <div class="classic-nav-browser">
+    <header id="classicNav" style="display:none">
+        <nav class="classic-nav-browser">
             <div class="classic-tabs-row">
+                <!--Desktop buttons-->
                 <button id="classicTabCV" class="classic-tab classic-active-tab">
                     <span><i class="fa-solid fa-file-lines"></i></span>
                     CV
@@ -41,6 +42,33 @@
                     <span><i class="fa-solid fa-envelope"></i></span>
                     Contact
                 </button>
+                <!--Mobile Dropdown-->
+                <button id="activeDropdownTab" class="tab-mobile classic-active-tab">
+                    <span><i class="fa-solid fa-file-lines"></i></span>
+                    CV
+                </button>
+                <button type="button" class="tabs-menu" id="menuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="tabs-dropdown hidden" id="tabsDropdown">
+                    <button id="dropdownTabCV" class="dropdown-tab active-dropdown-tab">
+                        <span><i class="fa-solid fa-file-lines"></i></span>
+                        CV
+                        <span class="close-tab">x</span>
+                    </button>
+                    <button id="dropdownTabPortfolio" class="dropdown-tab">
+                        <span><i class="fa-solid fa-globe"></i></span>
+                        Portfolio
+                        <span class="close-tab">x</span>
+                    </button>
+                    <button id="dropdownTabContact" class="dropdown-tab">
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                        Contact
+                        <span class="close-tab">x</span>
+                    </button>
+
+                </div>
+
                 <div class="classic-window-buttons">
                     <button class="classic-window-btn"><i class="fa-solid fa-window-minimize"></i></i></button>
                     <button class="classic-window-btn"><i class="fa-regular fa-window-restore"></i></button>
@@ -57,8 +85,8 @@
                 </div>
                 <input id="classicUrl" readonly type="text" value="https://cv.lilou-blanchette.dev/cv">
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
     <div id="overlay">
         <div id="portraitSection" class="rotate-device">
             <i class="fa-solid fa-mobile-screen phone"></i>

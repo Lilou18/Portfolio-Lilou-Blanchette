@@ -9,6 +9,56 @@ export class ClassicPortfolioManager {
      */
     constructor(uiManager) {
         this.uiManager = uiManager;
+
+        this.setupTabListeners();
+        this.setupDropdown();
+
+        this.tabInfo = {
+            cv: { icon: '<i class="fa-solid fa-file-lines"></i>', label: 'CV' },
+            portfolio: { icon: '<i class="fa-solid fa-globe"></i>', label: 'Portfolio' },
+            contact: { icon: '<i class="fa-solid fa-envelope"></i>', label: 'Contact' }
+        };
+    }
+
+    setupTabListeners() {
+        document.getElementById("classicTabCV")?.addEventListener("click", () => this.classicSwitchPanel("cv"));
+        document.getElementById("classicTabPortfolio")?.addEventListener("click", () => this.classicSwitchPanel("portfolio"));
+        document.getElementById("classicTabContact")?.addEventListener("click", () => this.classicSwitchPanel("contact"));
+    }
+
+    /**
+     * 
+     */
+    setupDropdown() {
+        const menuBtn = document.getElementById("menuBtn");
+        const dropdown = document.getElementById("tabsDropdown");
+
+        // Ouvrir/fermer le dropdown au clic du bouton hamburger
+        menuBtn?.addEventListener("click", () => {
+            dropdown?.classList.toggle("hidden");
+        });
+
+        // Fermer le dropdown si on clique ailleurs
+        document.addEventListener("click", (e) => {
+            if (!menuBtn?.contains(e.target) && !dropdown?.contains(e.target)) {
+                dropdown?.classList.add("hidden");
+            }
+        });
+
+        document.getElementById("dropdownTabCV")?.addEventListener("click", () => {
+            this.classicSwitchPanel("cv");
+            dropdown?.classList.add("hidden");
+        });
+
+        document.getElementById("dropdownTabPortfolio")?.addEventListener("click", () => {
+            this.classicSwitchPanel("portfolio");
+            dropdown?.classList.add("hidden");
+        });
+
+        document.getElementById("dropdownTabContact")?.addEventListener("click", () => {
+            this.classicSwitchPanel("contact");
+            dropdown?.classList.add("hidden");
+        });
     }
 
     /**
@@ -24,10 +74,6 @@ export class ClassicPortfolioManager {
         if (this.uiManager.nav) this.uiManager.nav.style.display = "none";
         const classicNav = document.getElementById("classicNav");
         if (classicNav) classicNav.style.display = "flex";
-
-        document.getElementById("classicTabCV")?.addEventListener("click", () => this.classicSwitchPanel("cv"));
-        document.getElementById("classicTabPortfolio")?.addEventListener("click", () => this.classicSwitchPanel("portfolio"));
-        document.getElementById("classicTabContact")?.addEventListener("click", () => this.classicSwitchPanel("contact"));
 
         // Load iframes immediately
         this.uiManager.loadPortfolioIframes();
@@ -48,6 +94,12 @@ export class ClassicPortfolioManager {
 
         this.uiManager.currentPanel = panelName;
         if (this.uiManager.panels[panelName]) this.uiManager.panels[panelName].style.display = "block";
+
+        // Change active panel
+        const activeDropdownTab = document.getElementById("activeDropdownTab");
+        if (activeDropdownTab && this.tabInfo[panelName]) {
+            activeDropdownTab.innerHTML = `<span>${this.tabInfo[panelName].icon}</span> ${this.tabInfo[panelName].label}`;
+        }
 
         document.getElementById("classicTabCV")?.classList.toggle("classic-active-tab", panelName === "cv");
         document.getElementById("classicTabPortfolio")?.classList.toggle("classic-active-tab", panelName === "portfolio");
@@ -75,5 +127,11 @@ export class ClassicPortfolioManager {
         // Show start menu again
         const startMenu = document.getElementById("start-menu");
         if (startMenu) startMenu.style.display = "flex";
+
+        this.onExitCallback?.();
+    }
+
+    setOnExitCallback(fn) {
+        this.onExitCallback = fn;
     }
 }

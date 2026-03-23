@@ -18,6 +18,8 @@ windowManager.setOrientationChangeCallback(() => {
     }
 });
 
+uiManager.classicPortfolioManager.setOnExitCallback(() => windowManager.checkOrientation());
+
 /**
  * Initialize the intro/start menu scene.
  */
