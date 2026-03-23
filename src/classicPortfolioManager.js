@@ -18,6 +18,12 @@ export class ClassicPortfolioManager {
             portfolio: { icon: '<i class="fa-solid fa-globe"></i>', label: 'Portfolio' },
             contact: { icon: '<i class="fa-solid fa-envelope"></i>', label: 'Contact' }
         };
+
+        this.urls = {
+            cv: "https://cv.lilou-blanchette.dev/cv",
+            portfolio: "https://cv.lilou-blanchette.dev/portfolio",
+            contact: "https://cv.lilou-blanchette.dev/contact"
+        }
     }
 
     setupTabListeners() {
@@ -93,7 +99,11 @@ export class ClassicPortfolioManager {
         }
 
         this.uiManager.currentPanel = panelName;
-        if (this.uiManager.panels[panelName]) this.uiManager.panels[panelName].style.display = "block";
+        if (this.uiManager.panels[panelName]) {
+            this.uiManager.panels[panelName].style.display = "block";
+
+            this.uiManager.resetPanelScroll(panelName);
+        }
 
         // Change active panel
         const activeDropdownTab = document.getElementById("activeDropdownTab");
@@ -101,9 +111,21 @@ export class ClassicPortfolioManager {
             activeDropdownTab.innerHTML = `<span>${this.tabInfo[panelName].icon}</span> ${this.tabInfo[panelName].label}`;
         }
 
+        // Change url
+        const classicUrl = document.getElementById("classicUrl");
+        if (classicUrl && this.urls[panelName]) {
+            classicUrl.value = this.urls[panelName];
+        }
+
+        // Update active tab
         document.getElementById("classicTabCV")?.classList.toggle("classic-active-tab", panelName === "cv");
         document.getElementById("classicTabPortfolio")?.classList.toggle("classic-active-tab", panelName === "portfolio");
         document.getElementById("classicTabContact")?.classList.toggle("classic-active-tab", panelName === "contact");
+
+        // Update dropdown tabs
+        document.getElementById("dropdownTabCV")?.classList.toggle("active-dropdown-tab", panelName === "cv");
+        document.getElementById("dropdownTabPortfolio")?.classList.toggle("active-dropdown-tab", panelName === "portfolio");
+        document.getElementById("dropdownTabContact")?.classList.toggle("active-dropdown-tab", panelName === "contact");
     }
 
     /**
