@@ -1607,6 +1607,24 @@ body.classic-mode .browser-content {
   [data-copy]:hover .copy-tooltip {
     opacity: 1;
   }
+
+  /* Start menu hover */
+  .portfolio-btn:hover::before {
+    opacity: 1;
+  }
+
+  .graph-panel:hover .bar-one,
+  .graph-panel:hover .bar-two,
+  .graph-panel:hover .bar-three,
+  .graph-panel:hover .bar-four,
+  .graph-panel:hover .bar-five {
+    animation-play-state: running;
+  }
+
+  .character-display:hover img {
+    animation: glitch 3.5s infinite steps(1);
+    box-shadow: 0 0 100px rgba(0, 255, 255, 1);
+  }
 }
 
 /* Hide mobile button for PC user */

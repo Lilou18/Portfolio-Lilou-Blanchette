@@ -7,7 +7,6 @@ import { GameManager } from "./gameManager.js";
 import { uiManager } from "./uiManager.js";
 import { soundManager } from "./soundManager.js";
 import { windowManager } from "./windowManager.js";
-import { stopProgressBarAnimation } from "./animationManager.js";
 
 // Callback function that windowManager calls if we switched from portrait mode to landscape mode
 // and we are yet to go into the intro scene.
