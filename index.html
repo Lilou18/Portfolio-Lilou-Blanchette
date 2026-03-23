@@ -21,13 +21,9 @@
 <body>
     <script type="module" src="./src/main.js"></script>
     <canvas id="gameCanvas" tabindex="0"></canvas>
-    <nav id="gameNav">
-        <button id="soundBtn" class="icon-btn"><i class="fa-solid fa-volume-high"></i></button>
-        <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
-        <button id="exitGameBtn" class="icon-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></button>
-    </nav>
-    <header id="classicNav" style="display:none">
-        <nav class="classic-nav-browser">
+
+    <header  >
+        <nav class="classic-nav-browser" id="classicNav" style="display:none">
             <div class="classic-tabs-row">
                 <!--Desktop buttons-->
                 <button id="classicTabCV" class="classic-tab classic-active-tab">
@@ -85,6 +81,11 @@
                 </div>
                 <input id="classicUrl" readonly type="text" value="https://cv.lilou-blanchette.dev/cv">
             </div>
+        </nav>
+        <nav id="gameNav">
+            <button id="soundBtn" class="icon-btn"><i class="fa-solid fa-volume-high"></i></button>
+            <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
+            <button id="exitGameBtn" class="icon-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></button>
         </nav>
     </header>
     <div id="overlay">
