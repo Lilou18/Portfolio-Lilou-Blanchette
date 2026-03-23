@@ -18,6 +18,12 @@ export class ClassicPortfolioManager {
             portfolio: { icon: '<i class="fa-solid fa-globe"></i>', label: 'Portfolio' },
             contact: { icon: '<i class="fa-solid fa-envelope"></i>', label: 'Contact' }
         };
+
+        this.urls = {
+            cv: "https://cv.lilou-blanchette.dev/cv",
+            portfolio: "https://cv.lilou-blanchette.dev/portfolio",
+            contact: "https://cv.lilou-blanchette.dev/contact"
+        }
     }
 
     setupTabListeners() {
@@ -99,6 +105,12 @@ export class ClassicPortfolioManager {
         const activeDropdownTab = document.getElementById("activeDropdownTab");
         if (activeDropdownTab && this.tabInfo[panelName]) {
             activeDropdownTab.innerHTML = `<span>${this.tabInfo[panelName].icon}</span> ${this.tabInfo[panelName].label}`;
+        }
+
+        // Change url
+        const classicUrl = document.getElementById("classicUrl");
+        if (classicUrl && this.urls[panelName]) {
+            classicUrl.value = this.urls[panelName];
         }
 
         // Update active tab
