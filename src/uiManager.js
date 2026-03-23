@@ -290,6 +290,7 @@ export class UIManager {
             if (this.currentPanel == null && !this.isSoundSettingsPanelOpen) {
                 this.currentPanel = panelName;
                 this.panels[panelName].style.display = "block";
+                this.resetPanelScroll(panelName);
                 // Dims the canvas background and pauses the game
                 this.canvas.classList.add('dimmed');
                 gameState.addPauseFlag("panelOpen");
@@ -297,6 +298,22 @@ export class UIManager {
 
         });
 
+    }
+
+    /**
+     * When we display a panel we must reset its scrool position
+     * @param {string} panelName - "cv" | "portfolio" | "contact"
+     * @returns 
+     */
+    resetPanelScroll(panelName) {
+        const panel = this.panels[panelName];
+        if (!panel) return;
+
+        const scrollContainer = panel.querySelector(".browser-content");
+
+        if (scrollContainer) {
+            scrollContainer.scrollTop = 0;
+        }
     }
 
     /**

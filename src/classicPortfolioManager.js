@@ -99,7 +99,11 @@ export class ClassicPortfolioManager {
         }
 
         this.uiManager.currentPanel = panelName;
-        if (this.uiManager.panels[panelName]) this.uiManager.panels[panelName].style.display = "block";
+        if (this.uiManager.panels[panelName]) {
+            this.uiManager.panels[panelName].style.display = "block";
+
+            this.uiManager.resetPanelScroll(panelName);
+        }
 
         // Change active panel
         const activeDropdownTab = document.getElementById("activeDropdownTab");
