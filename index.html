@@ -116,62 +116,65 @@
             <div class="panels-container">
                 <div class="bio-panel">
                     <div class="identity">
-                        <div class="character-display">
-                            <div class="big-big-circle"></div>
-                            <div class="big-circle"></div>
-                            <img class="glitch" src="./src/assets/monsterAnimationIdle.png" alt="monster character">
-                        </div>
-                        <h2>Lilou Blanchette</h2>
-                        <h3>Game Designer & Developer</h3>
-                    </div>
-                    <div class="menu-formation">
-                        <p class="menu-formation-label">Formation</p>
-                        <div class="menu-formation-items">
-                            <div class="menu-formation-item">
-                                <p class="formation-prog">DESS Design de jeux</p>
-                                <p class="formation-school">Université de Montréal</p>
-                                <p class="formation-year">2024 – 2025</p>
-                            </div>
-                            <div class="menu-formation-item">
-                                <p class="formation-prog">Baccalauréat en informatique</p>
-                                <p class="formation-school">Université de Montréal</p>
-                                <p class="formation-year">2020 – 2023</p>
+                        <div class="character-display-wrapper">
+                            <div class="character-display">
+                                <div class="big-big-circle"></div>
+                                <div class="big-circle"></div>
+                                <img class="glitch" src="./src/assets/monsterAnimationIdle.png" alt="monster character">
                             </div>
                         </div>
-                    </div>
-                    <div class="menu-skills">
-                        <p class="menu-skills-label">Compétences</p>
-                        <div class="menu-project-skills">
-                            <span class="menu-skill-tag">Unity</span>
-                            <span class="menu-skill-tag">C#</span>
-                            <span class="menu-skill-tag">Gameplay Programming</span>
-                            <span class="menu-skill-tag">Game Design</span>
-                            <span class="menu-skill-tag">System Design</span>
-                            <span class="menu-skill-tag">Level Design</span>
-                            <span class="menu-skill-tag">Python</span>
-                            <span class="menu-skill-tag">Java</span>
-                            <span class="menu-skill-tag">Communication</span>
-                            <span class="menu-skill-tag">Collaboration</span>
-
+                        <div class="identity-text">
+                            <h2>Lilou Blanchette</h2>
+                            <h3>Game Designer & Developer</h3>
                         </div>
                     </div>
-                    <div class="menu-skills">
-                        <p class="menu-skills-label">Compétences</p>
-                        <div class="menu-project-skills">
-                            <span class="menu-skill-tag">Unity</span>
-                            <span class="menu-skill-tag">C#</span>
-                            <span class="menu-skill-tag">Gameplay Programming</span>
-                            <span class="menu-skill-tag">Game Design</span>
-                            <span class="menu-skill-tag">System Design</span>
-                            <span class="menu-skill-tag">Level Design</span>
-                            <span class="menu-skill-tag">Python</span>
-                            <span class="menu-skill-tag">Java</span>
-                            <span class="menu-skill-tag">Communication</span>
-                            <span class="menu-skill-tag">Collaboration</span>
-
+                    <div class="hot-chocolat-bar">
+                        <div class="hot-chocolat">
+                            <img src="./src/assets/collectible.png" alt="mug-monster">
+                        </div>
+                        <div class="hot-chocolat">
+                            <img src="./src/assets/collectible.png" alt="mug-monster">
+                        </div>
+                        <div class="hot-chocolat">
+                            <img src="./src/assets/collectible.png" alt="mug-monster">
+                        </div>
+                        <div class="hot-chocolat">
+                            <img src="./src/assets/collectible.png" alt="mug-monster">
                         </div>
                     </div>
+                    <div class="bio-panel-right-col">
+                        <div class="menu-formation">
+                            <p class="menu-formation-label">Formation</p>
+                            <div class="menu-formation-items">
+                                <div class="menu-formation-item">
+                                    <p class="formation-prog">DESS Design de jeux</p>
+                                    <p class="formation-school">Université de Montréal</p>
+                                    <p class="formation-year">2024 – 2025</p>
+                                </div>
+                                <div class="menu-formation-item">
+                                    <p class="formation-prog">Baccalauréat en informatique</p>
+                                    <p class="formation-school">Université de Montréal</p>
+                                    <p class="formation-year">2020 – 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-skills">
+                            <p class="menu-skills-label">Compétences</p>
+                            <div class="menu-project-skills">
+                                <span class="menu-skill-tag">Unity</span>
+                                <span class="menu-skill-tag">C#</span>
+                                <span class="menu-skill-tag">Gameplay Programming</span>
+                                <span class="menu-skill-tag">Game Design</span>
+                                <span class="menu-skill-tag">System Design</span>
+                                <span class="menu-skill-tag">Level Design</span>
+                                <span class="menu-skill-tag">Python</span>
+                                <span class="menu-skill-tag">Java</span>
+                                <span class="menu-skill-tag">Communication</span>
+                                <span class="menu-skill-tag">Collaboration</span>
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-right-panel">
                     <div class="console-panel">
@@ -216,8 +219,12 @@
 
                         </div>
                     </div>
-                    <div class="graph-panel">
-                        <h3>Analyse de performance</h3>
+                    <div class="graph-panel" id="graphPanel">
+                        <div class="graph-analysis">
+                            <h3>Analyse de performance</h3>
+                            <button id="performanceAnalysis">Effectuez l'analyse</button>
+                        </div>
+
                         <div class="graph-content">
                             <ul>
                                 <li>60</li>
@@ -256,133 +263,6 @@
             </div>
         </div>
     </div>
-    <!-- <div id="start-menu" class="start-menu">
-        <div class="start-menu-container">
-            <div class="start-menu-panel-container">
-                <div class="menu-left-panel-container">
-                    <div class="menu-left-panel">
-                        <div class="character-display-container">
-                            <div class="character-display">
-                                <div class="big-big-circle"></div>
-                                <div class="big-circle"></div>
-                                <img class="glitch" src="./src/assets/monsterAnimationIdle.png" alt="monster character">
-                            </div>
-                        </div>
-                        <div class="hot-chocolat-bar">
-                            <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
-                            </div>
-                            <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
-                            </div>
-                            <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
-                            </div>
-                            <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
-                            </div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <span class="progress-label">Énergie:</span>
-                            <div class="progress-bar-outline">
-                                <div id="energyBar" class="progress-bar"></div>
-                            </div>
-                        </div>
-                        <div class="stats-container">
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    Monstres touchés
-                                    <span class="stat-value">6</span>
-                                </div>
-                                <div class="stat-item">
-                                    Chocolats chauds
-                                    <span class="stat-value">10</span>
-                                </div>
-                                <div class="stat-item">
-                                    Nombre de sauts
-                                    <span class="stat-value">20</span>
-                                </div>
-                                <div class="stat-item">
-                                    Énergie
-                                    <span class="stat-value">45</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-right-panel">
-                    <div class="console-panel-container">
-                        <div class="console-panel">
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line1 typewriter-text"><span
-                                            class="console-sign">&gt</span>Préparation du CV</p>
-                                </div>
-                                <p class="fade-in-delay-line1 typewriter-text">Réussi</p>
-
-                            </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line2 typewriter-text"><span
-                                            class="console-sign">&gt</span>Chargement du Portfolio</p>
-                                </div>
-                                <p class="fade-in-delay-line2 typewriter-text">Réussi</p>
-
-                            </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line3 typewriter-text"><span
-                                            class="console-sign">&gt</span>Configuration des coordonnées</p>
-                                </div>
-                                <p class="fade-in-delay-line3 typewriter-text">Réussi</p>
-
-                            </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line4 typewriter-text"><span
-                                            class="console-sign">&gt</span>Initialisation de la ville</p>
-                                </div>
-                                <p class="fade-in-delay-line4 typewriter-text">Réussi</p>
-
-                            </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line5 typewriter-text"><span
-                                            class="console-sign">&gt</span>Mise en place des hologrammes</p>
-                                </div>
-                                <p class="fade-in-delay-line5 typewriter-text">Réussi</p>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="graph-panel-container">
-                        <div class="graph-panel">
-                            <h2>Analyse de performance</h2>
-                            <div class="graph-content">
-                                <ul>
-                                    <li>60</li>
-                                    <li>50</li>
-                                    <li>40</li>
-                                    <li>30</li>
-                                    <li>20</li>
-                                    <li>10</li>
-                                </ul>
-                                <div class="diagram-container">
-                                    <div class="bar bar-one"></div>
-                                    <div class="bar bar-two"></div>
-                                    <div class="bar bar-three"></div>
-                                    <div class="bar bar-four"></div>
-                                    <div class="bar bar-five"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button id="start-button">Démarrer</button>
-        </div>
-    </div> -->
     <div id="soundSettingsPanel" class="soundSettingsPanel">
         <h1>Réglages Audio</h1>
         <button id="btnCloseSoundSettings"><i class="fa-solid fa-xmark"></i></button>

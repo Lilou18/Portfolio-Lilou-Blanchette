@@ -1604,6 +1604,16 @@ body.classic-mode .browser-content {
       0 4px 8px 0 rgba(17, 28, 65, 0.5);
   }
 
+  #performanceAnalysis:hover {
+    transform: translateY(4px);
+    background: rgba(0, 255, 255, 0.4);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+      0 1px 0 0 rgba(0, 0, 0, 0.7),
+      0 2px 0 0 rgba(0, 0, 0, 0.7),
+      0 3px 0 0 rgba(0, 0, 0, 0.7);
+  }
+
   [data-copy]:hover .copy-tooltip {
     opacity: 1;
   }
@@ -1611,14 +1621,6 @@ body.classic-mode .browser-content {
   /* Start menu hover */
   .portfolio-btn:hover::before {
     opacity: 1;
-  }
-
-  .graph-panel:hover .bar-one,
-  .graph-panel:hover .bar-two,
-  .graph-panel:hover .bar-three,
-  .graph-panel:hover .bar-four,
-  .graph-panel:hover .bar-five {
-    animation-play-state: running;
   }
 
   .character-display:hover img {
