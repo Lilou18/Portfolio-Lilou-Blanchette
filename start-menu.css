@@ -83,7 +83,7 @@
 .bio-panel-right-col {
   display: flex;
   flex-direction: column;
-  gap: clamp(5px, 1vh, 14px);
+  /* gap: clamp(5px, 1vh, 14px); */
   flex-shrink: 0;
   /* ← formation + skills ne se compressent jamais */
   overflow: hidden;
@@ -283,6 +283,82 @@
   flex-shrink: 0;
   /* ← texte jamais compressé */
 }
+
+/* .bio-info {
+  padding: clamp(0.313rem, 0.086rem + 1.293vh, 1.25rem);
+}
+
+.bio-info p{
+    margin: 0;
+  font-size: clamp(0.4rem, 0.231rem + 0.966vh, 1.1rem);
+  letter-spacing: 1px;
+  line-height: 1.5;
+} */
+
+.bio-info {
+  /* padding: clamp(0.313rem, 0.086rem + 1.293vh, 1.25rem); */
+  padding: clamp(0.625rem, 0.172rem + 2.586vh, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgb(4, 8, 34);
+  border-bottom: 1px solid #00ffff;
+}
+
+.bio-info p {
+  margin: 0;
+  font-size: clamp(0.4rem, 0.231rem + 0.966vh, 1.1rem);
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  margin: clamp(5px, calc(100dvh - 450px), 20px) clamp(10px, 1vw, 20px) clamp(5px, calc(100dvh - 450px), 20px) clamp(10px, 1vw, 20px);
+  flex-shrink: 0;
+  /* margin: 20px 20px 0px 20px; */
+}
+
+.progress-label {
+  letter-spacing: 1px;
+  padding-right: 5px;
+  font-size: clamp(0.6em, 1.5dvh, 1em);
+
+}
+
+.progress-bar-outline {
+  display: flex;
+  flex: 1;
+  background-color: #43444383;
+  border: 1px solid #00ffff;
+  /* height: 30px; */
+  height: clamp(10px, calc(100dvh - 450px), 30px);
+
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 1) 0%, rgba(255, 153, 0, 1) 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .menu-formation,
 .menu-skills {
