@@ -428,6 +428,7 @@ input[type=text] {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 0;
+  background-color: rgba(8, 39, 97, 0.692);
 }
 
 .cv-left-column {
@@ -533,6 +534,7 @@ input[type=text] {
 
 
 .experience-item {
+  /* background-color: rgba(8, 39, 97, 0.692); */
   border: 1px solid rgba(0, 255, 255, 0.3);
   border-left: 5px solid #00ffff;
   padding-left: 20px;
@@ -1626,6 +1628,10 @@ body.classic-mode .browser-content {
   .character-display:hover img {
     animation: glitch 3.5s infinite steps(1);
     box-shadow: 0 0 100px rgba(0, 255, 255, 1);
+  }
+
+  .hot-chocolat-bar:hover {
+    background: linear-gradient(90deg, rgba(0, 255, 255, 1) 0%, rgb(255, 149, 0) 24%, rgb(255, 149, 0) 87%, rgba(0, 255, 255, 1) 100%);
   }
 }
 

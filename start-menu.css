@@ -262,6 +262,7 @@ img {
   display: flex;
   gap: 20px;
   justify-content: center;
+  cursor: pointer;
 }
 
 .hot-chocolat {
@@ -270,6 +271,13 @@ img {
   background: url("./src/assets/collectible.png") 0 0;
   background-size: calc(31 * 100%) 100%;
   animation: playX 3s steps(31) infinite;
+  animation-play-state: paused;
+  animation-delay: -2.9s
+}
+
+.hot-chocolat-bar.playing .hot-chocolat {
+    animation-play-state: running;
+    animation-delay: 0s;
 }
 
 @keyframes playX {
@@ -282,31 +290,60 @@ img {
   }
 }
 
-.progress-bar-container {
+.signal-bar-container {
   display: flex;
   align-items: center;
   margin: clamp(0.313rem, 0.086rem + 1.293vh, 1.25rem);
   flex-shrink: 0;
 }
 
-.progress-label {
+.signal-label {
   letter-spacing: 1px;
   padding-right: 5px;
   font-size: var(--fs-p-menu);
 
 }
 
-.progress-bar-outline {
+.signal-progress-bar-outline {
   display: flex;
   flex: 1;
+  position: relative;
   background-color: #43444383;
   border: 1px solid #00ffff;
   height: clamp(0.625rem, 0.172rem + 2.586vh, 2.5rem);
 
 }
 
-.progress-bar {
+.signal-progress-bar {
+  transition: width 0.5s ease;
+  width: 0%;
   background: linear-gradient(90deg, rgba(255, 215, 0, 1) 0%, rgba(255, 153, 0, 1) 100%);
+}
+
+.signal-progress-bar.signal-full {
+  background: linear-gradient(90deg, #a6ff00, #00ff00);
+}
+
+.signal-segments {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.signal-segment {
+  flex: 1;
+  border-right: 1px solid rgb(0, 255, 255);
+}
+
+.signal-segment:last-child {
+  border-right: none;
+}
+
+.signal-score {
+  font-size: var(--fs-p-menu);
+  margin-left: 10px;
+  color: #00ff00;
 }
 
 /* Right Panel */
@@ -798,7 +835,7 @@ img {
 }
 
 @media(max-height: 630px) {
-  .progress-bar-container {
+  .signal-bar-container {
     display: none;
   }
 }

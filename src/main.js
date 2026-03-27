@@ -20,6 +20,8 @@ windowManager.setOrientationChangeCallback(() => {
     }
 });
 
+// Callback function when we leave the game to go back to the start menu. We check  
+// the device orientation to make sure it's still landscape.
 uiManager.classicPortfolioManager.setOnExitCallback(() => windowManager.checkOrientation());
 
 /**
@@ -56,13 +58,6 @@ function startGame(startMenu) {
 
     gameState.gameStarted = true;
     startMenu.style.display = "none";
-
-
-    // try {
-    //     stopProgressBarAnimation();
-    // } catch (error) {
-    //     console.error("Error stopping progress bar:", error);
-    // }
 
     k.go("level");
     soundManager.playBackgroundMusic();
