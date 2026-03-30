@@ -85,7 +85,9 @@ class WindowManager {
     */
     looseWindowFocus() {
         gameState.addPauseFlag("windowBlur");
-        uiManager.showPauseText();
+        if (gameState.gameStarted) {
+            uiManager.showPauseText();
+        }
         soundManager.addPauseFlagMusic("windowBlur");
     }
 
@@ -97,7 +99,9 @@ class WindowManager {
      */
     handleWindowFocus() {
         gameState.removePauseFlag("windowBlur");
-        uiManager.hidePauseText();
+        if (gameState.gameStarted) {
+            uiManager.hidePauseText();
+        }
         soundManager.removePauseFlagMusic("windowBlur");
     }
 
@@ -129,7 +133,7 @@ class WindowManager {
         if (deviceInfo.isPortrait) {
 
             // We allow vertical mode for the classic portfolio
-            if(uiManager.isClassicMode) return;
+            if (uiManager.isClassicMode) return;
 
             gameState.addPauseFlag("portraitMode");
             this.showPortraitOverlay();
