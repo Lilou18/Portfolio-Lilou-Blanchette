@@ -276,8 +276,8 @@ img {
 }
 
 .hot-chocolat-bar.playing .hot-chocolat {
-    animation-play-state: running;
-    animation-delay: 0s;
+  animation-play-state: running;
+  animation-delay: 0s;
 }
 
 @keyframes playX {
@@ -822,9 +822,16 @@ img {
 }
 
 /* Media queries*/
-@media(max-width:1220px) and (min-height: 400px) {
+@media(max-width:1322px) and (min-height: 430px) {
   .bio-info p {
     font-size: clamp(0.4rem, 0.114rem + 0.762vw, 0.8rem);
+  }
+}
+
+@media(max-width:1322px) and (min-width: 768px) and
+      (max-height:875px) and (min-height:430px){
+  .bio-info p {
+    font-size: clamp(0.4rem, 0.303rem + 0.552vh, 0.8rem);
   }
 }
 

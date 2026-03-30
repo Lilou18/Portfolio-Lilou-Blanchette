@@ -98,6 +98,9 @@ export class UIManager {
 
             if (this.nav) this.nav.style.display = "none";
 
+            this.pauseText = null;
+            this.backgroundColor = null;
+
             // Cleanup game state
             soundManager.stopBackgroundMusic();
             gameState.resetGame();
