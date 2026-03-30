@@ -78,7 +78,7 @@ export class StartMenuAnimationManager {
                 this.hoverGamingDone = true;
                 this.addSignal();
             }
-            this.consoleBar.textContent = "// Mode intéractif - Expérience ludique";
+            this.consoleBar.textContent = "// Mode interactif - Expérience ludique";
         });
 
         this.portfolioGamingBtn?.addEventListener("mouseout", () => {

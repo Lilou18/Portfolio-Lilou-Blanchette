@@ -238,7 +238,7 @@ img {
   margin: 0;
   font-size: clamp(0.4rem, 0.231rem + 0.966vh, 1.1rem);
   line-height: 1.4;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .bio-panel::-webkit-scrollbar {

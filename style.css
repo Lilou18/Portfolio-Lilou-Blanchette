@@ -602,6 +602,7 @@ input[type=text] {
 .skill-level-label {
   color: #87adf3;
   font-size: var(--fs-p);
+  letter-spacing: 1px;
 }
 
 .skill-tags {
