@@ -92,6 +92,11 @@ export class ClassicPortfolioManager {
      * @param {string} panelName - "cv" | "portfolio" | "contact"
      */
     classicSwitchPanel(panelName) {
+        // Stop the videos if we were on the portfolio tab
+        if (this.uiManager.currentPanel === "portfolio" && panelName !== "portfolio") {
+            this.uiManager.pausePortfolioIframes();
+        }
+
         // Hide only the currently visible panel
         if (this.uiManager.currentPanel && this.uiManager.currentPanel !== panelName) {
             const current = this.uiManager.panels[this.uiManager.currentPanel];
@@ -133,6 +138,11 @@ export class ClassicPortfolioManager {
      * Hides the current panel, hides the classic nav, shows the start menu.
      */
     exitClassicPortfolio() {
+        // Stop the videos if we were on the portfolio tab
+        if (this.uiManager.currentPanel === "portfolio") {
+            this.uiManager.pausePortfolioIframes();
+        }
+
         this.uiManager.isClassicMode = false;
         document.body.classList.remove("classic-mode");
 

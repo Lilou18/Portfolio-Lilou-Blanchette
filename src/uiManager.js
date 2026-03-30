@@ -80,6 +80,10 @@ export class UIManager {
         exitGameBtn.addEventListener("click", () => {
             // Cleanup UI
             if (this.currentPanel) {
+                // Make sure we pause the videos if we were in the portfolio section
+                if (this.currentPanel === "portfolio") {
+                    this.pausePortfolioIframes();
+                }
                 this.panels[this.currentPanel].style.display = "none";
                 this.panels[this.currentPanel].classList.remove("dimmed");
                 this.currentPanel = null;
@@ -349,7 +353,7 @@ export class UIManager {
             if (panelName === "portfolio") {
                 // Pause the videos when we hide the panel
                 this.pausePortfolioIframes();
-                soundManager.removePauseFlagMusic("videoPlaying");
+                // soundManager.removePauseFlagMusic("videoPlaying");
             }
 
             // Hide main panel
@@ -380,9 +384,11 @@ export class UIManager {
                     "*"
                 );
             } catch (e) {
-                // Player pas encore prêt, on ignore
+                // Player not ready, we ignore it
             }
         });
+
+        soundManager.removePauseFlagMusic("videoPlaying");
     }
 
     /**
@@ -446,28 +452,6 @@ export class UIManager {
     exitClassicPortfolio() {
         this.classicPortfolioManager.exitClassicPortfolio();
     }
-
-    /**
-     * Display a panel with the classic mode.
-     * Only hides the currently active panel before showing the new one.
-     * 
-     * @param {string} panelName - "cv" | "portfolio" | "contact"
-     */
-    classicSwitchPanel(panelName) {
-        // Hide only the currently visible panel
-        if (this.currentPanel && this.currentPanel !== panelName) {
-            const current = this.panels[this.currentPanel];
-            if (current) current.style.display = "none";
-        }
-
-        this.currentPanel = panelName;
-        if (this.panels[panelName]) this.panels[panelName].style.display = "block";
-
-        document.getElementById("classicTabCV")?.classList.toggle("classic-active-tab", panelName === "cv");
-        document.getElementById("classicTabPortfolio")?.classList.toggle("classic-active-tab", panelName === "portfolio");
-        document.getElementById("classicTabContact")?.classList.toggle("classic-active-tab", panelName === "contact");
-    }
-
 
 }
 
