@@ -43,11 +43,6 @@
   overflow: hidden;
   animation: pulse-glow 2s infinite alternate;
   color: var(--cyan-flash);
-
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 @keyframes pulse-glow {
@@ -874,11 +869,7 @@ img {
 
   .start-menu-container {
     gap: clamp(3px, 0.8dvh, 8px);
-    /* padding: clamp(2px, 0.8dvh, 8px); */
-    padding-left: max(clamp(2px, 0.8dvh, 8px), env(safe-area-inset-left));
-    padding-right: max(clamp(2px, 0.8dvh, 8px), env(safe-area-inset-right));
-    padding-top: max(clamp(2px, 0.8dvh, 8px), env(safe-area-inset-top));
-    padding-bottom: max(clamp(2px, 0.8dvh, 8px), env(safe-area-inset-bottom));
+    padding: clamp(2px, 0.8dvh, 8px);
   }
 
   .panels-container {
