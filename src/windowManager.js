@@ -98,6 +98,7 @@ class WindowManager {
      * the game only if no other pause sources are active.
      */
     handleWindowFocus() {
+        if (!document.hasFocus()) return;
         gameState.removePauseFlag("windowBlur");
         if (gameState.gameStarted) {
             uiManager.hidePauseText();
