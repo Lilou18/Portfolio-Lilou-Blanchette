@@ -43,6 +43,9 @@
   overflow: hidden;
   animation: pulse-glow 2s infinite alternate;
   color: var(--cyan-flash);
+
+  animation: none;
+  box-shadow: none;
 }
 
 @keyframes pulse-glow {
