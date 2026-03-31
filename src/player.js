@@ -217,7 +217,7 @@ export class Player {
      * @param {Object} scrollState Object containing all scroll data and logic
      */
     setupScrollInput(scrollState) {
-        window.addEventListener('wheel', (e) => {
+        this.wheelHandler = (e) => {
             if (gameState.isGamePaused) return;
 
             e.preventDefault();
@@ -275,7 +275,9 @@ export class Player {
                     this.gameObject.play("idle");
                 }
             }, timeoutDuration);
-        }, { passive: false });
+        };
+
+        window.addEventListener('wheel', this.wheelHandler, { passive: false });
     }
 
     /**
@@ -508,5 +510,13 @@ export class Player {
                 }
             }
         });
+
+    }
+
+    destroyWheelEvent() {
+        if (this.wheelHandler) {
+            window.removeEventListener('wheel', this.wheelHandler);
+            this.wheelHandler = null;
+        }
     }
 }

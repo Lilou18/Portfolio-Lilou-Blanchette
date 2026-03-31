@@ -49,6 +49,10 @@ class SoundManager {
             return;
         }
 
+        // To keep adding multiple listener to the same button
+        if (this.soundBtnInitialized) return;
+        this.soundBtnInitialized = true;
+
         this.soundBtn.addEventListener("click", () => {
             this.soundBtn.blur();
             this.toggleSettings();
@@ -120,6 +124,18 @@ class SoundManager {
             this.backgroundMusic.loop = true;
             this.backgroundMusic.play();
         }
+    }
+
+    /**
+    * Stop the background music and reset it so it can be replayed.
+    */
+    stopBackgroundMusic() {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.pause();
+            this.backgroundMusic.currentTime = 0;
+            this.backgroundMusic = null;
+        }
+        this.pauseFlags.clear();
     }
 
     /**

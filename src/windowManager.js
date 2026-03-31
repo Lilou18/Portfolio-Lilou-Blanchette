@@ -85,7 +85,9 @@ class WindowManager {
     */
     looseWindowFocus() {
         gameState.addPauseFlag("windowBlur");
-        uiManager.showPauseText();
+        if (gameState.gameStarted) {
+            uiManager.showPauseText();
+        }
         soundManager.addPauseFlagMusic("windowBlur");
     }
 
@@ -96,8 +98,11 @@ class WindowManager {
      * the game only if no other pause sources are active.
      */
     handleWindowFocus() {
+        if (!document.hasFocus()) return;
         gameState.removePauseFlag("windowBlur");
-        uiManager.hidePauseText();
+        if (gameState.gameStarted) {
+            uiManager.hidePauseText();
+        }
         soundManager.removePauseFlagMusic("windowBlur");
     }
 
@@ -107,6 +112,10 @@ class WindowManager {
      */
     setOrientationChangeCallback(cb) {
         this.onOrientationChangeCallback = cb;
+    }
+
+    setIsClassicModeGetter(isClassicMode) {
+        this.isClassicModeGetter = isClassicMode;
     }
 
     /**
@@ -123,6 +132,10 @@ class WindowManager {
 
         // Display the overlay if in portrait mode
         if (deviceInfo.isPortrait) {
+
+            // We allow vertical mode for the classic portfolio
+            if (uiManager.isClassicMode) return;
+
             gameState.addPauseFlag("portraitMode");
             this.showPortraitOverlay();
         }

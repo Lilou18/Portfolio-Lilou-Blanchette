@@ -49,6 +49,7 @@ export class GameManager {
         this.initialEnemiesSpawn();
         this.setupSpawning();
         this.spawnInitialCollectibles();
+        this.resetScoreUI();
         this.displayScoreUI();
     }
 
@@ -130,6 +131,7 @@ export class GameManager {
             },
         }
         this.k.wait(2, () => {
+            if (!gameState.gameStarted) return;
             this.spawnEnemyAtRatio(initialEnemies.firstEnemy);
             this.spawnEnemyAtRatio(initialEnemies.secondEnemy);
             this.spawnEnemyAtRatio(initialEnemies.thirdEnemy);
@@ -238,6 +240,7 @@ export class GameManager {
     */
     spawnCollectibleAfterDelay(delay) {
         this.k.wait(delay, () => {
+            if (!gameState.gameStarted) return;
             // If the game is paused then we wait 1 second then check again
             // if we can now spawn the collectible.
             if (gameState.isGamePaused) {
@@ -307,6 +310,10 @@ export class GameManager {
         this.scorePanel.style.display = "flex";
     }
 
+    /**
+     * Update the score.
+     * @param {number} amountScore The amount we must add or substract from the score.
+     */
     changeScore(amountScore) {
         const previousScore = this.score;
 
@@ -319,6 +326,21 @@ export class GameManager {
         }
     }
 
+    /**
+     * Reset UI score in case the player left the game and start a new game.
+     */
+    resetScoreUI() {
+        this.score = 0;
+        this.bestScore = 0;
+        this.isBestScore = false;
+        this.scoreText.textContent = "0";
+        this.scoreText.style.color = "#00ffff";
+        this.bestScoreText.textContent = "Record : 0";
+    }
+
+    /**
+     * Update the UI for the score.
+     */
     updateScoreUI() {
 
         // Case 1: We have a new best score
@@ -334,7 +356,7 @@ export class GameManager {
         else if (this.isBestScore) {
             this.scoreText.textContent = this.score;
             this.scoreText.style.color = "#00ffff";
-            this.bestScoreText.textContent = "Record : " + this.bestScore;            
+            this.bestScoreText.textContent = "Record : " + this.bestScore;
         }
 
     }

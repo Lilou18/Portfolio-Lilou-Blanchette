@@ -7,7 +7,9 @@ import { GameManager } from "./gameManager.js";
 import { uiManager } from "./uiManager.js";
 import { soundManager } from "./soundManager.js";
 import { windowManager } from "./windowManager.js";
-import { stopProgressBarAnimation } from "./animationManager.js";
+import { StartMenuAnimationManager } from "./startMenuAnimationManager.js";
+
+const startMenuAnimationManager = new StartMenuAnimationManager();
 
 // Callback function that windowManager calls if we switched from portrait mode to landscape mode
 // and we are yet to go into the intro scene.
@@ -18,6 +20,10 @@ windowManager.setOrientationChangeCallback(() => {
     }
 });
 
+// Callback function when we leave the game to go back to the start menu. We check  
+// the device orientation to make sure it's still landscape.
+uiManager.classicPortfolioManager.setOnExitCallback(() => windowManager.checkOrientation());
+
 /**
  * Initialize the intro/start menu scene.
  */
@@ -27,7 +33,15 @@ k.scene("intro", () => {
     const startMenu = document.getElementById("start-menu");
     if (startButton && startMenu) {
         startMenu.style.display = "flex";
-        startButton.addEventListener("click", () => startGame(startMenu), { once: true });
+        startButton.addEventListener("click", () => startGame(startMenu));
+    }
+
+    const classicPortfolioBtn = document.getElementById("portfolioClassic");
+    if (classicPortfolioBtn && startMenu) {
+        classicPortfolioBtn.addEventListener("click", () => {
+            startMenu.style.display = "none";
+            uiManager.displayClassicPortfolio();
+        });
     }
 });
 
@@ -44,13 +58,6 @@ function startGame(startMenu) {
 
     gameState.gameStarted = true;
     startMenu.style.display = "none";
-
-
-    try {
-        stopProgressBarAnimation();
-    } catch (error) {
-        console.error("Error stopping progress bar:", error);
-    }
 
     k.go("level");
     soundManager.playBackgroundMusic();
@@ -78,7 +85,9 @@ k.scene("level", async () => {
 
     // When the canvas resizes, we update the scale and position of the gameObjects.
     k.onResize(() => {
+        if (!gameState.gameStarted) return;
         k.wait(0.01, () => {
+            if (!gameState.gameStarted) return;
             levelInstance.layoutLevel();
             gameManager.onResize();
             uiManager.updateInteractionTextsOnResize();

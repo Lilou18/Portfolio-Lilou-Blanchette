@@ -23,6 +23,7 @@ export function createWorld() {
 
         // Update to sync animation pause state with the game state
         k.onUpdate(() => {
+            if (!world) return;
             // Pause all animations attached to the world when the game is paused
             world.paused = gameState.isGamePaused;
         });
@@ -30,37 +31,6 @@ export function createWorld() {
     return world;
 }
 
-
-let intervalId;
-/**
- * Starts the looping animation of the energy bar in the start menu.
- */
-function progressBarAnimation() {
-    const energyBar = document.getElementById("energyBar");
-    let width = 1;
-    let barDirection = 1;
-    intervalId = setInterval(() => {
-        width += barDirection;
-        energyBar.style.width = width + "%";
-
-        // Reverse direction when reaching bounds
-        if (width >= 100 || width <= 0) {
-            barDirection *= -1;
-        }
-    }, 20);
-
-
-
-
+export function resetWorld() {
+    world = null;
 }
-
-/**
- * Stops the energy bar animation when leaving the start menu
- */
-export function stopProgressBarAnimation() {
-    clearInterval(intervalId);
-}
-
-
-// Automatically start the menu energy bar animation
-progressBarAnimation();

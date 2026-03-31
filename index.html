@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="start-menu.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
@@ -16,13 +17,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Lilou Blanchette</title>
 </head>
-<nav id="gameNav">
-    <button id="soundBtn" class="icon-btn"><i class="fa-solid fa-volume-high"></i></button>
-    <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
-</nav>
+
 <body>
     <script type="module" src="./src/main.js"></script>
     <canvas id="gameCanvas" tabindex="0"></canvas>
+
+    <header>
+        <nav class="classic-nav-browser" id="classicNav" style="display:none">
+            <div class="classic-tabs-row">
+                <!--Desktop buttons-->
+                <button id="classicTabCV" class="classic-tab classic-active-tab">
+                    <span><i class="fa-solid fa-file-lines"></i></span>
+                    CV
+                </button>
+                <button id="classicTabPortfolio" class="classic-tab">
+                    <span><i class="fa-solid fa-globe"></i></span>
+                    Portfolio
+                </button>
+                <button id="classicTabContact" class="classic-tab">
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                    Contact
+                </button>
+                <!--Mobile Dropdown-->
+                <button id="activeDropdownTab" class="tab-mobile classic-active-tab">
+                    <span><i class="fa-solid fa-file-lines"></i></span>
+                    CV
+                </button>
+                <button type="button" class="tabs-menu" id="menuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="tabs-dropdown hidden" id="tabsDropdown">
+                    <button id="dropdownTabCV" class="dropdown-tab active-dropdown-tab">
+                        <span><i class="fa-solid fa-file-lines"></i></span>
+                        CV
+                        <span class="close-tab">x</span>
+                    </button>
+                    <button id="dropdownTabPortfolio" class="dropdown-tab">
+                        <span><i class="fa-solid fa-globe"></i></span>
+                        Portfolio
+                        <span class="close-tab">x</span>
+                    </button>
+                    <button id="dropdownTabContact" class="dropdown-tab">
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                        Contact
+                        <span class="close-tab">x</span>
+                    </button>
+
+                </div>
+
+                <div class="classic-window-buttons">
+                    <button class="classic-window-btn"><i class="fa-solid fa-window-minimize"></i></i></button>
+                    <button class="classic-window-btn"><i class="fa-regular fa-window-restore"></i></button>
+                    <button class="classic-window-btn" id="classicExitBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="classic-nav-separator">
+            <div class="classic-adress-bar">
+                <div class="classic-nav-buttons">
+                    <button class="classic-nav-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="classic-nav-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <input id="classicUrl" readonly type="text" value="https://cv.lilou-blanchette.dev/cv">
+            </div>
+        </nav>
+        <nav id="gameNav">
+            <button id="soundBtn" class="icon-btn"><i class="fa-solid fa-volume-high"></i></button>
+            <button id="fullscreenBtn" class="icon-btn"><i class="fa-solid fa-expand"></i></button>
+            <button id="exitGameBtn" class="icon-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></i></button>
+        </nav>
+    </header>
     <div id="overlay">
         <div id="portraitSection" class="rotate-device">
             <i class="fa-solid fa-mobile-screen phone"></i>
@@ -30,11 +95,6 @@
             <p>Meilleure expérience en mode paysage</p>
             <small>Tournez votre appareil</small>
         </div>
-        <!-- <div id="fullScreenSection" class="full-screen">
-            <i class="fa-solid fa-up-right-and-down-left-from-center fa-beat"></i>
-            <button id="fullscreenBtn" class="fullscreen-btn">Activer le Plein Écran</button>
-             <small>Recommandé pour une immersion totale</small>
-        </div> -->
     </div>
     <div id="mobileControls">
         <div class="left-controls">
@@ -53,129 +113,162 @@
     </div>
     <div id="start-menu" class="start-menu">
         <div class="start-menu-container">
-            <div class="start-menu-panel-container">
-                <div class="menu-left-panel-container">
-                    <div class="menu-left-panel">
-                        <div class="character-display-container">
+            <div class="panels-container">
+                <div class="bio-panel">
+                    <div class="identity">
+                        <div class="character-display-wrapper">
                             <div class="character-display">
-                                <div class="big-big-circle"></div>
-                                <div class="big-circle"></div>
                                 <img class="glitch" src="./src/assets/monsterAnimationIdle.png" alt="monster character">
+                                <div class="orbit-ring ring-1"></div>
+                                <div class="orbit-ring ring-2"></div>
                             </div>
                         </div>
+                        <div class="identity-text">
+                            <h2>Lilou Blanchette</h2>
+                            <h3>Game Designer & Developer</h3>
+                        </div>
+                    </div>
+                    <div class="bio-content">
                         <div class="hot-chocolat-bar">
                             <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
+                                <img>
                             </div>
                             <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
+                                <img>
                             </div>
                             <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
+                                <img>
                             </div>
                             <div class="hot-chocolat">
-                                <img src="./src/assets/collectible.png" alt="mug-monster">
+                                <img>
                             </div>
                         </div>
-                        <div class="progress-bar-container">
-                            <span class="progress-label">Énergie:</span>
-                            <div class="progress-bar-outline">
-                                <div id="energyBar" class="progress-bar"></div>
-                            </div>
+                        <div class="bio-info">
+                            <p>
+                                Passionnée par les jeux vidéo depuis aussi longtemps que je me souvienne, je me suis
+                                naturellement tournée vers des études en programmation et en design de jeux afin de
+                                comprendre et concevoir de nouvelles expériences ludiques.
+                            </p>
+                            <p>
+                                Mes intérêts pour la lecture, le cinéma et la musique nourrissent ma créativité et
+                                influencent ma manière de concevoir des expériences de jeu.
+                            </p>
+                            <p>
+                                Grâce à ma formation, je suis à l’aise autant dans la conception que dans
+                                l’implémentation
+                                de mécaniques de jeu, en passant de l’idée au prototype.
+                            </p>
+                            <p>
+                                J’apprécie particulièrement le travail d’équipe, car il alimente ma soif d’apprentissage
+                                en
+                                me permettant d’apprendre des autres, de partager mes idées et mes connaissances, et de
+                                faire émerger des concepts plus créatifs.
+                            </p>
+                            <p>
+                                N’hésitez pas à me contacter pour contribuer à votre prochain projet!
+                            </p>
                         </div>
-                        <div class="stats-container">
-                            <div class="stats-grid">
-                                <div class="stat-item">
-                                    Monstres touchés
-                                    <span class="stat-value">6</span>
-                                </div>
-                                <div class="stat-item">
-                                    Chocolats chauds
-                                    <span class="stat-value">10</span>
-                                </div>
-                                <div class="stat-item">
-                                    Nombre de sauts
-                                    <span class="stat-value">20</span>
-                                </div>
-                                <div class="stat-item">
-                                    Énergie
-                                    <span class="stat-value">45</span>
+                        <div class="signal-bar-container">
+                            <span class="signal-label">Signal:</span>
+                            <div class="signal-progress-bar-outline">
+                                <div id="signalBar" class="signal-progress-bar"></div>
+                                <div class="signal-segments">
+                                    <div class="signal-segment"></div>
+                                    <div class="signal-segment"></div>
+                                    <div class="signal-segment"></div>
+                                    <div class="signal-segment"></div>
+                                    <div class="signal-segment"></div>
                                 </div>
                             </div>
+                            <span class="signal-score" id="signalScore">0%</span>
                         </div>
                     </div>
                 </div>
                 <div class="menu-right-panel">
-                    <div class="console-panel-container">
-                        <div class="console-panel">
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line1 typewriter-text"><span
-                                            class="console-sign">&gt</span>Préparation du CV</p>
-                                </div>
-                                <p class="fade-in-delay-line1 typewriter-text">Réussi</p>
-
+                    <div class="console-panel">
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line1 typewriter-text"><span
+                                        class="console-sign">&gt</span>Préparation du CV</p>
                             </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line2 typewriter-text"><span
-                                            class="console-sign">&gt</span>Chargement du Portfolio</p>
-                                </div>
-                                <p class="fade-in-delay-line2 typewriter-text">Réussi</p>
+                            <p class="fade-in-delay-line1 typewriter-text">Réussi</p>
 
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line2 typewriter-text"><span
+                                        class="console-sign">&gt</span>Chargement du Portfolio</p>
                             </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line3 typewriter-text"><span
-                                            class="console-sign">&gt</span>Configuration des coordonnées</p>
-                                </div>
-                                <p class="fade-in-delay-line3 typewriter-text">Réussi</p>
+                            <p class="fade-in-delay-line2 typewriter-text">Réussi</p>
 
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line3 typewriter-text"><span
+                                        class="console-sign">&gt</span>Configuration des coordonnées</p>
                             </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line4 typewriter-text"><span
-                                            class="console-sign">&gt</span>Initialisation de la ville</p>
-                                </div>
-                                <p class="fade-in-delay-line4 typewriter-text">Réussi</p>
+                            <p class="fade-in-delay-line3 typewriter-text">Réussi</p>
 
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line4 typewriter-text"><span
+                                        class="console-sign">&gt</span>Initialisation de la ville</p>
                             </div>
-                            <div class="console-wrapper">
-                                <div class="typewriter-wrapper">
-                                    <p class="typewriter-effect-line5 typewriter-text"><span
-                                            class="console-sign">&gt</span>Mise en place des hologrammes</p>
-                                </div>
-                                <p class="fade-in-delay-line5 typewriter-text">Réussi</p>
+                            <p class="fade-in-delay-line4 typewriter-text">Réussi</p>
 
+                        </div>
+                        <div class="console-wrapper">
+                            <div class="typewriter-wrapper">
+                                <p class="typewriter-effect-line5 typewriter-text"><span
+                                        class="console-sign">&gt</span>Mise en place des hologrammes</p>
                             </div>
+                            <p class="fade-in-delay-line5 typewriter-text">Réussi</p>
+
+                        </div>
+                    </div>
+                    <div class="graph-panel" id="graphPanel">
+                        <div class="graph-analysis">
+                            <h3>Analyse de performance</h3>
+                            <button id="performanceAnalysis">Effectuez l'analyse</button>
                         </div>
 
-                    </div>
-                    <div class="graph-panel-container">
-                        <div class="graph-panel">
-                            <h2>Analyse de performance</h2>
-                            <div class="graph-content">
-                                <ul>
-                                    <li>60</li>
-                                    <li>50</li>
-                                    <li>40</li>
-                                    <li>30</li>
-                                    <li>20</li>
-                                    <li>10</li>
-                                </ul>
-                                <div class="diagram-container">
-                                    <div class="bar bar-one"></div>
-                                    <div class="bar bar-two"></div>
-                                    <div class="bar bar-three"></div>
-                                    <div class="bar bar-four"></div>
-                                    <div class="bar bar-five"></div>
-                                </div>
+                        <div class="graph-content">
+                            <ul>
+                                <li>60</li>
+                                <li>50</li>
+                                <li>40</li>
+                                <li>30</li>
+                                <li>20</li>
+                                <li>10</li>
+                            </ul>
+                            <div class="diagram-container">
+                                <div class="bar bar-one"></div>
+                                <div class="bar bar-two"></div>
+                                <div class="bar bar-three"></div>
+                                <div class="bar bar-four"></div>
+                                <div class="bar bar-five"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button id="start-button">Démarrer</button>
+            <div class="portfolios-container">
+                <button class="portfolio-btn portfolio-classic" id="portfolioClassic">
+                    <i class="fa-regular fa-file-lines portfolio-icon"></i>
+                    <h3 class="portfolio-label">Portfolio classique</h3>
+                    <p>CV, projets et coordonnées<br>dans une interface claire et structurée</p>
+                </button>
+                <button class="portfolio-btn portfolio-gaming" id="start-button">
+                    <i class="fa-solid fa-gamepad portfolio-icon"></i>
+                    <h3 class="portfolio-label">Portfolio intéractif</h3>
+                    <p>Explorez la ville et découvrez<br>les projets en jouant</p>
+                </button>
+            </div>
+            <div class="console-bar">
+                <span class="console-bar-text" id="consoleBar">// En attente — Choisissez votre interface pour le
+                    portfolio</span>
+            </div>
         </div>
     </div>
     <div id="soundSettingsPanel" class="soundSettingsPanel">
@@ -230,12 +323,26 @@
                     <h1>Lilou Blanchette</h1>
                     <p class="cv-job">Game Designer & Developer</p>
                     <div class="cv-contact">
-                        <a class="cv-icons" href="tel:+14385277030" target="_blank"><i class="fa-solid fa-phone"></i>
-                            438-527-7030</a>
-                        <a class="cv-icons" href="mailto:blanchette.lilou@gmail.com"><i
-                                class="fa-solid fa-envelope"></i> blanchette.lilou@gmail.com</a>
+                        <a class="cv-icons" href="tel:+14385277030" target="_blank" data-copy="+1438-527-7030"><i
+                                class="fa-solid fa-phone"></i>
+                            438-527-7030
+                            <span><i class="fa-solid fa-copy copy-icon"></i></span>
+                            <span class="copy-tooltip" id="copyTooltip">Copier <i
+                                    class="fa-solid fa-copy copy-icon"></i></span>
+                        </a>
+                        <a class="cv-icons" href="mailto:blanchette.lilou@gmail.com"
+                            data-copy="blanchette.lilou@gmail.com"><i class="fa-solid fa-envelope"></i>
+                            blanchette.lilou@gmail.com
+                            <span><i class="fa-solid fa-copy copy-icon"></i></span>
+                            <span class="copy-tooltip" id="copyTooltip">Copier <i
+                                    class="fa-solid fa-copy copy-icon"></i></span>
+                        </a>
                         <a class="cv-icons" href="https://github.com/Lilou18" target="_blank"><i
                                 class="fa-brands fa-github"></i> Github</a>
+                        <a class="cv-icons" href="https://www.linkedin.com/in/liloublanchette/" target="_blank">
+                            <i class="fa-brands fa-linkedin"></i>
+                            LinkedIn
+                        </a>
                         <!-- <a class="cv-icons"><i class="fa-solid fa-link"></i> Portfolio</a> -->
                     </div>
                 </div>
@@ -306,8 +413,8 @@
                                 </div>
                                 <p class="experience-title">Stagiaire TD Pipeline</p>
                                 <ul>
-                                    <li>Créer et développer l’interface d’un système de gestion de
-                                        fichiers pour soutenir les artistes
+                                    <li>Créer et développer l’interface d’un système de gestion de fichiers en Python
+                                        avec PySide2 pour soutenir les artistes
                                     </li>
                                     <li>Travailler avec l'équipe de développement pour concevoir,
                                         prendre en charge et améliorer les outils et les flux de travail
@@ -371,7 +478,6 @@
             </div>
             <a class="download-link" href="src/CV-Lilou-Blanchette.pdf" target="_blank">Cliquez ici pour télécharger le
                 CV</a>
-
         </div>
     </div>
     <div id="portfolioPanel">
@@ -397,7 +503,7 @@
         <div class="browser-content">
             <div class="content-section">
 
-                <div class="cv-header">
+                <div class="portfolio-header">
                     <h1>Portfolio</h1>
                     <p class="cv-job">Découvrez mes projets</p>
                 </div>
@@ -405,192 +511,192 @@
                     <div class="portfolio-body">
                         <div class="project">
                             <div class="project-video">
-                                <iframe data-src="https://www.youtube.com/embed/IYampwPriVI?si=gTgGJrUHRdD1J2FL&enablejsapi=1"
+                                <iframe
+                                    data-src="https://www.youtube.com/embed/IYampwPriVI?si=gTgGJrUHRdD1J2FL&enablejsapi=1"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
-                                <!-- <video controls style="width: 100%; height: 100%; object-fit: cover;">
-                                <source src="./video/Portal012.mp4" type="video/mp4">
-                                Votre navigateur ne supporte pas la vidéo
-                            </video> -->
-
                             </div>
-                            <div class="project-content">
-                                <h2 class="project-title">Polterg's Heist</h2>
-                                <ul class="project-role">
-                                    <li>Game Designer</li>
-                                    <li>Game Developer</li>
+
+                            <h2 class="project-title">Polterg's Heist</h2>
+                            <ul class="project-role">
+                                <li>Game Designer</li>
+                                <li>Game Developer</li>
+                            </ul>
+                            <div class="project-details">
+                                <p><span class="project-detail-label">Équipe : </span><span
+                                        class="project-detail-value">5 personnes + 2 Sound Designers</span></p>
+                                <p><span class="project-detail-label">Plateforme : </span><span
+                                        class="project-detail-value">PC</span></p>
+                                <p><span class="project-detail-label">Moteur de jeu : </span><span
+                                        class="project-detail-value">Unity</span></p>
+                                <p><span class="project-detail-label">Langages : </span><span
+                                        class="project-detail-value">C#</span></p>
+                            </div>
+                            <div class="project-tasks">
+                                <p>Tâches effectuées :</p>
+                                <ul>
+                                    <li>Collaboration à la conception des systèmes du jeu</li>
+                                    <li>Programmation des systèmes de gameplay : suspicion,
+                                        électricité, miroirs, checkpoints</li>
+                                    <li>Développement des comportements des NPCs (humains et chats) : patrouille,
+                                        système de navigation, système de détection</li>
+                                    <li> Conception et implémentation de mécaniques de diversion :
+                                        objets bruyants et blocage de portes avec des objets
+                                        possédés</li>
                                 </ul>
-                                <div class="project-details">
-                                    <p><strong>Équipe : </strong><span>5 personnes + 2 Sound Designers</span></p>
-                                    <p><strong>Plateforme : </strong><span>PC</span></p>
-                                    <p><strong>Moteur de jeu : </strong><span>Unity</span></p>
-                                    <p><strong>Langages : </strong><span>C#</span></p>
-                                </div>
-                                <div class="project-tasks">
-                                    <h4>Tâches effectuées :</h4>
-                                    <ul>
-                                        <li>Collaboration à la conception des systèmes du jeu</li>
-                                        <li>Programmation des systèmes de gameplay : suspicion,
-                                            électricité, miroirs, checkpoints</li>
-                                        <li>Développement des comportements des NPCs (humains et chats) : patrouille,
-                                            système de navigation, système de détection</li>
-                                        <li> Conception et implémentation de mécaniques de diversion :
-                                            objets bruyants et blocage de portes avec des objets
-                                            possédés</li>
-                                    </ul>
-                                </div>
-                                <p class="project-description"><strong>Description du projet : </strong><span>Dans ce
-                                        platformer 2D, incarnez un
-                                        fantôme explorant des maisons et musées pour récupérer trois
-                                        objets précieux. Pour progresser, le joueur résout des énigmes
-                                        en possédant des objets pour se déplacer discrètement et
-                                        éviter d’être repéré par les humains.</span>
-                                </p>
-
-                                <div class="project-skills">
-                                    <span class="skill-tag">Unity</span>
-                                    <span class="skill-tag">C#</span>
-                                    <span class="skill-tag">Game Design</span>
-                                    <span class="skill-tag">System Design</span>
-                                    <span class="skill-tag">Puzzle Design</span>
-                                    <span class="skill-tag">Gameplay Programming</span>
-                                    <span class="skill-tag">AI Programming</span>
-                                    <span class="skill-tag">Multi-Floor Navigation System</span>
-                                </div>
-                                <div class="project-links">
-                                    <!-- <a href="#" class="project-link"><i class="fa-solid fa-gamepad"></i> Voir le projet</a> -->
-                                    <a href="https://github.com/Lilou18/Poltergs-Heist" target="_blank"
-                                        class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
-                                </div>
                             </div>
+                            <p class="project-description-label">Description du projet :</p>
+                            <p class="project-description">Dans ce
+                                platformer 2D, incarnez un
+                                fantôme explorant des maisons et musées pour récupérer trois
+                                objets précieux. Pour progresser, le joueur résout des énigmes
+                                en possédant des objets pour se déplacer discrètement et
+                                éviter d’être repéré par les humains.
+                            </p>
+
+                            <div class="project-skills">
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Game Design</span>
+                                <span class="skill-tag">System Design</span>
+                                <span class="skill-tag">Puzzle Design</span>
+                                <span class="skill-tag">Gameplay Programming</span>
+                                <span class="skill-tag">AI Programming</span>
+                                <span class="skill-tag">Multi-Floor Navigation System</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Lilou18/Poltergs-Heist" target="_blank"
+                                    class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
+                            </div>
+
                         </div>
                         <div class="project">
                             <div class="project-video">
-                                <!-- <iframe src="https://youtu.be/embed/jYhSFvrAH-o" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe> -->
                                 <iframe width="560" height="315"
                                     data-src="https://www.youtube.com/embed/jYhSFvrAH-o?si=UULA4hflWzJGMZOU&enablejsapi=1"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <div class="project-content">
-                                <h2 class="project-title">Lost Souls</h2>
-                                <ul class="project-role">
-                                    <li>Game Designer</li>
-                                    <li>Level Designer</li>
-                                    <li>Game Developer</li>
-                                </ul>
-                                <div class="project-details">
-                                    <p><strong>Équipe : </strong><span>Projet individuel</span></p>
-                                    <p><strong>Plateforme : </strong><span>PC</span></p>
-                                    <p><strong>Moteur de jeu : </strong><span>Unity</span></p>
-                                    <p><strong>Langages : </strong><span>C#</span></p>
-                                </div>
-                                <div class="project-tasks">
-                                    <h4>Tâches effectuées :</h4>
-                                    <ul>
-                                        <li>Conception complète du gameplay et du niveau</li>
-                                        <li>Programmation du système de mouvement du joueur,
-                                            collisions et interactions avec l’environnement</li>
-                                        <li>Implémentation des deux types d’ennemis avec
-                                            comportements distincts</li>
-                                        <li> Intégration des obstacles environnementaux : plateformes
-                                            mobiles, plateformes qui s’effondrent et crushing blocks</li>
-                                    </ul>
-                                </div>
-                                <p class="project-description"><strong>Description du projet : </strong><span> Lost
-                                        Souls
-                                        est un platformer 2D où le joueur incarne
-                                        un esprit devant secourir ses amis à travers un niveau rempli
-                                        d’ennemis et d’obstacles dynamiques.</span>
-                                </p>
 
-                                <div class="project-skills">
-                                    <span class="skill-tag">Unity</span>
-                                    <span class="skill-tag">C#</span>
-                                    <span class="skill-tag">Level Design</span>
-                                    <span class="skill-tag">Game Design</span>
-                                    <span class="skill-tag">Gameplay Programming</span>
-                                    <span class="skill-tag">2D Platformer</span>
-                                    <span class="skill-tag">Enemy Behavior</span>
-                                </div>
-                                <div class="project-links">
-                                    <!-- <a href="#" class="project-link"><i class="fa-solid fa-gamepad"></i> Voir le projet</a> -->
-                                    <a href="https://github.com/Lilou18/LostSouls" target="_blank"
-                                        class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
-                                </div>
+                            <h2 class="project-title">Lost Souls</h2>
+                            <ul class="project-role">
+                                <li>Game Designer</li>
+                                <li>Level Designer</li>
+                                <li>Game Developer</li>
+                            </ul>
+                            <div class="project-details">
+                                <p><span class="project-detail-label">Équipe : </span><span
+                                        class="project-detail-value">Projet individuel</span></p>
+                                <p><span class="project-detail-label">Plateforme : </span><span
+                                        class="project-detail-value">PC</span></p>
+                                <p><span class="project-detail-label">Moteur de jeu : </span><span
+                                        class="project-detail-value">Unity</span></p>
+                                <p><span class="project-detail-label">Langages : </span><span
+                                        class="project-detail-value">C#</span></p>
                             </div>
+                            <div class="project-tasks">
+                                <p>Tâches effectuées :</p>
+                                <ul>
+                                    <li>Conception complète du gameplay et du niveau</li>
+                                    <li>Programmation du système de mouvement du joueur,
+                                        collisions et interactions avec l’environnement</li>
+                                    <li>Implémentation des deux types d’ennemis avec
+                                        comportements distincts</li>
+                                    <li> Intégration des obstacles environnementaux : plateformes
+                                        mobiles, plateformes qui s’effondrent et crushing blocks</li>
+                                </ul>
+                            </div>
+                            <p class="project-description-label">Description du projet :</p>
+                            <p class="project-description">Lost
+                                Souls
+                                est un platformer 2D où le joueur incarne
+                                un esprit devant secourir ses amis à travers un niveau rempli
+                                d’ennemis et d’obstacles dynamiques.
+                            </p>
+
+                            <div class="project-skills">
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Level Design</span>
+                                <span class="skill-tag">Game Design</span>
+                                <span class="skill-tag">Gameplay Programming</span>
+                                <span class="skill-tag">2D Platformer</span>
+                                <span class="skill-tag">Enemy Behavior</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Lilou18/LostSouls" target="_blank" class="project-link"><i
+                                        class="fa-brands fa-github"></i> Code source</a>
+                            </div>
+
                         </div>
                         <div class="project">
                             <div class="project-video">
-                                <iframe data-src="https://www.youtube.com/embed/rpOdbWPnK1k?si=E-mUeWTnAv6Pqt_p&enablejsapi=1"
+                                <iframe
+                                    data-src="https://www.youtube.com/embed/rpOdbWPnK1k?si=E-mUeWTnAv6Pqt_p&enablejsapi=1"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
-                                <!-- <video controls playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                                    <source src="./video/Portal012.mp4" type="video/mp4">
-                                    Votre navigateur ne supporte pas la vidéo
-                                </video> -->
-
                             </div>
-                            <div class="project-content">
-                                <h2 class="project-title">Portals 0.12</h2>
-                                <ul class="project-role">
-                                    <li>Game Designer</li>
-                                    <li>Game Developer</li>
+
+                            <h2 class="project-title">Portals 0.12</h2>
+                            <ul class="project-role">
+                                <li>Game Designer</li>
+                                <li>Game Developer</li>
+                            </ul>
+                            <div class="project-details">
+                                <p><span class="project-detail-label">Équipe : </span><span
+                                        class="project-detail-value">4 personnes</span></p>
+                                <p><span class="project-detail-label">Plateforme : </span><span
+                                        class="project-detail-value">PC</span></p>
+                                <p><span class="project-detail-label">Moteur de jeu : </span><span
+                                        class="project-detail-value">Unity</span></p>
+                                <p><span class="project-detail-label">Langages : </span><span
+                                        class="project-detail-value">C#</span></p>
+                            </div>
+                            <div class="project-tasks">
+                                <p>Tâches effectuées :</p>
+                                <ul>
+                                    <li>Conception et programmation du personnage « Bouclier »</li>
+                                    <li>Développement de la fonctionnalité multijoueur en utilisant
+                                        Photon Unity Networking 2</li>
+                                    <li>Collaboration à la conception des modes de jeu Free-for-all
+                                        et 2 vs 2</li>
+                                    <li> Implémentation des collisions et du système de points de
+                                        vie</li>
+                                    <li>Programmation du menu de sélection des modes de jeu</li>
+                                    <li>Intégration des trousses de soins</li>
                                 </ul>
-                                <div class="project-details">
-                                    <p><strong>Équipe : </strong><span>4 personnes</span></p>
-                                    <p><strong>Plateforme : </strong><span>PC</span></p>
-                                    <p><strong>Moteur de jeu : </strong><span>Unity</span></p>
-                                    <p><strong>Langages : </strong><span>C#</span></p>
-                                </div>
-                                <div class="project-tasks">
-                                    <h4>Tâches effectuées :</h4>
-                                    <ul>
-                                        <li>Conception et programmation du personnage « Bouclier »</li>
-                                        <li>Développement de la fonctionnalité multijoueur en utilisant
-                                            Photon Unity Networking 2</li>
-                                        <li>Collaboration à la conception des modes de jeu Free-for-all
-                                            et 2 vs 2</li>
-                                        <li> Implémentation des collisions et du système de points de
-                                            vie</li>
-                                        <li>Programmation du menu de sélection des modes de jeu</li>
-                                        <li>Intégration des trousses de soins</li>
-                                    </ul>
-                                </div>
-                                <p class="project-description"><strong>Description du projet : </strong><span>Portals
-                                        0.12
-                                        est un jeu de tir à la première personne
-                                        de type Battle Royale. Il propose trois modes de jeu : Free-for
-                                        all, 2 vs 2 et Player vs Bot. Les joueurs peuvent incarner l’un des
-                                        quatre personnages, chacun doté d’armes et de compétences
-                                        uniques. Le jeu intègre un système de déplacement par portails
-                                        et des cartes générées procéduralement.</span>
-                                </p>
-
-                                <div class="project-skills">
-                                    <span class="skill-tag">Unity</span>
-                                    <span class="skill-tag">C#</span>
-                                    <span class="skill-tag">Game Design</span>
-                                    <span class="skill-tag">Gameplay Programming</span>
-                                    <span class="skill-tag">Multiplayer</span>
-                                    <span class="skill-tag">Photon PUN2</span>
-                                    <span class="skill-tag">FPS</span>
-                                </div>
-
-                                <div class="project-links">
-                                    <!-- <a href="#" class="project-link"><i class="fa-solid fa-gamepad"></i> Voir le projet</a> -->
-                                    <a href="https://github.com/Lilou18/Portals0.12" target="_blank"
-                                        class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
-                                </div>
                             </div>
+                            <p class="project-description-label">Description du projet :</p>
+                            <p class="project-description">Portals
+                                0.12
+                                est un jeu de tir à la première personne
+                                de type Battle Royale. Il propose trois modes de jeu : Free-for
+                                all, 2 vs 2 et Player vs Bot. Les joueurs peuvent incarner l’un des
+                                quatre personnages, chacun doté d’armes et de compétences
+                                uniques. Le jeu intègre un système de déplacement par portails
+                                et des cartes générées procéduralement.
+                            </p>
+
+                            <div class="project-skills">
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Game Design</span>
+                                <span class="skill-tag">Gameplay Programming</span>
+                                <span class="skill-tag">Multiplayer</span>
+                                <span class="skill-tag">Photon PUN2</span>
+                                <span class="skill-tag">FPS</span>
+                            </div>
+
+                            <div class="project-links">
+                                <a href="https://github.com/Lilou18/Portals0.12" target="_blank" class="project-link"><i
+                                        class="fa-brands fa-github"></i> Code source</a>
+                            </div>
+
                         </div>
                     </div>
                     <h2 class="technical-project-title">Projet Technique</h2>
@@ -604,40 +710,48 @@
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
                             </div>
-                            <div class="project-content">
-                                <h2 class="project-title">Modélisation et animation 3D d’un arbre</h2>
-                                <ul class="project-role">
-                                    <li>Programmeuse</li>
-                                </ul>
-                                <div class="project-details">
-                                    <p><strong>Équipe : </strong><span>3 personnes</span></p>
-                                    <p><strong>Langage de programmation et outil : </strong><span>JavaScript,
-                                            Three.js</span></p>
-                                </div>
-                                <div class="project-tasks">
-                                    <h4>Tâches effectuées :</h4>
-                                    <ul>
-                                        <li> Construction d’un modèle 3D d’arbre à partir d’une structure
-                                            hiérarchique de branches</li>
-                                        <li>Construction manuelle du maillage continu en suivant des
-                                            courbes de Hermite (troncs, feuilles, pommes)</li>
-                                        <li>Animation en temps réel de l’arbre avec effets physiques :
-                                            gravité, vent, restitution, amortissement</li>
-                                    </ul>
-                                </div>
-                                <div class="project-skills">
-                                    <span class="skill-tag">JavaScript</span>
-                                    <span class="skill-tag">Three.js</span>
-                                    <span class="skill-tag">Physics Simulation</span>
-                                    <span class="skill-tag">3D Modeling</span>
-                                    <span class="skill-tag">Hermite Curves</span>
-                                </div>
-                                <div class="project-links">
-                                    <!-- <a href="#" class="project-link"><i class="fa-solid fa-gamepad"></i> Voir le projet</a> -->
-                                    <a href="https://github.com/Lilou18/TreeModelAnimation" target="_blank"
-                                        class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
-                                </div>
+
+                            <h2 class="project-title">Modélisation et animation 3D d’un arbre</h2>
+                            <ul class="project-role">
+                                <li>Programmeuse</li>
+                            </ul>
+                            <div class="project-details">
+                                <p><span class="project-detail-label">Équipe : </span><span
+                                        class="project-detail-value">3 personnes</span></p>
+                                <p><span class="project-detail-label">Langage de programmation et outil : </span><span
+                                        class="project-detail-value">JavaScript,
+                                        Three.js</span></p>
                             </div>
+                            <div class="project-tasks">
+                                <p>Tâches effectuées :</p>
+                                <ul>
+                                    <li> Construction d’un modèle 3D d’arbre à partir d’une structure
+                                        hiérarchique de branches</li>
+                                    <li>Construction manuelle du maillage continu en suivant des
+                                        courbes de Hermite (troncs, feuilles, pommes)</li>
+                                    <li>Animation en temps réel de l’arbre avec effets physiques :
+                                        gravité, vent, restitution, amortissement</li>
+                                </ul>
+                            </div>
+                            <p class="project-description-label">Description du projet :</p>
+                            <p class="project-description">Création et
+                                animation en temps réel d’arbres 3D générés à
+                                partir de squelettes procéduraux. Le projet met en œuvre des techniques de
+                                modélisation
+                                et de simulation physique pour reproduire l’effet de la gravité et du vent.
+                            </p>
+                            <div class="project-skills">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Three.js</span>
+                                <span class="skill-tag">Physics Simulation</span>
+                                <span class="skill-tag">3D Modeling</span>
+                                <span class="skill-tag">Hermite Curves</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Lilou18/TreeModelAnimation" target="_blank"
+                                    class="project-link"><i class="fa-brands fa-github"></i> Code source</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -673,10 +787,12 @@
                 </div>
                 <div class="contact-grid">
                     <a href="mailto:blanchette.lilou@gmail.com">
-                        <div class="contact-item">
+                        <div class="contact-item" data-copy="blanchette.lilou@gmail.com">
                             <i class="fa-solid fa-envelope fa-2xl"></i>
                             <h3>Email</h3>
                             <p>blanchette.lilou@gmail.com</p>
+                            <span class="copy-tooltip" id="copyTooltip">Copier <i
+                                    class="fa-solid fa-copy copy-icon"></i></span>
                         </div>
                     </a>
                     <a href="https://www.linkedin.com/in/liloublanchette/" target="_blank">
@@ -693,11 +809,13 @@
                             <p>https://github.com/Lilou18</p>
                         </div>
                     </a>
-                    <a href="tel:+14385277030" target="_blank">
+                    <a href="tel:+14385277030" target="_blank" data-copy="+1438-527-7030">
                         <div class="contact-item">
                             <i class="fa-solid fa-phone fa-2xl"></i>
                             <h3>Téléphone</h3>
                             <p>(+1) 438-527-7030</p>
+                            <span class="copy-tooltip" id="copyTooltip">Copier <i
+                                    class="fa-solid fa-copy copy-icon"></i></span>
                         </div>
                     </a>
                 </div>
