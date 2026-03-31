@@ -88,7 +88,7 @@ img {
   flex: 0 1 auto;
   min-width: 0;
   min-height: 0;
-  width: clamp(20px, 20vmin, 180px);
+  width: clamp(20px, 20dvmin, 180px);
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -897,7 +897,7 @@ img {
 
 @media (max-width: 768px) {
   .character-display-wrapper {
-    width: clamp(20px, 10vmin, 80px);
-    height: clamp(20px, 10vmin, 80px);
+    width: clamp(20px, 10dvmin, 80px);
+    height: clamp(20px, 10dvmin, 80px);
   }
 }
