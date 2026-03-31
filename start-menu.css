@@ -893,6 +893,10 @@ img {
   .portfolio-btn p {
     display: none;
   }
+
+  .character-display-wrapper {
+    width: clamp(20px, 10dvmin, 80px);
+  }
 }
 
 @media (max-width: 768px) {
