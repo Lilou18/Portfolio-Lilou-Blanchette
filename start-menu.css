@@ -252,15 +252,15 @@ img {
   letter-spacing: 2px;
 }
 
-.bio-panel::-webkit-scrollbar {
-  width: 6px;
+.bio-info::-webkit-scrollbar {
+  width: 3px;
 }
 
-.bio-panel::-webkit-scrollbar-track {
+.bio-info::-webkit-scrollbar-track {
   background: var(--dark-blue-bg);
 }
 
-.bio-panel::-webkit-scrollbar-thumb {
+.bio-info::-webkit-scrollbar-thumb {
   background: var(--cyan-flash);
   border-radius: 2px;
 }
