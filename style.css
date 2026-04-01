@@ -1,11 +1,11 @@
 :root {
   --pixelSize: 0.6;
 
-  --fs-h1: clamp(2rem, 1.842rem + 0.842vw, 2.6rem);
-  --fs-h2: clamp(1.4rem, 1.114rem + 0.762vw, 1.8rem);
-  --fs-h3: clamp(1.2rem, 1.121rem + 0.421vw, 1.5rem);
-  --fs-h4: clamp(1rem, 0.921rem + 0.421vw, 1.3rem);
-  --fs-p: clamp(0.8rem, 0.721rem + 0.421vw, 1.1rem);
+  --fs-h1: clamp(2rem, 1.842rem + 0.842dvw, 2.6rem);
+  --fs-h2: clamp(1.4rem, 1.114rem + 0.762dvw, 1.8rem);
+  --fs-h3: clamp(1.2rem, 1.121rem + 0.421dvw, 1.5rem);
+  --fs-h4: clamp(1rem, 0.921rem + 0.421dvw, 1.3rem);
+  --fs-p: clamp(0.8rem, 0.721rem + 0.421dvw, 1.1rem);
 }
 
 body,
