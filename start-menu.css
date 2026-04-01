@@ -896,22 +896,30 @@ img {
   }
 
   .character-display-wrapper {
-    width: clamp(20px, 10dvmin, 80px);
+    width: clamp(35px, 15dvmin, 80px);
   }
 }
 
-@media(max-height:330px){
-  .hot-chocolat-bar{
+@media(max-height:330px) {
+  .hot-chocolat-bar {
     display: none;
   }
-  .bio-info{
+
+  .bio-info {
     border-top: 1px solid #00ffff;
   }
 }
 
-@media (max-width: 768px) {
+@media(max-height: 480px) {
+  .bio-info {
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+}
+
+/* @media (max-width: 768px) {
   .character-display-wrapper {
     width: clamp(20px, 10dvmin, 80px);
     height: clamp(20px, 10dvmin, 80px);
   }
-}
+} */
