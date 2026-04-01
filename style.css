@@ -20,6 +20,8 @@ html {
   /* font-weight: <weight>; */
   font-style: normal;
   color: #00ffff;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 #gameCanvas {
