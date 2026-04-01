@@ -900,6 +900,15 @@ img {
   }
 }
 
+@media(max-height:330px){
+  .hot-chocolat-bar{
+    display: none;
+  }
+  .bio-info{
+    border-top: 1px solid #00ffff;
+  }
+}
+
 @media (max-width: 768px) {
   .character-display-wrapper {
     width: clamp(20px, 10dvmin, 80px);
