@@ -14,6 +14,7 @@ export class StartMenuAnimationManager {
         this.portfolioGamingBtn = document.getElementById("start-button");
         this.signalBar = document.getElementById("signalBar");
         this.signalScore = document.getElementById("signalScore");
+        this.bioInfo = document.querySelector(".bio-info");
 
         // Flags for the signal
         this.signal = 0;
@@ -25,6 +26,7 @@ export class StartMenuAnimationManager {
         this.hotChocolatBarDone = false;
 
         this.initEventListeners();
+        this.initBioInfoScroll();
     }
 
     /**
@@ -39,8 +41,8 @@ export class StartMenuAnimationManager {
             this.consoleBar.textContent = "// Identité confirmée - Bonjour !";
         });
 
-        this.hotChocolatBar?.addEventListener("click", ()=>{
-            if(!this.hotChocolatBarDone){
+        this.hotChocolatBar?.addEventListener("click", () => {
+            if (!this.hotChocolatBarDone) {
                 this.hotChocolatBarDone = true;
                 this.addSignal();
             }
@@ -62,7 +64,7 @@ export class StartMenuAnimationManager {
         });
 
         this.portoflioClassicBtn?.addEventListener("mouseover", () => {
-            if(!this.hoverClassicDone){
+            if (!this.hoverClassicDone) {
                 this.hoverClassicDone = true;
                 this.addSignal();
             }
@@ -74,7 +76,7 @@ export class StartMenuAnimationManager {
         });
 
         this.portfolioGamingBtn?.addEventListener("mouseover", () => {
-            if(!this.hoverGamingDone){
+            if (!this.hoverGamingDone) {
                 this.hoverGamingDone = true;
                 this.addSignal();
             }
@@ -101,5 +103,22 @@ export class StartMenuAnimationManager {
             this.signalBar.classList.add("signal-full");
             this.consoleBar.textContent = "// Signal établi - Bienvenue dans mon portfolio !"
         }
+    }
+
+    /**
+     * Initialize the scroll mask for bio-info when content overflows.
+     */
+    initBioInfoScroll() {
+        if (!this.bioInfo) return;
+
+        const updateMask = () => {
+            const needsScroll = this.bioInfo.scrollHeight > this.bioInfo.clientHeight;
+            const isAtBottom = this.bioInfo.scrollHeight - this.bioInfo.scrollTop <= this.bioInfo.clientHeight + 5;
+            this.bioInfo.classList.toggle('scroll', needsScroll && !isAtBottom);
+        };
+
+        this.bioInfo.addEventListener('scroll', updateMask);
+        window.addEventListener('resize', updateMask);
+        updateMask();
     }
 }

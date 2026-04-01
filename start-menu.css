@@ -915,6 +915,11 @@ img {
     overflow-y: auto;
     justify-content: flex-start;
   }
+
+  .bio-info.scroll {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
 }
 
 /* @media (max-width: 768px) {
