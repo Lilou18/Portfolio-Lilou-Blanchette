@@ -60,6 +60,17 @@
   }
 }
 
+.ring-1, .ring-2,
+.portfolio-btn,
+.start-menu-container,
+.typewriter-effect-line1,
+.typewriter-effect-line2,
+.typewriter-effect-line3,
+.typewriter-effect-line4,
+.typewriter-effect-line5 {
+    will-change: transform, opacity;
+}
+
 .panels-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
