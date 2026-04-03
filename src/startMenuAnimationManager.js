@@ -121,4 +121,23 @@ export class StartMenuAnimationManager {
         window.addEventListener('resize', updateMask);
         updateMask();
     }
+
+    resetStartMenuAnimations() {
+        const animated = document.querySelectorAll(`
+        .ring-1, .ring-2,
+        .portfolio-btn,
+        .start-menu-container,
+        .typewriter-effect-line1, .fade-in-delay-line1,
+        .typewriter-effect-line2, .fade-in-delay-line2,
+        .typewriter-effect-line3, .fade-in-delay-line3,
+        .typewriter-effect-line4, .fade-in-delay-line4,
+        .typewriter-effect-line5, .fade-in-delay-line5
+        `);
+
+        animated.forEach(el => {
+            el.style.animation = "none";
+            el.offsetHeight;
+            el.style.animation = "";
+        });
+    }
 }

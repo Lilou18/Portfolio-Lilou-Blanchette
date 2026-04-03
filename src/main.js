@@ -33,6 +33,7 @@ k.scene("intro", () => {
     const startMenu = document.getElementById("start-menu");
     if (startButton && startMenu) {
         startMenu.style.display = "flex";
+        startMenuAnimationManager.resetStartMenuAnimations();
         startButton.addEventListener("click", () => startGame(startMenu));
     }
 
